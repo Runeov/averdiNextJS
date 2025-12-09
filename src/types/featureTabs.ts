@@ -1,14 +1,15 @@
-﻿export interface FeatureTabItem {
+﻿import { ReactNode } from 'react';
+
+export interface FeatureTabItem {
   id: string;
-  tabLabel: string;
   title: string;
-  description: string;
-  benefits: string[];
-  imageSrc: string;
-  contentLink?: {
-    url: string;
-    text: string;
-  };
+  shortDesc: string;
+  icon: string;
+  // We change 'string' to 'string | ReactNode' to allow HTML/JSX
+  content: string | ReactNode; 
+  bullets: (string | ReactNode)[];
+  link: string;
+  linkText?: string;
 }
 
 export interface FeatureTabsData {

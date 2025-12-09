@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import '../index.css'; // Utilizing your existing Tailwind setup
-import { cn } from '@/lib/utils'; // Assuming you have your utils from previous uploads
+import { Navbar } from '@/components/layout/Navbar';
+import { Footer } from '@/components/layout/Footer';
+import '../index.css'; // Sørger for at Tailwind styles lastes
+import { cn } from '@/lib/utils';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -19,7 +21,7 @@ export const metadata: Metadata = {
     siteName: 'Averdi',
     images: [
       {
-        url: '/logo_thumbail.avif', // Ensure this exists in public/
+        url: '/logo_thumbail.avif', // Sørg for at denne finnes i public/ mappen
         width: 1200,
         height: 630,
         alt: 'Averdi - Trygg økonomistyring',
@@ -36,7 +38,14 @@ export default function RootLayout({
   return (
     <html lang="nb" className="scroll-smooth">
       <body className={cn(inter.variable, "font-sans antialiased bg-slate-50 text-slate-900 min-h-screen flex flex-col")}>
+        {/* Navbar vises øverst på alle sider */}
+        <Navbar />
+        
+        {/* Hovedinnholdet (siden du besøker) */}
         {children}
+        
+        {/* Footer vises nederst på alle sider */}
+        <Footer />
       </body>
     </html>
   );

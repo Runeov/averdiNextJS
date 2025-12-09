@@ -2,9 +2,9 @@ import Hero from '@/components/modules/home/Hero';
 // We will migrate these components in the next steps:
 import TrustStrip from '@/components/modules/home/TrustStrip';
 import Services from '@/components/modules/home/Services';
-// import SalesPitch from '@/components/modules/home/SalesPitch';
-// import KunnskapsbankTeaser from '@/components/modules/home/KunnskapsbankTeaser';
-// import ContactPanel from '@/components/modules/home/ContactPanel';
+ import SalesPitch from '@/components/modules/home/SalesPitch';
+ import KunnskapsbankTeaser from '@/components/modules/home/KunnskapsbankTeaser';
+ import ContactPanel from '@/components/modules/home/ContactPanel';
 
 export default function HomePage() {
   
@@ -56,6 +56,9 @@ export default function HomePage() {
       <Hero />
       <TrustStrip />
       <Services />
+      <SalesPitch />
+      <KunnskapsbankTeaser />
+      <ContactPanel />
 
       {/* Placeholders for upcoming sections */}
       <div className="py-20 text-center text-slate-400 bg-white">

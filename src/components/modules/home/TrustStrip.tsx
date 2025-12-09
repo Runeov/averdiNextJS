@@ -1,10 +1,9 @@
 import Image from 'next/image';
 
-// Import logos from your assets folder
-import logoRegnskapNorge from '@/assets/Logo_Regnskap-norge.avif';
-import logoPowerOffice from '@/assets/Logo_PowerOffice-Go.avif';
-import logoFinago from '@/assets/Logo_finago.avif';
-// Add other logos as needed
+// UPDATED IMPORTS: Match your new filenames exactly
+import logoRegnskapNorge from '@/assets/regnskapnorgemedledd_gra.webp';
+import logoPowerOffice from '@/assets/Logo_poweroffice.jpg';
+import logoFinago from '@/assets/Logo_finago.avif'; // Keep this if it works, otherwise replace it too
 
 export default function TrustStrip() {
   const partners = [
@@ -28,6 +27,7 @@ export default function TrustStrip() {
                 alt={`${partner.name} logo`}
                 fill
                 className="object-contain"
+                // You can remove 'unoptimized' now if the files are valid images
               />
             </div>
           ))}
