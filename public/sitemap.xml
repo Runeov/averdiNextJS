@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.averdi.no/</loc>
+    <lastmod>2025-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.averdi.no/kunnskapsbank</loc>
+    <lastmod>2025-12-02</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.averdi.no/kunnskapsbank/sametinget</loc>
+    <lastmod>2025-12-02</lastmod>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.averdi.no/kunnskapsbank/sametinget/variert-naeringsliv</loc>
+    <lastmod>2025-12-02</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.averdi.no/kunnskapsbank/sametinget/samisk-reiseliv</loc>
+    <lastmod>2025-12-02</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.averdi.no/kunnskapsbank/sametinget/primaernaering</loc>
+    <lastmod>2025-12-02</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.averdi.no/kunnskapsbank/sametinget/duodji</loc>
+    <lastmod>2025-12-02</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.averdi.no/kunnskapsbank/sametinget/duodji/produktutvikling</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.averdi.no/kunnskapsbank/sametinget/duodji/markedspromotering</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.averdi.no/kunnskapsbank/sametinget/duodji/utstyr-investering</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.averdi.no/kunnskapsbank/sametinget/duodji/etablererstotte</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.averdi.no/kunnskapsbank/sametinget/duodji/dokumentasjon</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.averdi.no/kunnskapsbank/sametinget/duodji/kompetanseheving</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.averdi.no/kunnskapsbank/handel</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.averdi.no/kunnskapsbank/organisasjoner</loc>
+    <priority>0.8</priority>
+  </url>
+</urlset>
