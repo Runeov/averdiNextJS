@@ -83,6 +83,7 @@ export default function Hero() {
                 alt="Karasjok oversiktsbilde"
                 className="w-full h-full object-cover rounded-3xl shadow-2xl border-4 border-white/50" 
                 priority
+                fetchPriority="high" // Added explicit fetchPriority
                 placeholder="blur"
               />
               

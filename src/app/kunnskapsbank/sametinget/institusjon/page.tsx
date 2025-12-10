@@ -1,16 +1,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowLeft, Building2, Calendar, FileCheck } from 'lucide-react';
+import { ArrowLeft, Building2, Calendar, FileCheck, Coins, TrendingUp } from 'lucide-react';
 import { ExpertInsight } from '@/components/modules/kunnskapsbank/ExpertInsight';
 import { McpDataSpan } from '@/components/ui/McpDataSpan';
 import { getExpert } from '@/data/experts';
 import { AverdiBackground } from '@/components/modules/AverdiBackground';
 import { CtaBlock } from '@/components/modules/kunnskapsbank/CtaBlock';
-import { ClientCase } from '@/components/modules/kunnskapsbank/ClientCase'; // Ny import
 
 export const metadata: Metadata = {
   title: 'Institusjonsutvikling & Festivalstøtte | Sametinget',
-  description: 'Vi bistår samiske institusjoner, festivaler og kulturhus med driftstilskudd og rapportering. Se hvordan vi hjelper Påskefestivalen i Karasjok.',
+  description: 'Vi bistår samiske institusjoner, festivaler og kulturhus med driftstilskudd og rapportering. Se frister og krav for 2026.',
 };
 
 export default function InstitusjonPage() {
@@ -37,9 +36,73 @@ export default function InstitusjonPage() {
           </h1>
           <p className="text-xl text-slate-600 leading-relaxed">
             Drift av samiske kulturhus, teatre og festivaler krever mer enn lidenskap. 
-            Det krever stålkontroll på skillet mellom driftstilskudd og prosjektmidler. 
-            Fristen for institusjonsutvikling er <McpDataSpan id="sameting-frist-institusjon" value="01.03.2026" className="font-bold text-slate-900 bg-purple-50 px-1 rounded" source="Sametinget" />.
+            Det krever stålkontroll på skillet mellom driftstilskudd og prosjektmidler.
           </p>
+        </div>
+
+        {/* --- EYECATCHER: DRIFTSMIDLER --- */}
+        <div className="bg-purple-50 border-l-4 border-purple-500 p-6 rounded-r-xl mb-16 shadow-sm">
+          <div className="flex items-start gap-4">
+            <div className="p-2 bg-white rounded-full text-purple-600 shadow-sm mt-1">
+              <Calendar className="w-6 h-6" />
+            </div>
+            <div className="flex-1">
+              <h3 className="font-bold text-purple-900 text-lg">Viktigste frist for 2026</h3>
+              <p className="text-purple-800 text-sm mb-4">
+                For institusjoner er det én dato som gjelder. Glemmer dere denne, mister dere driftsstøtten for hele året.
+              </p>
+              
+              <div className="grid sm:grid-cols-2 gap-4">
+                {/* Boks 1: Frist */}
+                <div className="bg-white p-3 rounded-lg border border-purple-100 flex flex-col">
+                  <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-1">Søknadsfrist</span>
+                  <div className="flex items-center gap-2">
+                    <McpDataSpan 
+                      id="sameting-frist-institusjon-hero" 
+                      value="01.03.2026" 
+                      source="Sametinget"
+                      className="font-bold text-2xl text-slate-900" 
+                    />
+                  </div>
+                  <span className="text-xs text-slate-500 mt-1">Absolutt frist</span>
+                </div>
+
+                {/* Boks 2: Formål */}
+                <div className="bg-white p-3 rounded-lg border border-purple-100 flex flex-col">
+                  <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-1">Gjelder for</span>
+                  <div className="flex items-center gap-2">
+                    <TrendingUp className="w-5 h-5 text-green-500" />
+                    <span className="font-bold text-xl text-slate-900">Drift & Lønn</span>
+                  </div>
+                  <span className="text-xs text-slate-400 mt-1">Ikke enkeltprosjekter</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Nøkkelinformasjon Grid */}
+        <div className="grid md:grid-cols-2 gap-6 mb-16">
+          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-slate-900">
+              <Building2 className="text-purple-600 w-5 h-5" /> Hva dekkes?
+            </h3>
+            <ul className="space-y-3 text-slate-600 text-sm">
+              <li>• Lønn til daglig leder og faste ansatte</li>
+              <li>• Husleie, strøm og faste kostnader</li>
+              <li>• Kompetanseheving for styret</li>
+            </ul>
+          </div>
+          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-slate-900">
+              <FileCheck className="text-[#E86C1F] w-5 h-5" /> Krav til drift
+            </h3>
+            <ul className="space-y-3 text-slate-600 text-sm">
+              <li>• Årsregnskap revidert av revisor</li>
+              <li>• Beretning om måloppnåelse</li>
+              <li>• Vedlagt budsjett for kommende år</li>
+            </ul>
+          </div>
         </div>
 
         {/* Expert Insight: Jan-Atle */}
@@ -57,7 +120,7 @@ export default function InstitusjonPage() {
           </ExpertInsight>
         )}
 
-        {/* Main Content (Med eksplisitt styling på overskrifter) */}
+        {/* Main Content Sections */}
         <div className="bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-slate-100 my-16">
           
           <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-6">
@@ -68,78 +131,47 @@ export default function InstitusjonPage() {
             I motsetning til prosjektstøtte (som søkes per tiltak), er institusjonsutvikling ment å sikre langsiktig drift. 
             Dette stiller strengere krav til organisasjon, styrearbeid og økonomistyring.
           </p>
-
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            <div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
-                <Building2 className="w-5 h-5 text-purple-600" />
-                Hva kan støttes?
-              </h3>
-              <ul className="space-y-3 text-slate-600">
-                <li className="flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-2"></span>
-                  Lønn til daglig leder og faste ansatte
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-2"></span>
-                  Lokaleier og faste driftsutgifter
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-2"></span>
-                  Kompetanseheving for styret og ansatte
-                </li>
-              </ul>
+          
+          <div className="grid sm:grid-cols-2 gap-6 mb-12">
+            <div className="p-5 bg-purple-50 rounded-xl border border-purple-100">
+              <h3 className="font-bold text-slate-900 mb-2 text-lg">Kulturhus & Sentra</h3>
+              <p className="text-sm text-slate-600 mb-3">
+                Språksentre, teatre og museer som har en fast struktur og helårsdrift.
+              </p>
             </div>
-
-            <div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
-                <FileCheck className="w-5 h-5 text-green-600" />
-                Krav til rapportering
-              </h3>
-              <ul className="space-y-3 text-slate-600">
-                <li className="flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 mt-2"></span>
-                  Årsregnskap revidert av statsautorisert revisor
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 mt-2"></span>
-                  Beretning om måloppnåelse (språk/kultur)
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 mt-2"></span>
-                  Budsjett for kommende år vedlagt søknad
-                </li>
-              </ul>
+            <div className="p-5 bg-blue-50 rounded-xl border border-blue-100">
+              <h3 className="font-bold text-slate-900 mb-2 text-lg">Festivaler</h3>
+              <p className="text-sm text-slate-600 mb-3">
+                Større festivaler med fast administrasjon kan søke om driftstilskudd i tillegg til underskuddsgaranti.
+              </p>
             </div>
           </div>
 
-          <div className="bg-slate-50 p-6 rounded-xl border-l-4 border-slate-900">
-            <h4 className="font-bold text-slate-900 flex items-center gap-2 mb-2">
-              <Calendar className="w-4 h-4" /> Viktig om fristen
+          <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4">
+            Rapportering er nøkkelen
+          </h3>
+          <p className="text-slate-600 mb-4">
+            For å beholde plassen på budsjettet, må dere bevise aktivitet. Regnskapet må settes opp slik at det er lett å hente ut nøkkeltall for rapportering til Sametinget.
+          </p>
+
+          <div className="bg-yellow-50 p-6 rounded-xl border-l-4 border-yellow-400">
+            <h4 className="font-bold text-yellow-800 flex items-center gap-2 mb-2 text-lg">
+              <Coins className="w-5 h-5" /> Tips: Periodisering
             </h4>
-            <p className="text-sm text-slate-600">
-              Søknadsfristen <McpDataSpan id="sameting-frist-institusjon" value="1. mars" className="font-semibold" /> gjelder for driftstilskudd for påfølgende år. 
-              Glemmer dere denne, står dere uten driftsmidler et helt kalenderår. Det finnes ingen "angrefrist" her.
+            <p className="text-sm text-yellow-800 leading-relaxed">
+              Driftstilskudd gis for kalenderåret. Hvis dere har ubrukte midler ved årsslutt, kan disse bli trukket tilbake hvis de ikke er periodisert riktig eller søkt overført.
             </p>
           </div>
         </div>
 
-        {/* --- KUNDECASE: PÅSKEFESTIVALEN (Flyttet ned) --- */}
-        <ClientCase 
-          quote="Når tusenvis av mennesker samles i Karasjok i påsken, koker det. Da er det avgjørende for oss å ha Averdi i ryggen. De sørger for at økonomien, bilagene og rapporteringen til Sametinget går på skinner."
-          author="Kenneth Eliassen"
-          role="Daglig leder"
-          company="Påskefestivalen i Karasjok"
-        />
-
-       {/* CTA Component */}
+        {/* CTA Component */}
         <CtaBlock 
           title="Trenger styret avlastning?"
           description="Vi kan fungere som institusjonens økonomiavdeling. Da vet bevilgende myndigheter at pengene forvaltes trygt."
           primaryButtonText="Snakk med Jan-Atle"
           primaryButtonLink="/kontakt"
-          secondaryButtonText="Se Næringsstøtte" // Endret tekst
-          secondaryButtonLink="/kunnskapsbank/sametinget/naering" // Endret lenke
+          secondaryButtonText="Se Næringsstøtte"
+          secondaryButtonLink="/kunnskapsbank/sametinget/naering"
         />
 
       </article>
