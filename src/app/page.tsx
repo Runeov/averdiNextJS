@@ -70,6 +70,11 @@ export default function HomePage() {
       <div className="py-20 text-center text-slate-400">
         SalesPitch Loading...
       </div>
+      {/* CSS Loading Test - Remove this after verification */}
+      <div className="fixed bottom-4 right-4 p-3 bg-averdi-orange text-white rounded shadow-lg">
+        <p className="text-sm font-bold">CSS Working!</p>
+        <p className="text-xs">Tailwind + Custom CSS Loaded</p>
+      </div>
     </main>
   );
 }
