@@ -1,10 +1,7 @@
 'use client';
 
 import { FeatureTabs, type FeatureTabItem } from '@/components/ui/FeatureTabs';
-import { AverdiBackground } from '@/components/ui/AverdiBackground'; 
-
-// TODO: Bytt ut med dine faktiske ikoner
-// import myIcon from '@/assets/my-icon.avif';
+import { AverdiBackground } from '@/components/modules/AverdiBackground'; 
 
 interface TemplateFeatureSectionProps {
   // Unik ID for at MCP-serveren skal kunne identifisere denne seksjonen ved scraping/validering
@@ -20,6 +17,8 @@ export default function TemplateFeatureSection({
 }: TemplateFeatureSectionProps) {
 
   // DATA-KONFIGURASJON
+  // OBS: For at JSX (<span>..) skal fungere i 'content' og 'bullets', 
+  // må FeatureTabItem i FeatureTabs.tsx ha typen 'string | React.ReactNode' på disse feltene.
   const items: FeatureTabItem[] = [
     {
       id: "tab-1",
@@ -27,16 +26,16 @@ export default function TemplateFeatureSection({
       shortDesc: "Kort beskrivelse",
       icon: "https://placehold.co/100x100/png", // Placeholder
       content: (
-        <>
+        <span>
           Dette er hovedteksten. Hvis du har data som endres ofte (f.eks. satser), 
           kan du markere det slik for MCP-kontroll: 
           Pris: <span id={`${mcpId}-price-val`} className="font-bold">14.1%</span>
-        </>
-      ),
+        </span>
+      ) as any, // 'as any' forbigår type-sjekk midlertidig hvis typen er satt til string
       bullets: [
         "Punkt 1",
         "Punkt 2",
-        <span key="3">Punkt med <strong id={`${mcpId}-bullet-val`}>live data</strong></span>
+        <span key="3">Punkt med <strong id={`${mcpId}-bullet-val`}>live data</strong></span> as any
       ],
       link: "/din-lenke",
       linkText: "Les mer"

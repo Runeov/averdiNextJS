@@ -1,4 +1,5 @@
-import { Newspaper, Quote } from 'lucide-react';
+import Image from 'next/image';
+import { Quote } from 'lucide-react';
 import type { Expert } from '@/data/experts';
 
 interface ExpertInsightProps {
@@ -9,65 +10,60 @@ interface ExpertInsightProps {
 }
 
 export function ExpertInsight({ title, quote, expert, children }: ExpertInsightProps) {
-  // Hjelpefunksjon for å lage initialer (f.eks. "Ingvald Laiti" -> "IL")
-  const getInitials = (name: string) => {
-    return name
-      .split(' ')
-      .map(n => n[0])
-      .join('')
-      .substring(0, 2)
-      .toUpperCase();
-  };
-
   return (
-    <section className="my-16 bg-white border-l-4 border-[#E86C1F] shadow-lg rounded-r-xl overflow-hidden">
-      <div className="p-8 sm:p-10">
-        
-        {/* Header */}
-        <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 bg-[#E86C1F]/10 rounded-lg">
-            <Newspaper className="h-6 w-6 text-[#E86C1F]" />
-          </div>
-          <h2 className="text-2xl font-bold text-slate-900">Aktuelt fra fageksperten</h2>
-        </div>
-        
-        <div className="flex flex-col md:flex-row gap-8">
-          <div className="flex-1">
-            <h3 className="text-xl font-bold text-slate-900 mb-3">
-              {title}
-            </h3>
-            
-            <div className="text-slate-600 leading-relaxed space-y-4">
-              {/* Hovedtekst */}
-              {children}
+    <div className="my-16 bg-slate-900 rounded-3xl p-8 md:p-12 text-white relative overflow-hidden shadow-2xl border border-slate-700">
+      
+      {/* Dekorativ bakgrunn */}
+      <div className="absolute top-0 right-0 w-64 h-64 bg-[#E86C1F]/10 rounded-full -translate-y-1/2 translate-x-1/3 blur-2xl"></div>
 
-              {/* Sitatboks */}
-              <div className="font-medium text-slate-800 bg-slate-50 p-6 rounded-lg border border-slate-200 relative mt-6">
-                <Quote className="absolute top-3 right-3 h-5 w-5 text-slate-300" />
-                <p className="italic relative z-10">
-                  "{quote}"
-                </p>
-              </div>
+      <div className="relative z-10 flex flex-col md:flex-row gap-10 items-start">
+        
+        {/* Venstre: Bilde/Initialer og Info */}
+        <div className="flex-shrink-0 flex flex-row md:flex-col items-center md:items-start gap-4 md:w-48">
+          
+          {/* SJEKK OM BILDE FINNES - HVIS IKKE, VIS INITIALER */}
+          {expert.image ? (
+            <div className="relative w-20 h-20 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-[#E86C1F]/30 shadow-lg">
+              <Image 
+                src={expert.image} 
+                alt={expert.name} 
+                fill
+                className="object-cover"
+              />
             </div>
+          ) : (
+            <div className="w-20 h-20 md:w-32 md:h-32 rounded-full border-4 border-[#E86C1F]/30 shadow-lg bg-slate-800 flex items-center justify-center">
+              <span className="text-2xl md:text-4xl font-bold text-[#E86C1F] tracking-wider">
+                {expert.initials}
+              </span>
+            </div>
+          )}
 
-            {/* Forfatterinfo - Tilpasset din experts.ts */}
-            <div className="mt-8 flex items-center gap-3 pt-6 border-t border-slate-100">
-              <div className="h-12 w-12 rounded-full bg-[#E86C1F]/10 flex items-center justify-center font-bold text-[#E86C1F] text-sm border-2 border-white shadow-sm overflow-hidden">
-                {/* Viser bilde hvis det finnes, ellers initialer */}
-                {expert.image ? (
-                  <img src={expert.image} alt={expert.name} className="w-full h-full object-cover" />
-                ) : (
-                  <span>{getInitials(expert.name)}</span>
-                )}
-              </div>
-              <div className="text-sm">
-                <p className="font-bold text-slate-900">{expert.name}</p>
-                <p className="text-slate-500">{expert.role}</p>
-              </div>
-            </div>
+          <div className="text-left md:text-left">
+            <p className="font-bold text-lg leading-tight">{expert.name}</p>
+            <p className="text-[#E86C1F] text-sm font-medium mt-1">{expert.role}</p>
+            <p className="text-slate-400 text-xs mt-2 hidden md:block">{expert.department}</p>
           </div>
         </div>
+
+        {/* Høyre: Innhold */}
+        <div className="flex-1">
+          <Quote className="w-10 h-10 text-[#E86C1F] mb-6 opacity-80" />
+          
+          <h3 className="text-2xl font-bold mb-4 text-white">
+            {title}
+          </h3>
+          
+          <blockquote className="text-xl font-medium text-slate-200 mb-6 italic border-l-4 border-[#E86C1F] pl-4">
+            "{quote}"
+          </blockquote>
+
+          <div className="text-slate-300 leading-relaxed text-lg space-y-4">
+            {children}
+          </div>
+        </div>
+
       </div>
-    </section>
+    </div>
   );
 }
