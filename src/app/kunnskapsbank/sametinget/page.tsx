@@ -50,9 +50,29 @@ export default function SametingetHub() {
     }
   ];
 
+  // --- NYTT: GENERER JSON-LD FOR GOOGLE ---
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    'mainEntity': sametingetFaq.map(item => ({
+      '@type': 'Question',
+      'name': item.question,
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': item.answer
+      }
+    }))
+  };
+
   return (
     <main className="min-h-screen bg-slate-50 relative overflow-hidden">
       <AverdiBackground />
+      
+      {/* --- NYTT: INJECT SCHEMA --- */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       
       <div className="relative z-10 container mx-auto px-4 py-12 max-w-6xl">
         
@@ -88,7 +108,7 @@ export default function SametingetHub() {
         <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-xl mb-20 shadow-sm">
           <div className="flex flex-col md:flex-row gap-8">
             
-            {/* Del 1: Regnskapsmessig Kontroll (Oppdatert) */}
+            {/* Del 1: Regnskapsmessig Kontroll */}
             <div className="flex-1">
               <div className="flex items-center gap-3 mb-3 text-blue-900">
                 <ShieldCheck className="w-6 h-6 text-blue-600" />
@@ -112,12 +132,27 @@ export default function SametingetHub() {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <span className="text-xs text-slate-500 uppercase font-semibold block">Maks Næring</span>
-                  <span className="font-bold text-xl text-slate-900">500 000 kr</span>
+                  <span className="text-xs text-slate-500 uppercase font-semibold block">Variert Næring</span>
+                  <McpDataSpan 
+                    id="sameting-variert-naering-maks" 
+                    value="500 000" 
+                    format="currency" 
+                    source="Sametinget 2026"
+                    className="font-bold text-xl text-slate-900" 
+                  />
                 </div>
                 <div>
-                  <span className="text-xs text-slate-500 uppercase font-semibold block">Investeringer</span>
-                  <span className="font-bold text-xl text-green-600">Inntil 35%</span>
+                  <span className="text-xs text-slate-500 uppercase font-semibold block">Støttegrad</span>
+                  <div className="flex items-center gap-1">
+                    <span className="font-bold text-xl text-green-600">Inntil</span>
+                    <McpDataSpan 
+                      id="sameting-variert-naering-sats" 
+                      value="50" 
+                      format="percentage" 
+                      source="Sametinget 2026"
+                      className="font-bold text-xl text-green-600" 
+                    />
+                  </div>
                 </div>
               </div>
               <p className="text-xs text-slate-500 mt-3 italic">
@@ -128,7 +163,7 @@ export default function SametingetHub() {
           </div>
         </div>
 
-        {/* Navigation Grid - 6 KORT */}
+        {/* Navigation Grid */}
         <h2 className="text-3xl font-bold text-slate-900 mb-8">Velg ditt område</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24">
           
