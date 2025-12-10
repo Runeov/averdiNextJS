@@ -6,34 +6,33 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-// Definerer hvordan dataene må se ut for å kunne brukes i denne komponenten
+// Oppdatert interface for å støtte JSX i content/bullets (for live data)
 export interface FeatureTabItem {
   id: string;
   title: string;
   shortDesc: string;
   icon: string; // URL til bilde/ikon
-  content: string;
-  bullets: string[];
+  content: string | React.ReactNode; // Tillater JSX
+  bullets: (string | React.ReactNode)[]; // Tillater JSX i lister
   link: string;
-  linkText?: string; // Valgfri, standard er "Les mer"
+  linkText?: string;
 }
 
 interface FeatureTabsProps {
   items: FeatureTabItem[];
-  themeColor?: string; // Mulighet for å overstyre farge (f.eks. lilla for Systemer)
+  themeColor?: string; 
   className?: string;
 }
 
 export function FeatureTabs({ 
   items, 
-  themeColor = "#E86C1F", // Standard Averdi-oransje
+  themeColor = "#E86C1F", 
   className 
 }: FeatureTabsProps) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<number | null>(0);
 
   const handleTabClick = (index: number) => {
-    // Hvis man klikker på den samme igjen, gjør ingenting (eller toggle hvis du vil)
     setActiveTab(index);
   };
 
@@ -42,92 +41,99 @@ export function FeatureTabs({
       
       {/* --- VENSTRE KOLONNE: Navigasjon (Desktop) + Accordion (Mobil) --- */}
       <div className="lg:col-span-5 flex flex-col gap-3">
-        {items.map((item, index) => (
-          <div key={item.id} className="flex flex-col">
-            
-            {/* Knapp */}
-            <button
-              onClick={() => handleTabClick(index)}
-              className={cn(
-                "group relative flex items-center gap-4 p-4 rounded-xl text-left transition-all duration-300 border-2 w-full",
-                activeTab === index 
-                  ? "bg-white shadow-sm z-10" 
-                  : "bg-white border-transparent hover:border-gray-200 hover:bg-gray-50"
-              )}
-              style={{
-                borderColor: activeTab === index ? themeColor : 'transparent',
-                backgroundColor: activeTab === index ? `${themeColor}0D` : undefined // 0D er hex for 5% opacity
-              }}
-            >
-              <div 
+        {items.map((item, index) => {
+          const isActive = activeTab === index;
+          return (
+            <div key={item.id} className="flex flex-col">
+              
+              {/* Knapp */}
+              <button
+                onClick={() => handleTabClick(index)}
+                aria-expanded={isActive}
+                aria-controls={`tab-content-${item.id}`}
                 className={cn(
-                  "flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center transition-colors",
-                  activeTab === index ? "bg-white" : "bg-gray-100 group-hover:bg-white"
+                  "group relative flex items-center gap-4 p-4 rounded-xl text-left transition-all duration-300 border-2 w-full",
+                  isActive 
+                    ? "bg-white shadow-sm z-10" 
+                    : "bg-white border-transparent hover:border-gray-200 hover:bg-gray-50"
                 )}
+                style={{
+                  borderColor: isActive ? themeColor : 'transparent',
+                  backgroundColor: isActive ? `${themeColor}0D` : undefined
+                }}
               >
-                {/* Note: Standard img tag used to support external URLs easily */}
-                <img src={item.icon} alt="" className="w-8 h-8 object-contain" />
-              </div>
-
-              <div className="flex-1">
-                <h3 
-                  className="font-bold text-lg transition-colors"
-                  style={{ color: activeTab === index ? themeColor : '#0f172a' }}
+                <div 
+                  className={cn(
+                    "flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center transition-colors",
+                    isActive ? "bg-white" : "bg-gray-100 group-hover:bg-white"
+                  )}
                 >
-                  {item.title}
-                </h3>
-                <p className="text-sm text-slate-500 hidden sm:block">
-                  {item.shortDesc}
-                </p>
-              </div>
+                  <img src={item.icon} alt="" className="w-8 h-8 object-contain" aria-hidden="true" />
+                </div>
 
-              <ChevronRight 
-                className={cn("w-5 h-5 transition-transform duration-300", activeTab === index ? "rotate-90 lg:rotate-0 lg:translate-x-1" : "text-gray-300")}
-                style={{ color: activeTab === index ? themeColor : undefined }}
-              />
-            </button>
-
-            {/* --- MOBIL INNHOLD (Accordion) --- */}
-            <div className="lg:hidden">
-              <AnimatePresence>
-                {activeTab === index && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="overflow-hidden"
+                <div className="flex-1">
+                  <h3 
+                    className="font-bold text-lg transition-colors"
+                    style={{ color: isActive ? themeColor : '#0f172a' }}
                   >
-                    <div 
-                      className="p-4 pl-20 pt-2 pb-6 ml-8 my-2 border-l-2"
-                      style={{ borderColor: `${themeColor}33` }} // 20% opacity
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-slate-500 hidden sm:block">
+                    {item.shortDesc}
+                  </p>
+                </div>
+
+                <ChevronRight 
+                  className={cn("w-5 h-5 transition-transform duration-300", isActive ? "rotate-90 lg:rotate-0 lg:translate-x-1" : "text-gray-300")}
+                  style={{ color: isActive ? themeColor : undefined }}
+                  aria-hidden="true"
+                />
+              </button>
+
+              {/* --- MOBIL INNHOLD (Accordion) --- */}
+              <div className="lg:hidden">
+                <AnimatePresence>
+                  {isActive && (
+                    <motion.div
+                      id={`tab-content-${item.id}`}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="overflow-hidden"
                     >
-                        <p className="text-slate-600 mb-4 text-sm leading-relaxed">
-                          {item.content}
-                        </p>
-                        <ul className="space-y-2 mb-4">
-                          {item.bullets.map((bullet, i) => (
-                            <li key={i} className="flex items-start gap-2 text-sm text-slate-700">
-                              <CheckCircle2 className="w-4 h-4 mt-0.5 shrink-0" style={{ color: themeColor }} />
-                              <span>{bullet}</span>
-                            </li>
-                          ))}
-                        </ul>
-                        <button 
-                          onClick={() => router.push(item.link)}
-                          className="font-bold text-sm flex items-center gap-2 hover:gap-3 transition-all"
-                          style={{ color: themeColor }}
-                        >
-                          {item.linkText || `Les mer om ${item.title.toLowerCase()}`} 
-                          <ArrowRight className="w-4 h-4" />
-                        </button>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                      <div 
+                        className="p-4 pl-20 pt-2 pb-6 ml-8 my-2 border-l-2"
+                        style={{ borderColor: `${themeColor}33` }}
+                      >
+                          <div className="text-slate-600 mb-4 text-sm leading-relaxed">
+                            {item.content}
+                          </div>
+                          <ul className="space-y-2 mb-4">
+                            {item.bullets.map((bullet, i) => (
+                              <li key={i} className="flex items-start gap-2 text-sm text-slate-700">
+                                <CheckCircle2 className="w-4 h-4 mt-0.5 shrink-0" style={{ color: themeColor }} aria-hidden="true" />
+                                <span>{bullet}</span>
+                              </li>
+                            ))}
+                          </ul>
+                          <button 
+                            onClick={() => router.push(item.link)}
+                            className="font-bold text-sm flex items-center gap-2 hover:gap-3 transition-all"
+                            style={{ color: themeColor }}
+                            aria-label={`Les mer om ${item.title}`}
+                          >
+                            {item.linkText || `Les mer om ${item.title.toLowerCase()}`} 
+                            <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                          </button>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* --- HØYRE KOLONNE: Innhold (Desktop) --- */}
@@ -141,10 +147,11 @@ export function FeatureTabs({
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.3 }}
                 className="flex flex-col h-full"
+                role="tabpanel"
               >
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center p-3">
-                    <img src={items[activeTab].icon} alt="" className="w-full h-full object-contain" />
+                    <img src={items[activeTab].icon} alt="" className="w-full h-full object-contain" aria-hidden="true" />
                   </div>
                   <div>
                     <h3 className="text-3xl font-bold text-slate-900">{items[activeTab].title}</h3>
@@ -152,14 +159,14 @@ export function FeatureTabs({
                   </div>
                 </div>
 
-                <p className="text-lg text-slate-600 leading-relaxed mb-8">
+                <div className="text-lg text-slate-600 leading-relaxed mb-8">
                   {items[activeTab].content}
-                </p>
+                </div>
 
                 <div className="grid sm:grid-cols-2 gap-4 mb-10">
                   {items[activeTab].bullets.map((bullet, i) => (
                     <div key={i} className="flex items-start gap-3">
-                      <CheckCircle2 className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: themeColor }} />
+                      <CheckCircle2 className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: themeColor }} aria-hidden="true" />
                       <span className="text-slate-700 font-medium text-sm">{bullet}</span>
                     </div>
                   ))}
@@ -170,9 +177,10 @@ export function FeatureTabs({
                     onClick={() => router.push(items[activeTab].link)}
                     className="inline-flex items-center gap-2 font-bold hover:gap-3 transition-all group"
                     style={{ color: themeColor }}
+                    aria-label={`Gå til ${items[activeTab].title}`}
                   >
                      {items[activeTab].linkText || `Les mer om ${items[activeTab].title.toLowerCase()}`}
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                   </button>
                 </div>
               </motion.div>
