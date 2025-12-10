@@ -132,14 +132,14 @@ export default function InstitusjonPage() {
           company="Påskefestivalen i Karasjok"
         />
 
-        {/* CTA */}
+       {/* CTA Component */}
         <CtaBlock 
           title="Trenger styret avlastning?"
           description="Vi kan fungere som institusjonens økonomiavdeling. Da vet bevilgende myndigheter at pengene forvaltes trygt."
           primaryButtonText="Snakk med Jan-Atle"
           primaryButtonLink="/kontakt"
-          secondaryButtonText="Se prosjektstøtte (Kultur)"
-          secondaryButtonLink="/kunnskapsbank/sametinget/kultur-sprak"
+          secondaryButtonText="Se Næringsstøtte" // Endret tekst
+          secondaryButtonLink="/kunnskapsbank/sametinget/naering" // Endret lenke
         />
 
       </article>

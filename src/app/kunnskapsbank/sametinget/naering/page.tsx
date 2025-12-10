@@ -36,19 +36,11 @@ export default function SametingetNaeringPage() {
           </h1>
           <p className="text-xl text-slate-600 leading-relaxed">
             Sametinget gir støtte til bedrifter som bygger opp under samisk kultur og bosetting. 
-            For mange ordninger kan du få inntil{' '}
-            <McpDataSpan 
-              id="sameting-naering-maks-sats" 
-              value="500 000" 
-              format="currency"
-              source="Sametinget Regelverk 2026"
-              className="font-bold text-slate-900"
-            />{' '}
-            kroner i tilskudd til investeringer og utvikling.
+            Dette er risikokapital som kan være avgjørende for å realisere ditt prosjekt i Tiltakssonen.
           </p>
         </div>
 
-        {/* --- NY EYECATCHER: FINANSIERINGSOVERSIKT --- */}
+        {/* --- EYECATCHER: FINANSIERINGSOVERSIKT --- */}
         <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-xl mb-16 shadow-sm">
           <div className="flex items-start gap-4">
             <div className="p-2 bg-white rounded-full text-blue-600 shadow-sm mt-1">
@@ -170,23 +162,27 @@ export default function SametingetNaeringPage() {
           </div>
 
           <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4">
-            Hvor mye kan du få?
+            Hvordan beregnes støtten?
           </h3>
           
           <p className="text-slate-600 mb-4">
-            Støttesatsene varierer, men hovedregelen for investeringstilskudd er inntil{' '}
-            <McpDataSpan id="sameting-investering-prosent" value="35" format="percentage" source="Sametinget" className="font-bold" />{' '}
-            av godkjent kostnadsoverslag.
+            Selv om rammen er høy, fullfinansierer Sametinget sjelden prosjekter. 
+            Det er en forutsetning at du har <strong>egenkapital</strong> eller lån i bunnen.
+            Støttegraden varierer fra prosjekt til prosjekt, men følger disse retningslinjene:
           </p>
           <ul className="list-disc list-inside space-y-2 text-slate-600 mb-8 ml-2">
             <li>
-              <strong>Maksimalt tilskudd:</strong>{' '}
-              <McpDataSpan id="sameting-naering-maks-sats" value="500 000" format="currency" source="Sametinget" className="font-bold text-slate-900" />.
+              <strong>Hovedregel:</strong> Inntil{' '}
+              <McpDataSpan id="sameting-investering-prosent" value="35" format="percentage" source="Sametinget" className="font-bold text-slate-900" />{' '}
+              av godkjente kostnader.
             </li>
             <li>
-              <strong>Nedre grense:</strong> Prosjekter under{' '}
+              <strong>Nedre grense:</strong> Prosjekter med totalbudsjett under{' '}
               <McpDataSpan id="sameting-naering-min-grense" value="50 000" format="currency" source="Sametinget" className="font-bold text-slate-900" />{' '}
               prioriteres sjelden.
+            </li>
+            <li>
+              <strong>Unntak:</strong> Enkelte "myke" prosjekter (som forprosjekter eller kompetanseheving) kan i særskilte tilfeller få inntil 50% dekning.
             </li>
           </ul>
 
