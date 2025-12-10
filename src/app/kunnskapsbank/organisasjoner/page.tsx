@@ -1,15 +1,25 @@
+import Link from 'next/link';
+import { ArrowLeft, Trophy, Receipt, HeartHandshake } from 'lucide-react';
 import { ExpertInsight } from '@/components/modules/kunnskapsbank/ExpertInsight';
 import { getExpert } from '@/data/experts';
-import { CategoryCard } from '@/components/home/modules/kunnskapsbank/CategoryGrid';
-import { Trophy, Receipt, HeartHandshake, ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
+// ✅ KORRIGERT IMPORT (Fjernet 'home' fra stien):
+import { CategoryCard } from '@/components/modules/kunnskapsbank/CategoryGrid'; 
+import { AverdiBackground } from '@/components/modules/AverdiBackground';
+
+export const metadata = {
+  title: 'Lag & Forening | Regnskapshjelp for Frivilligheten',
+  description: 'Vi forenkler hverdagen for kasserere i idrettslag og foreninger. Få hjelp med momskompensasjon, medlemsregister og årsregnskap.',
+};
 
 export default function OrganisasjonHub() {
   const alida = getExpert('alida');
 
   return (
-    <main className="min-h-screen bg-slate-50 py-12 px-4">
-      <div className="container mx-auto max-w-6xl">
+    <main className="min-h-screen bg-slate-50 relative overflow-hidden">
+      <AverdiBackground />
+      
+      <div className="relative z-10 container mx-auto px-4 py-12 max-w-6xl">
+        
         <Link href="/kunnskapsbank" className="inline-flex items-center text-slate-500 hover:text-green-600 mb-8 font-medium transition-colors">
           <ArrowLeft className="w-4 h-4 mr-2" /> Tilbake til oversikt
         </Link>
@@ -34,15 +44,15 @@ export default function OrganisasjonHub() {
 
         <div className="grid md:grid-cols-3 gap-6 mt-16">
           <CategoryCard 
-            title="Idrettslag"
-            description="Kasserer-guiden: Medlemskontingent, Vipps og dugnad."
+            title="Idrettslag & Vipps"
+            description="Kasserer-guiden: Slik integrerer du Vipps med regnskapet og får kontroll på kiosken."
             href="/kunnskapsbank/organisasjoner/idrettslag"
             icon={Trophy}
             theme="green"
           />
           <CategoryCard 
             title="Momskompensasjon"
-            description="Slik får dere pengene tilbake. Frister og krav."
+            description="Slik får dere pengene tilbake. Frister og krav til dokumentasjon."
             href="/kunnskapsbank/organisasjoner/moms"
             icon={Receipt}
             theme="green"

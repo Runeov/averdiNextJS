@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Landmark, Building2, Users, ArrowRight } from 'lucide-react';
-import { AverdiBackground } from '@/components/AverdiBackground';
+import { AverdiBackground } from '@/components/modules/AverdiBackground';
 
 export const metadata: Metadata = {
   title: 'Kunnskapsbank | Averdi',

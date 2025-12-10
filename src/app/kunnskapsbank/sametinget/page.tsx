@@ -1,14 +1,15 @@
 import Link from 'next/link';
 import { ArrowLeft, Scroll, Coins, Landmark, CalendarClock } from 'lucide-react';
-import { ExpertInsight } from '@/components/modules/home/kunnskapsbank/ExpertInsight';
-import { CategoryCard } from '@/components/modules/home/kunnskapsbank/CategoryGrid';
+import { ExpertInsight } from '@/components/modules/kunnskapsbank/ExpertInsight';
+// ✅ KORREKT IMPORT (Direkte fra modules/kunnskapsbank):
+import { CategoryCard } from '@/components/modules/kunnskapsbank/CategoryGrid'; 
 import { McpDataSpan } from '@/components/ui/McpDataSpan';
 import { getExpert } from '@/data/experts';
 import { AverdiBackground } from '@/components/modules/AverdiBackground';
 
 export const metadata = {
-  title: 'Sametinget Tilskudd & Støtteordninger | Averdi',
-  description: 'Komplett guide til Sametingets 3 milliarder i støttemidler. Vi hjelper deg med søknad til næring, kultur og språk.',
+  title: 'Sametinget Tilskudd & Støtteordninger 2026 | Averdi',
+  description: 'Komplett guide til Sametingets 3 milliarder i støttemidler. Vi hjelper deg med søknad til næring, kultur og språk. Se frister og krav.',
 };
 
 export default function SametingetHub() {
@@ -34,11 +35,11 @@ export default function SametingetHub() {
             Sametingets <span className="text-[#E86C1F]">Støtteordninger</span>
           </h1>
           <p className="text-xl text-slate-600 max-w-3xl leading-relaxed">
-            I 2026 forvalter Sametinget et totalbudsjett på ca.{' '}
+            I 2026 er den totale rammen for samiske formål på over{' '}
             <McpDataSpan 
-              id="sameting-totalbudsjett-2026" 
+              id="sameting-ramme-2026" 
               value="3 mrd" 
-              source="Statsbudsjettet 2026 - Samiske formål"
+              source="Statsbudsjettet 2026"
               className="font-bold text-slate-900 bg-orange-50 px-2 py-0.5 rounded border-b-2 border-[#E86C1F]"
             />{' '}
             kroner. Pengene finnes, men nåløyet kan være trangt hvis søknaden ikke treffer på språkkrav og måloppnåelse.
@@ -64,9 +65,11 @@ export default function SametingetHub() {
 
         {/* Frist-oversikt (Strategisk element fra SEO-analyse) */}
         <div className="grid md:grid-cols-2 gap-8 mb-20">
-          <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
+          <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3 mb-4 text-slate-900">
-              <CalendarClock className="w-6 h-6 text-[#E86C1F]" />
+              <div className="p-2 bg-orange-100 rounded-lg text-[#E86C1F]">
+                <CalendarClock className="w-6 h-6" />
+              </div>
               <h3 className="text-xl font-bold">Løpende frister (Næring)</h3>
             </div>
             <p className="text-slate-600 mb-4">
@@ -84,9 +87,11 @@ export default function SametingetHub() {
             </ul>
           </div>
 
-          <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
+          <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3 mb-4 text-slate-900">
-              <CalendarClock className="w-6 h-6 text-red-600" />
+              <div className="p-2 bg-red-100 rounded-lg text-red-600">
+                <CalendarClock className="w-6 h-6" />
+              </div>
               <h3 className="text-xl font-bold">Absolutte frister (Kultur)</h3>
             </div>
             <p className="text-slate-600 mb-4">
