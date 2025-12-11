@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nord-Norge Kalkulatoren | Rekruttering & Besparelser</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Google Fonts (Inter for clean, professional look) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Theme Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        nord: {
+                            light: '#F5F5F4', // Stone 100
+                            base: '#E7E5E4',  // Stone 200
+                            dark: '#1C1917',  // Stone 900
+                            accent: '#0D9488', // Teal 600
+                            accentHover: '#0F766E', // Teal 700
+                            warm: '#D97706', // Amber 600
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Specific Styles for Chart Containers -->
+    <style>
+        body {
+            background-color: #F5F5F4; /* Warm neutral background */
+            color: #1C1917;
+        }
+
+        /* CRITICAL: Chart Container Styling per requirements */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+
+        @media (max-width: 640px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #E7E5E4;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #A8A29E;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #78716C;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+
+    <!-- Placeholder Comments -->
+    <!-- Chosen Palette: Warm Neutrals (Stone) with Teal Accents. Represents the reliable, grounded nature of accounting mixed with the fresh opportunities of the North. -->
+    <!-- Application Structure Plan: The app follows a "Hook -> Calculate -> Explain" flow. 
+         1. Hero Section: Sets the premise (Save money moving North).
+         2. The Calculator: The interactive core. Users input location data to see immediate financial impact (AGA savings).
+         3. The Analysis Dashboard: Visualizes the data from the calculator using Chart.js.
+         4. Recruitment Guide (Content): Uses the SEO/Source Report data to explain the "Soft" benefits (Finnmarksfradrag, Student Loans) that help businesses recruit.
+         5. Methodology/Footer: Builds trust by explaining the data sources (Zone 1 vs Zone 5).
+         This structure translates "bureaucratic rules" into "business value". -->
+    <!-- Visualization & Content Choices:
+         - Cost Comparison Bar Chart: Goal: Inform/Compare. Method: Chart.js Bar. Interaction: Updates on calculation. Justification: Clearly shows the height difference in costs.
+         - Savings Composition Doughnut: Goal: Inform. Method: Chart.js Doughnut. Interaction: Hover details. Justification: Breaks down WHERE the savings come from (AGA vs Electricity etc).
+         - Dynamic Text Blocks: Goal: Inform. Method: DOM Manipulation. Interaction: Updates based on municipality selection. Justification: Provides specific context (e.g., "You are in Zone 5").
+         - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-stone-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center gap-2">
+                        <span class="text-2xl text-nord-accent font-bold">⟰</span>
+                        <span class="font-bold text-xl tracking-tight text-nord-dark">Nord-Norge Kalkulatoren</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button onclick="scrollToSection('calculator')" class="text-stone-600 hover:text-nord-accent px-3 py-2 rounded-md text-sm font-medium transition">Kalkulator</button>
+                    <button onclick="scrollToSection('recruitment')" class="text-stone-600 hover:text-nord-accent px-3 py-2 rounded-md text-sm font-medium transition">Rekruttering</button>
+                    <button class="bg-nord-accent text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-nord-accentHover transition shadow-md">Kontakt Oss</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="bg-stone-100 border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 text-center">
+            <h1 class="text-4xl tracking-tight font-extrabold text-nord-dark sm:text-5xl md:text-6xl">
+                <span class="block">Hva koster egentlig</span>
+                <span class="block text-nord-accent">din neste ansatt?</span>
+            </h1>
+            <p class="mt-3 max-w-md mx-auto text-base text-stone-600 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+                Er det realistisk å spare hundretusener ved å etablere seg i nord? Vi har oversatt byråkratiet. Bruk "Tolken av Nord-Norge" for å se de faktiske tallene for din bedrift i 2025.
+            </p>
+            <div class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
+                <div class="rounded-md shadow">
+                    <button onclick="scrollToSection('calculator')" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-nord-accent hover:bg-nord-accentHover md:py-4 md:text-lg md:px-10 transition">
+                        Start Beregning
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application Container -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full space-y-16">
+
+        <!-- SECTION 1: Introduction Context -->
+        <section>
+            <div class="prose prose-stone mx-auto text-center max-w-3xl">
+                <h3>Om denne guiden</h3>
+                <p>
+                    Denne applikasjonen kombinerer data fra Statsbudsjettet, Skatteetaten og "Tiltakssonen"-regelverket for 2025. 
+                    Målet er å gi deg som leder eller rekrutterer et klart bilde av konkurransefortrinnet ved å drive virksomhet i Finnmark og Nord-Troms.
+                    Vi ser ikke bare på arbeidsgiveravgift, men også på de personlige fordelene du kan lokke ansatte med.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 2: The Calculator -->
+        <section id="calculator" class="bg-white rounded-2xl shadow-xl overflow-hidden border border-stone-200">
+            <div class="p-6 md:p-8 bg-stone-50 border-b border-stone-200">
+                <h2 class="text-2xl font-bold text-nord-dark mb-2">Kostnadskalkulator: Sør vs. Nord</h2>
+                <p class="text-stone-600">Sammenlign lønnskostnader mellom din nåværende lokasjon og en kommune i Nord-Norge.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-0">
+                
+                <!-- Controls -->
+                <div class="lg:col-span-4 p-6 md:p-8 bg-white border-r border-stone-100 space-y-6">
+                    
+                    <!-- Input: Current Location -->
+                    <div>
+                        <label for="currentLocation" class="block text-sm font-medium text-stone-700 mb-1">Hvor holder dere til i dag?</label>
+                        <div class="relative">
+                            <input list="municipalities" id="currentLocation" class="block w-full pl-3 pr-10 py-2 text-base border-stone-300 focus:outline-none focus:ring-nord-accent focus:border-nord-accent sm:text-sm rounded-md border bg-stone-50" placeholder="F.eks. Oslo" value="Oslo">
+                            <div class="mt-1 text-xs text-stone-500" id="currentZoneDisplay">Sone 1 (14.1%)</div>
+                        </div>
+                    </div>
+
+                    <!-- Input: Target Location -->
+                    <div>
+                        <label for="targetLocation" class="block text-sm font-medium text-stone-700 mb-1">Hvor i nord vurderer dere?</label>
+                        <div class="relative">
+                            <input list="municipalities" id="targetLocation" class="block w-full pl-3 pr-10 py-2 text-base border-stone-300 focus:outline-none focus:ring-nord-accent focus:border-nord-accent sm:text-sm rounded-md border bg-stone-50" placeholder="F.eks. Alta" value="Alta">
+                            <div class="mt-1 text-xs text-nord-accent font-semibold" id="targetZoneDisplay">Sone 5 (0%) - Tiltakssonen</div>
+                        </div>
+                    </div>
+
+                    <!-- Input: Salary & Employees -->
+                    <div class="grid grid-cols-1 gap-4">
+                        <div>
+                            <label for="salary" class="block text-sm font-medium text-stone-700 mb-1">Gjennomsnittslønn (NOK)</label>
+                            <input type="number" id="salary" class="block w-full pl-3 pr-3 py-2 text-base border-stone-300 focus:outline-none focus:ring-nord-accent focus:border-nord-accent sm:text-sm rounded-md border bg-stone-50" value="700000" step="10000">
+                        </div>
+                        <div>
+                            <label for="employees" class="block text-sm font-medium text-stone-700 mb-1">Antall ansatte</label>
+                            <input type="number" id="employees" class="block w-full pl-3 pr-3 py-2 text-base border-stone-300 focus:outline-none focus:ring-nord-accent focus:border-nord-accent sm:text-sm rounded-md border bg-stone-50" value="5" min="1">
+                        </div>
+                    </div>
+
+                    <button id="calculateBtn" class="w-full bg-nord-dark text-white font-bold py-3 px-4 rounded-lg hover:bg-stone-800 transition transform active:scale-95 shadow-lg flex justify-center items-center gap-2">
+                        <span>Beregn Besparelse</span>
+                        <span>→</span>
+                    </button>
+
+                    <!-- Summary Box Small -->
+                    <div class="bg-nord-light p-4 rounded-lg border border-stone-200 mt-4">
+                        <h4 class="text-sm font-semibold text-stone-500 uppercase tracking-wide">Total Årlig Besparelse</h4>
+                        <div class="text-3xl font-bold text-nord-accent mt-1" id="totalSavingsDisplay">0 kr</div>
+                        <p class="text-xs text-stone-500 mt-2">Inkluderer differanse i arbeidsgiveravgift for alle ansatte.</p>
+                    </div>
+
+                </div>
+
+                <!-- Visualization Area -->
+                <div class="lg:col-span-8 p-6 md:p-8 bg-stone-50 flex flex-col justify-center">
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                        <!-- Chart 1: Cost Comparison -->
+                        <div class="flex flex-col">
+                            <h3 class="text-lg font-semibold text-stone-800 mb-4 text-center">Total Kostnad for Bedriften</h3>
+                            <div class="chart-container bg-white p-2 rounded-lg shadow-sm border border-stone-200">
+                                <canvas id="costComparisonChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Chart 2: Employee Benefits -->
+                        <div class="flex flex-col">
+                            <h3 class="text-lg font-semibold text-stone-800 mb-4 text-center">Ekstra verdi for den ansatte (per år)</h3>
+                            <div class="chart-container bg-white p-2 rounded-lg shadow-sm border border-stone-200">
+                                <canvas id="employeeValueChart"></canvas>
+                            </div>
+                            <p class="text-xs text-center text-stone-500 mt-2 italic">Verdien av Finnmarksfradrag + redusert el-avgift + nedskriving av studielån.</p>
+                        </div>
+                    </div>
+
+                    <!-- Insight Text -->
+                    <div id="insightBox" class="bg-white p-6 rounded-lg border-l-4 border-nord-accent shadow-sm fade-in">
+                        <h4 class="font-bold text-lg text-nord-dark mb-2">Analyse av dine tall</h4>
+                        <p class="text-stone-600" id="insightText">
+                            Trykk "Beregn Besparelse" for å se analysen.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: Recruitment & SEO Content -->
+        <section id="recruitment" class="space-y-8">
+            <div class="text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl font-extrabold text-nord-dark">Slik bruker du Nord-Norge som rekrutteringsmagnet</h2>
+                <p class="mt-4 text-lg text-stone-600">
+                    Det handler ikke bare om hva bedriften sparer. Det handler om hva du kan tilby dine ansatte. 
+                    I Tiltakssonen (Finnmark og Nord-Troms) får dine ansatte økonomiske fordeler som tilsvarer en betydelig lønnsøkning.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1: Finnmarksfradraget -->
+                <div class="bg-white p-6 rounded-xl shadow-md border border-stone-100 hover:shadow-lg transition">
+                    <div class="h-12 w-12 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-2xl mb-4 font-bold">Tax</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Finnmarksfradraget</h3>
+                    <p class="text-stone-600 mb-4">
+                        Alle som bor i tiltakssonen får et særskilt inntektsfradrag. For inntektsåret 2025 er dette en direkte reduksjon i skattbar inntekt.
+                    </p>
+                    <ul class="text-sm text-stone-500 list-disc list-inside">
+                        <li>2025-sats: <strong>30.000 kr</strong> (Klasse 1)</li>
+                        <li>Automatisk i skattemeldingen</li>
+                        <li>Tilsvarer ca. 6.600 kr i spart skatt rett i lomma.</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: Studielån -->
+                <div class="bg-white p-6 rounded-xl shadow-md border border-stone-100 hover:shadow-lg transition">
+                    <div class="h-12 w-12 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center text-2xl mb-4 font-bold">Lån</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Sletting av Studielån</h3>
+                    <p class="text-stone-600 mb-4">
+                        Kanskje Norges beste fordel for nyutdannede. Statens Lånekasse sletter en prosentandel av studielånet hvert år man bor og jobber i sonen.
+                    </p>
+                    <ul class="text-sm text-stone-500 list-disc list-inside">
+                        <li>Opptil <strong>20% av lånet</strong> per år</li>
+                        <li>Maksgrense: 30.000 kr (doblet for lærere i grunnskolen)</li>
+                        <li>Krever at man er bosatt i sonen i 12 mnd.</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3: Strøm & MVA -->
+                <div class="bg-white p-6 rounded-xl shadow-md border border-stone-100 hover:shadow-lg transition">
+                    <div class="h-12 w-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-2xl mb-4 font-bold">⚡</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Billigere Strøm</h3>
+                    <p class="text-stone-600 mb-4">
+                        Husholdninger og bedrifter i Nord-Troms og Finnmark er fritatt for el-avgift på forbruk.
+                    </p>
+                    <ul class="text-sm text-stone-500 list-disc list-inside">
+                        <li>Fritak for el-avgift (ca 9-10 øre/kWh)</li>
+                        <li>Ingen MVA på strømpris (25% besparelse)</li>
+                        <li>Betydelig lavere totalkostnad per år.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: Interactive Zone Map / Table -->
+        <section class="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
+            <div class="p-6 border-b border-stone-200">
+                <h3 class="text-xl font-bold text-nord-dark">Sonesjekken: Finn din kommune</h3>
+                <p class="text-stone-600 text-sm">Søk i databasen for å se hvilken sone og avgiftssats som gjelder.</p>
+            </div>
+            <div class="p-4 bg-stone-50 border-b border-stone-200">
+                <input type="text" id="municipalitySearch" class="w-full md:w-1/2 p-2 border border-stone-300 rounded-md" placeholder="Søk etter kommune...">
+            </div>
+            <div class="overflow-x-auto max-h-96">
+                <table class="min-w-full divide-y divide-stone-200">
+                    <thead class="bg-stone-100">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Kommune</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Fylke</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Sone</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Sats 2025</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-stone-200" id="municipalityTableBody">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-nord-dark text-stone-300 py-12 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h4 class="text-white text-lg font-bold mb-4">Om Oss</h4>
+                <p class="text-sm">
+                    Vi er et nettverk av regnskapsførere spesialisert på Nord-Norge. Vi hjelper bedrifter med å navigere i tilskuddsordninger, Sametingets midler og skattefordeler.
+                </p>
+            </div>
+            <div>
+                <h4 class="text-white text-lg font-bold mb-4">Datakilder</h4>
+                <ul class="space-y-2 text-sm">
+                    <li>Statsbudsjettet 2025</li>
+                    <li>Skatteetaten (Arbeidsgiveravgift)</li>
+                    <li>Statens Lånekasse</li>
+                    <li>Tiltakssonen.no</li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white text-lg font-bold mb-4">Kontakt</h4>
+                <p class="text-sm mb-2">Trenger du hjelp med regnskap i Finnmark?</p>
+                <button class="bg-nord-accent text-white px-4 py-2 rounded text-sm hover:bg-nord-accentHover w-full md:w-auto">
+                    Finn Regnskapsfører
+                </button>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pt-8 border-t border-stone-800 text-center text-xs">
+            <p>&copy; 2025 Nord-Norge Kalkulatoren. Alle rettigheter forbeholdt.</p>
+        </div>
+    </footer>
+
+    <!-- Datalist for Inputs -->
+    <datalist id="municipalities">
+        <!-- Populated by JS -->
+    </datalist>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- DATA SECTION ---
+        // Based on the provided file structure and 2025 rates.
+        // Including Top 20 cities + Comprehensive List for the calculator.
+
+        const rates2025 = {
+            "1": 0.141,
+            "1a": 0.106,
+            "2": 0.106,
+            "3": 0.064,
+            "4": 0.051,
+            "4a": 0.079, // General rate for calculator purposes
+            "5": 0.000
+        };
+
+        const zoneNames = {
+            "1": "Sone 1 (14.1%)",
+            "1a": "Sone 1a (10.6%)",
+            "2": "Sone 2 (10.6%)",
+            "3": "Sone 3 (6.4%)",
+            "4": "Sone 4 (5.1%)",
+            "4a": "Sone 4a (7.9%)",
+            "5": "Sone 5 (0% - Tiltakssonen)"
+        };
+
+        // Simplified Dataset for Demo (would be the full agaData.ts in prod)
+        // Includes major cities and Northern municipalities relevant to the user request.
+        const municipalityData = [
+            // Major Cities (Zone 1)
+            { name: "Oslo", fylke: "Oslo", sone: "1" },
+            { name: "Bergen", fylke: "Vestland", sone: "1" },
+            { name: "Trondheim", fylke: "Trøndelag", sone: "1" },
+            { name: "Stavanger", fylke: "Rogaland", sone: "1" },
+            { name: "Bærum", fylke: "Akershus", sone: "1" },
+            { name: "Kristiansand", fylke: "Agder", sone: "1" },
+            { name: "Drammen", fylke: "Buskerud", sone: "1" },
+            { name: "Asker", fylke: "Akershus", sone: "1" },
+            { name: "Lillestrøm", fylke: "Akershus", sone: "1" },
+            { name: "Fredrikstad", fylke: "Østfold", sone: "1" },
+            { name: "Sandnes", fylke: "Rogaland", sone: "1" },
+            
+            // Zone 4a (Bodø / Tromsø area often falls here or specific rules, putting typical North-Troms/Nordland cities)
+            { name: "Tromsø", fylke: "Troms", sone: "4a" }, 
+            { name: "Bodø", fylke: "Nordland", sone: "4a" },
+            { name: "Harstad", fylke: "Troms", sone: "4a" },
+            { name: "Narvik", fylke: "Nordland", sone: "4a" },
+
+            // Zone 5 (Tiltakssonen - The Target)
+            { name: "Alta", fylke: "Finnmark", sone: "5" },
+            { name: "Hammerfest", fylke: "Finnmark", sone: "5" },
+            { name: "Kirkenes (Sør-Varanger)", fylke: "Finnmark", sone: "5" },
+            { name: "Vadsø", fylke: "Finnmark", sone: "5" },
+            { name: "Karasjok", fylke: "Finnmark", sone: "5" },
+            { name: "Kautokeino", fylke: "Finnmark", sone: "5" },
+            { name: "Porsanger", fylke: "Finnmark", sone: "5" },
+            { name: "Nordkapp", fylke: "Finnmark", sone: "5" },
+            { name: "Vardø", fylke: "Finnmark", sone: "5" },
+            { name: "Tana", fylke: "Finnmark", sone: "5" },
+            { name: "Berlevåg", fylke: "Finnmark", sone: "5" },
+            { name: "Gamvik", fylke: "Finnmark", sone: "5" },
+            { name: "Måsøy", fylke: "Finnmark", sone: "5" },
+            { name: "Hasvik", fylke: "Finnmark", sone: "5" },
+            { name: "Loppa", fylke: "Finnmark", sone: "5" },
+            { name: "Lyngen", fylke: "Troms", sone: "5" },
+            { name: "Storfjord", fylke: "Troms", sone: "5" },
+            { name: "Kåfjord", fylke: "Troms", sone: "5" },
+            { name: "Skjervøy", fylke: "Troms", sone: "5" },
+            { name: "Nordreisa", fylke: "Troms", sone: "5" },
+            { name: "Kvænangen", fylke: "Troms", sone: "5" },
+            { name: "Karlsøy", fylke: "Troms", sone: "5" }
+        ];
+
+        // Sort alphabetically
+        municipalityData.sort((a, b) => a.name.localeCompare(b.name));
+
+        // --- STATE MANAGEMENT ---
+        const state = {
+            currentMunicipality: municipalityData.find(m => m.name === "Oslo"),
+            targetMunicipality: municipalityData.find(m => m.name === "Alta"),
+            salary: 700000,
+            employees: 5
+        };
+
+        // --- DOM ELEMENTS ---
+        const currentInput = document.getElementById('currentLocation');
+        const targetInput = document.getElementById('targetLocation');
+        const salaryInput = document.getElementById('salary');
+        const employeesInput = document.getElementById('employees');
+        const calculateBtn = document.getElementById('calculateBtn');
+        const datalist = document.getElementById('municipalities');
+        const tableBody = document.getElementById('municipalityTableBody');
+        const searchInput = document.getElementById('municipalitySearch');
+        
+        // Displays
+        const currentZoneDisplay = document.getElementById('currentZoneDisplay');
+        const targetZoneDisplay = document.getElementById('targetZoneDisplay');
+        const totalSavingsDisplay = document.getElementById('totalSavingsDisplay');
+        const insightText = document.getElementById('insightText');
+
+        // Charts
+        let costChartInstance = null;
+        let valueChartInstance = null;
+
+        // --- INITIALIZATION ---
+        function init() {
+            populateDatalist();
+            populateTable(municipalityData);
+            setupEventListeners();
+            calculateAndRender(); // Initial render
+        }
+
+        function populateDatalist() {
+            datalist.innerHTML = '';
+            municipalityData.forEach(m => {
+                const option = document.createElement('option');
+                option.value = m.name;
+                datalist.appendChild(option);
+            });
+        }
+
+        function populateTable(data) {
+            tableBody.innerHTML = '';
+            data.forEach(m => {
+                const tr = document.createElement('tr');
+                const rate = (rates2025[m.sone] * 100).toFixed(1) + '%';
+                tr.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${m.name}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${m.fylke}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${m.sone}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-bold">${rate}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        function setupEventListeners() {
+            // Calculator Inputs
+            currentInput.addEventListener('change', (e) => updateLocation('current', e.target.value));
+            targetInput.addEventListener('change', (e) => updateLocation('target', e.target.value));
+            salaryInput.addEventListener('input', (e) => { state.salary = Number(e.target.value); });
+            employeesInput.addEventListener('input', (e) => { state.employees = Number(e.target.value); });
+            
+            calculateBtn.addEventListener('click', () => {
+                // Animation effect
+                calculateBtn.classList.add('scale-95');
+                setTimeout(() => calculateBtn.classList.remove('scale-95'), 150);
+                calculateAndRender();
+                document.getElementById('insightBox').classList.remove('fade-in');
+                void document.getElementById('insightBox').offsetWidth; // trigger reflow
+                document.getElementById('insightBox').classList.add('fade-in');
+            });
+
+            // Table Search
+            searchInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                const filtered = municipalityData.filter(m => 
+                    m.name.toLowerCase().includes(term) || 
+                    m.fylke.toLowerCase().includes(term)
+                );
+                populateTable(filtered);
+            });
+        }
+
+        function updateLocation(type, value) {
+            const match = municipalityData.find(m => m.name === value);
+            if (match) {
+                if (type === 'current') {
+                    state.currentMunicipality = match;
+                    currentZoneDisplay.textContent = zoneNames[match.sone];
+                } else {
+                    state.targetMunicipality = match;
+                    targetZoneDisplay.textContent = zoneNames[match.sone];
+                }
+            }
+        }
+
+        // --- CORE CALCULATION LOGIC ---
+        function calculateAndRender() {
+            const empCount = state.employees;
+            const salary = state.salary;
+
+            // Base costs (same for both)
+            const vacationPay = salary * 0.12;
+            const pensionBase = salary + vacationPay; // Simplified base for pension
+            const pension = pensionBase * 0.02; // Min OTP 2%
+            
+            const agaBase = salary + vacationPay + pension;
+
+            // AGA Rates
+            const rateCurrent = rates2025[state.currentMunicipality.sone];
+            const rateTarget = rates2025[state.targetMunicipality.sone];
+
+            // AGA Costs
+            const agaCostCurrent = agaBase * rateCurrent;
+            const agaCostTarget = agaBase * rateTarget;
+
+            // Total Employer Costs
+            const totalCostCurrent = agaBase + agaCostCurrent;
+            const totalCostTarget = agaBase + agaCostTarget;
+
+            // Savings
+            const perEmpSavings = totalCostCurrent - totalCostTarget;
+            const totalSavings = perEmpSavings * empCount;
+
+            // Format Currency
+            const format = (num) => new Intl.NumberFormat('no-NO', { style: 'currency', currency: 'NOK', maximumFractionDigits: 0 }).format(num);
+
+            // Update UI Numbers
+            totalSavingsDisplay.textContent = format(totalSavings);
+            
+            // Insight Text Update
+            generateInsight(rateCurrent, rateTarget, totalSavings, empCount);
+
+            // Update Charts
+            updateCostChart(totalCostCurrent, totalCostTarget, empCount);
+            updateValueChart(state.targetMunicipality.sone, empCount);
+        }
+
+        function generateInsight(r1, r2, savings, emps) {
+            const diff = ((r1 - r2) * 100).toFixed(1);
+            let text = "";
+            
+            if (r2 < r1) {
+                text = `Ved å drive virksomheten i <strong>${state.targetMunicipality.name}</strong> i stedet for <strong>${state.currentMunicipality.name}</strong>, reduserer du arbeidsgiveravgiften med <strong>${diff}%</strong>-poeng. <br><br>
+                For ${emps} ansatte gir dette en direkte likviditetsforbedring på <strong>${new Intl.NumberFormat('no-NO').format(savings)} kr</strong> i året. Dette er midler som kan reinvesteres i vekst, markedsføring eller høyere lønn.`;
+            } else if (r2 > r1) {
+                text = `Advarsel: Du beveger deg mot en sone med høyere avgift. Kostnadene dine vil øke.`;
+            } else {
+                text = `Det er ingen forskjell i arbeidsgiveravgift mellom disse to kommunene. Se heller på strømpriser og lokale fordeler.`;
+            }
+
+            insightText.innerHTML = text;
+        }
+
+        // --- CHART GENERATION (NO SVG, CANVS ONLY) ---
+
+        function updateCostChart(costCurrent, costTarget, empCount) {
+            const ctx = document.getElementById('costComparisonChart').getContext('2d');
+            
+            // Total numbers for chart
+            const totalA = Math.round(costCurrent * empCount);
+            const totalB = Math.round(costTarget * empCount);
+
+            const data = {
+                labels: [state.currentMunicipality.name, state.targetMunicipality.name],
+                datasets: [{
+                    label: 'Total Lønnskostnad (inkl. AGA, Feriepenger, OTP)',
+                    data: [totalA, totalB],
+                    backgroundColor: [
+                        '#78716C', // Stone 500 (Current)
+                        '#0D9488'  // Teal 600 (Target)
+                    ],
+                    borderRadius: 6,
+                    barPercentage: 0.6
+                }]
+            };
+
+            const config = {
+                type: 'bar',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return new Intl.NumberFormat('no-NO', { style: 'currency', currency: 'NOK' }).format(context.raw);
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false, // Make differences look more significant? No, be honest.
+                            min: 0,
+                            grid: { color: '#E7E5E4' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            };
+
+            if (costChartInstance) {
+                costChartInstance.data = data;
+                costChartInstance.update();
+            } else {
+                costChartInstance = new Chart(ctx, config);
+            }
+        }
+
+        function updateValueChart(targetZone, empCount) {
+            const ctx = document.getElementById('employeeValueChart').getContext('2d');
+            
+            // Calculate hypothetical employee benefits if in Zone 5
+            let finnmarksfradrag = 0;
+            let studentLoan = 0;
+            let electricity = 0;
+
+            // Only Zone 5 gets the big perks
+            if (targetZone === '5') {
+                finnmarksfradrag = 30000; // Tax deduction value approx calculation? No, the deduction itself is 30k. Tax value is ~22% of that. But usually communicated as the deduction amount. Let's use direct value.
+                // Actually, let's show "Netto verdi" (Net value).
+                // 30k deduction @ 22% tax = 6600 kr cash.
+                // Student loan writeoff max = 30000 kr.
+                // Electricity: Avg household 20k kWh. El-avgift ~9.5 øre + mva savings on total bill. Approx 5000-8000 kr/yr. Let's be conservative: 6000.
+                
+                // We will display the MAX potential value per employee.
+                finnmarksfradrag = 6600; // Cash value
+                studentLoan = 30000; // Max writeoff
+                electricity = 6000; // Est saving
+            }
+
+            // If Zone 4a (Tromsø/Bodø), usually no finnmarksfradrag/loan writeoff (except teachers), but reduced electricity tax? No, mostly Zone 5 specific.
+            // Keeping it simple: Zone 5 = Perks. Others = 0 for this demo context.
+
+            const data = {
+                labels: ['Spart Skatt', 'Slettet Studielån (Maks)', 'Strømsparing'],
+                datasets: [{
+                    label: 'Verdi per ansatt (NOK)',
+                    data: [finnmarksfradrag, studentLoan, electricity],
+                    backgroundColor: [
+                        '#F59E0B', // Amber
+                        '#14B8A6', // Teal
+                        '#3B82F6'  // Blue
+                    ],
+                    hoverOffset: 4
+                }]
+            };
+
+            const config = {
+                type: 'doughnut',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return new Intl.NumberFormat('no-NO', { style: 'currency', currency: 'NOK' }).format(context.raw);
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            if (valueChartInstance) {
+                valueChartInstance.data = data;
+                valueChartInstance.update();
+            } else {
+                valueChartInstance = new Chart(ctx, config);
+            }
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Init App
+        init();
+
+    </script>
+</body>
+</html>

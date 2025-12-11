@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nord-Norge Kalkulatoren 2026 | Bedrift & Skatt</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f0f4f8; }
+        .chart-container { 
+            position: relative; 
+            width: 100%; 
+            height: 300px; 
+        }
+        /* Custom inputs */
+        input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none; height: 16px; width: 16px; border-radius: 50%;
+            background: #2563eb; cursor: pointer; margin-top: -6px; box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%; height: 4px; cursor: pointer; background: #cbd5e1; border-radius: 2px;
+        }
+        .toggle-checkbox:checked { right: 0; border-color: #68D391; }
+        .toggle-checkbox:checked + .toggle-label { background-color: #68D391; }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <nav class="bg-slate-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="font-bold text-xl tracking-wide flex items-center gap-2">
+                <span class="bg-blue-600 text-white px-2 py-1 rounded text-sm">2026</span>
+                <span>INNSATSSONE<span class="text-blue-400">KALKULATOREN</span></span>
+            </div>
+            <div class="text-xs text-slate-400 hidden md:block uppercase tracking-wider">ExpertInsight Edition</div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8 max-w-7xl">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <div class="lg:col-span-5 space-y-6">
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h2 class="text-lg font-bold text-slate-800 mb-4 flex items-center">
+                        <span class="bg-slate-100 text-slate-600 w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3 font-mono">1</span>
+                        Lokasjon & Eiendom
+                    </h2>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Fra (Sone 1)</label>
+                            <select id="originSelect" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                                </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-blue-600 uppercase mb-1">Til (Sone 4/5)</label>
+                            <select id="destinationSelect" class="w-full bg-blue-50 border border-blue-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none font-medium text-slate-900">
+                                </select>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-sm font-medium text-slate-700">Næringseiendom Verdi</label>
+                            <span class="text-xs text-slate-400">Markedsverdi</span>
+                        </div>
+                        <input type="number" id="propertyValue" value="15000000" step="1000000" class="w-full border border-slate-300 rounded px-3 py-2 mb-3 font-mono text-right">
+                        
+                        <div class="flex items-center justify-between text-sm">
+                            <div class="flex items-center gap-2">
+                                <span class="text-slate-600">Eiendomsskatt (Promille):</span>
+                                <input type="number" id="taxPromille" value="5" max="7" min="0" class="w-16 border border-slate-300 rounded px-1 py-1 text-center text-xs">
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="hasPropertyTax" checked class="mr-2 text-blue-600 rounded">
+                                <label for="hasPropertyTax" class="text-xs text-slate-500">Kommune har skatt</label>
+                            </div>
+                        </div>
+                        <p class="text-[10px] text-slate-400 mt-2 italic">*Sjekker automatisk mot unntaksliste ved valg av kommune.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h2 class="text-lg font-bold text-slate-800 mb-4 flex items-center">
+                        <span class="bg-slate-100 text-slate-600 w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3 font-mono">2</span>
+                        Lønn & Arbeidsgiveravgift
+                    </h2>
+
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Ordinære Ansatte</label>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-xs text-slate-500">Antall</label>
+                                <input type="number" id="empCount" value="10" class="w-full border border-slate-300 rounded px-3 py-2">
+                            </div>
+                            <div>
+                                <label class="text-xs text-slate-500">Snittlønn</label>
+                                <input type="number" id="empSalary" value="650000" class="w-full border border-slate-300 rounded px-3 py-2">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-200 mb-4">
+                        <div class="flex items-start gap-3">
+                            <div class="bg-yellow-100 p-2 rounded-full text-yellow-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            </div>
+                            <div class="w-full">
+                                <label class="block text-sm font-bold text-yellow-800 mb-1">Ledelse / Nøkkelpersoner</label>
+                                <p class="text-[10px] text-yellow-700 mb-3 leading-tight">Selv om ekstra AGA (5%) er borte, sparer du full 14,1% på hele lønnen her.</p>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="text-xs text-yellow-700">Antall</label>
+                                        <input type="number" id="execCount" value="2" class="w-full bg-white border border-yellow-300 rounded px-3 py-2 text-sm">
+                                    </div>
+                                    <div>
+                                        <label class="text-xs text-yellow-700">Lønn (eks: 1.2M)</label>
+                                        <input type="number" id="execSalary" value="1200000" class="w-full bg-white border border-yellow-300 rounded px-3 py-2 text-sm">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-bold text-slate-800 flex items-center">
+                            <span class="bg-slate-100 text-slate-600 w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3 font-mono">3</span>
+                            Personlige Fordeler
+                        </h2>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="includePersonal" checked class="sr-only peer">
+                            <div class="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-600"></div>
+                        </label>
+                    </div>
+
+                    <div id="personalInputs" class="space-y-3 transition-opacity duration-200">
+                        <div class="flex items-center justify-between p-3 bg-green-50 rounded border border-green-100">
+                            <span class="text-sm font-medium text-green-900">Studielån (Nedskriving)</span>
+                            <span class="text-sm font-bold text-green-700">60 000 kr</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-blue-50 rounded border border-blue-100">
+                            <span class="text-sm font-medium text-blue-900">Skatt (Alminnelig Inntekt)</span>
+                            <span class="text-sm font-bold text-blue-700">18.5% <span class="text-xs font-normal text-slate-500">(vs 22%)</span></span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-purple-50 rounded border border-purple-100">
+                            <span class="text-sm font-medium text-purple-900">Finnmarksfradrag</span>
+                            <span class="text-sm font-bold text-purple-700">45 000 kr</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="lg:col-span-7 space-y-6">
+                
+                <div class="bg-gradient-to-r from-slate-900 to-slate-800 text-white p-8 rounded-2xl shadow-xl relative overflow-hidden">
+                    <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-slate-400 font-medium uppercase tracking-wider text-xs mb-1">Total Estimert Likviditetseffekt</h3>
+                            <div id="totalSavings" class="text-5xl font-bold tracking-tight text-white mb-2">0 kr</div>
+                            <p class="text-sm text-slate-400">Årlig besparelse (Bedrift + Ansatte)</p>
+                        </div>
+                        <div class="border-l border-slate-700 pl-8 hidden md:block">
+                            <div class="mb-4">
+                                <p class="text-xs text-slate-400">AGA Besparelse (Bedrift)</p>
+                                <p id="agaOnlySavings" class="text-2xl font-semibold text-blue-400">0 kr</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400">Bruttolønnsekvivalent (Ansatte)</p>
+                                <p id="personalValue" class="text-2xl font-semibold text-green-400">0 kr</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute -right-10 -bottom-20 w-64 h-64 bg-blue-600 rounded-full opacity-10 blur-3xl"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h4 class="text-sm font-bold text-slate-700 mb-4 uppercase">Kostnadsfordeling (Bedrift)</h4>
+                        <div class="chart-container" style="height: 250px;">
+                            <canvas id="costChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h4 class="text-sm font-bold text-slate-700 mb-4 uppercase">Sammensetning av Gevinst</h4>
+                        <div class="chart-container" style="height: 250px;">
+                            <canvas id="gainChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-white p-5 rounded-xl border-l-4 border-blue-500 shadow-sm">
+                        <h4 class="font-bold text-slate-800 text-sm mb-1">AGA-Effekten</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            Ved å flytte fra Sone 1 (14,1%) til Sone 5 (0%) frigjør du <span class="font-bold text-blue-600">141 000 kr</span> per million i lønnskostnad. Dette gjelder også lederlønn.
+                        </p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border-l-4 border-orange-500 shadow-sm">
+                        <h4 class="font-bold text-slate-800 text-sm mb-1">Eiendomsskatt</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            Mange kommuner i nord har eiendomsskatt (typisk 4-7‰). Sørg for å sjekke din spesifikke kommune. Kalkulatoren estimerer dette nå.
+                        </p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border-l-4 border-green-500 shadow-sm">
+                        <h4 class="font-bold text-slate-800 text-sm mb-1">"Lønnsøkning"</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            Med 60k slettet lån og 3,5% lavere skatt, får en ansatt med 650k en kjøpekraft som tilsvarer ca <span class="font-bold text-green-600">100 000 kr</span> mer i brutto Oslo-lønn.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // --- CONFIG & DATA ---
+        
+        // Mock Exception List (Communicates "Check Datasheet")
+        const propertyTaxExceptions = ["Os", "Røyrvik", "Vea", "Bø"]; // Eksempler
+
+        const zones = {
+            "1": { rate: 0.141, name: "Sone 1 (Oslo/Sentralt)" },
+            "4": { rate: 0.051, name: "Sone 4 (Tromsø/Bodø m.fl)" }, // Forenklet, Bodø er 4a
+            "5": { rate: 0.000, name: "Sone 5 (Tiltakssonen)" }
+        };
+
+        const municipalities = [
+            { name: "Oslo", zone: "1" }, { name: "Bergen", zone: "1" }, 
+            { name: "Trondheim", zone: "1" }, { name: "Stavanger", zone: "1" },
+            { name: "Bærum", zone: "1" }, { name: "Drammen", zone: "1" },
+            // Zone 4/4a
+            { name: "Tromsø", zone: "4" }, { name: "Bodø", zone: "4" }, 
+            { name: "Rana", zone: "4" }, { name: "Harstad", zone: "4" },
+            // Zone 5 (Finnmark/Nord-Troms)
+            { name: "Alta", zone: "5" }, { name: "Hammerfest", zone: "5" },
+            { name: "Kirkenes", zone: "5" }, { name: "Vadsø", zone: "5" },
+            { name: "Kautokeino", zone: "5" }, { name: "Karasjok", zone: "5" },
+            { name: "Nordkapp", zone: "5" }, { name: "Vardø", zone: "5" }
+        ];
+
+        // 2026 Constants
+        const CONSTANTS = {
+            loanWriteDown: 60000,
+            loanWriteDownTeacher: 80000,
+            taxRateNormal: 0.22,
+            taxRateZone5: 0.185,
+            finnmarkDeduction: 45000, // Proposed 2026
+            socialSecRate: 0.078 // Trygdeavgift (Approx)
+        };
+
+        // DOM Elements
+        const els = {
+            origin: document.getElementById('originSelect'),
+            dest: document.getElementById('destinationSelect'),
+            propVal: document.getElementById('propertyValue'),
+            taxProm: document.getElementById('taxPromille'),
+            hasPropTax: document.getElementById('hasPropertyTax'),
+            
+            empCount: document.getElementById('empCount'),
+            empSal: document.getElementById('empSalary'),
+            execCount: document.getElementById('execCount'),
+            execSal: document.getElementById('execSalary'),
+            
+            incPers: document.getElementById('includePersonal'),
+            
+            outTotal: document.getElementById('totalSavings'),
+            outAga: document.getElementById('agaOnlySavings'),
+            outPers: document.getElementById('personalValue')
+        };
+
+        let chartCost, chartGain;
+
+        // --- INIT ---
+        function init() {
+            // Populate Dropdowns
+            municipalities.sort((a,b) => a.name.localeCompare(b.name)).forEach(m => {
+                let opt = new Option(m.name, m.zone);
+                if(m.name === "Oslo") opt.selected = true;
+                els.origin.add(opt);
+                
+                // Add only Zone 4/5 to destination
+                if(m.zone === "4" || m.zone === "5") {
+                    let opt2 = new Option(m.name, m.zone);
+                    if(m.name === "Alta") opt2.selected = true;
+                    els.dest.add(opt2);
+                }
+            });
+
+            // Listeners
+            Object.values(els).forEach(el => {
+                if(el && el.addEventListener) {
+                    el.addEventListener('input', calculate);
+                    el.addEventListener('change', calculate);
+                }
+            });
+
+            // Special listener for Destination Change -> Check Property Tax List
+            els.dest.addEventListener('change', checkPropertyTaxList);
+
+            initCharts();
+            calculate();
+        }
+
+        function checkPropertyTaxList() {
+            const destName = els.dest.options[els.dest.selectedIndex].text;
+            // Simple logic: If in exception list, uncheck box. Else check.
+            if(propertyTaxExceptions.includes(destName)) {
+                els.hasPropTax.checked = false;
+            } else {
+                els.hasPropTax.checked = true;
+            }
+            calculate();
+        }
+
+        function calculate() {
+            // 1. Get Inputs
+            const originRate = zones[els.origin.value].rate;
+            const destRate = zones[els.dest.value].rate;
+            const isZone5 = els.dest.value === "5";
+
+            const empN = parseInt(els.empCount.value) || 0;
+            const empS = parseInt(els.empSal.value) || 0;
+            const execN = parseInt(els.execCount.value) || 0;
+            const execS = parseInt(els.execSal.value) || 0;
+
+            const propV = parseInt(els.propVal.value) || 0;
+            const propT = parseFloat(els.taxProm.value) || 0;
+            const propTaxActive = els.hasPropTax.checked;
+
+            // 2. Business Calcs
+            // AGA Regular
+            const costAgaOrg = (empN * empS) * originRate;
+            const costAgaDest = (empN * empS) * destRate;
+            
+            // AGA Executives (Full saving, no 5% extra logic needed for 2026, just base AGA diff)
+            const costExecAgaOrg = (execN * execS) * originRate;
+            const costExecAgaDest = (execN * execS) * destRate;
+
+            const totalAgaSaving = (costAgaOrg + costExecAgaOrg) - (costAgaDest + costExecAgaDest);
+
+            // Property Tax (Comparison: Assuming Origin has it vs Dest has/has not)
+            // Simplified: We calculate the COST of property tax in Dest.
+            // Origin cost is "Sunk" or we compare "Change". 
+            // Let's assume Origin (Oslo) has ~3 promille.
+            const propTaxOrigin = propV * 0.003; 
+            const propTaxDest = propTaxActive ? (propV * (propT/1000)) : 0;
+            const propTaxDiff = propTaxOrigin - propTaxDest; // Positive = Saving
+
+            // 3. Personal Value Calcs (Gross Salary Equivalent)
+            let personalNetBenefit = 0;
+            if (els.incPers.checked && isZone5) {
+                const totalEmployees = empN + execN;
+                
+                // Student Loan (60k net value)
+                // Gross Equivalent: 60k / (1 - marginalTax). Approx 100k gross.
+                const loanVal = CONSTANTS.loanWriteDown * totalEmployees; 
+                
+                // Tax Diff (22% vs 18.5% on General Income)
+                // Finnmark Deduction (45k less taxable income * 18.5%)
+                const deductionVal = (CONSTANTS.finnmarkDeduction * 0.185) * totalEmployees;
+                
+                // Rate Diff (3.5% of taxable income)
+                // Approx Taxable Income = Gross - Minstefradrag (~100k)
+                const taxableIncomeEmp = Math.max(0, empS - 100000);
+                const taxableIncomeExec = Math.max(0, execS - 100000);
+                
+                const rateDiffVal = ((taxableIncomeEmp * (0.22 - 0.185)) * empN) + 
+                                    ((taxableIncomeExec * (0.22 - 0.185)) * execN);
+
+                personalNetBenefit = loanVal + deductionVal + rateDiffVal;
+            }
+
+            // 4. Totals
+            // Note: We present Personal Benefit as "Value Added", added to the Business Savings for a "Total Economic Impact" view.
+            const totalImpact = totalAgaSaving + propTaxDiff + personalNetBenefit;
+
+            // 5. Update UI
+            els.outTotal.innerText = fmtMoney(totalImpact);
+            els.outAga.innerText = fmtMoney(totalAgaSaving);
+            els.outPers.innerText = fmtMoney(personalNetBenefit);
+
+            // 6. Update Charts
+            updateCharts(
+                { origin: costAgaOrg + costExecAgaOrg + propTaxOrigin, dest: costAgaDest + costExecAgaDest + propTaxDest },
+                { aga: totalAgaSaving, prop: propTaxDiff, pers: personalNetBenefit }
+            );
+        }
+
+        function fmtMoney(n) {
+            return Math.round(n).toLocaleString('no-NO') + " kr";
+        }
+
+        // --- CHARTS ---
+        function initCharts() {
+            // Cost Chart
+            const ctx1 = document.getElementById('costChart').getContext('2d');
+            chartCost = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ['Sone 1 (Nå)', 'Sone 5 (Ny)'],
+                    datasets: [{
+                        label: 'Totale Avgifter (AGA + Eiendom)',
+                        data: [0, 0],
+                        backgroundColor: ['#94a3b8', '#3b82f6'],
+                        borderRadius: 5
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+
+            // Gain Chart
+            const ctx2 = document.getElementById('gainChart').getContext('2d');
+            chartGain = new Chart(ctx2, {
+                type: 'doughnut',
+                data: {
+                    labels: ['AGA Besparelse', 'Ansattverdi (Netto)', 'Eiendom (Diff)'],
+                    datasets: [{
+                        data: [1, 1, 0],
+                        backgroundColor: ['#3b82f6', '#22c55e', '#f97316'],
+                        borderWidth: 0
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+        }
+
+        function updateCharts(costs, gains) {
+            chartCost.data.datasets[0].data = [costs.origin, costs.dest];
+            chartCost.update();
+
+            chartGain.data.datasets[0].data = [
+                Math.max(0, gains.aga), 
+                Math.max(0, gains.pers), 
+                Math.max(0, gains.prop)
+            ];
+            chartGain.update();
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>

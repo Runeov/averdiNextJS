@@ -7,7 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import contactLogo from '@/assets/contact.avif'; // Ensure this asset is moved
+import contactLogo from '@/assets/contact.avif'; 
 
 export default function ContactPanel() {
   const [formData, setFormData] = useState({
