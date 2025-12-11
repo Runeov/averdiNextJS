@@ -1,31 +1,84 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowLeft, Calculator, TrendingUp, Briefcase, AlertTriangle } from 'lucide-react';
-import { ExpertInsight } from '@/components/modules/kunnskapsbank/ExpertInsight';
+import { 
+  ArrowLeft, 
+  TrendingUp, 
+  Briefcase, 
+  Truck, 
+  Calculator, 
+  ShieldCheck, 
+  Coins, 
+  BookOpen, 
+  ExternalLink,
+  Users,
+  Building2,
+  FileText
+} from 'lucide-react';
 import { CategoryCard } from '@/components/modules/kunnskapsbank/CategoryGrid';
 import { McpDataSpan } from '@/components/ui/McpDataSpan';
-import { getExpert } from '@/data/experts';
 import { AverdiBackground } from '@/components/modules/AverdiBackground';
+import { FaqAccordion } from '@/components/ui/FaqAccordion';
 
-export const metadata = {
-  title: 'Bedrift i Tiltakssonen | Skattefordeler & Regnskap',
-  description: 'Utnytt 0% arbeidsgiveravgift og Finnmarksfradraget strategisk. Vi er din partner for vekst i Nord-Troms og Finnmark.',
+export const metadata: Metadata = {
+  title: 'Bedrift i Tiltakssonen | Skattefordeler & Regnskap 2026',
+  description: 'Guide til 0% arbeidsgiveravgift, Finnmarksfradraget og skattefordeler i Nord-Troms og Finnmark. Vi har analysert statsbudsjettet for 2026.',
 };
 
 export default function BedriftHub() {
-  const ingvald = getExpert('ingvald-laiti');
+
+  // FAQ Data med SEO-fokus på skatt og soner
+  const bedriftFaq = [
+    {
+      question: 'Hvilke kommuner har 0% arbeidsgiveravgift (Sone 5)?',
+      answer: 'Nullsatsen gjelder i hele Finnmark fylke, samt følgende kommuner i Nord-Troms: Karlsøy, Kvænangen, Kåfjord, Lyngen, Nordreisa, Skjervøy og Storfjord. Dette er definert som Tiltakssonen.'
+    },
+    {
+      question: 'Gjelder nullsatsen for transportbedrifter?',
+      answer: 'Nei, transportsektoren og finansforetak omfattes av EØS-reglene for bagatellstøtte (De Minimis). Det betyr at dere har et tak på hvor mye avgiftslette dere kan motta over en 3-års periode (ca 300 000 Euro).'
+    },
+    {
+      question: 'Hva er Finnmarksfradraget for 2026?',
+      answer: 'I forslaget til Statsbudsjettet 2026 økes Finnmarksfradraget til 45 000 kroner. Dette er et fradrag i alminnelig inntekt som gis til alle som er bosatt i tiltakssonen.'
+    },
+    {
+      question: 'Kan jeg ha ansatte på hjemmekontor sørpå?',
+      answer: 'Hvis en ansatt bor og jobber (hjemmekontor) utenfor tiltakssonen mer enn 50% av tiden, skal det betales arbeidsgiveravgift etter satsen der den ansatte bor (f.eks. 14,1% i Oslo). Det er arbeidsstedet, ikke bedriftens adresse, som styrer satsen.'
+    }
+  ];
+
+  // JSON-LD Schema for Google
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    'mainEntity': bedriftFaq.map(item => ({
+      '@type': 'Question',
+      'name': item.question,
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': item.answer
+      }
+    }))
+  };
 
   return (
     <main className="min-h-screen bg-slate-50 relative overflow-hidden">
       <AverdiBackground />
       
+      {/* Inject Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      
       <div className="relative z-10 container mx-auto px-4 py-12 max-w-6xl">
         
+        {/* Breadcrumb */}
         <Link href="/kunnskapsbank" className="inline-flex items-center text-slate-500 hover:text-blue-600 mb-8 font-medium transition-colors">
           <ArrowLeft className="w-4 h-4 mr-2" /> Tilbake til oversikt
         </Link>
 
-        {/* Hero */}
-        <div className="mb-16">
+        {/* Hero Section */}
+        <div className="mb-12">
           <span className="text-blue-600 font-bold tracking-wider uppercase text-sm mb-3 block">
             Strategisk Økonomistyring
           </span>
@@ -39,47 +92,183 @@ export default function BedriftHub() {
           </p>
         </div>
 
-        {/* Expert Insight: Ingvald (MÅ HA: Hjemmekontor-fellen) */}
-        {ingvald && (
-          <ExpertInsight 
-            title="Advarsel: Hjemmekontor-fellen kan koste dyrt" 
-            quote="Har du ansatte på hjemmekontor sørpå? Da gjelder IKKE nullsatsen. Skatteetaten kontrollerer dette nøye via IP-adresser og reiseregninger. Feilrapportering her utløser 14,1% avgift pluss straffeskatt."
-            expert={ingvald}
-          >
-            <p>
-              Vi ser en økende trend hvor bedrifter i nord ansetter folk fra hele landet for å dekke kompetansegapet. 
-              Det er en god strategi, men du må vite at arbeidsgiveravgiften følger <strong>den ansattes arbeidssted</strong>, ikke bedriftens postadresse.
-            </p>
-            <p className="mt-4">
-              I vårt lønnssystem setter vi opp automatiske sonesjekker basert på den ansattes bostedskommune for å sikre at du ikke går på en smell ved bokettersyn.
-            </p>
-          </ExpertInsight>
-        )}
+        {/* --- BUDSJETTANALYSE (BEDRIFT) --- */}
+        <section className="my-16 bg-slate-900 text-white rounded-2xl overflow-hidden shadow-xl border border-slate-700">
+          <div className="flex flex-col md:flex-row">
+            <div className="p-8 md:p-12 md:w-2/5 bg-slate-800 relative">
+              <div className="absolute top-0 right-0 p-4 opacity-5">
+                <FileText className="w-32 h-32 text-white" />
+              </div>
+              <span className="inline-block px-3 py-1 bg-blue-500/20 text-blue-300 text-xs font-bold uppercase tracking-wider rounded-full mb-4 border border-blue-500/30">
+                Averdi Innsikt
+              </span>
+              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">
+                Statsbudsjettet 2026: Slik påvirkes din bunnlinje
+              </h2>
+              <p className="text-slate-300 leading-relaxed mb-6">
+                Vi har analysert de foreslåtte endringene i skattesatser og distriktspolitiske virkemidler. 
+                Her er mulighetsrommet for din bedrift.
+              </p>
+              <div className="flex items-center gap-3 text-sm text-slate-400">
+                <div className="h-8 w-8 rounded-full bg-slate-700 flex items-center justify-center font-bold">AV</div>
+                <span>Analysert av Averdi-teamet</span>
+              </div>
+            </div>
 
-        {/* Navigation Grid */}
-        <h2 className="text-3xl font-bold text-slate-900 mb-8">Verktøy for vekst</h2>
-        <div className="grid md:grid-cols-3 gap-6">
+            <div className="p-8 md:p-12 md:w-3/5 bg-slate-900">
+              <div className="space-y-8">
+                <div className="flex gap-4">
+                  <div className="mt-1 bg-green-500/10 p-2 rounded-lg h-fit">
+                    <TrendingUp className="w-5 h-5 text-green-500" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg text-white mb-1">Rekruttering blir billigere</h3>
+                    <p className="text-slate-400 text-sm leading-relaxed">
+                      Med økt gjeldsslette (60k) og Finnmarksfradrag (45k), øker den ansattes kjøpekraft betraktelig. 
+                      Dette betyr at du kan tilby en svært konkurransedyktig totalpakke uten å øke bruttolønnen tilsvarende.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="mt-1 bg-blue-500/10 p-2 rounded-lg h-fit">
+                    <ShieldCheck className="w-5 h-5 text-blue-500" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg text-white mb-1">Nullsatsen ligger fast</h3>
+                    <p className="text-slate-400 text-sm leading-relaxed">
+                      Arbeidsgiveravgiften i Sone 5 forblir 0%. For en bedrift med 10 millioner i lønnskostnader, 
+                      utgjør dette en direkte besparelse på 1,41 millioner sammenlignet med en konkurrent i Oslo.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* --- STATUS-OPPDATERING & SATSER --- */}
+        <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-xl mb-20 shadow-sm">
+          <div className="flex flex-col md:flex-row gap-8">
+            
+            {/* Del 1: Regnskapsmessig Kontroll */}
+            <div className="flex-1">
+              <div className="flex items-center gap-3 mb-3 text-blue-900">
+                <Briefcase className="w-6 h-6 text-blue-600" />
+                <h3 className="font-bold text-lg">Full kontroll på regelverket</h3>
+              </div>
+              <p className="text-blue-800 text-sm mb-4 leading-relaxed">
+                Det finnes unntak og fallgruver, spesielt knyttet til "bagatellstøtte" for transportnæringen og regler for hjemmekontor. 
+                Vi sikrer at din bedrift rapporterer riktig til Skatteetaten.
+              </p>
+              <div className="bg-white p-3 rounded-lg border border-blue-100 inline-block">
+                <span className="text-xs text-slate-500 uppercase font-semibold block mb-1">Vårt råd</span>
+                <span className="font-bold text-slate-900">Ta en sone-sjekk på alle ansatte i januar.</span>
+              </div>
+            </div>
+
+            {/* Del 2: Nøkkeltall 2026 */}
+            <div className="flex-1 md:border-l md:border-blue-200 md:pl-8">
+              <div className="flex items-center gap-3 mb-3 text-blue-900">
+                <Coins className="w-6 h-6 text-blue-600" />
+                <h3 className="font-bold text-lg">Satser for 2026</h3>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <span className="text-xs text-slate-500 uppercase font-semibold block">AGA Sone 5</span>
+                  <McpDataSpan 
+                    id="aga-sone5-2026" 
+                    value="0" 
+                    format="percentage" 
+                    className="font-bold text-xl text-slate-900" 
+                  />
+                </div>
+                <div>
+                  <span className="text-xs text-slate-500 uppercase font-semibold block">Studielån (Slette)</span>
+                  <McpDataSpan 
+                    id="studielan-sone5-2026" 
+                    value="60 000" 
+                    format="currency" 
+                    className="font-bold text-xl text-green-600" 
+                  />
+                </div>
+              </div>
+              <p className="text-xs text-slate-500 mt-3 italic">
+                * Satser basert på forslag i Statsbudsjettet 2026.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        {/* --- DIGITALE VERKTØY (NY SEKSJON) --- */}
+        <h2 className="text-3xl font-bold text-slate-900 mb-8">Verktøykasse for ledere</h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24">
+          
+          {/* VERKTØY: KALKULATOREN */}
           <CategoryCard 
             title="Innsatssonekalkulatoren"
-            description="Se hvordan du kan tilby Oslo-lønn til lavere kostnad ved å utnytte avgiftsfritaket strategisk."
-            href="/kunnskapsbank/bedrifter/tiltakssonen"
+            description="Interaktivt verktøy: Se hvor mye du sparer på å flytte bedriften eller ansette i nord. Beregner AGA og ansatt-gevinst."
+            href="/kunnskapsbank/bedrifter/tiltakssonen" 
             icon={Calculator}
             theme="blue"
           />
+
+          {/* ARTIKKEL: REKRUTTERING */}
           <CategoryCard 
-            title="Rekruttering 2026"
-            description="Slik bruker du 60.000 kr i gjeldsslette som et våpen i kampen om talentene."
-            href="/kunnskapsbank/bedrifter/rekruttering" // Vi kan bygge denne senere
-            icon={Briefcase}
+            title="Rekrutteringspakken 2026"
+            description="Slik bruker du de nye reglene for studielån og skatt som et våpen i kampen om talentene."
+            href="/kunnskapsbank/bedrifter/rekruttering" 
+            icon={Users}
             theme="blue"
           />
+
+          {/* ARTIKKEL: TRANSPORT/REGLER */}
           <CategoryCard 
-            title="Transport & Logistikk"
-            description="Særlige regler for transportstøtte og 'bagatellstøtte' (De Minimis) i sonen."
-            href="/kunnskapsbank/bedrifter/transport" // Vi kan bygge denne senere
-            icon={TrendingUp}
+            title="Transport & Bagatellstøtte"
+            description="Unntaksreglene du må kjenne til. Slik unngår du straffeskatt hvis du driver med godstransport."
+            href="/kunnskapsbank/bedrifter/transport" 
+            icon={Truck}
             theme="blue"
           />
+
+          {/* ARTIKKEL: INNOVASJON NORGE */}
+          <CategoryCard 
+            title="Arktiske Midler"
+            description="Slik kombinerer du 0% AGA med investeringsstøtte fra Innovasjon Norge Arktis."
+            href="/kunnskapsbank/bedrifter/innovasjon-norge" 
+            icon={Building2}
+            theme="blue"
+          />
+
+        </div>
+
+        {/* FAQ Section */}
+        <div className="max-w-3xl mx-auto mb-20">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6 text-center">Spørsmål om Sone 5</h2>
+          <FaqAccordion items={bedriftFaq} themeColor="#2563EB" />
+        </div>
+
+        {/* --- KILDER & AUTORITET --- */}
+        <div className="border-t border-slate-200 pt-8 pb-4 mt-20">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-xs text-slate-500">
+            <div className="flex items-start gap-3 max-w-2xl">
+              <BookOpen className="w-5 h-5 text-slate-400 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="font-semibold text-slate-700 mb-1">Offisielt Regelverk</p>
+                <p>
+                  Beregninger og satser er hentet fra <strong>Statsbudsjettet 2026</strong> (Prop. 1 S) og Skatteetatens gjeldende satser for arbeidsgiveravgift.
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a href="https://www.skatteetaten.no/bedrift-og-organisasjon/arbeidsgiver/arbeidsgiveravgift/soner/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-blue-600 transition-colors">
+                Sonekart (Skatteetaten) <ExternalLink className="w-3 h-3" />
+              </a>
+              <a href="https://www.regjeringen.no/no/statsbudsjett/2026/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-blue-600 transition-colors">
+                Statsbudsjettet 2026 <ExternalLink className="w-3 h-3" />
+              </a>
+            </div>
+          </div>
         </div>
 
       </div>
