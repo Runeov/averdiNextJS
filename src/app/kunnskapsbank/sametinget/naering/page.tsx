@@ -6,6 +6,7 @@ import { McpDataSpan } from '@/components/ui/McpDataSpan';
 import { getExpert } from '@/data/experts';
 import { AverdiBackground } from '@/components/modules/AverdiBackground';
 import { CtaBlock } from '@/components/modules/kunnskapsbank/CtaBlock';
+import { FaqAccordion } from '@/components/ui/FaqAccordion';
 
 export const metadata: Metadata = {
   title: 'Næringsstøtte fra Sametinget | Guide for Bedrifter',
@@ -15,11 +16,34 @@ export const metadata: Metadata = {
 export default function SametingetNaeringPage() {
   const janAtle = getExpert('jan-atle');
 
+  const faqData = [
+    { question: "Hvor mye kan jeg få i støtte til variert næringsliv?", answer: "Du kan få inntil 500 000 kroner i investeringstilskudd. Støttesatsen er normalt inntil 35 % av godkjente kostnader, men kan være høyere for små prosjekter." },
+    { question: "Hvilke bedrifter kan søke Sametinget?", answer: "Ordningen gjelder for bedrifter etablert i STN-området (Sametingets virkeområde for næring). Prosjektet må ha en samisk kulturell forankring eller bidra til lokalsamfunnet." },
+    { question: "Kan jeg søke støtte til brukt utstyr?", answer: "Hovedregelen er at Sametinget støtter kjøp av nytt utstyr. Kjøp av brukt utstyr støttes normalt ikke, med mindre det er særskilte grunner for det." }
+  ];
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    'mainEntity': faqData.map(item => ({
+      '@type': 'Question',
+      'name': item.question,
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': item.answer
+      }
+    }))
+  };
+
   return (
     <main className="min-h-screen bg-slate-50 relative overflow-hidden">
       <AverdiBackground />
-      
+
       <article className="relative z-10 container mx-auto px-4 py-12 max-w-4xl">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         
         {/* Breadcrumb */}
         <Link href="/kunnskapsbank/sametinget" className="inline-flex items-center text-slate-500 hover:text-[#E86C1F] mb-8 font-medium transition-colors">
@@ -199,7 +223,7 @@ export default function SametingetNaeringPage() {
         </div>
 
         {/* CTA Component */}
-        <CtaBlock 
+        <CtaBlock
           title="Har du en forretningsidé?"
           description="Vi kan hjelpe deg å vurdere om prosjektet kvalifiserer til støtte, og bistå med budsjett og søknadsskriving."
           primaryButtonText="Bestill rådgivningstime"
@@ -207,6 +231,12 @@ export default function SametingetNaeringPage() {
           secondaryButtonText="Les om Kulturstøtte i stedet"
           secondaryButtonLink="/kunnskapsbank/sametinget/kultur-sprak"
         />
+
+        {/* FAQ Section */}
+        <div className="mt-16 mb-12">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">Ofte stilte spørsmål</h2>
+          <FaqAccordion items={faqData} themeColor="#3b82f6" />
+        </div>
 
       </article>
     </main>

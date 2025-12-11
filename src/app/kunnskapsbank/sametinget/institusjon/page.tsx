@@ -6,6 +6,7 @@ import { McpDataSpan } from '@/components/ui/McpDataSpan';
 import { getExpert } from '@/data/experts';
 import { AverdiBackground } from '@/components/modules/AverdiBackground';
 import { CtaBlock } from '@/components/modules/kunnskapsbank/CtaBlock';
+import { FaqAccordion } from '@/components/ui/FaqAccordion';
 
 export const metadata: Metadata = {
   title: 'Institusjonsutvikling & Festivalstøtte | Sametinget',
@@ -15,11 +16,34 @@ export const metadata: Metadata = {
 export default function InstitusjonPage() {
   const janAtle = getExpert('jan-atle');
 
+  const faqData = [
+    { question: "Hva er forskjellen på driftstilskudd og prosjektstøtte?", answer: "Driftstilskudd går til faste kostnader (lønn, husleie) for å holde institusjonen i gang året rundt. Prosjektstøtte er engangssummer til avgrensede tiltak (f.eks. en utstilling)." },
+    { question: "Når må vi rapportere på driftstilskuddet?", answer: "Rapportering for foregående år skal normalt leveres innen 1. april. Dette inkluderer revidert regnskap og årsmelding." },
+    { question: "Kan festivaler få fast driftsstøtte?", answer: "Ja, festivaler som har etablert seg som faste institusjoner kan søke om fast driftstilskudd over Sametingets budsjett, i stedet for å søke prosjektmidler hvert år." }
+  ];
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    'mainEntity': faqData.map(item => ({
+      '@type': 'Question',
+      'name': item.question,
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': item.answer
+      }
+    }))
+  };
+
   return (
     <main className="min-h-screen bg-slate-50 relative overflow-hidden">
       <AverdiBackground />
-      
+
       <article className="relative z-10 container mx-auto px-4 py-12 max-w-4xl">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         
         {/* Breadcrumb */}
         <Link href="/kunnskapsbank/sametinget" className="inline-flex items-center text-slate-500 hover:text-[#E86C1F] mb-8 font-medium transition-colors">
@@ -165,16 +189,22 @@ export default function InstitusjonPage() {
         </div>
 
         {/* CTA Component */}
-        <CtaBlock 
-          title="Trenger styret avlastning?"
-          description="Vi kan fungere som institusjonens økonomiavdeling. Da vet bevilgende myndigheter at pengene forvaltes trygt."
-          primaryButtonText="Snakk med Jan-Atle"
-          primaryButtonLink="/kontakt"
-          secondaryButtonText="Se Næringsstøtte"
-          secondaryButtonLink="/kunnskapsbank/sametinget/naering"
-        />
+         <CtaBlock
+           title="Trenger styret avlastning?"
+           description="Vi kan fungere som institusjonens økonomiavdeling. Da vet bevilgende myndigheter at pengene forvaltes trygt."
+           primaryButtonText="Snakk med Jan-Atle"
+           primaryButtonLink="/kontakt"
+           secondaryButtonText="Se Næringsstøtte"
+           secondaryButtonLink="/kunnskapsbank/sametinget/naering"
+         />
 
-      </article>
+        {/* FAQ Section */}
+        <div className="mt-16 mb-12">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">Ofte stilte spørsmål</h2>
+          <FaqAccordion items={faqData} themeColor="#8B5CF6" />
+        </div>
+
+       </article>
     </main>
   );
 }

@@ -6,6 +6,7 @@ import { McpDataSpan } from '@/components/ui/McpDataSpan';
 import { getExpert } from '@/data/experts';
 import { AverdiBackground } from '@/components/modules/AverdiBackground'; // Oppdatert import-sti
 import { CtaBlock } from '@/components/modules/kunnskapsbank/CtaBlock';
+import { FaqAccordion } from '@/components/ui/FaqAccordion';
 
 export const metadata: Metadata = {
   title: 'Støtte til Duodji & Håndverk | Sametinget',
@@ -15,11 +16,34 @@ export const metadata: Metadata = {
 export default function DuodjiPage() {
   const janAtle = getExpert('jan-atle');
 
+  const faqData = [
+    { question: "Må jeg betale moms på duodji?", answer: "Nei, omsetning av egenprodusert duodji er fritatt for merverdiavgift (0% utgående moms), men du har likevel fradragsrett for inngående moms på utstyr." },
+    { question: "Hvordan kommer jeg inn i Duodjiregisteret?", answer: "Du må søke om opptak. Kravet er enten fagbrev i duodji, relevant utdanning, eller at du kan dokumentere realkompetanse gjennom produkter og utstillinger." },
+    { question: "Hvor mye må jeg selge for?", answer: "For å kvalifisere til driftstilskudd er det ofte et omsetningskrav på minimum 50 000 kroner fra egenproduksjon." }
+  ];
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    'mainEntity': faqData.map(item => ({
+      '@type': 'Question',
+      'name': item.question,
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': item.answer
+      }
+    }))
+  };
+
   return (
     <main className="min-h-screen bg-slate-50 relative overflow-hidden">
       <AverdiBackground />
-      
+
       <article className="relative z-10 container mx-auto px-4 py-12 max-w-4xl">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         
         {/* Breadcrumb */}
         <Link href="/kunnskapsbank/sametinget" className="inline-flex items-center text-slate-500 hover:text-[#E86C1F] mb-8 font-medium transition-colors">
@@ -196,16 +220,22 @@ export default function DuodjiPage() {
         </div>
 
         {/* CTA Component */}
-        <CtaBlock 
-          title="Vil du leve av hendene dine?"
-          description="Vi hjelper deg med søknad om opptak i Duodjiregisteret og setter opp et regnskapssystem som håndterer momsfritaket automatisk."
-          primaryButtonText="Få hjelp med regnskapet"
-          primaryButtonLink="/kontakt"
-          secondaryButtonText="Se annen næringsstøtte"
-          secondaryButtonLink="/kunnskapsbank/sametinget/naering"
-        />
+         <CtaBlock
+           title="Vil du leve av hendene dine?"
+           description="Vi hjelper deg med søknad om opptak i Duodjiregisteret og setter opp et regnskapssystem som håndterer momsfritaket automatisk."
+           primaryButtonText="Få hjelp med regnskapet"
+           primaryButtonLink="/kontakt"
+           secondaryButtonText="Se annen næringsstøtte"
+           secondaryButtonLink="/kunnskapsbank/sametinget/naering"
+         />
 
-      </article>
+        {/* FAQ Section */}
+        <div className="mt-16 mb-12">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">Ofte stilte spørsmål</h2>
+          <FaqAccordion items={faqData} themeColor="#E86C1F" />
+        </div>
+
+       </article>
     </main>
   );
 }

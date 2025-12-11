@@ -6,6 +6,7 @@ import { McpDataSpan } from '@/components/ui/McpDataSpan';
 import { getExpert } from '@/data/experts';
 import { AverdiBackground } from '@/components/modules/AverdiBackground';
 import { CtaBlock } from '@/components/modules/kunnskapsbank/CtaBlock';
+import { FaqAccordion } from '@/components/ui/FaqAccordion';
 
 export const metadata: Metadata = {
   title: 'Kulturmidler og Språkstøtte | Sametinget 2026',
@@ -15,11 +16,34 @@ export const metadata: Metadata = {
 export default function KulturSprakPage() {
   const janAtle = getExpert('jan-atle');
 
+  const faqData = [
+    { question: "Når er søknadsfristen for kulturmidler?", answer: "Hovedfristen for prosjektstøtte (musikk, litteratur, kunst) er 1. oktober for påfølgende år. Det finnes også noen ordninger med løpende frist." },
+    { question: "Hva menes med språkplan i søknaden?", answer: "Alle som søker kulturmidler må beskrive hvordan samisk språk skal synes og høres i prosjektet. Dette gjelder alt fra plakater og markedsføring til selve gjennomføringen." },
+    { question: "Kan jeg få støtte til å gi ut musikk?", answer: "Ja, det gis støtte til musikkutgivelser. Det stilles krav til at utgivelsen har samisk tekst eller sterk samisk kulturell tilknytning (f.eks. joik)." }
+  ];
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    'mainEntity': faqData.map(item => ({
+      '@type': 'Question',
+      'name': item.question,
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': item.answer
+      }
+    }))
+  };
+
   return (
     <main className="min-h-screen bg-slate-50 relative overflow-hidden">
       <AverdiBackground />
-      
+
       <article className="relative z-10 container mx-auto px-4 py-12 max-w-4xl">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         
         {/* Breadcrumb */}
         <Link href="/kunnskapsbank/sametinget" className="inline-flex items-center text-slate-500 hover:text-[#E86C1F] mb-8 font-medium transition-colors">
@@ -209,7 +233,7 @@ export default function KulturSprakPage() {
         </div>
 
        {/* CTA Component */}
-        <CtaBlock 
+        <CtaBlock
           title="Skal dere søke i år?"
           description="Vi kan ta rollen som prosjektøkonom i søknaden. Da vet Sametinget at budsjett, regnskap og rapportering blir håndtert profesjonelt."
           primaryButtonText="Kontakt oss om søknadshjelp"
@@ -217,6 +241,12 @@ export default function KulturSprakPage() {
           secondaryButtonText="Se Institusjonsstøtte"
           secondaryButtonLink="/kunnskapsbank/sametinget/institusjon"
         />
+
+       {/* FAQ Section */}
+       <div className="mt-16 mb-12">
+         <h2 className="text-2xl font-bold text-slate-900 mb-6">Ofte stilte spørsmål</h2>
+         <FaqAccordion items={faqData} themeColor="#E86C1F" />
+       </div>
 
       </article>
     </main>

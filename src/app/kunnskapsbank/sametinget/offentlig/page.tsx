@@ -6,6 +6,7 @@ import { McpDataSpan } from '@/components/ui/McpDataSpan';
 import { getExpert } from '@/data/experts';
 import { AverdiBackground } from '@/components/modules/AverdiBackground';
 import { CtaBlock } from '@/components/modules/kunnskapsbank/CtaBlock';
+import { FaqAccordion } from '@/components/ui/FaqAccordion';
 
 export const metadata: Metadata = {
   title: 'Tilskudd til Barnehage, Skole og Utdanning | Sametinget',
@@ -15,11 +16,34 @@ export const metadata: Metadata = {
 export default function OffentligPage() {
   const janAtle = getExpert('jan-atle');
 
+  const faqData = [
+    { question: "Hvem dekker vikarutgiftene for lærere?", answer: "Statsforvalteren i Troms og Finnmark forvalter ordningen nasjonalt. De dekker vikarutgifter (etter fast sats) for lærere som tar videreutdanning i samisk." },
+    { question: "Når er fristen for studiepermisjon?", answer: "Søknadsfristen er 1. april for påfølgende skoleår. Det er skoleeier (kommunen) som må sende søknaden." },
+    { question: "Kan private barnehager søke om midler?", answer: "Ja, private barnehager har samme rettigheter som kommunale til å søke om tilskudd til samisk språkopplæring for barna." }
+  ];
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    'mainEntity': faqData.map(item => ({
+      '@type': 'Question',
+      'name': item.question,
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': item.answer
+      }
+    }))
+  };
+
   return (
     <main className="min-h-screen bg-slate-50 relative overflow-hidden">
       <AverdiBackground />
-      
+
       <article className="relative z-10 container mx-auto px-4 py-12 max-w-4xl">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         
         {/* Breadcrumb */}
         <Link href="/kunnskapsbank/sametinget" className="inline-flex items-center text-slate-500 hover:text-[#E86C1F] mb-8 font-medium transition-colors">
@@ -184,16 +208,22 @@ export default function OffentligPage() {
         </div>
 
         {/* CTA Component */}
-        <CtaBlock 
-          title="Trenger kommunen bistand?"
-          description="Vi kan bistå oppvekstetaten med søknadsprosesser, refusjonskrav og prosjektregnskap for eksterne midler."
-          primaryButtonText="Kontakt oss"
-          primaryButtonLink="/kontakt"
-          secondaryButtonText="Se kulturstøtte"
-          secondaryButtonLink="/kunnskapsbank/sametinget/kultur-sprak"
-        />
+         <CtaBlock
+           title="Trenger kommunen bistand?"
+           description="Vi kan bistå oppvekstetaten med søknadsprosesser, refusjonskrav og prosjektregnskap for eksterne midler."
+           primaryButtonText="Kontakt oss"
+           primaryButtonLink="/kontakt"
+           secondaryButtonText="Se kulturstøtte"
+           secondaryButtonLink="/kunnskapsbank/sametinget/kultur-sprak"
+         />
 
-      </article>
+        {/* FAQ Section */}
+        <div className="mt-16 mb-12">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">Ofte stilte spørsmål</h2>
+          <FaqAccordion items={faqData} themeColor="#6366f1" />
+        </div>
+
+       </article>
     </main>
   );
 }

@@ -27,6 +27,26 @@ export const metadata: Metadata = {
 };
 
 export default function SametingetHub() {
+
+  // FAQ Data for primaernaering
+  const faqData = [
+    { question: "Hvor stor båt kan jeg få støtte til?", answer: "Sametinget gir støtte til fartøy under 11 meter. Du må være registrert på blad B i fiskermanntallet for å søke." },
+    { question: "Kan jeg kjøpe båten før jeg søker?", answer: "Nei! Du må ikke inngå bindende kjøpekontrakt før søknaden er sendt og mottatt hos Sametinget. Gjør du det, blir søknaden avvist." },
+    { question: "Hva slags tilleggsnæring støttes?", answer: "Jordbrukere kan få støtte til å utvikle tilleggsnæringer som utnytter gårdens ressurser, for eksempel utleie, turisme ('Inn på tunet') eller videreforedling av mat." }
+  ];
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    'mainEntity': faqData.map(item => ({
+      '@type': 'Question',
+      'name': item.question,
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': item.answer
+      }
+    }))
+  };
   
   // FAQ Data
   const sametingetFaq = [
@@ -51,8 +71,12 @@ export default function SametingetHub() {
   return (
     <main className="min-h-screen bg-slate-50 relative overflow-hidden">
       <AverdiBackground />
-      
+
       <div className="relative z-10 container mx-auto px-4 py-12 max-w-6xl">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         
         {/* Breadcrumb */}
         <Link href="/kunnskapsbank" className="inline-flex items-center text-slate-500 hover:text-[#E86C1F] mb-8 font-medium transition-colors">
@@ -199,6 +223,12 @@ export default function SametingetHub() {
         <div className="max-w-3xl mx-auto mb-20">
           <h2 className="text-2xl font-bold text-slate-900 mb-6 text-center">Spørsmål om virkeområdet (STN)</h2>
           <FaqAccordion items={sametingetFaq} themeColor="#E86C1F" />
+        </div>
+
+        {/* Primaernaering FAQ Section */}
+        <div className="mt-16 mb-12">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">Ofte stilte spørsmål om primærnæring</h2>
+          <FaqAccordion items={faqData} themeColor="#3b82f6" />
         </div>
 
         {/* --- KILDER & AUTORITET --- */}
