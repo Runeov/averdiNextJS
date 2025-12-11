@@ -13,7 +13,7 @@ export function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
 
-  // Håndter scrolleffekt
+  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -22,13 +22,13 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Håndter anker-scrolling
+  // Handle anchor scrolling
   const scrollToSection = (sectionId: string) => {
     if (pathname !== '/') {
-      // Hvis vi ikke er på forsiden, naviger dit først med hash
+      // If not on homepage, navigate there first with hash
       router.push(`/#${sectionId}`);
     } else {
-      // Smooth scroll hvis vi allerede er på forsiden
+      // Smooth scroll if already on homepage
       const element = document.getElementById(sectionId);
       if (element) {
         const navbarHeight = 80;
@@ -60,18 +60,18 @@ export function Navbar() {
           
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity" aria-label="Gå til forsiden">
               <Image 
                 src={logoAverdi} 
                 alt="Averdi Logo" 
-                height={50} // Eksplisitt høyde hjelper mot layout shift
-                className="h-12 w-auto" // Tailwind håndterer visuell størrelse
+                height={50} // Explicit height helps against layout shift
+                className="h-12 w-auto" // Tailwind handles visual size
                 priority 
               />
             </Link>
           </div>
 
-          {/* Desktop Navigasjon */}
+          {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-center space-x-2">
               <Link href="/" className={navLinkClass(pathname === '/')}>
@@ -89,8 +89,8 @@ export function Navbar() {
               <Link href="/kunnskapsbank" className={navLinkClass(pathname.startsWith('/kunnskapsbank'))}>
                 Kunnskapsbank
               </Link>
-              <Link href="/aktuelt" className={navLinkClass(pathname.startsWith('/aktuelt'))}>
-                Aktuelt
+              <Link href="/kunnskapsbank/artikler" className={navLinkClass(pathname.startsWith('/kunnskapsbank/artikler'))}>
+                Innsikt
               </Link>
             </div>
           </div>
@@ -100,24 +100,27 @@ export function Navbar() {
             <button
               onClick={() => scrollToSection('contact')}
               className="group relative inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium text-white transition-all duration-300 bg-gradient-to-r from-[#E86C1F] to-[#F4B223] rounded-full hover:shadow-lg hover:shadow-[#E86C1F]/30 hover:-translate-y-0.5 focus:outline-none"
+              aria-label="Kontakt oss"
             >
               Kontakt oss
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </button>
           </div>
 
-          {/* Mobil menyknapp */}
+          {/* Mobile Menu Button */}
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="inline-flex items-center justify-center p-2 rounded-full text-slate-600 hover:text-[#E86C1F] hover:bg-[#E86C1F]/10 transition-colors"
+              aria-expanded={isMenuOpen}
+              aria-label="Åpne meny"
             >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isMenuOpen ? <X className="h-6 w-6" aria-hidden="true" /> : <Menu className="h-6 w-6" aria-hidden="true" />}
             </button>
           </div>
         </div>
 
-        {/* Mobil Navigasjon */}
+        {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden absolute top-20 left-0 w-full bg-white/95 backdrop-blur-xl border-b border-slate-100 shadow-xl animate-in slide-in-from-top-5 duration-200">
             <div className="px-4 pt-2 pb-6 space-y-2">
@@ -133,8 +136,11 @@ export function Navbar() {
               <Link href="/kunnskapsbank" onClick={() => setIsMenuOpen(false)} className="text-slate-600 hover:bg-slate-50 block px-4 py-3 rounded-xl w-full text-left text-base font-medium">
                 Kunnskapsbank
               </Link>
+              <Link href="/kunnskapsbank/artikler" onClick={() => setIsMenuOpen(false)} className="text-slate-600 hover:bg-slate-50 block px-4 py-3 rounded-xl w-full text-left text-base font-medium">
+                Innsikt
+              </Link>
               <div className="pt-4 mt-2 border-t border-slate-100">
-                <button onClick={() => scrollToSection('contact')} className="w-full flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-gradient-to-r from-[#E86C1F] to-[#F4B223] rounded-xl shadow-md active:scale-95 transition-all">
+                <button onClick={() => scrollToSection('contact')} className="w-full flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-gradient-to-r from-[#E86C1F] to-[#F4B223] rounded-xl shadow-md active:scale-95 transition-all" aria-label="Kontakt oss">
                   Kontakt oss
                 </button>
               </div>

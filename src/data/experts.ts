@@ -39,6 +39,14 @@ export const experts: Record<string, Expert> = {
     department: "Lønn",
     email: "alida@averdi.no",
     bio: "Spesialist på lønnskjøring og HR for foreninger og idrettslag. Sørger for at frivilligheten går rundt."
+  },"Hilde-Marie": {
+    id: "Hilde-Marie",
+    name: "Hilde-Marie",
+    role: "Strategisk Rådgiver & Analytiker",
+    initials: "EM",
+    department: "Rådgivning",
+    email: "hml@averdi.no",
+    bio: "Spesialist på krysningspunktet mellom samisk samfunnsliv og norsk forvaltning. Forfatter av 'Statens Tilståelse'-rapportene."
   },
   // --- PLASS TIL FLERE ANSATTE (Kopier blokken under for å legge til ny) ---
   "annen-statsautorisert": {
