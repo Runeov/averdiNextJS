@@ -10,11 +10,7 @@ import {
   BookOpen,
   Scale,
   ArrowRight,
-  ShieldCheck,
-  UserCheck,
-  Building,
-  MapPin,
-  Sparkles
+  ShieldCheck
 } from 'lucide-react';
 
 import { AverdiBackground } from '@/components/modules/AverdiBackground';
@@ -39,7 +35,7 @@ export default function DeepDivePremium() {
   };
 
   const jsonLd = {
-    '@context': 'https://schema.org',
+    '@context': '[https://schema.org](https://schema.org)',
     '@type': 'Article',
     'headline': 'Sosioøkonomiske forskjeller uten at samfunnet ser det',
     'author': {
@@ -331,7 +327,7 @@ export default function DeepDivePremium() {
             </div>
           </section>
 
-          {/* SOURCES - CLEANED */}
+          {/* SOURCES */}
           <div className="mt-12 text-xs text-slate-400 border-t border-slate-100 pt-6">
             <p className="font-bold mb-2">Kilder & Grunnlag:</p>
             <ul className="list-disc list-inside space-y-1">
@@ -373,7 +369,7 @@ export default function DeepDivePremium() {
 // --- LOCAL COMPONENT DEFINITION ---
 function CtaBlock({ title, description, primaryButtonText, primaryButtonLink, secondaryButtonText, secondaryButtonLink }: any) {
     return (
-        <div className="bg-slate-900 rounded-2xl p-8 md:p-12 text-center md:text-left relative overflow-hidden my-12 shadow-2xl">
+        <div className="bg-slate-900 rounded-2xl p-8 md:p-12 text-center md:text-left relative overflow-hidden my-12">
             <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
                 <div className="max-w-xl">
                     <h3 className="text-2xl font-bold text-white mb-4">{title}</h3>
@@ -381,7 +377,7 @@ function CtaBlock({ title, description, primaryButtonText, primaryButtonLink, se
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0 w-full md:w-auto">
                     {primaryButtonLink && (
-                        <Link href={primaryButtonLink} className="inline-flex items-center justify-center px-6 py-3 bg-[#E86C1F] text-white font-bold rounded-full hover:bg-[#d65f18] transition-all shadow-lg">
+                        <Link href={primaryButtonLink} className="inline-flex items-center justify-center px-6 py-3 bg-[#E86C1F] text-white font-bold rounded-full hover:bg-[#d65f18] transition-all">
                             {primaryButtonText || 'Les mer'}
                         </Link>
                     )}

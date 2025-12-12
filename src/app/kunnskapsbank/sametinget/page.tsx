@@ -154,7 +154,8 @@ export default function SametingetHub() {
             <McpDataSpan 
               id="sameting-ramme-2026" 
               source="Statsbudsjettet 2026"
-              value="3 mrd" 
+              value={3000000000}
+              format="currency"
               className="font-bold text-slate-900 bg-orange-50 px-2 py-0.5 rounded border-b-2 border-[#E86C1F]"
             />{' '}
             i potten. Det er ikke "støtte" – det er risikokapital. Men pengene utløses kun hvis du oversetter bedriftens mål til Sametingets språk om <em>Kulturell trygghet</em> og <em>Birgejupmi</em>.
@@ -201,11 +202,10 @@ export default function SametingetHub() {
               <div className="grid grid-cols-2 gap-4 mt-6">
                 <div>
                   <span className="text-xs text-slate-500 uppercase font-bold block">Maks Tilskudd</span>
-                  {/* Changed data-id to id */}
                   <McpDataSpan 
                     id="sameting-variert-naering-maks" 
                     source="Sametinget 2026"
-                    value="500 000" 
+                    value={500000}
                     format="currency" 
                     className="font-bold text-2xl text-slate-900" 
                   />
@@ -214,11 +214,10 @@ export default function SametingetHub() {
                   <span className="text-xs text-slate-500 uppercase font-bold block">Risikoavlastning</span>
                   <div className="flex items-center gap-1">
                     <span className="font-bold text-2xl text-green-600">Inntil</span>
-                    {/* Changed data-id to id */}
-                     <McpDataSpan 
+                    <McpDataSpan 
                       id="sameting-stottegrad" 
                       source="Sametinget 2026"
-                      value="50" 
+                      value={0.5}
                       format="percentage" 
                       className="font-bold text-2xl text-green-600" 
                     />
