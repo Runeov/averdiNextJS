@@ -1,288 +1,328 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
-import { 
-  ArrowLeft, 
-  Clock, 
-  HeartPulse, 
-  Coins, 
-  FileWarning, 
-  Quote, 
-  ArrowRight,
-  UserCheck,
-  BookOpen
-} from 'lucide-react';
+import Image from 'next/image';
+import { ArrowLeft, Clock, Share2, MessageSquare, ThumbsUp, AlertTriangle, Coins, ShieldCheck, HeartPulse } from 'lucide-react';
 import { AverdiBackground } from '@/components/modules/AverdiBackground';
 import { McpDataSpan } from '@/components/ui/McpDataSpan';
 import { getExpert } from '@/data/experts';
-import { CtaBlock } from '@/components/modules/kunnskapsbank/CtaBlock';
 
 export const metadata: Metadata = {
-  title: 'Den usynlige skatten: Sosioøkonomiske forskjeller i Sápmi | Averdi Analyse',
-  description: 'En dybdeanalyse av "friksjonskostnadene" i nord. Hvorfor pant-gapet, helsekøene og byråkratiet fungerer som en skjult skatt for det samiske samfunnet.',
+  title: 'Den usynlige skatten i Nord | Averdi Innsikt',
+  description: 'Vi snakker om strømpriser. Vi burde snakke om systemisk tidstyveri. En dybdeanalyse av de usynlige kostnadene i Sápmi.',
 };
 
-export default function DeepDiveArticle() {
+export default function ArtikkelFornesStyle() {
   const author = getExpert('elle-maret');
-
-  // JSON-LD for Article (SEO)
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    'headline': 'Sosioøkonomiske forskjeller uten at samfunnet er bevist på det',
-    'author': {
-      '@type': 'Person',
-      'name': 'Elle Máret',
-      'jobTitle': 'Strategisk Rådgiver'
-    },
-    'publisher': {
-      '@type': 'Organization',
-      'name': 'Averdi'
-    },
-    'datePublished': '2025-12-11',
-    'description': 'En analyse av hvordan strukturelle barrierer fungerer som en skjult skatt i Sápmi.'
-  };
+  const date = "12. desember 2025";
 
   return (
-    <main className="min-h-screen bg-slate-50 relative overflow-hidden font-sans">
+    <main className="min-h-screen bg-slate-50 relative font-sans">
       <AverdiBackground />
       
-      {/* Inject Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-
-      <article className="relative z-10 container mx-auto px-4 py-12 max-w-4xl">
-        
-        {/* Breadcrumb */}
-        <Link href="/kunnskapsbank" className="inline-flex items-center text-slate-500 hover:text-[#E86C1F] mb-12 font-medium transition-colors">
-          <ArrowLeft className="w-4 h-4 mr-2" /> Tilbake til Kunnskapsbanken
+      {/* Navigation / Header */}
+      <nav className="relative z-20 container mx-auto px-4 py-6 max-w-6xl flex justify-between items-center">
+        <Link href="/kunnskapsbank/artikler" className="flex items-center text-slate-500 hover:text-slate-900 transition-colors font-medium">
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Tilbake til oversikten
         </Link>
+      </nav>
 
-        {/* --- HEADER --- */}
-        <header className="mb-16 text-center md:text-left">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 text-white text-xs font-bold uppercase tracking-widest mb-6">
-            <BookOpen className="w-4 h-4" />
-            Averdi Innsikt
-          </div>
-          <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 mb-6 leading-tight">
-            Sosioøkonomiske forskjeller <br className="hidden md:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E86C1F] to-[#F4B223]">
-              uten at samfunnet ser det
-            </span>
-          </h1>
-          <p className="text-xl md:text-2xl text-slate-600 leading-relaxed max-w-3xl">
-            Mens Norge diskuterer strømpriser, betaler befolkningen i nord en usynlig skatt i form av tapt tid, dårligere helse og død kapital. Her er regnskapet staten ikke fører.
-          </p>
-        </header>
-
-        {/* --- AUTHOR INTRO --- */}
-        {author && (
-          <div className="bg-white border-l-4 border-[#E86C1F] p-8 rounded-r-xl shadow-lg mb-16 flex flex-col md:flex-row gap-8 items-center">
-            <div className="flex-shrink-0">
-              {author.image ? (
-                <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-slate-100 relative">
-                   <Image src={author.image} alt={author.name} fill className="object-cover" />
-                </div>
-              ) : (
-                <div className="w-24 h-24 rounded-full bg-slate-100 flex items-center justify-center text-2xl font-bold text-slate-400 border-2 border-slate-200">
-                  {author.initials}
-                </div>
-              )}
-            </div>
-            <div className="flex-1">
-              <div className="flex items-center gap-2 mb-2">
-                <h3 className="text-lg font-bold text-slate-900">{author.name}</h3>
-                <span className="bg-[#E86C1F]/10 text-[#E86C1F] text-xs px-2 py-0.5 rounded-full font-bold">Ny i Averdi</span>
-              </div>
-              <p className="text-slate-600 text-sm mb-3 italic">
-                "{author.bio}"
-              </p>
-              <p className="text-slate-500 text-sm leading-relaxed">
-                Elle har sluttet seg til Averdi for å lede vår satsing på strategisk rådgivning. 
-                Med bakgrunn fra skjæringspunktet mellom forvaltning og samisk næringsliv, 
-                hjelper hun bedrifter å navigere i det vi kaller "Statens Tilståelse".
-              </p>
-            </div>
-          </div>
-        )}
-
-        {/* --- ARTICLE BODY --- */}
-        <div className="prose prose-lg prose-slate max-w-none">
-          
-          {/* Intro Section */}
-          <div className="mb-16">
-            <p className="lead text-2xl font-serif text-slate-800 italic border-l-4 border-slate-300 pl-6 py-2 my-8">
-              "Vi leser ikke statsbudsjettet som et politisk løfte. Vi leser det som en revisor leser et årsregnskap der tallene fundamentalt sett ikke går opp."
-            </p>
-            <p>
-              Norge befinner seg i en post-sannhetsfase. Sannhets- og forsoningskommisjonen har levert sin rapport, og sannheten er bordlagt. 
-              Men for det samiske samfunnet var dette startskuddet for realitetsbehandlingen.
-            </p>
-            <p>
-              Hos Averdi har vi analysert de økonomiske konsekvensene av rapporten. Vår konklusjon er at det eksisterer en 
-              <strong> "Kulturell Friksjon"</strong> – en usynlig kostnad som belastes bedrifter og familier i nord hver dag. 
-              Denne kostnaden er ikke synlig i SSBs modeller, men den merkes på bunnlinjen.
-            </p>
-          </div>
-
-          {/* Section 1: Time */}
-          <section className="mb-16">
-            <h2 className="flex items-center gap-3 text-3xl font-bold text-slate-900 mb-6">
-              <Clock className="w-8 h-8 text-[#E86C1F]" />
-              1. De Tapte Timene (Tidstyveri)
-            </h2>
-            <p>
-              Tid er penger, sies det. I Sápmi er tid også produksjon. Når en reindriftsutøver eller gründer må bruke 
-              <strong> 20-40% av sin tid</strong> på byråkratiske prosesser, konsultasjoner og søknader som ikke er tilpasset deres virkelighet, 
-              er dette et direkte tap av verdiskaping.
-            </p>
-            <div className="bg-slate-100 p-6 rounded-xl my-6">
-              <h3 className="text-lg font-bold text-slate-900 mb-2">Konsultasjonsutmattelsen</h3>
-              <p className="text-sm text-slate-600">
-                Utbyggere stiller med betalte advokater. Rettighetshavere stiller på dugnad etter arbeidsdagen. 
-                Dette er en strukturell asymmetri som tapper lokalsamfunnet for ressurser.
-              </p>
-            </div>
-          </section>
-
-          {/* Section 2: Health */}
-          <section className="mb-16">
-            <h2 className="flex items-center gap-3 text-3xl font-bold text-slate-900 mb-6">
-              <HeartPulse className="w-8 h-8 text-red-600" />
-              2. "Doctor's Delay" (Helsetapet)
-            </h2>
-            <p>
-              I Meld. St. 12 (Folkehelsemeldingen) innrømmer staten at <em>"manglende språkkompetanse truer pasientsikkerheten"</em>. 
-              Dette er juridisk dynamitt.
-            </p>
-            <p>
-              Når pasienter må bruke barnebarn som tolker, oppstår feilmedisinering og sene diagnoser. 
-              Dette fører til at samiske pasienter ofte kommer senere til behandling enn befolkningen for øvrig. 
-              Kostnaden tas ikke av helseforetaket, men av den enkelte gjennom tapt livskvalitet og uføretrygd.
-            </p>
-          </section>
-
-          {/* Section 3: Capital */}
-          <section className="mb-16">
-            <h2 className="flex items-center gap-3 text-3xl font-bold text-slate-900 mb-6">
-              <Coins className="w-8 h-8 text-yellow-600" />
-              3. Pant-gapet (Den døde kapitalen)
-            </h2>
-            <p>
-              Her finner vi den største barrieren for vekst. En familie i Karasjok kan ha høy inntekt, men lav "bank-verdi".
-            </p>
-            <div className="grid md:grid-cols-2 gap-6 my-8">
-              <div className="bg-white border-2 border-slate-200 p-6 rounded-xl">
-                <h4 className="font-bold text-slate-500 uppercase text-xs mb-2">Virkelighet</h4>
-                <div className="flex items-baseline gap-1">
-                  <span className="font-bold text-xl text-slate-900">Byggekostnad:</span>
-                  <McpDataSpan id="byggekostnad-finnmark" value="6,5 mill" className="font-bold text-xl text-slate-900"/>
-                </div>
-                <p className="text-sm text-slate-600 mt-2">Hva det faktisk koster å bygge et hus i Indre Finnmark.</p>
-              </div>
-              <div className="bg-white border-2 border-slate-200 p-6 rounded-xl">
-                <h4 className="font-bold text-slate-500 uppercase text-xs mb-2">Bankens vurdering</h4>
-                <div className="flex items-baseline gap-1">
-                  <span className="font-bold text-xl text-red-600">Takst:</span>
-                  <McpDataSpan id="takst-finnmark" value="2,5 mill" className="font-bold text-xl text-red-600"/>
-                </div>
-                <p className="text-sm text-slate-600 mt-2">Hva bankens algoritmer sier huset er verdt.</p>
-              </div>
-            </div>
-            <p>
-              Dette gapet på <McpDataSpan id="pant-gap-finnmark" value="4 millioner kroner" className="font-bold"/> må dekkes av egenkapital. 
-              Det gjør at unge ikke får bygd, og at næringsdrivende ikke får lån med pant i egen bolig. Kapitalen er "død".
-            </p>
-          </section>
-
-          {/* Section 4: Birgejupmi */}
-          <section className="mb-16">
-            <h2 className="flex items-center gap-3 text-3xl font-bold text-slate-900 mb-6">
-              <FileWarning className="w-8 h-8 text-blue-600" />
-              4. Birgejupmi-fellen
-            </h2>
-            <p>
-              <em>Birgejupmi</em> – evnen til å klare seg selv – har vært en overlevelsesstrategi. 
-              Men i en moderne velferdsstat har det blitt en subsidie til staten.
-            </p>
-            <p>
-              Fordi vi ordner opp selv, trenger ikke staten å bygge systemer som fungerer. 
-              Vi tolker for naboen, vi kjører bestemor, vi fikser veien. 
-              Averdis råd er klart: <strong>Det er på tide å slutte med dugnad og begynne å sende faktura.</strong>
-            </p>
-          </section>
-
-          <hr className="my-12 border-slate-200" />
-
-          {/* --- CONCLUSION / AVERDI STRATEGY --- */}
-          <div className="bg-slate-900 text-white p-10 rounded-3xl shadow-2xl relative overflow-hidden">
-            <div className="relative z-10">
-              <h2 className="text-3xl font-bold mb-6">Averdi-rådet: Fra offer til leverandør</h2>
-              <p className="text-lg text-slate-300 mb-8 leading-relaxed">
-                Staten har i sine stortingsmeldinger innrømmet at systemet feiler ("Statens Tilståelse"). 
-                Når staten abdiserer fra ansvaret, oppstår det et marked.
-              </p>
-              <div className="space-y-4 mb-8">
-                <div className="flex items-start gap-4">
-                  <UserCheck className="w-6 h-6 text-[#E86C1F] flex-shrink-0 mt-1" />
-                  <div>
-                    <h4 className="font-bold text-white">Send faktura for kompetanse</h4>
-                    <p className="text-sm text-slate-400">Ikke gi bort kulturkompetanse gratis. Kommunene har lovpålagte krav de ikke klarer å oppfylle. Selg løsningen.</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <Quote className="w-6 h-6 text-[#E86C1F] flex-shrink-0 mt-1" />
-                  <div>
-                    <h4 className="font-bold text-white">Profesjonaliser søknadene</h4>
-                    <p className="text-sm text-slate-400">I "søknadsregimet" vinner den som skriver best "byråkrat-norsk". Vi hjelper deg å oversette din reelle verdiskaping til språket systemet forstår.</p>
-                  </div>
-                </div>
-              </div>
-              
-              <Link href="/kontakt" className="inline-flex items-center justify-center px-8 py-4 bg-[#E86C1F] text-white font-bold rounded-full hover:bg-[#d65f18] transition-all">
-                Snakk med Elle om strategi
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
+      <article className="relative z-10 container mx-auto px-4 pb-24 max-w-3xl">
+        
+        {/* HERO SECTION - THE HOOK */}
+        <header className="mb-12">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100 text-orange-700 text-xs font-bold uppercase tracking-widest mb-6">
+                <AlertTriangle className="w-3 h-3" />
+                Dybdeanalyse
             </div>
             
-            {/* Background Blob */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-[#E86C1F]/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-          </div>
+            <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 mb-6 leading-tight">
+                Norge lyver om rikdommen sin.
+            </h1>
+            
+            <div className="flex items-center gap-4 text-slate-500 text-sm mb-8 border-b border-slate-200 pb-8">
+                <div className="flex items-center gap-2">
+                    {author?.image ? (
+                        <div className="w-8 h-8 rounded-full overflow-hidden relative">
+                            <Image src={author.image} alt={author.name} fill className="object-cover" />
+                        </div>
+                    ) : (
+                        <div className="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-xs">
+                            EM
+                        </div>
+                    )}
+                    <span className="font-semibold text-slate-900">{author?.name || 'Elle Máret'}</span>
+                </div>
+                <span>•</span>
+                <div className="flex items-center">
+                    <Clock className="w-4 h-4 mr-1" />
+                    5 min lesetid
+                </div>
+                <span>•</span>
+                <span>{date}</span>
+            </div>
+        </header>
 
-          {/* Sources Footnote */}
-          <div className="mt-12 text-xs text-slate-400 border-t border-slate-100 pt-6">
-            <p className="font-bold mb-2">Kilder & Grunnlag:</p>
-            <ul className="list-disc list-inside space-y-1">
-              <li>Meld. St. 19 (2022–2023) - Sannhets- og forsoningskommisjonen</li>
-              <li>Meld. St. 12 (2023–2024) - Folkehelsemeldingen</li>
-              <li>Prop. 1 S (2025-2026) - Statsbudsjettet</li>
-              <li>SAMINOR 2 / Senter for samisk helseforskning</li>
-            </ul>
-            <p className="mt-4">
-              Denne analysen er utarbeidet av Averdi AS v/ <McpDataSpan id="author-name" value="Elle Máret" source="Averdi" />. 
-              Tall og satser er basert på gjeldende forslag for <McpDataSpan id="budget-year" value="2026" source="Statsbudsjettet" />.
+        {/* CONTENT BODY - FORNES STYLE (Short paragraphs, punchy, conversational) */}
+        <div className="prose prose-lg prose-slate max-w-none text-slate-800">
+            
+            <p className="font-bold text-xl leading-relaxed">
+                Vi må slutte å snakke om Gini-koeffisienter. Vi må slutte å snakke om synlig fattigdom.
             </p>
-          </div>
+
+            <p>
+                Det finnes en usynlig skatt i Norge.
+            </p>
+
+            <p>
+                Den betales ikke med kroner over skatteseddelen. Den betales med noe mye mer verdifullt:
+            </p>
+
+            <p className="font-bold">
+                Tid. Helse. Og død kapital.
+            </p>
+
+            <p>
+                Dette er historien om hvorfor det er svindyrt å være "rik" i Sápmi. Og hvorfor statens Excel-ark lyver.
+            </p>
+
+            <div className="my-12 p-8 bg-white rounded-2xl shadow-sm border-l-4 border-orange-500 italic">
+                "Det samiske samfunnet står overfor en styrt konkurs. Initiert av staten, effektuert av kommunene."
+            </div>
+
+            {/* SECTION 1: TIME THEFT */}
+            <h2 className="text-3xl font-extrabold text-slate-900 mt-16 mb-6 flex items-center gap-3">
+                1. Det store tidstyveriet <Clock className="w-6 h-6 text-orange-500" />
+            </h2>
+
+            <p>
+                Se for deg dette scenariet:
+            </p>
+
+            <p>
+                Statnett vil bygge en kraftlinje. De stiller med prosjektledere, jurister og kommunikasjonsrådgivere. Alle har millionlønn. Alle er på jobb.
+            </p>
+
+            <p>
+                Hvem møter de på andre siden av bordet?
+            </p>
+
+            <p>
+                En reindriftsutøver.
+            </p>
+
+            <p>
+                Han kommer rett fra fjellet. Han har ikke sovet, fordi han har gjetet flokken for å unngå rovdyrtap. Han stiller på dugnad.
+            </p>
+
+            <p>
+                Dette kaller vi "Konsultasjonsutmattelse". Det er en systemisk hersketeknikk.
+            </p>
+
+            <p>
+                Ledere i pressede reinbeitedistrikter bruker nå opp mot <McpDataSpan id="tidsbruk-admin" source="Averdi Analyse" value="40%" /> av årsverket sitt på papirarbeid.
+            </p>
+
+            <p>
+                Det er tid tatt fra flokken. Tid tatt fra verdiskaping. Tid tatt fra barna.
+            </p>
+
+            <p>
+                Og hvis de ikke svarer? Da sier staten: "Den som tier, samtykker".
+            </p>
+
+            <p>
+                Så de tvinges til å svare. På alt. Alltid.
+            </p>
+
+            {/* SECTION 2: THE BANK LIE */}
+            <h2 className="text-3xl font-extrabold text-slate-900 mt-16 mb-6 flex items-center gap-3">
+                2. Banken som sier du er null verdt <Coins className="w-6 h-6 text-orange-500" />
+            </h2>
+
+            <p>
+                Her er et regnestykke som får blodet til å koke.
+            </p>
+
+            <p>
+                La oss si du vil bygge hus i Karasjok. Du er ung, du har jobb, du vil satse.
+            </p>
+
+            <ul className="space-y-4 list-none pl-0 my-8">
+                <li className="flex items-start gap-3">
+                    <span className="text-2xl">🏗️</span>
+                    <div>
+                        <strong>Kostnad for å bygge nytt:</strong> <br />
+                        <McpDataSpan id="byggekost-finnmark" source="Markedsanalyse" value="6,5 millioner kroner" />.
+                    </div>
+                </li>
+                <li className="flex items-start gap-3">
+                    <span className="text-2xl">🏦</span>
+                    <div>
+                        <strong>Bankens verdivurdering (pant):</strong> <br />
+                        <McpDataSpan id="panteverdi-finnmark" source="Bankpraksis" value="2,5 millioner kroner" />.
+                    </div>
+                </li>
+                <li className="flex items-start gap-3">
+                    <span className="text-2xl">❌</span>
+                    <div>
+                        <strong>Gapet du må dekke selv (Egenkapital):</strong> <br />
+                        <McpDataSpan id="pant-gap" source="Kalkyle" value="4,0 millioner kroner" />.
+                    </div>
+                </li>
+            </ul>
+
+            <p>
+                Fire. Millioner. I. Egenkapital.
+            </p>
+
+            <p>
+                Det spiller ingen rolle om du har hundrevis av rein i fjellet. Banken kaller det "død kapital". Du kan ikke pantsette dem for å bygge hus.
+            </p>
+
+            <p>
+                Resultatet? Vi får folk som er "Income rich, asset poor".
+            </p>
+
+            <p>
+                De har inntekt, men de eier ingenting i bankens øyne. De får ikke lån til å investere. De får ikke lån til å utvikle seg.
+            </p>
+
+            <p>
+                De sitter fast.
+            </p>
+
+            {/* SECTION 3: HEALTH & BIRGEJUPMI */}
+            <h2 className="text-3xl font-extrabold text-slate-900 mt-16 mb-6 flex items-center gap-3">
+                3. Når "vondt i ryggen" egentlig er "vondt i livet" <HeartPulse className="w-6 h-6 text-orange-500" />
+            </h2>
+
+            <p>
+                Legene kaller det "muskel- og skjelettplager".
+            </p>
+
+            <p>
+                Vi kaller det somatisering av statlig svikt.
+            </p>
+
+            <p>
+                Når du lever under konstant press om arealvern, gruvedrift og rettigheter, setter det seg i kroppen.
+            </p>
+
+            <p>
+                Men når du kommer til legen, får du smertestillende. Fordi legen ikke forstår konteksten. Legen ser ikke traumene fra Fosen eller frykten for fremtiden.
+            </p>
+
+            <p>
+                Dette skaper fenomenet "Doctor's Delay".
+            </p>
+
+            <p>
+                Diagnosen kommer for sent. Behandlingen virker ikke. Folk havner på uføretrygd.
+            </p>
+
+            <p>
+                Og vet du hva det verste er?
+            </p>
+
+            <p>
+                Vi bruker våre egne barn som tolker. Bestemor forteller ikke om de intime plagene sine når barnebarnet på 14 år må oversette.
+            </p>
+
+            <p>
+                Dette er ikke helsehjelp. Det er risikosport.
+            </p>
+
+            {/* SECTION 4: THE STATE'S CONFESSION */}
+            <h2 className="text-3xl font-extrabold text-slate-900 mt-16 mb-6 flex items-center gap-3">
+                Statens stille tilståelse <ShieldCheck className="w-6 h-6 text-orange-500" />
+            </h2>
+
+            <p>
+                Staten vet dette. De har til og med innrømmet det.
+            </p>
+
+            <p>
+                I Meld. St. 12 skriver regjeringen rett ut: <em>"Manglende språkkompetanse truer pasientsikkerheten".</em>
+            </p>
+
+            <p>
+                Smak på den setningen.
+            </p>
+
+            <p>
+                Når noe "truer pasientsikkerheten", er det per definisjon ulovlig. Det er et lovbrudd. Hver dag.
+            </p>
+
+            <p>
+                Men hva gjør staten?
+            </p>
+
+            <p>
+                De sier: "Dette må kommunene løse innenfor gjeldende rammer."
+            </p>
+
+            <p>
+                Oversatt fra byråkrat-norsk: <strong>"Vi vet det er krise, men vi gidder ikke betale for det."</strong>
+            </p>
+
+            {/* CONCLUSION & CTA */}
+            <div className="mt-16 bg-slate-900 text-white p-10 rounded-3xl">
+                <h3 className="text-2xl font-bold mb-6 text-orange-500">
+                    Så, hva gjør vi?
+                </h3>
+                
+                <p className="text-lg leading-relaxed text-slate-200">
+                    Vi må slutte å "berge oss".
+                </p>
+
+                <p className="text-lg leading-relaxed text-slate-200">
+                    Begrepet <em>Birgejupmi</em> – å klare seg selv – har blitt en felle. Så lenge vi jobber gratis, tolker gratis og fikser opp i statens rot på dugnad, ser ikke systemet kostnaden.
+                </p>
+
+                <p className="text-lg leading-relaxed text-slate-200 font-bold">
+                    Det er på tide å sende faktura.
+                </p>
+
+                <p className="text-lg leading-relaxed text-slate-200">
+                    Vi i Averdi foreslår en ny strategi: Vi bygger de systemene staten mangler. Vi selger "Compliance as a Service". Vi selger samisk helsepersonell til markedspris.
+                </p>
+
+                <p className="text-lg leading-relaxed text-slate-200">
+                    Ikke fordi vi er kyniske. Men fordi det er det eneste språket staten forstår.
+                </p>
+
+                <div className="mt-8 pt-8 border-t border-slate-700">
+                    <p className="font-bold text-white text-xl mb-4">
+                        Er du leder i en kommune i nord?
+                    </p>
+                    <Link href="/kontakt" className="inline-flex items-center justify-center w-full md:w-auto px-8 py-4 bg-[#E86C1F] hover:bg-[#d65a10] text-white font-bold rounded-full transition-all text-center">
+                        La oss ta "sannhetspraten" <ArrowLeft className="w-5 h-5 ml-2 rotate-180" />
+                    </Link>
+                </div>
+            </div>
 
         </div>
+
+        {/* ENGAGEMENT BAR (Linkedin Style) */}
+        <div className="mt-12 flex justify-between items-center border-t border-b border-slate-200 py-4">
+            <div className="flex gap-6">
+                <button className="flex items-center gap-2 text-slate-500 hover:text-blue-600 font-semibold transition-colors">
+                    <ThumbsUp className="w-5 h-5" />
+                    <span>Liker dette</span>
+                </button>
+                <button className="flex items-center gap-2 text-slate-500 hover:text-blue-600 font-semibold transition-colors">
+                    <MessageSquare className="w-5 h-5" />
+                    <span>Diskuter</span>
+                </button>
+            </div>
+            <button className="flex items-center gap-2 text-slate-500 hover:text-blue-600 font-semibold transition-colors">
+                <Share2 className="w-5 h-5" />
+                <span>Del sannheten</span>
+            </button>
+        </div>
+
       </article>
-
-      {/* Cross-link to Services */}
-      <section className="bg-white py-16 border-t border-slate-200">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <CtaBlock 
-            title="Trenger din bedrift en tolk?"
-            description="Vi oversetter komplekse regelverk til lønnsomhet. Enten det gjelder Sametingets tilskudd eller skattefordeler i tiltakssonen."
-            primaryButtonText="Se våre tjenester"
-            primaryButtonLink="/tjenester"
-            secondaryButtonText="Les om Bedriftsstøtte"
-            secondaryButtonLink="/kunnskapsbank/bedrifter"
-          />
-        </div>
-      </section>
-
     </main>
   );
 }
