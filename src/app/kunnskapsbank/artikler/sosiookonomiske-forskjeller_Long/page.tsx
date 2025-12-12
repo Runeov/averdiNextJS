@@ -10,7 +10,11 @@ import {
   BookOpen,
   Scale,
   ArrowRight,
-  ShieldCheck
+  ShieldCheck,
+  UserCheck,
+  Building,
+  MapPin,
+  Sparkles
 } from 'lucide-react';
 
 import { AverdiBackground } from '@/components/modules/AverdiBackground';
