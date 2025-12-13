@@ -8,11 +8,11 @@ import {
   FileCheck, 
   BookOpen, 
   ExternalLink,
-  Target
+  Target,
+  BarChart3
 } from 'lucide-react';
 import { InnsatssoneCalculator } from '@/components/tools/InnsatssoneCalculator';
 import { ExpertInsight } from '@/components/modules/kunnskapsbank/ExpertInsight';
-import { CtaBlock } from '@/components/modules/kunnskapsbank/CtaBlock';
 import { McpDataSpan } from '@/components/ui/McpDataSpan';
 import { getExpert } from '@/data/experts';
 import { AverdiBackground } from '@/components/modules/AverdiBackground';
@@ -23,45 +23,79 @@ export const metadata: Metadata = {
   description: 'Statsbudsjettet 2026 gir deg et kraftig rekrutteringsvåpen. Se hvordan 60.000 i gjeldsslette kan tilsvare 100.000 i lønnsøkning.',
 };
 
+// Lokal CtaBlock - Mørk/Vertikal (Stabil)
+function LocalCtaBlock({ title, description, primaryButtonText, primaryButtonLink, secondaryButtonText, secondaryButtonLink }: any) {
+    return (
+        <div className="bg-slate-900 rounded-2xl p-8 md:p-12 text-center relative overflow-hidden my-12 shadow-2xl">
+            <div className="relative z-10 flex flex-col items-center gap-8 max-w-3xl mx-auto">
+                <div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">{title}</h3>
+                    <p className="text-slate-300 text-lg mb-0 leading-relaxed">{description}</p>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center">
+                    {primaryButtonLink && (
+                        <Link href={primaryButtonLink} className="inline-flex items-center justify-center px-8 py-3 bg-[#E86C1F] text-white font-bold rounded-full hover:bg-[#d65f18] transition-all shadow-lg">
+                            {primaryButtonText || 'Les mer'}
+                        </Link>
+                    )}
+                    {secondaryButtonLink && (
+                        <Link href={secondaryButtonLink} className="inline-flex items-center justify-center px-8 py-3 bg-white/10 text-white font-bold rounded-full hover:bg-white/20 transition-all backdrop-blur-sm">
+                            {secondaryButtonText || 'Tilbake'}
+                        </Link>
+                    )}
+                </div>
+            </div>
+            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+        </div>
+    );
+}
+
 export default function RekrutteringPage() {
   const alida = getExpert('alida'); // Alida er HR/Lønn ekspert
 
-  // FAQ Data for Rekruttering
+  // FAQ Data for Rekruttering (JSX for visning)
   const faqData = [
     {
       question: 'Hvem får slettet 60 000 kr i studielån?',
-      answer: 'Forslaget for 2026 gjelder alle personer som bor og arbeider i Tiltakssonen (Finnmark og Nord-Troms) i minst 12 måneder. Det er ingen krav til yrke, men gjelden må være knyttet til fullført utdanning.'
+      answer: <>Forslaget for 2026 gjelder alle personer som bor og arbeider i <strong>Tiltakssonen</strong> (Finnmark og Nord-Troms) i minst 12 måneder. Det er ingen krav til yrke, men gjelden må være knyttet til fullført utdanning.</>
     },
     {
       question: 'Hva er forskjellen på "Tiltakssonen" og "Distriktskommuner"?',
-      answer: 'I Tiltakssonen slettes inntil 60 000 kr per år. I andre distriktskommuner (sone 5 og 6 utenfor nord) er satsen 25 000 kr. Tiltakssonen har altså mer enn dobbel effekt.'
+      answer: <>I Tiltakssonen slettes inntil <strong>60 000 kr</strong> per år. I andre distriktskommuner (sone 5 og 6 utenfor nord) er satsen 25 000 kr. Tiltakssonen har altså mer enn dobbel effekt.</>
     },
     {
       question: 'Må bedriften betale for gjeldslettingen?',
-      answer: 'Nei, dette er en statlig ordning via Lånekassen. Bedriften betaler ingenting, men kan bruke verdien av ordningen i sin markedsføring mot jobbsøkere.'
+      answer: <>Nei, dette er en statlig ordning via Lånekassen. Bedriften betaler ingenting, men kan bruke verdien av ordningen i sin <strong>markedsføring</strong> mot jobbsøkere.</>
     },
     {
       question: 'Gjelder 0% arbeidsgiveravgift for alle ansatte?',
-      answer: 'Ja, så lenge den ansatte utfører hoveddelen av arbeidet i Tiltakssonen. For ansatte med mye hjemmekontor sørpå eller pendlere, gjelder egne regler.'
+      answer: <>Ja, så lenge den ansatte utfører hoveddelen av arbeidet i Tiltakssonen. For ansatte med mye hjemmekontor sørpå eller pendlere, gjelder egne regler.</>
     }
   ];
 
-  // JSON-LD Schema
+  // JSON-LD Schema (String only)
+  const jsonLdData = [
+    { q: 'Hvem får slettet 60 000 kr i studielån?', a: 'Gjelder alle i Tiltakssonen i minst 12 måneder.' },
+    { q: 'Hva er forskjellen på "Tiltakssonen" og "Distriktskommuner"?', a: 'Tiltakssonen: 60 000 kr. Andre distrikter: 25 000 kr.' },
+    { q: 'Må bedriften betale for gjeldslettingen?', a: 'Nei, statlig ordning.' },
+    { q: 'Gjelder 0% arbeidsgiveravgift for alle ansatte?', a: 'Ja, hvis arbeidet utføres i sonen.' }
+  ];
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    'mainEntity': faqData.map(item => ({
+    'mainEntity': jsonLdData.map(item => ({
       '@type': 'Question',
-      'name': item.question,
+      'name': item.q,
       'acceptedAnswer': {
         '@type': 'Answer',
-        'text': item.answer
+        'text': item.a
       }
     }))
   };
 
   return (
-    <main className="min-h-screen bg-slate-50 relative overflow-hidden">
+    <main className="min-h-screen bg-slate-50 relative overflow-hidden font-sans">
       <AverdiBackground />
       
       {/* Inject Schema */}
@@ -79,14 +113,14 @@ export default function RekrutteringPage() {
 
         {/* Hero */}
         <div className="mb-12 text-center md:text-left">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-sm font-medium mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-sm font-bold mb-4 uppercase tracking-wider">
             Strategisk HR & Lønn
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-slate-900">
+          <h1 className="text-4xl md:text-6xl font-extrabold mb-6 text-slate-900 leading-tight">
             Slik vinner du kampen om <span className="text-blue-600">hodene i 2026</span>
           </h1>
           <p className="text-xl text-slate-600 max-w-3xl leading-relaxed">
-            I 2026 endres spillereglene. Med en dobling av gjeldsslette til <McpDataSpan id="studielan-sats-hero" value="60 000" format="currency" className="font-bold text-slate-900"/> har bedrifter i nord fått et rekrutteringsvåpen som matcher Oslo-lønn – hvis du vet hvordan du bruker det.
+            I 2026 endres spillereglene. Med en dobling av gjeldsslette til <McpDataSpan id="studielan-sats-hero" value="60 000" format="currency" className="font-bold text-slate-900 bg-blue-50 px-1 rounded"/> har bedrifter i nord fått et rekrutteringsvåpen som matcher Oslo-lønn – hvis du vet hvordan du bruker det.
           </p>
         </div>
 
@@ -102,9 +136,9 @@ export default function RekrutteringPage() {
             quote="Når jeg hjelper bedrifter med lønnspakker, ser vi ofte at en lønn på 650 000 kr i Alta gir samme kjøpekraft som 850 000 kr i Oslo. Men kandidaten vet ikke dette før du viser dem regnestykket."
             expert={alida}
           >
-            <p>
+            <p className="text-slate-700">
               Mange søkere ser seg blinde på bruttolønn. Din jobb i intervjuet er å vise "Total Compensation"-pakken. 
-              Med gratis barnehage, el-avgiftsfritak og gjeldsslette, sitter familien igjen med mye mer penger til ferie og sparing, selv med lavere nominell lønn.
+              Med gratis barnehage, el-avgiftsfritak og gjeldsslette, sitter familien igjen med mye mer <strong>Handlingsrom</strong> til ferie og sparing, selv med lavere nominell lønn.
             </p>
           </ExpertInsight>
         )}
@@ -117,11 +151,13 @@ export default function RekrutteringPage() {
           </h2>
           
           <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-            [cite_start]Regjeringens forslag til Statsbudsjett 2026 inneholder historiske økninger i de personrettede virkemidlene [cite: 475-476]. 
-            Dette er ikke "distriktsstøtte", men en direkte investering i din bedrifts evne til å tiltrekke kompetanse.
+            Regjeringens forslag til Statsbudsjett 2026 inneholder historiske økninger i de personrettede virkemidlene. 
+            Dette er ikke "distriktsstøtte", men en direkte <strong>investering</strong> i din bedrifts evne til å tiltrekke kompetanse.
           </p>
 
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
+          
+
+          <div className="grid md:grid-cols-2 gap-8 mb-12 mt-8">
             
             {/* Studielån */}
             <div className="bg-green-50 p-6 rounded-2xl border border-green-100">
@@ -132,11 +168,12 @@ export default function RekrutteringPage() {
                 <h3 className="font-bold text-slate-900 text-lg">Gjeldsslette</h3>
               </div>
               <p className="text-slate-700 mb-4 text-sm">
-                [cite_start]Satsen økes til <strong>60 000 kr</strong> per år[cite: 552]. For en ansatt med studielån er dette penger rett i lomma (netto).
+                Satsen økes til <McpDataSpan id="studielan-sats-boks" value="60 000" format="currency" className="font-bold"/> per år. 
+                For en ansatt med studielån er dette penger rett i lomma (netto).
               </p>
               <div className="bg-white p-3 rounded border border-green-200 text-xs text-slate-600">
                 <strong>Verdi før skatt:</strong> Tilsvarer en lønnsøkning på ca. 
-                [cite_start]<span className="text-green-700 font-bold ml-1">109 000 kr</span>[cite: 565].
+                <span className="text-green-700 font-bold ml-1">109 000 kr</span>.
               </div>
             </div>
 
@@ -149,7 +186,8 @@ export default function RekrutteringPage() {
                 <h3 className="font-bold text-slate-900 text-lg">Lavere Skatt</h3>
               </div>
               <p className="text-slate-700 mb-4 text-sm">
-                [cite_start]Finnmarksfradraget økes til <strong>45 000 kr</strong>[cite: 574]. I tillegg er skattesatsen på alminnelig inntekt 18,5% (mot 22% sørpå).
+                Finnmarksfradraget økes til <McpDataSpan id="finnmarksfradrag-sats-boks" value="45 000" format="currency" className="font-bold"/>. 
+                I tillegg er skattesatsen på alminnelig inntekt 18,5% (mot 22% sørpå).
               </p>
               <div className="bg-white p-3 rounded border border-purple-200 text-xs text-slate-600">
                 <strong>Effekt:</strong> Gir ca 20 000 kr mer utbetalt per år for et par.
@@ -170,7 +208,7 @@ export default function RekrutteringPage() {
             <li className="flex items-start gap-3">
               <Target className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
               <span>
-                [cite_start]<strong>Synliggjør boligmarkedet:</strong> "Selg leiligheten i Oslo, kjøp enebolig her, og bli gjeldfri på 5 år med statlig nedskriving." [cite: 608-614].
+                <strong>Synliggjør boligmarkedet:</strong> "Selg leiligheten i Oslo, kjøp enebolig her, og bli gjeldfri på 5 år med statlig nedskriving."
               </span>
             </li>
           </ul>
@@ -184,7 +222,7 @@ export default function RekrutteringPage() {
         </div>
 
         {/* CTA */}
-        <CtaBlock 
+        <LocalCtaBlock 
           title="Trenger du hjelp med lønnskjøring?"
           description="Vi kan sette opp lønnssystemet ditt slik at det automatisk håndterer de ulike sonene og rapporterer riktig til myndighetene."
           primaryButtonText="Snakk med Alida"

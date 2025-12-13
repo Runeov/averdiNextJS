@@ -14,7 +14,6 @@ import {
   Building2,
   FileText
 } from 'lucide-react';
-import { CategoryCard } from '@/components/modules/kunnskapsbank/CategoryGrid';
 import { McpDataSpan } from '@/components/ui/McpDataSpan';
 import { AverdiBackground } from '@/components/modules/AverdiBackground';
 import { FaqAccordion } from '@/components/ui/FaqAccordion';
@@ -24,44 +23,67 @@ export const metadata: Metadata = {
   description: 'Guide til 0% arbeidsgiveravgift, Finnmarksfradraget og skattefordeler i Nord-Troms og Finnmark. Vi har analysert statsbudsjettet for 2026.',
 };
 
+// Lokal CategoryCard for stabilitet
+function LocalCategoryCard({ title, description, href, icon: Icon, theme }: any) {
+    const themeColor = theme === 'blue' ? 'text-blue-600 bg-blue-50 group-hover:bg-blue-600' : 'text-[#E86C1F] bg-orange-50 group-hover:bg-[#E86C1F]';
+    const hoverText = theme === 'blue' ? 'group-hover:text-blue-600' : 'group-hover:text-[#E86C1F]';
+
+    return (
+        <Link href={href} className={`group flex flex-col p-6 bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md transition-all h-full hover:border-${theme === 'blue' ? 'blue-600' : '[#E86C1F]'}`}>
+            <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${themeColor} group-hover:text-white transition-colors`}>
+                <Icon className="w-6 h-6" />
+            </div>
+            <h3 className={`text-xl font-bold text-slate-900 mb-2 ${hoverText} transition-colors`}>{title}</h3>
+            <p className="text-sm text-slate-600 leading-relaxed flex-grow">{description}</p>
+        </Link>
+    );
+}
+
 export default function BedriftHub() {
 
-  // FAQ Data med SEO-fokus på skatt og soner
+  // FAQ Data med SEO-fokus på skatt og soner (JSX for visning)
   const bedriftFaq = [
     {
       question: 'Hvilke kommuner har 0% arbeidsgiveravgift (Sone 5)?',
-      answer: 'Nullsatsen gjelder i hele Finnmark fylke, samt følgende kommuner i Nord-Troms: Karlsøy, Kvænangen, Kåfjord, Lyngen, Nordreisa, Skjervøy og Storfjord. Dette er definert som Tiltakssonen.'
+      answer: <>Nullsatsen gjelder i hele <strong>Finnmark fylke</strong>, samt følgende kommuner i Nord-Troms: Karlsøy, Kvænangen, Kåfjord, Lyngen, Nordreisa, Skjervøy og Storfjord. Dette er definert som <em>Tiltakssonen</em>.</>
     },
     {
       question: 'Gjelder nullsatsen for transportbedrifter?',
-      answer: 'Nei, transportsektoren og finansforetak omfattes av EØS-reglene for bagatellstøtte (De Minimis). Det betyr at dere har et tak på hvor mye avgiftslette dere kan motta over en 3-års periode (ca 300 000 Euro).'
+      answer: <>Nei, transportsektoren og finansforetak omfattes av EØS-reglene for <strong>bagatellstøtte (De Minimis)</strong>. Det betyr at dere har et tak på hvor mye avgiftslette dere kan motta over en 3-års periode (ca 300 000 Euro).</>
     },
     {
       question: 'Hva er Finnmarksfradraget for 2026?',
-      answer: 'I forslaget til Statsbudsjettet 2026 økes Finnmarksfradraget til 45 000 kroner. Dette er et fradrag i alminnelig inntekt som gis til alle som er bosatt i tiltakssonen.'
+      answer: <>I forslaget til Statsbudsjettet 2026 økes Finnmarksfradraget til <strong>45 000 kroner</strong>. Dette er et fradrag i alminnelig inntekt som gis til alle som er bosatt i tiltakssonen.</>
     },
     {
       question: 'Kan jeg ha ansatte på hjemmekontor sørpå?',
-      answer: 'Hvis en ansatt bor og jobber (hjemmekontor) utenfor tiltakssonen mer enn 50% av tiden, skal det betales arbeidsgiveravgift etter satsen der den ansatte bor (f.eks. 14,1% i Oslo). Det er arbeidsstedet, ikke bedriftens adresse, som styrer satsen.'
+      answer: <>Hvis en ansatt bor og jobber (hjemmekontor) utenfor tiltakssonen mer enn 50% av tiden, skal det betales arbeidsgiveravgift etter satsen der den ansatte bor (f.eks. 14,1% i Oslo). Det er <strong>arbeidsstedet</strong>, ikke bedriftens adresse, som styrer satsen.</>
     }
   ];
 
-  // JSON-LD Schema for Google
+  // JSON-LD Schema for Google (String only)
+  const jsonLdData = [
+    { q: 'Hvilke kommuner har 0% arbeidsgiveravgift (Sone 5)?', a: 'Nullsatsen gjelder i hele Finnmark fylke, samt følgende kommuner i Nord-Troms: Karlsøy, Kvænangen, Kåfjord, Lyngen, Nordreisa, Skjervøy og Storfjord.' },
+    { q: 'Gjelder nullsatsen for transportbedrifter?', a: 'Nei, transportsektoren og finansforetak omfattes av EØS-reglene for bagatellstøtte (De Minimis).' },
+    { q: 'Hva er Finnmarksfradraget for 2026?', a: 'I forslaget til Statsbudsjettet 2026 økes Finnmarksfradraget til 45 000 kroner.' },
+    { q: 'Kan jeg ha ansatte på hjemmekontor sørpå?', a: 'Hvis en ansatt bor og jobber (hjemmekontor) utenfor tiltakssonen mer enn 50% av tiden, skal det betales arbeidsgiveravgift etter satsen der den ansatte bor.' }
+  ];
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    'mainEntity': bedriftFaq.map(item => ({
+    'mainEntity': jsonLdData.map(item => ({
       '@type': 'Question',
-      'name': item.question,
+      'name': item.q,
       'acceptedAnswer': {
         '@type': 'Answer',
-        'text': item.answer
+        'text': item.a
       }
     }))
   };
 
   return (
-    <main className="min-h-screen bg-slate-50 relative overflow-hidden">
+    <main className="min-h-screen bg-slate-50 relative overflow-hidden font-sans">
       <AverdiBackground />
       
       {/* Inject Schema */}
@@ -82,12 +104,12 @@ export default function BedriftHub() {
           <span className="text-blue-600 font-bold tracking-wider uppercase text-sm mb-3 block">
             Strategisk Økonomistyring
           </span>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-slate-900">
+          <h1 className="text-4xl md:text-6xl font-extrabold mb-6 text-slate-900 leading-tight">
             Ditt konkurransefortrinn <span className="text-blue-600">i Nord</span>
           </h1>
           <p className="text-xl text-slate-600 max-w-3xl leading-relaxed">
             I 2026 styrkes de personrettede virkemidlene i Nord-Troms og Finnmark kraftig. 
-            Med <McpDataSpan id="aga-sats-sone5-2026" value="0" format="percentage" source="Statsbudsjettet 2026" className="font-bold text-slate-900"/> arbeidsgiveravgift 
+            Med <McpDataSpan id="aga-sats-sone5-2026" value="0" format="percentage" source="Statsbudsjettet 2026" className="font-bold text-slate-900 bg-blue-50 px-2 py-0.5 rounded"/> arbeidsgiveravgift 
             og økt nedskriving av studielån, har du muligheten til å være lønnsledende uten å øke totalkostnadene.
           </p>
         </div>
@@ -109,7 +131,10 @@ export default function BedriftHub() {
                 Vi har analysert de foreslåtte endringene i skattesatser og distriktspolitiske virkemidler. 
                 Her er mulighetsrommet for din bedrift.
               </p>
-              <div className="flex items-center gap-3 text-sm text-slate-400">
+              
+              
+
+              <div className="flex items-center gap-3 text-sm text-slate-400 mt-4">
                 <div className="h-8 w-8 rounded-full bg-slate-700 flex items-center justify-center font-bold">AV</div>
                 <span>Analysert av Averdi-teamet</span>
               </div>
@@ -161,7 +186,7 @@ export default function BedriftHub() {
                 Vi sikrer at din bedrift rapporterer riktig til Skatteetaten.
               </p>
               <div className="bg-white p-3 rounded-lg border border-blue-100 inline-block">
-                <span className="text-xs text-slate-500 uppercase font-semibold block mb-1">Vårt råd</span>
+                <span className="text-xs text-slate-500 uppercase font-bold block mb-1">Vårt råd</span>
                 <span className="font-bold text-slate-900">Ta en sone-sjekk på alle ansatte i januar.</span>
               </div>
             </div>
@@ -174,7 +199,7 @@ export default function BedriftHub() {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <span className="text-xs text-slate-500 uppercase font-semibold block">AGA Sone 5</span>
+                  <span className="text-xs text-slate-500 uppercase font-bold block">AGA Sone 5</span>
                   <McpDataSpan 
                     id="aga-sone5-2026" 
                     value="0" 
@@ -183,7 +208,7 @@ export default function BedriftHub() {
                   />
                 </div>
                 <div>
-                  <span className="text-xs text-slate-500 uppercase font-semibold block">Studielån (Slette)</span>
+                  <span className="text-xs text-slate-500 uppercase font-bold block">Studielån (Slette)</span>
                   <McpDataSpan 
                     id="studielan-sone5-2026" 
                     value="60 000" 
@@ -205,7 +230,7 @@ export default function BedriftHub() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24">
           
           {/* VERKTØY: KALKULATOREN */}
-          <CategoryCard 
+          <LocalCategoryCard 
             title="Innsatssonekalkulatoren"
             description="Interaktivt verktøy: Se hvor mye du sparer på å flytte bedriften eller ansette i nord. Beregner AGA og ansatt-gevinst."
             href="/kunnskapsbank/bedrifter/tiltakssonen" 
@@ -214,7 +239,7 @@ export default function BedriftHub() {
           />
 
           {/* ARTIKKEL: REKRUTTERING */}
-          <CategoryCard 
+          <LocalCategoryCard 
             title="Rekrutteringspakken 2026"
             description="Slik bruker du de nye reglene for studielån og skatt som et våpen i kampen om talentene."
             href="/kunnskapsbank/bedrifter/rekruttering" 
@@ -223,7 +248,7 @@ export default function BedriftHub() {
           />
 
           {/* ARTIKKEL: TRANSPORT/REGLER */}
-          <CategoryCard 
+          <LocalCategoryCard 
             title="Transport & Bagatellstøtte"
             description="Unntaksreglene du må kjenne til. Slik unngår du straffeskatt hvis du driver med godstransport."
             href="/kunnskapsbank/bedrifter/transport" 
@@ -232,7 +257,7 @@ export default function BedriftHub() {
           />
 
           {/* ARTIKKEL: INNOVASJON NORGE */}
-          <CategoryCard 
+          <LocalCategoryCard 
             title="Arktiske Midler"
             description="Slik kombinerer du 0% AGA med investeringsstøtte fra Innovasjon Norge Arktis."
             href="/kunnskapsbank/bedrifter/innovasjon-norge" 

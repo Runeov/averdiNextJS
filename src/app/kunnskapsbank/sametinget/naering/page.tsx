@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowLeft, CheckCircle2, AlertTriangle, FileText, Coins, TrendingUp } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, AlertTriangle, FileText, Coins, TrendingUp, MapPin } from 'lucide-react';
 import { ExpertInsight } from '@/components/modules/kunnskapsbank/ExpertInsight';
 import { McpDataSpan } from '@/components/ui/McpDataSpan';
 import { getExpert } from '@/data/experts';
@@ -10,7 +10,7 @@ import { FaqAccordion } from '@/components/ui/FaqAccordion';
 
 export const metadata: Metadata = {
   title: 'Næringsstøtte fra Sametinget | Guide for Bedrifter',
-  description: 'Slik søker du om tilskudd til Duodji, samisk reiseliv og tilleggsnæringer. Få inntil 500.000 i støtte. Vi hjelper deg med søknaden.',
+  description: 'Slik søker du om tilskudd til Duodji, samisk reiseliv og tilleggsnæringer. Få inntil 500.000 i støtte i STN-området. Vi hjelper deg med søknaden.',
 };
 
 export default function SametingetNaeringPage() {
@@ -60,8 +60,22 @@ export default function SametingetNaeringPage() {
           </h1>
           <p className="text-xl text-slate-600 leading-relaxed">
             Sametinget gir støtte til bedrifter som bygger opp under samisk kultur og bosetting. 
-            Dette er risikokapital som kan være avgjørende for å realisere ditt prosjekt i Tiltakssonen.
+            Dette er risikokapital som kan være avgjørende for å realisere ditt prosjekt i nord.
           </p>
+        </div>
+
+        {/* --- GEOGRAFI-SJEKK (NY) --- */}
+        <div className="bg-indigo-50 border border-indigo-100 p-5 rounded-2xl mb-12 flex items-start gap-4 shadow-sm">
+          <div className="p-2 bg-white rounded-full text-indigo-600 shadow-sm mt-1 shrink-0">
+            <MapPin className="w-5 h-5" />
+          </div>
+          <div>
+            <h3 className="font-bold text-indigo-900 text-lg mb-1">Gjelder kun STN-området</h3>
+            <p className="text-indigo-800 text-sm leading-relaxed">
+              For å være kvalifisert til søke må bedriften din ha forretningsadresse i <em>Sametingets virkeområde for næring</em> (STN). 
+              Dette omfatter kommuner og kretser i Finnmark, Troms og Nordland hvor samisk språk og kultur står sterkt.
+            </p>
+          </div>
         </div>
 
         {/* --- EYECATCHER: FINANSIERINGSOVERSIKT --- */}
@@ -123,7 +137,7 @@ export default function SametingetNaeringPage() {
               <AlertTriangle className="text-[#E86C1F] w-5 h-5" /> Viktige krav
             </h3>
             <ul className="space-y-3 text-slate-600 text-sm">
-              <li>• Prosjektet må ha <strong>samisk kulturelement</strong></li>
+              <li>• Prosjektet må ha samisk kulturelement</li>
               <li>• Søknad MÅ sendes <em>før</em> investeringen gjøres</li>
               <li>• Måloppnåelse vektlegges tungt</li>
             </ul>
@@ -191,7 +205,7 @@ export default function SametingetNaeringPage() {
           
           <p className="text-slate-600 mb-4">
             Selv om rammen er høy, fullfinansierer Sametinget sjelden prosjekter. 
-            Det er en forutsetning at du har <strong>egenkapital</strong> eller lån i bunnen.
+            Det er en forutsetning at du har egenkapital eller lån i bunnen.
             Støttegraden varierer fra prosjekt til prosjekt, men følger disse retningslinjene:
           </p>
           <ul className="list-disc list-inside space-y-2 text-slate-600 mb-8 ml-2">
@@ -215,7 +229,7 @@ export default function SametingetNaeringPage() {
               <FileText className="w-5 h-5" /> Husk prosjektregnskap!
             </h4>
             <p className="text-sm text-yellow-800 leading-relaxed">
-              Mottar du støtte, <strong>MÅ</strong> du føre eget prosjektregnskap som viser at pengene er brukt til formålet. 
+              Mottar du støtte, må du føre eget prosjektregnskap som viser at pengene er brukt til formålet. 
               Dette må ofte attesteres av statsautorisert revisor/regnskapsfører (det er oss!). 
               Manglende rapportering fører til krav om tilbakebetaling.
             </p>

@@ -1,14 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, HelpCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
+// --- UPDATE START ---
 export interface FaqItem {
   question: string;
-  answer: string;
+  // Changed from 'string' to 'React.ReactNode' to support HTML/JSX in answers
+  answer: React.ReactNode; 
 }
+// --- UPDATE END ---
 
 interface FaqAccordionProps {
   items: FaqItem[];
@@ -35,9 +38,7 @@ export function FaqAccordion({
           {/* Spørsmålsknapp */}
           <button
             onClick={() => handleToggle(index)}
-            // ✅ FIX 1: Legg til aria-expanded for tilgjengelighet
             aria-expanded={openIndex === index}
-            // ✅ FIX 2: aria-controls kobler knappen til innholdet
             aria-controls={`faq-content-${index}`}
             className={cn(
               "group relative flex items-center gap-4 p-5 rounded-2xl text-left transition-all duration-300 border-2 w-full",
@@ -73,7 +74,7 @@ export function FaqAccordion({
               </h3>
             </div>
 
-            {/* Pil - Krever ingen aria-label her fordi knappen allerede har tekst (spørsmålet) */}
+            {/* Pil */}
             <ChevronRight 
               className={cn("w-5 h-5 transition-transform duration-300 text-slate-300", 
                 openIndex === index ? "rotate-90" : "group-hover:text-slate-400"
@@ -87,7 +88,7 @@ export function FaqAccordion({
             {openIndex === index && (
               <motion.div
                 key="content"
-                id={`faq-content-${index}`} // Matcher aria-controls
+                id={`faq-content-${index}`}
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}

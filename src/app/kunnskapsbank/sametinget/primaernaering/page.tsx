@@ -1,38 +1,25 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { 
-  ArrowLeft, 
-  Scroll, 
-  Briefcase, 
-  Landmark, 
-  CalendarClock, 
-  Anchor, 
-  Scissors, 
-  BookOpen, 
-  ExternalLink, 
-  Coins, 
-  TrendingUp, 
-  GraduationCap,
-  ShieldCheck 
-} from 'lucide-react';
-import { BudgetAnalysis } from '@/components/modules/kunnskapsbank/BudgetAnalysis';
-import { CategoryCard } from '@/components/modules/kunnskapsbank/CategoryGrid';
+import { ArrowLeft, CheckCircle2, AlertTriangle, FileText, Coins, TrendingUp, MapPin, Anchor, Tractor, Fish } from 'lucide-react';
+import { ExpertInsight } from '@/components/modules/kunnskapsbank/ExpertInsight';
 import { McpDataSpan } from '@/components/ui/McpDataSpan';
+import { getExpert } from '@/data/experts';
 import { AverdiBackground } from '@/components/modules/AverdiBackground';
+import { CtaBlock } from '@/components/modules/kunnskapsbank/CtaBlock';
 import { FaqAccordion } from '@/components/ui/FaqAccordion';
 
 export const metadata: Metadata = {
-  title: 'Sametinget Tilskudd & Støtteordninger 2026 | Averdi',
-  description: 'Komplett guide til Sametingets 3 milliarder. Vi har analysert statsbudsjettet for 2026 og hjelper deg å navigere søknadsjungelen.',
+  title: 'Støtte til Fiske og Landbruk | Sametinget',
+  description: 'Investeringstilskudd til fiskefartøy, redskap, mottaksanlegg og jordbruk i STN-området. Vi veileder deg gjennom regelverket.',
 };
 
-export default function SametingetHub() {
+export default function SametingetPrimaryPage() {
+  const janAtle = getExpert('jan-atle');
 
-  // FAQ Data for primaernaering
   const faqData = [
-    { question: "Hvor stor båt kan jeg få støtte til?", answer: "Sametinget gir støtte til fartøy under 11 meter. Du må være registrert på blad B i fiskermanntallet for å søke." },
-    { question: "Kan jeg kjøpe båten før jeg søker?", answer: "Nei! Du må ikke inngå bindende kjøpekontrakt før søknaden er sendt og mottatt hos Sametinget. Gjør du det, blir søknaden avvist." },
-    { question: "Hva slags tilleggsnæring støttes?", answer: "Jordbrukere kan få støtte til å utvikle tilleggsnæringer som utnytter gårdens ressurser, for eksempel utleie, turisme ('Inn på tunet') eller videreforedling av mat." }
+    { question: "Kan jeg få støtte til kjøp av min første sjark?", answer: "Ja. Sametinget prioriterer førstegangsetablerere i fiskerinæringen. Du må være under 35 år (eller kvinne uansett alder) for høyest prioritet, og båten må være under 11 meter." },
+    { question: "Gjelder støtten for brukt utstyr i landbruk?", answer: "Som hovedregel gis det kun støtte til nye investeringer og nybygg. For kjøp av fartøy gjelder egne regler hvor brukte fartøy kan støttes ved førstegangsetablering." },
+    { question: "Må jeg stå i Fiskermanntallet?", answer: "Ja. For å søke støtte til fiskeriformål må du være oppført på blad B i Fiskermanntallet, eller søke om opptak samtidig med investeringen." }
   ];
 
   const jsonLd = {
@@ -47,215 +34,234 @@ export default function SametingetHub() {
       }
     }))
   };
-  
-  // FAQ Data
-  const sametingetFaq = [
-    {
-      question: 'Hvilke kommuner er med i virkeområdet (STN)?',
-      answer: 'STN-området (Sametingets tilskuddsordninger for næringsutvikling) omfatter hele Finnmark fylke, samt følgende kommuner i Troms: Kåfjord, Skjervøy, Nordreisa, Kvænangen, Lavangen, Gratangen og Skånland (Tjeldsund). I Nordland gjelder det Tysfjord (Narvik/Hamarøy) og Hattfjelldal.'
-    },
-    {
-      question: 'Kan jeg søke støtte til kjøp av fiskebåt?',
-      answer: 'Ja, Sametinget gir støtte til førstegangs-investering i fiskefartøy for fiskere bosatt i STN-området. Båten må være under 11 meter (i enkelte tilfeller andre grenser), og det stilles krav til at du er registrert på blad B i fiskermanntallet.'
-    },
-    {
-      question: 'Hva menes med "Duodji-registeret"?',
-      answer: 'For å få driftstilskudd til Duodji, må du eller bedriften være registrert i Duodji-registeret. Dette krever fagbrev eller dokumentert realkompetanse som duodji-utøver.'
-    },
-    {
-      question: 'Hva slags støtte kan barnehager få?',
-      answer: 'Barnehager kan søke om tilskudd til samisk språkopplæring, utvikling av pedagogisk materiell og prosjekter som styrker samisk språk og kultur blant barna. Fristen her følger ofte barnehageåret (september).'
-    }
-  ];
 
   return (
     <main className="min-h-screen bg-slate-50 relative overflow-hidden">
       <AverdiBackground />
 
-      <div className="relative z-10 container mx-auto px-4 py-12 max-w-6xl">
+      <article className="relative z-10 container mx-auto px-4 py-12 max-w-4xl">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         
         {/* Breadcrumb */}
-        <Link href="/kunnskapsbank" className="inline-flex items-center text-slate-500 hover:text-[#E86C1F] mb-8 font-medium transition-colors">
-          <ArrowLeft className="w-4 h-4 mr-2" /> Tilbake til oversikt
+        <Link href="/kunnskapsbank/sametinget" className="inline-flex items-center text-slate-500 hover:text-[#E86C1F] mb-8 font-medium transition-colors">
+          <ArrowLeft className="w-4 h-4 mr-2" /> Tilbake til Sametinget-hub
         </Link>
 
-        {/* Hero Section */}
+        {/* Hero */}
         <div className="mb-12">
-          <span className="text-[#E86C1F] font-bold tracking-wider uppercase text-sm mb-3 block">
-            Nisjekompetanse fra Karasjok
-          </span>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-slate-900">
-            Sametingets <span className="text-[#E86C1F]">Støtteordninger</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-sm font-medium mb-4">
+            Marine næringer & Landbruk
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900">
+            Kapital til <span className="text-[#E86C1F]">Kyst og Vidde</span>
           </h1>
-          <p className="text-xl text-slate-600 max-w-3xl leading-relaxed">
-            I 2026 er den totale rammen for samiske formål på over{' '}
-            <McpDataSpan 
-              id="sameting-ramme-2026" 
-              value="3 mrd" 
-              source="Statsbudsjettet 2026"
-              className="font-bold text-slate-900 bg-orange-50 px-2 py-0.5 rounded border-b-2 border-[#E86C1F]"
-            />{' '}
-            kroner. Pengene finnes, men nåløyet kan være trangt hvis søknaden ikke treffer på språkkrav og måloppnåelse.
+          <p className="text-xl text-slate-600 leading-relaxed">
+            Skal du investere i eget fartøy, bygge nytt fjøs eller modernisere driften? 
+            Sametinget har øremerkede midler for å sikre at primærnæringene i nord forblir lønnsomme og bærekraftige.
           </p>
         </div>
 
-        {/* --- BUDSJETTANALYSE (Selskapsautoritet) --- */}
-        <BudgetAnalysis />
-
-        {/* --- STATUS-OPPDATERING & FRISTER --- */}
-        <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-xl mb-20 shadow-sm">
-          <div className="flex flex-col md:flex-row gap-8">
-            
-            {/* Del 1: Regnskapsmessig Kontroll */}
-            <div className="flex-1">
-              <div className="flex items-center gap-3 mb-3 text-blue-900">
-                <ShieldCheck className="w-6 h-6 text-blue-600" />
-                <h3 className="font-bold text-lg">Full kontroll på 2026-endringene</h3>
-              </div>
-              <p className="text-blue-800 text-sm mb-4 leading-relaxed">
-                Vi har analysert konsekvensene av statsbudsjettet og Sametingets nye rammer. 
-                Vi vet nøyaktig hvordan endringene påvirker prosjektregnskap, periodisering og rapporteringskrav for din virksomhet.
-              </p>
-              <div className="bg-white p-3 rounded-lg border border-blue-100 inline-block">
-                <span className="text-xs text-slate-500 uppercase font-semibold block mb-1">Regnskapsmessig trygghet</span>
-                <span className="font-bold text-slate-900">Vi rigger systemene dine for det nye regelverket.</span>
-              </div>
-            </div>
-
-            {/* Del 2: Rammer for 2026 (MED MCP-IDENTIFISERING) */}
-            <div className="flex-1 md:border-l md:border-blue-200 md:pl-8">
-              <div className="flex items-center gap-3 mb-3 text-blue-900">
-                <Coins className="w-6 h-6 text-blue-600" />
-                <h3 className="font-bold text-lg">Rammer for 2026</h3>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <span className="text-xs text-slate-500 uppercase font-semibold block">Variert Næring</span>
-                  <McpDataSpan 
-                    id="sameting-variert-naering-maks" 
-                    value="500 000" 
-                    format="currency" 
-                    source="Sametinget 2026"
-                    className="font-bold text-xl text-slate-900" 
-                  />
-                </div>
-                <div>
-                  <span className="text-xs text-slate-500 uppercase font-semibold block">Støttegrad</span>
-                  <div className="flex items-center gap-1">
-                    <span className="font-bold text-xl text-green-600">Inntil</span>
-                    <McpDataSpan 
-                      id="sameting-variert-naering-sats" 
-                      value="50" 
-                      format="percentage" 
-                      source="Sametinget 2026"
-                      className="font-bold text-xl text-green-600" 
-                    />
-                  </div>
-                </div>
-              </div>
-              <p className="text-xs text-slate-500 mt-3 italic">
-                * Gjelder Variert Næringsliv. Marine næringer har egne satser (maks 300k).
-              </p>
-            </div>
-
+        {/* --- GEOGRAFI-SJEKK --- */}
+        <div className="bg-indigo-50 border border-indigo-100 p-5 rounded-2xl mb-12 flex items-start gap-4 shadow-sm">
+          <div className="p-2 bg-white rounded-full text-indigo-600 shadow-sm mt-1 shrink-0">
+            <MapPin className="w-5 h-5" />
+          </div>
+          <div>
+            <h3 className="font-bold text-indigo-900 text-lg mb-1">STN-området er inngangsbilletten</h3>
+            <p className="text-indigo-800 text-sm leading-relaxed">
+              Disse ordningene er eksklusive for bedrifter og personer bosatt i <em>Sametingets virkeområde for næring</em>. 
+              Dette gjelder store deler av Finnmark og Troms, samt utvalgte kommuner i Nordland.
+            </p>
           </div>
         </div>
 
-        {/* Navigation Grid */}
-        <h2 className="text-3xl font-bold text-slate-900 mb-8">Velg ditt område</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24">
-          
-          <CategoryCard 
-            title="Variert Næringsliv"
-            description="Investeringsstøtte til service, reiseliv og småindustri i STN-området."
-            href="/kunnskapsbank/sametinget/naering"
-            icon={Briefcase}
-            theme="orange"
-          />
+        {/* --- EYECATCHER: FINANSIERINGSOVERSIKT --- */}
+        <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-xl mb-16 shadow-sm">
+          <div className="flex items-start gap-4">
+            <div className="p-2 bg-white rounded-full text-blue-600 shadow-sm mt-1">
+              <Anchor className="w-6 h-6" />
+            </div>
+            <div className="flex-1">
+              <h3 className="font-bold text-blue-900 text-lg">Finansieringsrammer 2026</h3>
+              <p className="text-blue-800 text-sm mb-4">
+                Gjelder marine næringer, jordbruk og reindrift. 
+              </p>
+              
+              <div className="grid sm:grid-cols-2 gap-4">
+                {/* Boks 1: Maks Beløp */}
+                <div className="bg-white p-3 rounded-lg border border-blue-100 flex flex-col">
+                  <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-1">Maks Investeringstøtte</span>
+                  <div className="flex items-baseline gap-1">
+                    <McpDataSpan 
+                      id="sameting-marine-maks-sats" 
+                      value="500 000" 
+                      format="currency" 
+                      source="Sametinget"
+                      className="font-bold text-2xl text-slate-900" 
+                    />
+                    <span className="text-sm text-slate-500 font-medium">NOK</span>
+                  </div>
+                  <span className="text-xs text-slate-400 mt-1">Høyere satser kan gjelde for mottaksanlegg</span>
+                </div>
 
-          <CategoryCard 
-            title="Fiske & Primærnæring"
-            description="Støtte til kjøp av fiskefartøy, mottaksanlegg og tilleggsnæring i jordbruk."
-            href="/kunnskapsbank/sametinget/primaernaering"
-            icon={Anchor}
-            theme="orange"
-          />
-
-          <CategoryCard 
-            title="Duodji & Håndverk"
-            description="Driftstilskudd, investeringer i verksted og markedstiltak for duodji-utøvere."
-            href="/kunnskapsbank/sametinget/duodji"
-            icon={Scissors}
-            theme="orange"
-          />
-
-          <CategoryCard 
-            title="Kultur & Språk"
-            description="Støtte til arrangementer, utgivelser, musikk og språkopplæring."
-            href="/kunnskapsbank/sametinget/kultur-sprak"
-            icon={Scroll}
-            theme="orange"
-          />
-          
-          <CategoryCard 
-            title="Institusjonsutvikling"
-            description="Driftstilskudd for samiske hus, teatre, festivaler og språksentre."
-            href="/kunnskapsbank/sametinget/institusjon"
-            icon={Landmark}
-            theme="orange"
-          />
-
-          <CategoryCard 
-            title="Offentlig Sektor"
-            description="Tilskudd til samisk i barnehage og skole, læremidler og stipend."
-            href="/kunnskapsbank/sametinget/offentlig"
-            icon={GraduationCap}
-            theme="orange"
-          />
-
+                {/* Boks 2: Støttegrad */}
+                <div className="bg-white p-3 rounded-lg border border-blue-100 flex flex-col">
+                  <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-1">Dekningsgrad</span>
+                  <div className="flex items-center gap-2">
+                    <TrendingUp className="w-5 h-5 text-green-500" />
+                    <span className="font-bold text-xl text-slate-900">Inntil 35%</span>
+                  </div>
+                  <span className="text-xs text-slate-400 mt-1">Av godkjent kostnadsoverslag</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
+        {/* Nøkkelinformasjon Grid */}
+        <div className="grid md:grid-cols-2 gap-6 mb-16">
+          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-slate-900">
+              <CheckCircle2 className="text-green-500 w-5 h-5" /> Hvem kvalifiserer?
+            </h3>
+            <ul className="space-y-3 text-slate-600 text-sm">
+              <li>• Fiskere på blad B i manntallet</li>
+              <li>• Aktive jordbruksforetak</li>
+              <li>• Mottaksanlegg og landindustri</li>
+              <li>• Førstegangsetablerere prioriteres</li>
+            </ul>
+          </div>
+          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-slate-900">
+              <AlertTriangle className="text-[#E86C1F] w-5 h-5" /> Tekniske krav
+            </h3>
+            <ul className="space-y-3 text-slate-600 text-sm">
+              <li>• Fartøy må være under 11 meter (som regel)</li>
+              <li>• Investeringen må være "fremtidsrettet"</li>
+              <li>• Krav om lærlingordning for større bedrifter</li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Expert Insight */}
+        {janAtle && (
+          <ExpertInsight 
+            title="Lønnsomhet i småskala" 
+            quote="Mange tror at de store pengene kun ligger i de store kvotene. Men med riktig finansiering fra Sametinget, kan en mindre sjark eller et modernisert gårdsbruk gi en svært solid driftsmargin, spesielt når gjeldsgraden holdes nede."
+            expert={janAtle}
+          >
+            <p>
+              Vi ser ofte at kunder undervurderer verdien av tilleggsnæring. 
+              Kombinasjonen av tradisjonelt fiske og lokal videreforedling er akkurat den typen "robust økonomi" Sametinget ønsker å støtte.
+            </p>
+          </ExpertInsight>
+        )}
+
+        {/* Main Content Sections */}
+        <div className="bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-slate-100 my-16">
+          
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-6">
+            Hva kan du søke støtte til?
+          </h2>
+          
+          <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+            Sametinget deler primærnæringene inn i to hovedkategorier utenom reindrift (som har egne prosesser). 
+            Her er mulighetene for deg som lever av naturen:
+          </p>
+          
+          <div className="grid sm:grid-cols-2 gap-6 mb-12">
+            {/* Marine Næringer */}
+            <div className="p-5 bg-blue-50 rounded-xl border border-blue-100">
+              <div className="flex items-center gap-2 mb-3">
+                <Fish className="w-6 h-6 text-blue-600" />
+                <h3 className="font-bold text-slate-900 text-lg">Marine Næringer</h3>
+              </div>
+              <ul className="space-y-2 text-sm text-slate-600">
+                <li>• <strong>Fiskefartøy:</strong> Kjøp av fartøy, nyanlegg eller ombygging.</li>
+                <li>• <strong>Redskap:</strong> Investering i linestamp, juksa eller teiner.</li>
+                <li>• <strong>Serviceanlegg:</strong> Kaianlegg, egnebuer og servicebygg.</li>
+                <li>• <strong>Mottak:</strong> Utstyr for mottak og produksjon av fisk.</li>
+              </ul>
+            </div>
+
+            {/* Jordbruk */}
+            <div className="p-5 bg-green-50 rounded-xl border border-green-100">
+              <div className="flex items-center gap-2 mb-3">
+                <Tractor className="w-6 h-6 text-green-600" />
+                <h3 className="font-bold text-slate-900 text-lg">Jordbruk & Tilleggsnæring</h3>
+              </div>
+              <ul className="space-y-2 text-sm text-slate-600">
+                <li>• <strong>Driftsbygninger:</strong> Nybygg, tilbygg og omfattende renovering.</li>
+                <li>• <strong>Videreforedling:</strong> Utstyr for lokalmatproduksjon.</li>
+                <li>• <strong>Generasjonsskifte:</strong> Tilrettelegging for nye eiere.</li>
+                <li>• <strong>Tilleggsnæring:</strong> Turisme eller tjenester knyttet til gården.</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4">
+            Spesielt for fiskere: Førstegangsetablering
+          </h3>
+          
+          <p className="text-slate-600 mb-6">
+            Er du ung fisker i et sjøsamisk område? Da har du noen av de beste vilkårene i virkemiddelapparatet. 
+            Sametinget ønsker å rekruttere unge til kysten.
+          </p>
+
+          <div className="bg-indigo-50 p-6 rounded-xl border border-indigo-100 mb-8">
+            <h4 className="font-bold text-indigo-900 mb-3 text-lg">Kriterier for investeringstilskudd til fartøy:</h4>
+            <ul className="grid sm:grid-cols-2 gap-4 text-sm text-indigo-800">
+              <li className="flex items-start gap-2">
+                <CheckCircle2 className="w-4 h-4 mt-0.5 text-indigo-600" />
+                <span>Søker må være registrert på blad B.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle2 className="w-4 h-4 mt-0.5 text-indigo-600" />
+                <span>Fartøyet må være under 11 meter.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle2 className="w-4 h-4 mt-0.5 text-indigo-600" />
+                <span>Gjelder kjøp av både nytt og brukt fartøy (ved første gang).</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle2 className="w-4 h-4 mt-0.5 text-indigo-600" />
+                <span>Nedbetalingstid på lån må dokumenteres.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div className="bg-yellow-50 p-6 rounded-xl border-l-4 border-yellow-400">
+            <h4 className="font-bold text-yellow-800 flex items-center gap-2 mb-2 text-lg">
+              <FileText className="w-5 h-5" /> Dokumentasjon er nøkkelen
+            </h4>
+            <p className="text-sm text-yellow-800 leading-relaxed">
+              For primærnæringene er kravene til lønnsomhetsberegning strenge. 
+              Du må vise et realistisk driftsbudsjett for de neste årene. 
+              Vi hjelper deg å sette opp dette slik at saksbehandleren ser potensialet umiddelbart.
+            </p>
+          </div>
+        </div>
+
+        {/* CTA Component */}
+        <CtaBlock
+          title="Klar for å satse?"
+          description="Vi kjenner reglene for både sjark og fjøs. La oss ta papirarbeidet, så kan du fokusere på driften."
+          primaryButtonText="Start søknadsprosessen"
+          primaryButtonLink="/kontakt"
+          secondaryButtonText="Se alle støtteordninger"
+          secondaryButtonLink="/kunnskapsbank/sametinget"
+        />
 
         {/* FAQ Section */}
-        <div className="max-w-3xl mx-auto mb-20">
-          <h2 className="text-2xl font-bold text-slate-900 mb-6 text-center">Spørsmål om virkeområdet (STN)</h2>
-          <FaqAccordion items={sametingetFaq} themeColor="#E86C1F" />
-        </div>
-
-        {/* Primaernaering FAQ Section */}
         <div className="mt-16 mb-12">
           <h2 className="text-2xl font-bold text-slate-900 mb-6">Ofte stilte spørsmål om primærnæring</h2>
           <FaqAccordion items={faqData} themeColor="#3b82f6" />
         </div>
 
-        {/* --- KILDER & AUTORITET --- */}
-        <div className="border-t border-slate-200 pt-8 pb-4 mt-20">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-xs text-slate-500">
-            <div className="flex items-start gap-3 max-w-2xl">
-              <BookOpen className="w-5 h-5 text-slate-400 flex-shrink-0 mt-0.5" />
-              <div>
-                <p className="font-semibold text-slate-700 mb-1">Datagrunnlag og Rammeverk</p>
-                <p>
-                  Næringsinnholdet er basert på <strong>Meld. St. 37 (2020–2021)</strong>, som er gjeldende stortingsmelding for næringsgrunnlag i samiske samfunn. 
-                  Satser og budsjettrammer er oppdatert iht. <strong>Statsbudsjettet 2026</strong>.
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a href="https://www.regjeringen.no/no/dokumenter/meld.-st.-37-20202021/id2861398/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-[#E86C1F] transition-colors">
-                Les Meld. St. 37 <ExternalLink className="w-3 h-3" />
-              </a>
-              <a href="https://www.ssb.no/jord-skog-jakt-og-fiskeri/fiske-og-fangst/statistikk/fiskeri" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-[#E86C1F] transition-colors">
-                SSB Fiskeristatistikk <ExternalLink className="w-3 h-3" />
-              </a>
-            </div>
-          </div>
-        </div>
-
-      </div>
+      </article>
     </main>
   );
 }

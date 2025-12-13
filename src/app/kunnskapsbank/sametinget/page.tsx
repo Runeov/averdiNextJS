@@ -11,12 +11,10 @@ import {
   ExternalLink, 
   Coins, 
   ShieldCheck,
-  MapPin, 
   Lightbulb, 
   AlertTriangle 
 } from 'lucide-react';
 import { BudgetAnalysis } from '@/components/modules/kunnskapsbank/BudgetAnalysis';
-import { CategoryCard } from '@/components/modules/kunnskapsbank/CategoryGrid';
 import { McpDataSpan } from '@/components/ui/McpDataSpan';
 import { getExpert } from '@/data/experts';
 import { AverdiBackground } from '@/components/modules/AverdiBackground';
@@ -54,41 +52,67 @@ export const metadata: Metadata = {
   }
 };
 
+// Lokal CategoryCard for stabilitet
+function LocalCategoryCard({ title, description, href, icon: Icon, theme }: any) {
+    return (
+        <Link href={href} className="group flex flex-col p-6 bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md hover:border-[#E86C1F] transition-all h-full">
+            <div className="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center mb-4 text-[#E86C1F] group-hover:bg-[#E86C1F] group-hover:text-white transition-colors">
+                <Icon className="w-6 h-6" />
+            </div>
+            <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-[#E86C1F] transition-colors">{title}</h3>
+            <p className="text-sm text-slate-600 leading-relaxed flex-grow">{description}</p>
+        </Link>
+    );
+}
+
 export default function SametingetHub() {
   const janAtle = getExpert('jan-atle');
   
-  // --- 2. FAQ CONTENT ---
+  // --- 2. FAQ CONTENT (Med JSX) ---
   const sametingetFaq = [
     {
       question: 'Er jeg i "riktig" område (STN)?',
-      answer: 'Sjekk kartet nøye! Du kan være i Tiltakssonen (skatt) men utenfor STN (tilskudd). STN inkluderer hele Finnmark og 7 kommuner i Nord-Troms, pluss spesifikke kretser i Troms og Nordland. Er du utenfor disse, kvalifiserer du ikke til næringsstøtte.'
+      answer: <>Sjekk kartet nøye! Du kan være i Tiltakssonen (skatt) men utenfor STN (tilskudd). STN inkluderer hele <strong>Finnmark</strong> og <strong>7 kommuner i Nord-Troms</strong>, pluss spesifikke kretser i Troms og Nordland. Er du utenfor disse, kvalifiserer du ikke til næringsstøtte.</>
     },
     {
       question: 'Får jeg støtte til fiskebåt?',
-      answer: 'Ja, men kun hvis båten er under 11 meter og du bor i STN-området. Dette er din "inngangsbillett" som førstegangsetablerer. Vi hjelper deg å dokumentere lønnsomhet.'
+      answer: <>Ja, men kun hvis båten er under <strong>11 meter</strong> og du bor i STN-området. Dette er din "inngangsbillett" som førstegangsetablerer. Vi hjelper deg å dokumentere lønnsomhet.</>
     },
     {
       question: 'Hva kreves for å få Duodji-støtte?',
-      answer: 'Du må være registrert i Duodji-registeret. Dette fungerer som ditt "fagbrev" i systemet. Mangler du formell utdanning? Vi hjelper deg med realkompetansevurdering slik at porten åpnes.'
+      answer: <>Du må være registrert i <strong>Duodji-registeret</strong>. Dette fungerer som ditt "fagbrev" i systemet. Mangler du formell utdanning? Vi hjelper deg med realkompetansevurdering slik at porten åpnes.</>
     },
     {
       question: 'Hva er "Variert Næringsliv"?',
-      answer: 'Dette er "gratis egenkapital" for småbedrifter innen service, reiseliv og småindustri. Du kan søke om inntil 500 000 kr til investeringer, men ikke til ren drift.'
+      answer: <>Dette er "gratis egenkapital" for småbedrifter innen service, reiseliv og småindustri. Du kan søke om inntil <strong>500 000 kr</strong> til investeringer, men ikke til ren drift.</>
     }
   ];
 
-  // --- 3. JSON-LD ---
+  // --- 3. JSON-LD (String only) ---
+  const faqJsonData = sametingetFaq.map(item => ({
+      question: item.question,
+      answer: typeof item.answer === 'string' ? item.answer : "Se nettsiden for detaljert svar." // Fallback for complex JSX in JSON-LD if needed, but here we can just strip tags manually if we had the text version
+  }));
+  
+  // Manuell tekst-versjon for JSON-LD for å være 100% sikker
+  const jsonLdData = [
+    { q: 'Er jeg i "riktig" område (STN)?', a: 'Sjekk kartet nøye! Du kan være i Tiltakssonen (skatt) men utenfor STN (tilskudd). STN inkluderer hele Finnmark og 7 kommuner i Nord-Troms.' },
+    { q: 'Får jeg støtte til fiskebåt?', a: 'Ja, men kun hvis båten er under 11 meter og du bor i STN-området.' },
+    { q: 'Hva kreves for å få Duodji-støtte?', a: 'Du må være registrert i Duodji-registeret.' },
+    { q: 'Hva er "Variert Næringsliv"?', a: 'Dette er "gratis egenkapital" for småbedrifter innen service, reiseliv og småindustri. Inntil 500 000 kr.' }
+  ];
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
       {
         '@type': 'FAQPage',
-        'mainEntity': sametingetFaq.map(item => ({
+        'mainEntity': jsonLdData.map(item => ({
           '@type': 'Question',
-          'name': item.question,
+          'name': item.q,
           'acceptedAnswer': {
             '@type': 'Answer',
-            'text': item.answer.replace(/<[^>]+>/g, '') 
+            'text': item.a
           }
         }))
       },
@@ -98,20 +122,6 @@ export default function SametingetHub() {
           { '@type': 'ListItem', 'position': 1, 'name': 'Kunnskapsbank', 'item': 'https://www.averdi.no/kunnskapsbank' },
           { '@type': 'ListItem', 'position': 2, 'name': 'Sametinget Støtte', 'item': 'https://www.averdi.no/kunnskapsbank/sametinget' }
         ]
-      },
-      {
-        '@type': 'Organization',
-        'name': 'Averdi',
-        'url': 'https://www.averdi.no',
-        'logo': { '@type': 'ImageObject', 'url': 'https://www.averdi.no/logo.png' },
-        'sameAs': ['https://www.linkedin.com/company/averdi', 'https://www.facebook.com/averdi']
-      },
-      {
-        '@type': 'Person',
-        'name': 'Jan Atle',
-        'jobTitle': 'Statsautorisert Regnskapsfører',
-        'worksFor': { '@type': 'Organization', 'name': 'Averdi' },
-        'url': 'https://www.averdi.no/eksperter/jan-atle'
       },
       {
         '@type': 'Service',
@@ -125,7 +135,7 @@ export default function SametingetHub() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-50 relative overflow-hidden">
+    <main className="min-h-screen bg-slate-50 relative overflow-hidden font-sans">
       <AverdiBackground />
       
       <script
@@ -140,14 +150,14 @@ export default function SametingetHub() {
           <ArrowLeft className="w-4 h-4 mr-2" /> Tilbake til oversikt
         </Link>
 
-        {/* Hero Section */}
+        {/* Hero Section - KORRIGERT IHT. PROTOKOLL */}
         <div className="mb-12">
           <span className="text-[#E86C1F] font-bold tracking-wider uppercase text-sm mb-3 block">
             Tolken av Nord-Norge
           </span>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-slate-900 leading-tight">
-            Sametinget snakker byråkratisk. <br className="hidden md:block" />
-            <span className="text-[#E86C1F]">Vi snakker bunnlinje.</span>
+          <h1 className="text-4xl md:text-6xl font-extrabold mb-6 text-slate-900 leading-tight">
+            Sametinget setter rammene. <br className="hidden md:block" />
+            <span className="text-[#E86C1F]">Vi finner mulighetene.</span>
           </h1>
           <p className="text-xl text-slate-600 max-w-3xl leading-relaxed">
             I 2026 ligger det over{' '}
@@ -158,7 +168,8 @@ export default function SametingetHub() {
               format="currency"
               className="font-bold text-slate-900 bg-orange-50 px-2 py-0.5 rounded border-b-2 border-[#E86C1F]"
             />{' '}
-            i potten. Det er ikke "støtte" – det er risikokapital. Men pengene utløses kun hvis du oversetter bedriftens mål til Sametingets språk om <em>Kulturell trygghet</em> og <em>Birgejupmi</em>.
+            i potten. Det er ikke bare støtte – det er en <strong>Investeringsmotor</strong>. 
+            Pengene utløses når du bruker regelverket til å bygge <em>Kulturell trygghet</em> og <em>Birgejupmi</em>.
           </p>
         </div>
 
@@ -183,7 +194,7 @@ export default function SametingetHub() {
                 Mange bedrifter taper penger fordi de blander <strong>Tiltakssonen</strong> (skatt) med <strong>STN-området</strong> (tilskudd).
               </p>
               <div className="bg-slate-50 p-4 rounded-lg text-sm border-l-4 border-[#E86C1F]">
-                <p className="font-medium text-slate-900">Pekefingeren:</p>
+                <p className="font-bold text-slate-900 mb-1">Pekefingeren:</p>
                 <p className="text-slate-600">
                   Du kan ha 0% arbeidsgiveravgift (Tiltakssonen) men null rett på investeringsstøtte (utenfor STN). Vi sjekker postnummeret ditt mot de nyeste kartene før du ber om hjelp til søknaden.
                 </p>
@@ -233,7 +244,7 @@ export default function SametingetHub() {
         <h2 className="text-3xl font-bold text-slate-900 mb-8">Hva vil du bygge i dag?</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24">
           
-          <CategoryCard 
+          <LocalCategoryCard 
             title="Variert Næringsliv"
             description="Gratis egenkapital. For deg som driver service, reiseliv eller småindustri i STN."
             href="/kunnskapsbank/sametinget/naering"
@@ -241,7 +252,7 @@ export default function SametingetHub() {
             theme="orange"
           />
 
-          <CategoryCard 
+          <LocalCategoryCard 
             title="Fiske & Primærnæring"
             description="Skal du kjøpe din første båt? Vi sikrer at du får investeringsstøtten du har krav på."
             href="/kunnskapsbank/sametinget/primaernaering"
@@ -249,7 +260,7 @@ export default function SametingetHub() {
             theme="orange"
           />
 
-          <CategoryCard 
+          <LocalCategoryCard 
             title="Duodji & Håndverk"
             description="Gjør tradisjon til levebrød. Vi hjelper med driftstilskudd og markedstilgang."
             href="/kunnskapsbank/sametinget/duodji"
@@ -257,7 +268,7 @@ export default function SametingetHub() {
             theme="orange"
           />
 
-          <CategoryCard 
+          <LocalCategoryCard 
             title="Kultur & Språk"
             description="Finansiering av kulturprosjekter. Vi oversetter 'kulturell trygghet' til regnskapsspråk."
             href="/kunnskapsbank/sametinget/kultur-sprak"
@@ -265,7 +276,7 @@ export default function SametingetHub() {
             theme="orange"
           />
           
-          <CategoryCard 
+          <LocalCategoryCard 
             title="Institusjonsutvikling"
             description="Forvalter du et samisk hus eller teater? Vi sikrer driftsgrunnlaget."
             href="/kunnskapsbank/sametinget/institusjon"
@@ -273,7 +284,7 @@ export default function SametingetHub() {
             theme="orange"
           />
 
-          <CategoryCard 
+          <LocalCategoryCard 
             title="Offentlig Sektor"
             description="Barnehage og skole: Slik henter dere midler til samisk språkopplæring."
             href="/kunnskapsbank/sametinget/offentlig"
