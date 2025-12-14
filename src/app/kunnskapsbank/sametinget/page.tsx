@@ -19,6 +19,7 @@ import { McpDataSpan } from '@/components/ui/McpDataSpan';
 import { getExpert } from '@/data/experts';
 import { AverdiBackground } from '@/components/modules/AverdiBackground';
 import { FaqAccordion } from '@/components/ui/FaqAccordion';
+import { cleanText } from '@/utils/text';
 
 // --- 1. SEO & METADATA ---
 export const metadata: Metadata = {
@@ -88,18 +89,12 @@ export default function SametingetHub() {
     }
   ];
 
-  // --- 3. JSON-LD (String only) ---
-  const faqJsonData = sametingetFaq.map(item => ({
-      question: item.question,
-      answer: typeof item.answer === 'string' ? item.answer : "Se nettsiden for detaljert svar." // Fallback for complex JSX in JSON-LD if needed, but here we can just strip tags manually if we had the text version
-  }));
-  
-  // Manuell tekst-versjon for JSON-LD for å være 100% sikker
+  // --- 3. JSON-LD (Strictly Sanitized) ---
   const jsonLdData = [
-    { q: 'Er jeg i "riktig" område (STN)?', a: 'Sjekk kartet nøye! Du kan være i Tiltakssonen (skatt) men utenfor STN (tilskudd). STN inkluderer hele Finnmark og 7 kommuner i Nord-Troms.' },
-    { q: 'Får jeg støtte til fiskebåt?', a: 'Ja, men kun hvis båten er under 11 meter og du bor i STN-området.' },
-    { q: 'Hva kreves for å få Duodji-støtte?', a: 'Du må være registrert i Duodji-registeret.' },
-    { q: 'Hva er "Variert Næringsliv"?', a: 'Dette er "gratis egenkapital" for småbedrifter innen service, reiseliv og småindustri. Inntil 500 000 kr.' }
+    { q: 'Er jeg i "riktig" område (STN)?', a: cleanText('Sjekk kartet nøye! Du kan være i Tiltakssonen (skatt) men utenfor STN (tilskudd). STN inkluderer hele Finnmark og 7 kommuner i Nord-Troms.') },
+    { q: 'Får jeg støtte til fiskebåt?', a: cleanText('Ja, men kun hvis båten er under 11 meter og du bor i STN-området.') },
+    { q: 'Hva kreves for å få Duodji-støtte?', a: cleanText('Du må være registrert i Duodji-registeret.') },
+    { q: 'Hva er "Variert Næringsliv"?', a: cleanText('Dette er "gratis egenkapital" for småbedrifter innen service, reiseliv og småindustri. Inntil 500 000 kr.') }
   ];
 
   const jsonLd = {
@@ -128,7 +123,7 @@ export default function SametingetHub() {
         'name': 'Søknadshjelp Sametinget',
         'serviceType': 'Rådgivning for Sametingets næringsstøtte',
         'provider': { '@type': 'Organization', 'name': 'Averdi' },
-        'description': 'Vi oversetter byråkratiske krav til kommersiell fordel. Hjelp med søknad, budsjett og "kulturell trygghet"-beskrivelser.',
+        'description': cleanText('Vi oversetter byråkratiske krav til kommersiell fordel. Hjelp med søknad, budsjett og "kulturell trygghet"-beskrivelser.'),
         'areaServed': 'Nord-Troms og Finnmark'
       }
     ]
@@ -150,7 +145,7 @@ export default function SametingetHub() {
           <ArrowLeft className="w-4 h-4 mr-2" /> Tilbake til oversikt
         </Link>
 
-        {/* Hero Section - KORRIGERT IHT. PROTOKOLL */}
+        {/* Hero Section - KORRIGERT IHT. PROTOKOLL (v7) */}
         <div className="mb-12">
           <span className="text-[#E86C1F] font-bold tracking-wider uppercase text-sm mb-3 block">
             Tolken av Nord-Norge
