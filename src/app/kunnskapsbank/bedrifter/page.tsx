@@ -12,15 +12,23 @@ import {
   ExternalLink,
   Users,
   Building2,
-  FileText
+  FileText,
+  Cpu,
+  Search,
+  Database,
+  Eye,
+  AlertTriangle
 } from 'lucide-react';
 import { McpDataSpan } from '@/components/ui/McpDataSpan';
 import { AverdiBackground } from '@/components/modules/AverdiBackground';
 import { FaqAccordion } from '@/components/ui/FaqAccordion';
+import { cleanText } from '@/utils/text';
+import { getExpert } from '@/data/experts';
+import { ExpertInsight } from '@/components/modules/kunnskapsbank/ExpertInsight';
 
 export const metadata: Metadata = {
-  title: 'Bedrift i Tiltakssonen | Skattefordeler & Regnskap 2026',
-  description: 'Guide til 0% arbeidsgiveravgift, Finnmarksfradraget og skattefordeler i Nord-Troms og Finnmark. Vi har analysert statsbudsjettet for 2026.',
+  title: 'Fremtidens Bedriftsøkonomi: Null Feil, Full Innsikt',
+  description: 'Vi kombinerer AI-drevet regnskap med statsautorisert kontroll. Slik fjerner vi feil og gir deg "Financial Intelligence".',
 };
 
 // Lokal CategoryCard for stabilitet
@@ -40,34 +48,33 @@ function LocalCategoryCard({ title, description, href, icon: Icon, theme }: any)
 }
 
 export default function BedriftHub() {
+  const isak = getExpert('isak');
 
   // FAQ Data med SEO-fokus på skatt og soner (JSX for visning)
   const bedriftFaq = [
     {
-      question: 'Hvilke kommuner har 0% arbeidsgiveravgift (Sone 5)?',
-      answer: <>Nullsatsen gjelder i hele <strong>Finnmark fylke</strong>, samt følgende kommuner i Nord-Troms: Karlsøy, Kvænangen, Kåfjord, Lyngen, Nordreisa, Skjervøy og Storfjord. Dette er definert som <em>Tiltakssonen</em>.</>
+      question: 'Hvorfor er datakvalitet så viktig?',
+      answer: <>Små feil som en feilplassert desimal eller dobbel registrering kan gi store utslag. Med <strong className="text-blue-600">AI-validering</strong> fanger vi disse feilene <em>før</em> de havner i regnskapet.</>
     },
     {
-      question: 'Gjelder nullsatsen for transportbedrifter?',
-      answer: <>Nei, transportsektoren og finansforetak omfattes av EØS-reglene for <strong>bagatellstøtte (De Minimis)</strong>. Det betyr at dere har et tak på hvor mye avgiftslette dere kan motta over en 3-års periode (ca 300 000 Euro).</>
+      question: 'Hva er RAG (Retrieval-Augmented Generation)?',
+      answer: <>RAG er teknologien vi bruker for å la AI søke direkte i oppdaterte lovverk og dine egne data. Det betyr at du får svar basert på <strong className="text-blue-600">fakta</strong>, ikke gjetning.</>
     },
     {
-      question: 'Hva er Finnmarksfradraget for 2026?',
-      answer: <>I forslaget til Statsbudsjettet 2026 økes Finnmarksfradraget til <strong>45 000 kroner</strong>. Dette er et fradrag i alminnelig inntekt som gis til alle som er bosatt i tiltakssonen.</>
+      question: 'Kan AI erstatte regnskapsføreren?',
+      answer: <>Nei, men det erstatter den kjedelige delen av jobben. Vi bruker "Hybrid Intelligence" – AI tar seg av datainnsamling og kontroll, mens vi (menneskene) tar oss av strategien og de vanskelige vurderingene.</>
     },
     {
-      question: 'Kan jeg ha ansatte på hjemmekontor sørpå?',
-      answer: <>Hvis en ansatt bor og jobber (hjemmekontor) utenfor tiltakssonen mer enn 50% av tiden, skal det betales arbeidsgiveravgift etter satsen der den ansatte bor (f.eks. 14,1% i Oslo). Det er <strong>arbeidsstedet</strong>, ikke bedriftens adresse, som styrer satsen.</>
+      question: 'Hvordan hjelper dette med likviditeten?',
+      answer: <>Ved å automatisere fakturering og purring (AR), reduserer vi tiden det tar å få betalt. Bedre data gir også mer presise likviditetsprognoser.</>
     }
   ];
 
-  // JSON-LD Schema for Google (String only)
-  const jsonLdData = [
-    { q: 'Hvilke kommuner har 0% arbeidsgiveravgift (Sone 5)?', a: 'Nullsatsen gjelder i hele Finnmark fylke, samt følgende kommuner i Nord-Troms: Karlsøy, Kvænangen, Kåfjord, Lyngen, Nordreisa, Skjervøy og Storfjord.' },
-    { q: 'Gjelder nullsatsen for transportbedrifter?', a: 'Nei, transportsektoren og finansforetak omfattes av EØS-reglene for bagatellstøtte (De Minimis).' },
-    { q: 'Hva er Finnmarksfradraget for 2026?', a: 'I forslaget til Statsbudsjettet 2026 økes Finnmarksfradraget til 45 000 kroner.' },
-    { q: 'Kan jeg ha ansatte på hjemmekontor sørpå?', a: 'Hvis en ansatt bor og jobber (hjemmekontor) utenfor tiltakssonen mer enn 50% av tiden, skal det betales arbeidsgiveravgift etter satsen der den ansatte bor.' }
-  ];
+  // JSON-LD Schema for Google (Using cleanText)
+  const jsonLdData = bedriftFaq.map(item => ({
+    q: item.question,
+    a: cleanText(typeof item.answer === 'string' ? item.answer : "Se nettsiden for detaljert svar.")
+  }));
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -102,166 +109,169 @@ export default function BedriftHub() {
         {/* Hero Section */}
         <div className="mb-12">
           <span className="text-blue-600 font-bold tracking-wider uppercase text-sm mb-3 block">
-            Strategisk Økonomistyring
+            Hybrid Intelligence
           </span>
           <h1 className="text-4xl md:text-6xl font-extrabold mb-6 text-slate-900 leading-tight">
-            Ditt konkurransefortrinn <span className="text-blue-600">i Nord</span>
+            Fra regnskap til <br className="hidden md:block" />
+            <span className="text-blue-600">Vekstmotor</span>
           </h1>
           <p className="text-xl text-slate-600 max-w-3xl leading-relaxed">
-            I 2026 styrkes de personrettede virkemidlene i Nord-Troms og Finnmark kraftig. 
-            Med <McpDataSpan id="aga-sats-sone5-2026" value="0" format="percentage" source="Statsbudsjettet 2026" className="font-bold text-slate-900 bg-blue-50 px-2 py-0.5 rounded"/> arbeidsgiveravgift 
-            og økt nedskriving av studielån, har du muligheten til å være lønnsledende uten å øke totalkostnadene.
+            Vi teller ikke bare bønner, vi planter dem med presisjon. Ved å kombinere
+            <strong className="text-slate-900"> Statsautorisert kontroll</strong> med
+            <strong className="text-blue-600"> AI-drevet automatisering</strong>,
+            eliminerer vi feil og gir deg sanntidsinnsikt i din bedrifts fremtid.
           </p>
         </div>
 
-        {/* --- BUDSJETTANALYSE (BEDRIFT) --- */}
-        <section className="my-16 bg-slate-900 text-white rounded-2xl overflow-hidden shadow-xl border border-slate-700">
-          <div className="flex flex-col md:flex-row">
-            <div className="p-8 md:p-12 md:w-2/5 bg-slate-800 relative">
-              <div className="absolute top-0 right-0 p-4 opacity-5">
-                <FileText className="w-32 h-32 text-white" />
-              </div>
-              <span className="inline-block px-3 py-1 bg-blue-500/20 text-blue-300 text-xs font-bold uppercase tracking-wider rounded-full mb-4 border border-blue-500/30">
-                Averdi Innsikt
-              </span>
-              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">
-                Statsbudsjettet 2026: Slik påvirkes din bunnlinje
+        {/* --- PROBLEM: THE 8 SILENT KILLERS --- */}
+        <section className="my-16 bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200">
+          <div className="p-8 md:p-12 border-b border-slate-100">
+            <div className="flex items-center gap-3 mb-6">
+              <AlertTriangle className="w-8 h-8 text-red-500" />
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
+                De 8 feilene som dreper lønnsomheten
               </h2>
-              <p className="text-slate-300 leading-relaxed mb-6">
-                Vi har analysert de foreslåtte endringene i skattesatser og distriktspolitiske virkemidler. 
-                Her er mulighetsrommet for din bedrift.
-              </p>
-              
-              
-
-              <div className="flex items-center gap-3 text-sm text-slate-400 mt-4">
-                <div className="h-8 w-8 rounded-full bg-slate-700 flex items-center justify-center font-bold">AV</div>
-                <span>Analysert av Averdi-teamet</span>
-              </div>
             </div>
+            <p className="text-slate-600 max-w-2xl text-lg">
+              Selv de beste gjør feil. Her er fellene vi bruker teknologi for å eliminere automatisk.
+            </p>
+          </div>
 
-            <div className="p-8 md:p-12 md:w-3/5 bg-slate-900">
-              <div className="space-y-8">
-                <div className="flex gap-4">
-                  <div className="mt-1 bg-green-500/10 p-2 rounded-lg h-fit">
-                    <TrendingUp className="w-5 h-5 text-green-500" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg text-white mb-1">Rekruttering blir billigere</h3>
-                    <p className="text-slate-400 text-sm leading-relaxed">
-                      Med økt gjeldsslette (60k) og Finnmarksfradrag (45k), øker den ansattes kjøpekraft betraktelig. 
-                      Dette betyr at du kan tilby en svært konkurransedyktig totalpakke uten å øke bruttolønnen tilsvarende.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="mt-1 bg-blue-500/10 p-2 rounded-lg h-fit">
-                    <ShieldCheck className="w-5 h-5 text-blue-500" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg text-white mb-1">Nullsatsen ligger fast</h3>
-                    <p className="text-slate-400 text-sm leading-relaxed">
-                      Arbeidsgiveravgiften i Sone 5 forblir 0%. For en bedrift med 10 millioner i lønnskostnader, 
-                      utgjør dette en direkte besparelse på 1,41 millioner sammenlignet med en konkurrent i Oslo.
-                    </p>
-                  </div>
-                </div>
-              </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x border-slate-100">
+            <div className="p-6 hover:bg-slate-50 transition-colors">
+                <FileText className="w-6 h-6 text-slate-400 mb-3" />
+                <h3 className="font-bold text-slate-900 mb-2">Manuelle Tastefeil</h3>
+                <p className="text-sm text-slate-500">En null for mye eller lite? AI validerer tallene før de bokføres.</p>
+            </div>
+            <div className="p-6 hover:bg-slate-50 transition-colors">
+                <Briefcase className="w-6 h-6 text-slate-400 mb-3" />
+                <h3 className="font-bold text-slate-900 mb-2">Feilklassifisering</h3>
+                <p className="text-sm text-slate-500">Drift eller investering? Vi sikrer at kostnader havner på rett konto.</p>
+            </div>
+            <div className="p-6 hover:bg-slate-50 transition-colors">
+                <Search className="w-6 h-6 text-slate-400 mb-3" />
+                <h3 className="font-bold text-slate-900 mb-2">Glemte Avstemminger</h3>
+                <p className="text-sm text-slate-500">Vi matcher bank mot regnskap i sanntid. Ingen spøkelser i systemet.</p>
+            </div>
+            <div className="p-6 hover:bg-slate-50 transition-colors">
+                <Coins className="w-6 h-6 text-slate-400 mb-3" />
+                <h3 className="font-bold text-slate-900 mb-2">Treig Fakturering</h3>
+                <p className="text-sm text-slate-500">Automatisert oppfølging (AR) sikrer at pengene kommer inn.</p>
+            </div>
+            {/* Row 2 */}
+            <div className="p-6 hover:bg-slate-50 transition-colors border-t border-slate-100">
+                <TrendingUp className="w-6 h-6 text-slate-400 mb-3" />
+                <h3 className="font-bold text-slate-900 mb-2">Avskrivningsrot</h3>
+                <p className="text-sm text-slate-500">Vi automatiserer anleggsregisteret slik at verdiene stemmer.</p>
+            </div>
+            <div className="p-6 hover:bg-slate-50 transition-colors border-t border-slate-100">
+                <Truck className="w-6 h-6 text-slate-400 mb-3" />
+                <h3 className="font-bold text-slate-900 mb-2">Lager-kaos</h3>
+                <p className="text-sm text-slate-500">Overlager binder kapital. Vi gir deg kontroll på vareflyten.</p>
+            </div>
+            <div className="p-6 hover:bg-slate-50 transition-colors border-t border-slate-100">
+                <Database className="w-6 h-6 text-slate-400 mb-3" />
+                <h3 className="font-bold text-slate-900 mb-2">Datatap</h3>
+                <p className="text-sm text-slate-500">Skybaserte backups. Alltid. Vi sikrer dine digitale verdier.</p>
+            </div>
+            <div className="p-6 hover:bg-slate-50 transition-colors border-t border-slate-100">
+                <ShieldCheck className="w-6 h-6 text-slate-400 mb-3" />
+                <h3 className="font-bold text-slate-900 mb-2">DIY-Skatt</h3>
+                <p className="text-sm text-slate-500">Ikke gjør skatt selv. Vår ekspertise + AI sikrer korrekt rapportering.</p>
             </div>
           </div>
         </section>
 
-        {/* --- STATUS-OPPDATERING & SATSER --- */}
-        <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-xl mb-20 shadow-sm">
-          <div className="flex flex-col md:flex-row gap-8">
-            
-            {/* Del 1: Regnskapsmessig Kontroll */}
-            <div className="flex-1">
-              <div className="flex items-center gap-3 mb-3 text-blue-900">
-                <Briefcase className="w-6 h-6 text-blue-600" />
-                <h3 className="font-bold text-lg">Full kontroll på regelverket</h3>
-              </div>
-              <p className="text-blue-800 text-sm mb-4 leading-relaxed">
-                Det finnes unntak og fallgruver, spesielt knyttet til "bagatellstøtte" for transportnæringen og regler for hjemmekontor. 
-                Vi sikrer at din bedrift rapporterer riktig til Skatteetaten.
-              </p>
-              <div className="bg-white p-3 rounded-lg border border-blue-100 inline-block">
-                <span className="text-xs text-slate-500 uppercase font-bold block mb-1">Vårt råd</span>
-                <span className="font-bold text-slate-900">Ta en sone-sjekk på alle ansatte i januar.</span>
-              </div>
+        {/* --- SOLUTION: AI & RAG --- */}
+        <section className="bg-slate-900 text-white rounded-2xl p-8 md:p-12 mb-16 relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-8 opacity-10">
+                <Cpu className="w-48 h-48 text-blue-400" />
             </div>
 
-            {/* Del 2: Nøkkeltall 2026 */}
-            <div className="flex-1 md:border-l md:border-blue-200 md:pl-8">
-              <div className="flex items-center gap-3 mb-3 text-blue-900">
-                <Coins className="w-6 h-6 text-blue-600" />
-                <h3 className="font-bold text-lg">Satser for 2026</h3>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <span className="text-xs text-slate-500 uppercase font-bold block">AGA Sone 5</span>
-                  <McpDataSpan 
-                    id="aga-sone5-2026" 
-                    value="0" 
-                    format="percentage" 
-                    className="font-bold text-xl text-slate-900" 
-                  />
+            <div className="relative z-10 flex flex-col md:flex-row gap-12">
+                <div className="md:w-1/2">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-500/20 text-blue-300 text-xs font-bold uppercase tracking-wider rounded-full mb-6 border border-blue-500/30">
+                        Teknologi
+                    </div>
+                    <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                        Vi bruker AI til å gi deg <span className="text-blue-400">Financial Intelligence</span>
+                    </h2>
+                    <p className="text-slate-300 leading-relaxed mb-6">
+                        Regnskap har tradisjonelt handlet om "hva skjedde i fjor?". Med våre moderne verktøy snur vi fokuset: "Hva skjer i morgen?".
+                    </p>
+                    <ul className="space-y-4">
+                        <li className="flex items-start gap-3">
+                            <Eye className="w-5 h-5 text-blue-400 mt-1" />
+                            <div>
+                                <strong className="block text-white">Regulatory Copilot (RAG)</strong>
+                                <span className="text-slate-400 text-sm">Vi bruker AI til å søke i oppdaterte lovverk umiddelbart. Du får svar på komplekse spørsmål om mva og regelverk på sekunder, ikke dager.</span>
+                            </div>
+                        </li>
+                        <li className="flex items-start gap-3">
+                            <FileText className="w-5 h-5 text-blue-400 mt-1" />
+                            <div>
+                                <strong className="block text-white">Automatisert Rapportering</strong>
+                                <span className="text-slate-400 text-sm">Vi bruker ikke dager på å klippe og lime i Excel. Rapportene dine genereres automatisk, slik at vi kan bruke tiden på å analysere tallene sammen med deg.</span>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-                <div>
-                  <span className="text-xs text-slate-500 uppercase font-bold block">Studielån (Slette)</span>
-                  <McpDataSpan 
-                    id="studielan-sone5-2026" 
-                    value="60 000" 
-                    format="currency" 
-                    className="font-bold text-xl text-green-600" 
-                  />
+
+                <div className="md:w-1/2 bg-slate-800/50 rounded-xl p-6 border border-slate-700 backdrop-blur-sm">
+                    {isak && (
+                        <ExpertInsight
+                            title="Isaks Perspektiv: Tillit til maskinen"
+                            quote="Jeg stoler på at roboten kan telle, men jeg stoler på at jeg selv kan tenke. Vår jobb er å sette opp systemene slik at feil blir umulig, slik at vi kan bruke tiden på å bygge verdi for deg."
+                            expert={isak}
+                            className="bg-transparent border-0 p-0 shadow-none"
+                        />
+                    )}
+                    <div className="mt-6 pt-6 border-t border-slate-700">
+                        <div className="flex items-center justify-between text-sm text-slate-400 mb-2">
+                            <span>Feilrate (Manuelt)</span>
+                            <span className="text-red-400">Høy</span>
+                        </div>
+                        <div className="w-full bg-slate-700 rounded-full h-2 mb-4">
+                            <div className="bg-red-500 h-2 rounded-full w-3/4"></div>
+                        </div>
+
+                        <div className="flex items-center justify-between text-sm text-slate-400 mb-2">
+                            <span>Feilrate (Averdi Hybrid)</span>
+                            <span className="text-green-400">Tilnærmet Null</span>
+                        </div>
+                        <div className="w-full bg-slate-700 rounded-full h-2">
+                            <div className="bg-green-500 h-2 rounded-full w-[2%]"></div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <p className="text-xs text-slate-500 mt-3 italic">
-                * Satser basert på forslag i Statsbudsjettet 2026.
-              </p>
             </div>
+        </section>
 
-          </div>
-        </div>
-
-        {/* --- DIGITALE VERKTØY (NY SEKSJON) --- */}
-        <h2 className="text-3xl font-bold text-slate-900 mb-8">Verktøykasse for ledere</h2>
+        {/* --- NAVIGATION GRID --- */}
+        <h2 className="text-3xl font-bold text-slate-900 mb-8">Utforsk våre verktøy</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24">
           
-          {/* VERKTØY: KALKULATOREN */}
           <LocalCategoryCard 
             title="Innsatssonekalkulatoren"
-            description="Interaktivt verktøy: Se hvor mye du sparer på å flytte bedriften eller ansette i nord. Beregner AGA og ansatt-gevinst."
+            description="Se hvor mye du sparer på 0% AGA. En perfekt demonstrasjon av hvordan data gir beslutningsstøtte."
             href="/kunnskapsbank/bedrifter/tiltakssonen" 
             icon={Calculator}
             theme="blue"
           />
 
-          {/* ARTIKKEL: REKRUTTERING */}
           <LocalCategoryCard 
-            title="Rekrutteringspakken 2026"
-            description="Slik bruker du de nye reglene for studielån og skatt som et våpen i kampen om talentene."
+            title="Rekruttering & Lønn"
+            description="Automatiserte lønnssystemer som håndterer Finnmarksfradraget og reiseutgifter korrekt."
             href="/kunnskapsbank/bedrifter/rekruttering" 
             icon={Users}
             theme="blue"
           />
 
-          {/* ARTIKKEL: TRANSPORT/REGLER */}
           <LocalCategoryCard 
-            title="Transport & Bagatellstøtte"
-            description="Unntaksreglene du må kjenne til. Slik unngår du straffeskatt hvis du driver med godstransport."
+            title="Skatt & Regler"
+            description="RAG-teknologi gir oss svarene på komplekse spørsmål om transportstøtte og bagatellmessig støtte."
             href="/kunnskapsbank/bedrifter/transport" 
             icon={Truck}
-            theme="blue"
-          />
-
-          {/* ARTIKKEL: INNOVASJON NORGE */}
-          <LocalCategoryCard 
-            title="Arktiske Midler"
-            description="Slik kombinerer du 0% AGA med investeringsstøtte fra Innovasjon Norge Arktis."
-            href="/kunnskapsbank/bedrifter/innovasjon-norge" 
-            icon={Building2}
             theme="blue"
           />
 
@@ -269,31 +279,8 @@ export default function BedriftHub() {
 
         {/* FAQ Section */}
         <div className="max-w-3xl mx-auto mb-20">
-          <h2 className="text-2xl font-bold text-slate-900 mb-6 text-center">Spørsmål om Sone 5</h2>
+          <h2 className="text-2xl font-bold text-slate-900 mb-6 text-center">Spørsmål om Digital Økonomi</h2>
           <FaqAccordion items={bedriftFaq} themeColor="#2563EB" />
-        </div>
-
-        {/* --- KILDER & AUTORITET --- */}
-        <div className="border-t border-slate-200 pt-8 pb-4 mt-20">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-xs text-slate-500">
-            <div className="flex items-start gap-3 max-w-2xl">
-              <BookOpen className="w-5 h-5 text-slate-400 flex-shrink-0 mt-0.5" />
-              <div>
-                <p className="font-semibold text-slate-700 mb-1">Offisielt Regelverk</p>
-                <p>
-                  Beregninger og satser er hentet fra <strong>Statsbudsjettet 2026</strong> (Prop. 1 S) og Skatteetatens gjeldende satser for arbeidsgiveravgift.
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a href="https://www.skatteetaten.no/bedrift-og-organisasjon/arbeidsgiver/arbeidsgiveravgift/soner/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-blue-600 transition-colors">
-                Sonekart (Skatteetaten) <ExternalLink className="w-3 h-3" />
-              </a>
-              <a href="https://www.regjeringen.no/no/statsbudsjett/2026/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-blue-600 transition-colors">
-                Statsbudsjettet 2026 <ExternalLink className="w-3 h-3" />
-              </a>
-            </div>
-          </div>
         </div>
 
       </div>
