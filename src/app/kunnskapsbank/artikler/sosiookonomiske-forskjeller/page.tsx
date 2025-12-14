@@ -20,7 +20,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import { AverdiBackground } from '@/components/modules/AverdiBackground';
 import { getExpert } from '@/data/experts';
-import logoThumb from '/mnt/data/logo_thumbail.avif';
+import logoThumb from '@/assets/logo_averdi.png';
 
 // Brand colours (Averdi)
 const BRAND = {
@@ -48,7 +48,7 @@ const SAMPLE_POSTS: Post[] = [
     timestamp: '12. des 2025',
     likes: 124,
     comments: 8,
-    image: '/mnt/data/logo_thumbail.avif',
+    image: '/assets/logo_thumbnail.avif',
   },
   {
     id: 'p2',
