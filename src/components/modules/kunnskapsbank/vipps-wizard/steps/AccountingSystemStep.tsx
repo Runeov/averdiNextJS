@@ -57,3 +57,4 @@ export function AccountingSystemStep({ config, updateConfig }: Props) {
     </div>
   );
 }
+

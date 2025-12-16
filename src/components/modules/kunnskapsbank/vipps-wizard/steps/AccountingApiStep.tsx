@@ -1,5 +1,6 @@
 import React from 'react';
 import { WizardConfig } from '../types';
+import { AccountingCredentialsGuide } from '../guides';
 
 interface Props {
   config: WizardConfig;
@@ -15,6 +16,12 @@ export function AccountingApiStep({ config, updateConfig }: Props) {
         </h2>
         <p className="text-gray-600">Configure API authentication</p>
       </div>
+
+      {/* How-to Guide - Expandable */}
+      <AccountingCredentialsGuide
+        system={config.accountingSystem}
+        integrationPartner={config.integrationPartner}
+      />
 
       <div className="space-y-4">
         <div>
@@ -46,3 +53,4 @@ export function AccountingApiStep({ config, updateConfig }: Props) {
     </div>
   );
 }
+

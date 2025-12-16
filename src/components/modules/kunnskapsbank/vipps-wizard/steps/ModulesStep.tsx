@@ -20,7 +20,7 @@ export function ModulesStep({ config, modules, toggleModule }: Props) {
         {modules.map((module) => {
           const Icon = module.icon;
           const isSelected = config.modules.includes(module.id) || module.required;
-          
+
           return (
             <button
               key={module.id}
@@ -56,3 +56,4 @@ export function ModulesStep({ config, modules, toggleModule }: Props) {
     </div>
   );
 }
+

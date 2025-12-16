@@ -63,3 +63,4 @@ export function OrganizationInfoStep({ config, updateConfig }: Props) {
     </div>
   );
 }
+

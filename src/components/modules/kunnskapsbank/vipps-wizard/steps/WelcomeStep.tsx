@@ -11,7 +11,7 @@ export function WelcomeStep() {
         <h2 className="text-3xl font-bold text-gray-900 mb-3">Vipps MobilePay Integration Setup</h2>
         <p className="text-lg text-gray-600">Complete integration in 10 minutes</p>
       </div>
-      
+
       <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
         <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
           <Info className="w-5 h-5 text-blue-600" />
@@ -35,3 +35,4 @@ export function WelcomeStep() {
     </div>
   );
 }
+

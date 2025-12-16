@@ -7,3 +7,4 @@ export { VippsCredentialsStep } from './VippsCredentialsStep';
 export { AccountingApiStep } from './AccountingApiStep';
 export { AccountMappingStep } from './AccountMappingStep';
 export { CompleteStep } from './CompleteStep';
+

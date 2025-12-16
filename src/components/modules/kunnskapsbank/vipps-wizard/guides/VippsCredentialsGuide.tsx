@@ -23,7 +23,7 @@ export function VippsCredentialsGuide() {
 
       {isOpen && (
         <div className="px-6 py-6 bg-white border-t border-blue-200 space-y-6">
-          
+
           {/* Step 1 */}
           <div className="space-y-3">
             <div className="flex items-start gap-3">
@@ -35,9 +35,9 @@ export function VippsCredentialsGuide() {
                 <div className="bg-gray-50 p-4 rounded-lg space-y-2 text-sm">
                   <p className="text-gray-700">
                     <strong>URL:</strong>{' '}
-                    <a 
-                      href="https://portal.vippsmobilepay.com" 
-                      target="_blank" 
+                    <a
+                      href="https://portal.vippsmobilepay.com"
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 hover:underline inline-flex items-center gap-1"
                     >
@@ -50,7 +50,7 @@ export function VippsCredentialsGuide() {
                   </p>
                   <div className="bg-yellow-50 border-l-4 border-yellow-400 p-3 mt-2">
                     <p className="text-yellow-800 text-xs">
-                      <strong>⚠️ Viktig:</strong> Ikke bruk den gamle portalen (portal.vipps.no). 
+                      <strong>⚠️ Viktig:</strong> Ikke bruk den gamle portalen (portal.vipps.no).
                       Den nye portalen er portal.vippsmobilepay<strong>.com</strong>
                     </p>
                   </div>
@@ -78,7 +78,7 @@ export function VippsCredentialsGuide() {
                   <div className="bg-blue-50 border border-blue-200 p-3 rounded mt-2">
                     <p className="text-blue-800 text-xs">
                       <Key className="w-4 h-4 inline mr-1" />
-                      <strong>Tips:</strong> Organisasjonsnummeret ditt vises øverst på siden. 
+                      <strong>Tips:</strong> Organisasjonsnummeret ditt vises øverst på siden.
                       Verifiser at det stemmer med det du skrev i forrige steg.
                     </p>
                   </div>
@@ -139,7 +139,7 @@ export function VippsCredentialsGuide() {
                       Dette er en UUID (universally unique identifier) i formatet xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
                     </p>
                   </div>
-                  <button 
+                  <button
                     className="text-blue-600 hover:underline text-xs flex items-center gap-1"
                     onClick={() => navigator.clipboard.writeText('Client ID kopieres med "Copy" knappen i portalen')}
                   >
@@ -166,7 +166,7 @@ export function VippsCredentialsGuide() {
                   <p className="text-gray-700">
                     <strong>Client Secret</strong> er IKKE synlig i portalen av sikkerhetshensyn.
                   </p>
-                  
+
                   <div className="bg-red-50 border-l-4 border-red-500 p-3 space-y-2">
                     <p className="text-red-900 font-semibold">🔒 Viktig sikkerhetsinformasjon:</p>
                     <ul className="list-disc list-inside space-y-1 text-red-800 text-xs ml-2">
@@ -188,7 +188,7 @@ export function VippsCredentialsGuide() {
 
                   <div className="bg-yellow-50 border border-yellow-300 p-3 rounded mt-2">
                     <p className="text-yellow-800 text-xs">
-                      <strong>Best practice:</strong> Lagre Client Secret i en passordmanager (1Password, LastPass, Bitwarden) 
+                      <strong>Best practice:</strong> Lagre Client Secret i en passordmanager (1Password, LastPass, Bitwarden)
                       med en gang du får den.
                     </p>
                   </div>
@@ -221,7 +221,7 @@ export function VippsCredentialsGuide() {
                   </div>
                   <div className="bg-blue-50 border border-blue-200 p-3 rounded">
                     <p className="text-blue-800 text-xs">
-                      <strong>Hvis du har flere salgssteder:</strong> Du vil ha et MSN per salgssted. 
+                      <strong>Hvis du har flere salgssteder:</strong> Du vil ha et MSN per salgssted.
                       Velg det som matcher hovedenheten din. Du kan legge til flere senere.
                     </p>
                   </div>
@@ -244,7 +244,7 @@ export function VippsCredentialsGuide() {
                   <p className="text-gray-700">
                     Hvis du skal bruke Report API (for å hente oppgjørsrapporter), trenger du også en <strong>Subscription Key</strong>.
                   </p>
-                  
+
                   <div className="bg-blue-50 p-3 rounded space-y-2">
                     <p className="text-blue-900 font-semibold text-xs">Hvor finner jeg denne?</p>
                     <ol className="list-decimal list-inside space-y-1 text-blue-800 text-xs ml-2">
@@ -285,7 +285,7 @@ export function VippsCredentialsGuide() {
               <li className="flex items-start gap-2">
                 <span className="font-bold">❌</span>
                 <div>
-                  <strong>Mangler tilgang:</strong> Hvis du ikke ser "Developer" i menyen, mangler du utvikler-tilgang. 
+                  <strong>Mangler tilgang:</strong> Hvis du ikke ser "Developer" i menyen, mangler du utvikler-tilgang.
                   Kontakt personen som administrerer Vipps-kontoen i organisasjonen din.
                 </div>
               </li>
@@ -311,8 +311,8 @@ export function VippsCredentialsGuide() {
               Hvis du står fast eller ikke finner nøklene dine:
             </p>
             <div className="space-y-2 text-sm">
-              <a 
-                href="https://developer.vippsmobilepay.com/docs/knowledge-base/portal/" 
+              <a
+                href="https://developer.vippsmobilepay.com/docs/knowledge-base/portal/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-green-700 hover:underline"
@@ -320,8 +320,8 @@ export function VippsCredentialsGuide() {
                 <ExternalLink className="w-4 h-4" />
                 Offisiell Vipps dokumentasjon om portalen
               </a>
-              <a 
-                href="mailto:support@averdi.no" 
+              <a
+                href="mailto:support@averdi.no"
                 className="flex items-center gap-2 text-green-700 hover:underline"
               >
                 <Key className="w-4 h-4" />
@@ -335,3 +335,4 @@ export function VippsCredentialsGuide() {
     </div>
   );
 }
+

@@ -74,3 +74,4 @@ export function VippsCredentialsStep({ config, updateConfig }: Props) {
     </div>
   );
 }
+

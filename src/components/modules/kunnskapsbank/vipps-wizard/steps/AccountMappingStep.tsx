@@ -68,3 +68,4 @@ export function AccountMappingStep({ config, updateNested }: Props) {
     </div>
   );
 }
+

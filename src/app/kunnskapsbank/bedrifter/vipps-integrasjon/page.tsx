@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft, Info, CheckCircle2, AlertCircle } from 'lucide-react';
 import { AverdiBackground } from '@/components/modules/AverdiBackground';
-import { VippsSetupWizard } from '@/components/modules/kunnskapsbank/VippsSetupWizard';
+import { VippsSetupWizard } from '@/components/modules/kunnskapsbank/vipps-wizard'
 import { FaqAccordion } from '@/components/ui/FaqAccordion';
 
 export const metadata: Metadata = {

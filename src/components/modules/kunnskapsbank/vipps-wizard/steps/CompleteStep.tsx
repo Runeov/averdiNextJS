@@ -10,11 +10,11 @@ interface Props {
   sendToAverdi: () => void;
 }
 
-export function CompleteStep({ 
-  config, 
-  generateConfigFile, 
-  generateImplementationGuide, 
-  sendToAverdi 
+export function CompleteStep({
+  config,
+  generateConfigFile,
+  generateImplementationGuide,
+  sendToAverdi
 }: Props) {
   return (
     <div className="space-y-6">
@@ -74,3 +74,4 @@ export function CompleteStep({
     </div>
   );
 }
+

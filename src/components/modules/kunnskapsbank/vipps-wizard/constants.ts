@@ -62,6 +62,14 @@ export const integrationPartners: IntegrationPartner[] = [
     url: 'https://smnregnskap.no'
   },
   {
+    id: 'emonkey',
+    name: 'Emonkey',
+    description: 'Middleware / integration partner for Vipps settlement import',
+    features: ['Daily settlement import', 'Automated posting', 'Reconciliation support'],
+    pricing: 'Contact Emonkey',
+    url: 'https://emonkey.no'
+  },
+  {
     id: 'direct',
     name: 'Direct Integration',
     description: 'Build your own integration using APIs',

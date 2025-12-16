@@ -36,7 +36,7 @@ export function IntegrationPartnerStep({ config, updateConfig, integrationPartne
                 <Check className="w-6 h-6 text-orange-500 flex-shrink-0" />
               )}
             </div>
-            
+
             <div className="mt-3 pt-3 border-t border-gray-200">
               <span className="text-sm font-medium text-gray-700">Pricing: {partner.pricing}</span>
             </div>
@@ -46,3 +46,4 @@ export function IntegrationPartnerStep({ config, updateConfig, integrationPartne
     </div>
   );
 }
+
