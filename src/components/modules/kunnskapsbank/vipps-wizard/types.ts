@@ -1,4 +1,4 @@
-// Types for VippsSetupWizard
+import { LucideIcon } from 'lucide-react';
 
 export interface WizardConfig {
   accountingSystem: string;
@@ -13,38 +13,32 @@ export interface WizardConfig {
   accountingApiKey: string;
   accountingApiSecret: string;
   integrationPartner: string;
-  accounts: AccountsConfig;
-  mvaSettings: MvaSettings;
-  features: FeaturesConfig;
-}
-
-export interface AccountsConfig {
-  vippsInterim: string;
-  bankAccount: string;
-  salesIncome: string;
-  salesIncomeMVA: string;
-  fees: string;
-  roundingDiff: string;
-}
-
-export interface MvaSettings {
-  enabled: boolean;
-  threshold: number;
-  defaultCode: string;
-}
-
-export interface FeaturesConfig {
-  autoBooking: boolean;
-  eFaktura: boolean;
-  ocrEnabled: boolean;
-  loginWithVipps: boolean;
+  accounts: {
+    vippsInterim: string;
+    bankAccount: string;
+    salesIncome: string;
+    salesIncomeMVA: string;
+    fees: string;
+    roundingDiff: string;
+  };
+  mvaSettings: {
+    enabled: boolean;
+    threshold: number;
+    defaultCode: string;
+  };
+  features: {
+    autoBooking: boolean;
+    eFaktura: boolean;
+    ocrEnabled: boolean;
+    loginWithVipps: boolean;
+  };
 }
 
 export interface Module {
   id: string;
   name: string;
   description: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: LucideIcon;
   apis: string[];
   vippsProduct?: string;
   required?: boolean;
@@ -80,4 +74,6 @@ export interface CompleteStepProps extends StepProps {
   generateConfigFile: () => void;
   generateImplementationGuide: () => void;
   sendToAverdi: () => void;
+  troubleshootingOpen: boolean;
+  setTroubleshootingOpen: (open: boolean) => void;
 }
