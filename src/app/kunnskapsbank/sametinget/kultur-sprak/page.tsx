@@ -251,7 +251,7 @@ export default function KulturSprakPage() {
                 Går du i pluss, får du ingenting. Dette krever presis budsjettering.
             </p>
             
-          {/* NY DESIGN PÅ SPRÅKPLAN-SEKSJONEN */}
+            {/* NY DESIGN PÅ SPRÅKPLAN-SEKSJONEN */}
             <div className="bg-blue-50 border border-blue-100 rounded-2xl p-8 relative overflow-hidden">
                 <div className="absolute top-0 right-0 p-6 opacity-10">
                 <Languages className="w-32 h-32 text-blue-600" />
@@ -298,7 +298,7 @@ export default function KulturSprakPage() {
             </div>
             </div>
 
-            {/* CTA Component - Mørk stil med Vertikal Layout (Tekst over knapper) */}
+            {/* CTA Component */}
             <LocalCtaBlock
             title="Skal dere søke i år?"
             description="Vi kan ta rollen som prosjektøkonom i søknaden. Da vet Sametinget at budsjett, regnskap og rapportering blir håndtert profesjonelt."

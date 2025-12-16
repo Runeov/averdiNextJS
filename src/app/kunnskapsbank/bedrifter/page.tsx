@@ -12,7 +12,8 @@ import {
   ExternalLink,
   Users,
   Building2,
-  FileText
+  FileText,
+  Settings
 } from 'lucide-react';
 import { McpDataSpan } from '@/components/ui/McpDataSpan';
 import { AverdiBackground } from '@/components/modules/AverdiBackground';
@@ -244,6 +245,15 @@ export default function BedriftHub() {
             description="Slik bruker du de nye reglene for studielån og skatt som et våpen i kampen om talentene."
             href="/kunnskapsbank/bedrifter/rekruttering" 
             icon={Users}
+            theme="blue"
+          />
+
+          {/* VERKTØY: VIPPS INTEGRASJON */}
+          <LocalCategoryCard 
+            title="Vipps Integrasjonsguide"
+            description="Interaktiv oppsett av Vipps MobilePay med PowerOffice Go. Automatiser bokføring av oppgjør, gebyrer og MVA."
+            href="/kunnskapsbank/bedrifter/vipps-integrasjon" 
+            icon={Settings}
             theme="blue"
           />
 
