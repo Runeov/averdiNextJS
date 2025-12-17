@@ -20,6 +20,52 @@ export function VippsSetupWizard() {
   const [step, setStep] = useState(0);
   const [config, setConfig] = useState<WizardConfig>(initialConfig);
 
+  const buildConfigData = (cfg: WizardConfig) => {
+    return {
+      version: '2.0',
+      metadata: {
+        created: new Date().toISOString(),
+        wizard: 'Vipps-PowerOffice Integration Setup'
+      },
+      company: {
+        name: cfg.companyName,
+        orgNumber: cfg.orgNumber,
+        type: cfg.organizationType
+      },
+      vipps: {
+        clientId: cfg.integrationPartner === 'emonkey' ? 'HANDLED_BY_EMONKEY' : cfg.vippsClientId,
+        merchantSerialNumber: cfg.vippsMerchantSerialNumber,
+        subscriptionKey: cfg.integrationPartner === 'emonkey'
+          ? 'NOT_REQUIRED_FOR_EMONKEY'
+          : (cfg.vippsSubscriptionKey || 'NOT_PROVIDED'),
+        environment: 'production',
+        apiVersion: 'v2',
+        products: modules
+          .filter(m => cfg.modules.includes(m.id) || m.required)
+          .map(m => m.vippsProduct)
+          .filter(Boolean)
+      },
+      accounting: {
+        system: cfg.accountingSystem,
+        integrationPartner: cfg.integrationPartner,
+        accounts: cfg.accounts,
+        mva: cfg.mvaSettings,
+        features: cfg.features
+      },
+      modules: cfg.modules,
+      authentication: {
+        vipps: {
+          method: 'OAuth 2.0',
+          tokenEndpoint: 'https://api.vipps.no/accesstoken/get'
+        },
+        poweroffice: {
+          method: 'OAuth 2.0 Client Credentials',
+          tokenEndpoint: 'https://goapi.poweroffice.net/OAuth/Token'
+        }
+      }
+    };
+  };
+
   const normalizePartnerConfirmation = (value: string) => {
     return value
       .trim()
@@ -76,7 +122,7 @@ export function VippsSetupWizard() {
           ? !!(config.vippsMerchantSerialNumber && isPartnerConfirmed)
           : !!(config.vippsClientId && config.vippsClientSecret && config.vippsMerchantSerialNumber);
         }
-      case 6: return !!(config.accountingApiKey && config.accountingApiSecret);
+      case 6: return !!config.accountingApiSecret; // Only Client Key required now
       case 7: return true;
       case 8: return true;
       default: return true;
@@ -85,47 +131,7 @@ export function VippsSetupWizard() {
 
   // File generation functions
   const generateConfigFile = () => {
-    const configData = {
-      version: '2.0',
-      metadata: {
-        created: new Date().toISOString(),
-        wizard: 'Vipps-PowerOffice Integration Setup'
-      },
-      company: {
-        name: config.companyName,
-        orgNumber: config.orgNumber,
-        type: config.organizationType
-      },
-      vipps: {
-        clientId: config.integrationPartner === 'emonkey' ? 'HANDLED_BY_EMONKEY' : config.vippsClientId,
-        merchantSerialNumber: config.vippsMerchantSerialNumber,
-        subscriptionKey: config.integrationPartner === 'emonkey'
-          ? 'NOT_REQUIRED_FOR_EMONKEY'
-          : (config.vippsSubscriptionKey || 'NOT_PROVIDED'),
-        environment: 'production',
-        apiVersion: 'v2',
-        products: modules.filter(m => config.modules.includes(m.id) || m.required)
-          .map(m => m.vippsProduct).filter(Boolean)
-      },
-      accounting: {
-        system: config.accountingSystem,
-        integrationPartner: config.integrationPartner,
-        accounts: config.accounts,
-        mva: config.mvaSettings,
-        features: config.features
-      },
-      modules: config.modules,
-      authentication: {
-        vipps: {
-          method: 'OAuth 2.0',
-          tokenEndpoint: 'https://api.vipps.no/accesstoken/get'
-        },
-        poweroffice: {
-          method: 'OAuth 2.0 Client Credentials',
-          tokenEndpoint: 'https://goapi.poweroffice.net/OAuth/Token'
-        }
-      }
-    };
+    const configData = buildConfigData(config);
 
     const blob = new Blob([JSON.stringify(configData, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -134,6 +140,17 @@ export function VippsSetupWizard() {
     a.download = `vipps-integration-${config.orgNumber}-${Date.now()}.json`;
     a.click();
     URL.revokeObjectURL(url);
+  };
+
+  // Demo helper: store JSON in localStorage and open the example page.
+  const openExampleJson = () => {
+    const configData = buildConfigData(config);
+    const json = JSON.stringify(configData, null, 2);
+
+    localStorage.setItem('vippsWizardConfigJson', json);
+    localStorage.setItem('vippsWizardConfigJsonUpdatedAt', new Date().toISOString());
+
+    window.open('/kunnskapsbank/bedrifter/vipps-integrasjon/example-json', '_blank', 'noopener,noreferrer');
   };
 
   const generateImplementationGuide = () => {
@@ -203,7 +220,7 @@ Best regards`;
       component: (
         <CompleteStep
           config={config}
-          generateConfigFile={generateConfigFile}
+          openExampleJson={openExampleJson}
           generateImplementationGuide={generateImplementationGuide}
           sendToAverdi={sendToAverdi}
         />
@@ -292,19 +309,15 @@ CLIENT INFORMATION
 Organization: ${config.companyName}
 Org. Number: ${config.orgNumber}
 Type: ${config.organizationType}
-Contact Email: [TO BE FILLED BY CLIENT]
-Contact Phone: [TO BE FILLED BY CLIENT]
 
 INTEGRATION CONFIGURATION
 --------------------------
 Accounting System: ${config.accountingSystem === 'poweroffice' ? 'PowerOffice Go' : '24SevenOffice'}
 Integration Partner: ${partner?.name || config.integrationPartner}
-MVA Enabled: ${config.mvaSettings.enabled ? 'Yes' : 'No'}
-${config.mvaSettings.enabled ? `MVA Threshold: ${config.mvaSettings.threshold.toLocaleString('nb-NO')} NOK\nDefault MVA Code: ${config.mvaSettings.defaultCode}` : ''}
 
 ACTIVE MODULES
 --------------
-${activeModules.map(m => `• ${m.name}\n  Vipps Product: ${m.vippsProduct || 'N/A'}\n  APIs Used: ${m.apis.join(', ')}`).join('\n')}
+${activeModules.map(m => `• ${m.name}`).join('\n')}
 
 ACCOUNT MAPPING (NS 4102)
 --------------------------
@@ -315,199 +328,20 @@ Sales Income (VAT 25%): ${config.accounts.salesIncomeMVA}
 Bank & Card Fees: ${config.accounts.fees}
 Rounding Differences: ${config.accounts.roundingDiff}
 
-FEATURES ENABLED
-----------------
-✓ Automatic Booking: ${config.features.autoBooking ? 'Yes' : 'No'}
-✓ Vipps eFaktura: ${config.features.eFaktura ? 'Yes' : 'No'}
-✓ OCR Payment Matching: ${config.features.ocrEnabled ? 'Yes' : 'No'}
-✓ Login with Vipps: ${config.features.loginWithVipps ? 'Yes' : 'No'}
-
-VIPPS API CREDENTIALS (SECURE - HANDLE WITH CARE)
+VIPPS API CREDENTIALS
 --------------------------------------------------
-Client ID: ${config.integrationPartner === 'emonkey' ? '[HANDLED BY EMONKEY]' : config.vippsClientId}
 Merchant Serial Number (MSN): ${config.vippsMerchantSerialNumber}
-Client Secret: ${config.integrationPartner === 'emonkey' ? '[HANDLED BY EMONKEY]' : '[REDACTED - See encrypted config file]'}
-Subscription Key: ${config.integrationPartner === 'emonkey' ? '[NOT REQUIRED]' : (config.vippsSubscriptionKey ? '[PROVIDED]' : '[NOT PROVIDED]')}
 
-Portal: https://portal.vippsmobilepay.com
-Environment: Production
-API Version: v2 (ePayment API)
-
-${config.accountingSystem === 'poweroffice' ? `
-POWEROFFICE GO API CREDENTIALS
+POWEROFFICE GO
 ------------------------------
-Application Key: ${config.accountingApiKey}
 Client Key: [REDACTED - See encrypted config file]
-Token Endpoint: https://goapi.poweroffice.net/OAuth/Token
-Authorization Method: OAuth 2.0 Client Credentials Grant
-
-Extensions Path: Menu > Settings > Extensions
-` : `
-24SEVENOFFICE API CREDENTIALS
------------------------------
-API Key: ${config.accountingApiKey}
-API Secret: [REDACTED - See encrypted config file]
-`}
-
-IMPLEMENTATION CHECKLIST FOR AVERDI ACCOUNTING
------------------------------------------------
-□ Step 1: Verify Signing Authority
-  - Client has BankID
-  - Client has signing authority (check Brønnøysund)
-  - If sports club: Check if board fullmakt/prokura is needed
-
-□ Step 2: Vipps Portal Setup
-  - Client logs into portal.vippsmobilepay.com
-  - Verify organization number ${config.orgNumber}
-  - Activate required products: ${activeModules.map(m => m.vippsProduct).filter(Boolean).join(', ')}
-  ${config.integrationPartner === 'emonkey'
-    ? '- Add eMonkey as Regnskapspartner and note MSN'
-    : '- Generate/verify API keys match configuration'}
-
-□ Step 3: Accounting System Setup
-  - Verify ${config.accountingSystem === 'poweroffice' ? 'PowerOffice Go' : '24SevenOffice'} account is active
-  - Create/verify account codes: ${Object.values(config.accounts).join(', ')}
-  ${config.features.eFaktura ? '  - Activate AutoPay and OCR in bank settings' : ''}
-  ${config.features.ocrEnabled ? '  - Configure OCR payment matching' : ''}
-
-□ Step 4: Integration Partner Setup (${partner?.name})
-  - Contact ${partner?.name} with this configuration
-  - Provide both JSON config file and this guide
-  - Complete OAuth authorization flow:
-    * Vipps Portal authorization
-    * ${config.accountingSystem === 'poweroffice' ? 'PowerOffice Go Extensions approval' : '24SevenOffice API approval'}
-  - Map Vipps sales units to accounting accounts
-  ${config.mvaSettings.enabled ? '  - Configure MVA code mapping per transaction type' : ''}
-
-□ Step 5: Testing Phase
-  - Perform test transaction (minimum 10 NOK)
-  - Verify transaction appears in ${config.accountingSystem === 'poweroffice' ? 'PowerOffice Go' : '24SevenOffice'}
-  - Check account ${config.accounts.vippsInterim} receives debit
-  - Wait for settlement (T+2/T+3 days)
-  - Verify settlement to account ${config.accounts.bankAccount}
-  - Confirm account ${config.accounts.vippsInterim} balances to zero
-  - Verify fees posted to account ${config.accounts.fees}
-
-□ Step 6: Go-Live Preparation
-  - Document access credentials in secure password manager
-  - Set up monthly reconciliation routine for account ${config.accounts.vippsInterim}
-  - Schedule training session with client treasurer/kasserer
-  - Provide troubleshooting guide to client
-  - Set calendar reminder for API key rotation (annual)
-
-□ Step 7: Post-Implementation
-  - Monitor first week of transactions daily
-  - Perform first month-end reconciliation together with client
-  - Address any MVA questions before first VAT report
-  - Document any client-specific customizations
-
-MONTHLY RECONCILIATION PROCEDURE
----------------------------------
-Account ${config.accounts.vippsInterim} should balance to ZERO at month-end.
-
-If DEBIT balance exists:
-  → Check if sales near month-end (settlement in next month - OK)
-  → Verify all bank receipts are posted
-  → Review Vipps settlement report for missing transactions
-
-If CREDIT balance exists:
-  → Check for duplicate postings
-  → Verify bank receipt wasn't posted twice
-  → Review integration logs for errors
-
-Acceptable rounding differences (< 5 kr) → Post to account ${config.accounts.roundingDiff}
-
-TYPICAL TRANSACTION FLOW
--------------------------
-Day 1 (Saturday): 
-  - Customer pays 100 kr for vaffel in kiosk
-  - Vipps registers transaction
-
-Day 3 (Monday):
-  - Vipps generates settlement report
-  - Middleware (${partner?.name}) fetches report at 06:00
-  - Booking posted in ${config.accountingSystem === 'poweroffice' ? 'PowerOffice Go' : '24SevenOffice'}:
-    Debit ${config.accounts.vippsInterim}: 100.00 kr
-    Credit ${config.accounts.salesIncome}: 100.00 kr
-
-Day 5 (Wednesday):
-  - Vipps pays out to bank (98.25 kr after 1.75 kr fee)
-  - Booking posted:
-    Debit ${config.accounts.bankAccount}: 98.25 kr
-    Debit ${config.accounts.fees}: 1.75 kr
-    Credit ${config.accounts.vippsInterim}: 100.00 kr
-
-Result: Account ${config.accounts.vippsInterim} = 0 kr (balanced)
 
 CONTACT INFORMATION
 -------------------
-Vipps Support: https://vippsmobilepay.com/support
-${config.accountingSystem === 'poweroffice' ? 'PowerOffice Support: https://www.poweroffice.no/support' : '24SevenOffice Support: https://24sevenoffice.com/support'}
-${partner ? `${partner.name}: ${partner.url || '[Contact via accounting software]'}` : ''}
 Averdi Accounting: support@averdi.no
-Phone: +47 907 67 993
-
-SECURITY NOTES
---------------
-⚠️ CRITICAL: This document contains sensitive information
-- Store in encrypted location
-- Never send unencrypted via email
-- Rotate API keys annually or when staff changes
-- Revoke access immediately if security breach suspected
-- Client Secret and API keys redacted from this document - see encrypted JSON file
-
-GDPR COMPLIANCE
----------------
-${config.integrationPartner !== 'direct' ? `- Databehandleravtale (DPA) with ${partner?.name} required` : '- Direct integration: Client is data controller'}
-- Personal data minimization: Only process necessary transaction data
-${config.modules.includes('donations') || config.modules.includes('pos') ? '- For kiosk/donations: Consider anonymizing customer data where names not required' : ''}
-${config.features.loginWithVipps ? '- Login with Vipps: Additional consent required from members' : ''}
-- Document retention: Settlement reports as accounting source documentation
-
-TROUBLESHOOTING QUICK REFERENCE
---------------------------------
-Problem: Transactions not appearing
-→ Check: Integration partner dashboard for errors
-→ Action: Use "Retry" button if import failed
-
-Problem: Account ${config.accounts.vippsInterim} doesn't balance
-→ Check: Bank statement for Vipps payout
-→ Action: Compare with Vipps settlement report line by line
-
-Problem: Wrong MVA code
-→ Check: Integration default settings
-→ Action: Specify MVA code per transaction type
-
-Problem: Integration stopped working
-→ Check: Vipps Portal > Developer > API Keys status
-→ Action: Re-authorize in PowerOffice Extensions
-
-For detailed troubleshooting: Contact support@averdi.no
-
-ESTIMATED TIMELINE
-------------------
-Day 1-2:   Averdi reviews configuration
-Day 3-5:   Technical setup and OAuth authorizations
-Day 6-7:   Testing phase with client
-Day 8-10:  Go-live and monitoring
-Week 2-4:  First month-end reconciliation support
-
-PRICING REFERENCE (Estimated)
-------------------------------
-Vipps Transaction Fees: ${config.modules.includes('pos') ? '1.75%' : '2.99%'} + ${config.modules.includes('pos') ? '0 kr' : '1 kr'} per transaction
-Integration Partner (${partner?.name}): ${partner?.pricing}
-PowerOffice Go: Per bilag/transaction pricing
-Total Monthly: Typically ${partner?.pricing === '150-500 kr/month' ? '500-1000' : '300-800'} kr for small to medium organizations
 
 ==============================================================================
-END OF IMPLEMENTATION GUIDE
-
 Generated by Vipps Integration Setup Wizard v2.0
-For: ${config.companyName} (${config.orgNumber})
-Date: ${new Date().toISOString()}
-
-This guide should be used together with the JSON configuration file.
-Send this TXT file via email, but send JSON file via secure channel only.
 ==============================================================================
 `;
 }

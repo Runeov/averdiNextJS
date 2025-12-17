@@ -1,18 +1,18 @@
 import React from 'react';
-import { Check, Download } from 'lucide-react';
+import { Check, Download, ExternalLink } from 'lucide-react';
 import { WizardConfig } from '../types';
 import { TroubleshootingGuide } from '../guides';
 
 interface Props {
   config: WizardConfig;
-  generateConfigFile: () => void;
+  openExampleJson: () => void;
   generateImplementationGuide: () => void;
   sendToAverdi: () => void;
 }
 
 export function CompleteStep({
   config,
-  generateConfigFile,
+  openExampleJson,
   generateImplementationGuide,
   sendToAverdi
 }: Props) {
@@ -46,11 +46,11 @@ export function CompleteStep({
 
       <div className="space-y-3">
         <button
-          onClick={generateConfigFile}
+          onClick={openExampleJson}
           className="w-full bg-orange-500 hover:bg-orange-600 text-white px-6 py-4 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
         >
-          <Download className="w-5 h-5" />
-          Download Configuration File (JSON)
+          <ExternalLink className="w-5 h-5" />
+          Open Demo Config (ExampleOfJson.html)
         </button>
 
         <button
