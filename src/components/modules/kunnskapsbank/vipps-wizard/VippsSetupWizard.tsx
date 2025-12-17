@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ChevronRight, ChevronLeft, Check } from 'lucide-react';
 import { WizardConfig } from './types';
 import { modules, integrationPartners, initialConfig } from './constants';
@@ -19,6 +19,26 @@ import {
 export function VippsSetupWizard() {
   const [step, setStep] = useState(0);
   const [config, setConfig] = useState<WizardConfig>(initialConfig);
+
+  // Keep the top of the wizard ("magnet") in view when moving between steps,
+  // especially on mobile where focus/keyboard can leave the scroll position far down.
+  const wizardTopRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Wait until the next paint(s) so the new step content has mounted and layout is stable.
+    const prefersReducedMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        wizardTopRef.current?.scrollIntoView({
+          behavior: prefersReducedMotion ? 'auto' : 'smooth',
+          block: 'start'
+        });
+      });
+    });
+  }, [step]);
 
   const buildConfigData = (cfg: WizardConfig) => {
     return {
@@ -230,6 +250,8 @@ Best regards`;
 
   return (
     <div className="p-8">
+      {/* Anchor for step-to-step scroll behavior */}
+      <div ref={wizardTopRef} className="scroll-mt-24" />
       {/* Progress Bar */}
       <div className="mb-8">
         <div className="flex items-center justify-between mb-2">
