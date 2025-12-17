@@ -1,10 +1,24 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { BookOpen, ChevronUp, ChevronDown, ExternalLink, Key, Shield, AlertCircle, Info, Eye } from 'lucide-react';
 
-export function VippsCredentialsGuide() {
+import { integrationPartners } from '../constants';
+
+import EmonkeyVipps1 from '../images/bilde1.png';
+import EmonkeyVipps2 from '../images/bilde2.png';
+import EmonkeyVipps3 from '../images/bilde3.png';
+
+interface Props {
+  integrationPartner?: string;
+}
+
+export function VippsCredentialsGuide({ integrationPartner }: Props) {
   const [isOpen, setIsOpen] = useState(false);
+  const isEmonkey = integrationPartner === 'emonkey';
+  const integrationPartnerName =
+    integrationPartners.find((p) => p.id === integrationPartner)?.name || integrationPartner || 'Regnskapspartner';
 
   return (
     <div className="bg-blue-50 border border-blue-200 rounded-lg overflow-hidden">
@@ -15,7 +29,9 @@ export function VippsCredentialsGuide() {
         <div className="flex items-center gap-3">
           <BookOpen className="w-5 h-5 text-blue-600" />
           <span className="font-semibold text-blue-900">
-            📖 Hvordan finne API-nøklene dine (Steg-for-steg guide)
+            {isEmonkey
+              ? '📖 eMonkey: Gi regnskapspartner tilgang i Vipps-portalen (Steg-for-steg)'
+              : '📖 Hvordan finne API-nøklene dine (Steg-for-steg guide)'}
           </span>
         </div>
         {isOpen ? <ChevronUp className="w-5 h-5 text-blue-600" /> : <ChevronDown className="w-5 h-5 text-blue-600" />}
@@ -23,6 +39,154 @@ export function VippsCredentialsGuide() {
 
       {isOpen && (
         <div className="px-6 py-6 bg-white border-t border-blue-200 space-y-6">
+
+          {isEmonkey ? (
+            <>
+              <div className="mb-2 text-center">
+                <h3 className="text-2xl font-bold mb-2 text-slate-900">Koble Vipps mot regnskap (eMonkey)</h3>
+                <p className="text-sm text-slate-600 max-w-2xl mx-auto">
+                  Følg stegene under for å gi <strong>eMonkey</strong> tilgang i Vipps-portalen og finn ditt{' '}
+                  <strong>MSN (Merchant Serial Number)</strong>.
+                </p>
+              </div>
+
+              {/* Step 1 */}
+              <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-1 h-full bg-cyan-600" />
+                <div className="flex flex-col md:flex-row gap-6">
+                  <div className="flex-shrink-0">
+                    <span className="flex items-center justify-center w-12 h-12 rounded-full bg-slate-100 text-slate-900 font-bold text-xl">1</span>
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-xl font-bold mb-2">Logg inn som administrator</h4>
+                    <p className="text-slate-600">
+                      Gå til{' '}
+                      <a
+                        href="https://portal.vippsmobilepay.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-cyan-700 underline hover:text-cyan-900"
+                      >
+                        portal.vippsmobilepay.com
+                      </a>{' '}
+                      og logg inn med BankID. Du må ha administratorrettigheter for å utføre endringer.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Step 2 */}
+              <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-1 h-full bg-slate-200" />
+                <div className="flex flex-col md:flex-row gap-6">
+                  <div className="flex-shrink-0">
+                    <span className="flex items-center justify-center w-12 h-12 rounded-full bg-slate-100 text-slate-900 font-bold text-xl">2</span>
+                  </div>
+                  <div className="flex-1 w-full">
+                    <h4 className="text-xl font-bold mb-2">Naviger til Regnskapspartnere</h4>
+                    <p className="text-slate-600 mb-4">
+                      I menyen til venstre, klikk på <strong>Rapporter</strong> og velg fanen{' '}
+                      <strong>Regnskapspartnere</strong>.
+                    </p>
+                    <div className="rounded-lg border border-slate-200 bg-slate-50 p-3">
+                      <Image
+                        src={EmonkeyVipps1}
+                        alt="Vipps portal: Rapporter → Regnskapspartnere"
+                        className="h-auto w-full rounded-md"
+                        sizes="(max-width: 768px) 100vw, 700px"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Step 3 */}
+              <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-1 h-full bg-slate-200" />
+                <div className="flex flex-col md:flex-row gap-6">
+                  <div className="flex-shrink-0">
+                    <span className="flex items-center justify-center w-12 h-12 rounded-full bg-slate-100 text-slate-900 font-bold text-xl">3</span>
+                  </div>
+                  <div className="flex-1 w-full">
+                    <h4 className="text-xl font-bold mb-2">Legg til partner (eMonkey)</h4>
+                    <p className="text-slate-600 mb-3">
+                      Klikk på <strong>Rediger partnertilganger</strong> (eller bruk søkefeltet). Søk opp{' '}
+                      <span className="font-semibold text-slate-900">eMonkey</span> i listen.
+                    </p>
+                    <p className="text-sm bg-blue-50 text-blue-800 p-3 rounded-md mb-4 border-l-4 border-blue-400">
+                      <strong>Obs:</strong> Husk å velge hvilke salgssteder (Vipps-numre) integrasjonen skal gjelde for.
+                    </p>
+                    <div className="rounded-lg border border-slate-200 bg-slate-50 p-3">
+                      {/* Crop bottom 50% for bilde2 */}
+                      <div
+                        className="relative w-full overflow-hidden rounded-md"
+                        style={{ aspectRatio: `${EmonkeyVipps2.width} / ${Math.round(EmonkeyVipps2.height / 2)}` }}
+                      >
+                        <Image
+                          src={EmonkeyVipps2}
+                          alt="Vipps portal: Søk etter eMonkey og legg til regnskapspartner"
+                          fill
+                          className="object-cover object-top"
+                          sizes="(max-width: 768px) 100vw, 700px"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Step 4 */}
+              <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-1 h-full bg-slate-200" />
+                <div className="flex flex-col md:flex-row gap-6">
+                  <div className="flex-shrink-0">
+                    <span className="flex items-center justify-center w-12 h-12 rounded-full bg-slate-100 text-slate-900 font-bold text-xl">4</span>
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-xl font-bold mb-2">Klikk «Lagre»</h4>
+                    <p className="text-slate-600">
+                      Når du har valgt regnskapspartner og salgssteder, klikk <strong>Lagre</strong> for å bekrefte
+                      endringene.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Step 5 */}
+              <div className="bg-slate-900 p-6 rounded-2xl shadow-lg relative overflow-hidden text-white">
+                <div className="absolute top-0 left-0 w-1 h-full bg-cyan-400" />
+                <div className="flex flex-col md:flex-row gap-6">
+                  <div className="flex-shrink-0">
+                    <span className="flex items-center justify-center w-12 h-12 rounded-full bg-cyan-600 text-white font-bold text-xl">5</span>
+                  </div>
+                  <div className="flex-1 w-full">
+                    <h4 className="text-xl font-bold mb-2 text-white">Identifiser MSN-nummer</h4>
+                    <p className="text-slate-300 mb-4">
+                      For å fullføre integrasjonen trenger vi ditt <strong>MSN (Merchant Serial Number)</strong>. Etter at
+                      partner er lagt til, finner du MSN i oversikten for salgssteder.
+                    </p>
+                    <div className="rounded-lg border border-white/10 bg-white/5 p-3">
+                      <Image
+                        src={EmonkeyVipps3}
+                        alt="Vipps portal: Oversikt med MSN-nummer"
+                        className="h-auto w-full rounded-md"
+                        sizes="(max-width: 768px) 100vw, 700px"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-2 border-t border-slate-200 pt-6 text-center">
+                <h4 className="text-lg font-semibold text-slate-900 mb-2">Neste steg</h4>
+                <p className="text-slate-600">
+                  Lim inn ditt <strong>MSN-nummer</strong> i feltet under og bekreft at valgt regnskapspartner er{' '}
+                  <strong>{integrationPartnerName}</strong>.
+                </p>
+              </div>
+            </>
+          ) : (
+            <>
 
           {/* Step 1 */}
           <div className="space-y-3">
@@ -329,6 +493,9 @@ export function VippsCredentialsGuide() {
               </a>
             </div>
           </div>
+
+            </>
+          )}
 
         </div>
       )}

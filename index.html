@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Averdi Guide: Vipps Integrasjon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .averdi-blue { color: #0f172a; } /* Slate 900 */
+        .averdi-accent { color: #0891b2; } /* Cyan 600 - Nordic/Aurora vibe */
+        .step-card:hover { transform: translateY(-2px); transition: all 0.3s ease; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-slate-900 rounded-md flex items-center justify-center text-white font-bold text-lg">A</div>
+                <span class="font-bold text-xl tracking-tight text-slate-900">AVERDI</span>
+            </div>
+            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Integrasjonsguide</span>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 py-12">
+        <div class="mb-12 text-center">
+            <h1 class="text-4xl font-bold mb-4 text-slate-900">Koble Vipps mot Regnskap</h1>
+            <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+                Øk din <span class="text-cyan-700 font-medium">konkurransekraft</span> ved å automatisere dataflyten. 
+                Følg disse stegene for å gi din regnskapspartner tilgang i Vipps-portalen.
+            </p>
+        </div>
+
+        <div class="space-y-8">
+
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 step-card relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-1 h-full bg-cyan-600"></div>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex-shrink-0">
+                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-slate-100 text-slate-900 font-bold text-xl">1</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">Logg inn som administrator</h3>
+                        <p class="text-slate-600 mb-4">
+                            Gå til <a href="https://portal.vippsmobilepay.com" target="_blank" class="text-cyan-600 underline hover:text-cyan-800">portal.vippsmobilepay.com</a> og logg inn med BankID. Du må ha administratorrettigheter for å utføre endringer.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 step-card relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-1 h-full bg-slate-200"></div>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex-shrink-0">
+                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-slate-100 text-slate-900 font-bold text-xl">2</span>
+                    </div>
+                    <div class="w-full">
+                        <h3 class="text-xl font-bold mb-2">Naviger til Regnskapspartnere</h3>
+                        <p class="text-slate-600 mb-6">
+                            I menyen til venstre, klikk på <strong>Rapporter</strong> og velg fanen <strong>Regnskapspartnere</strong> øverst i bildet.
+                        </p>
+                        
+                        <div class="w-full h-64 bg-slate-100 rounded-lg border-2 border-dashed border-slate-300 flex flex-col items-center justify-center text-slate-400 mb-4">
+                            <svg class="w-10 h-10 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            [cite_start]<span class="text-sm">Sett inn skjermbilde: Rapporter fanen [cite: 575]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 step-card relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-1 h-full bg-slate-200"></div>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex-shrink-0">
+                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-slate-100 text-slate-900 font-bold text-xl">3</span>
+                    </div>
+                    <div class="w-full">
+                        <h3 class="text-xl font-bold mb-2">Legg til partner (Emonkey)</h3>
+                        <p class="text-slate-600 mb-4">
+                            Klikk på <strong>"Rediger partnertilganger"</strong> eller søkefeltet. Søk opp <span class="font-semibold text-slate-900">Emonkey AS</span> (eller din spesifikke partner) i listen.
+                        </p>
+                        <p class="text-sm bg-blue-50 text-blue-800 p-3 rounded-md mb-4 border-l-4 border-blue-400">
+                            <strong>Obs:</strong> Sørg for å huke av for de salgsstedene (Vipps-numrene) integrasjonen skal gjelde for.
+                        </p>
+
+                        <div class="w-full h-48 bg-slate-100 rounded-lg border-2 border-dashed border-slate-300 flex flex-col items-center justify-center text-slate-400">
+                            <svg class="w-8 h-8 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            [cite_start]<span class="text-sm">Sett inn skjermbilde: Søk etter Emonkey [cite: 604]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-900 p-8 rounded-2xl shadow-lg step-card relative overflow-hidden text-white">
+                <div class="absolute top-0 left-0 w-1 h-full bg-cyan-400"></div>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex-shrink-0">
+                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-cyan-600 text-white font-bold text-xl">4</span>
+                    </div>
+                    <div class="w-full">
+                        <h3 class="text-xl font-bold mb-2 text-white">Identifiser MSN-nummer</h3>
+                        <p class="text-slate-300 mb-6">
+                            For at vi skal kunne fullføre integrasjonen, trenger vi ditt <strong>MSN (Merchant Serial Number)</strong>. Dette finner du i kolonnen markert under etter at partner er lagt til.
+                        </p>
+                        
+                        <div class="bg-white/10 p-4 rounded-lg backdrop-blur-sm border border-white/10 mb-6">
+                            <div class="flex justify-between items-center text-sm font-mono text-cyan-300">
+                                <span>Salgssted: Kiosk</span>
+                                <span>MSN: 123456</span>
+                            </div>
+                        </div>
+
+                        <div class="w-full h-40 bg-white/5 rounded-lg border-2 border-dashed border-white/20 flex flex-col items-center justify-center text-slate-400">
+                            [cite_start]<span class="text-sm">Sett inn skjermbilde: Oversikt med MSN-nummer [cite: 616]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="mt-12 border-t border-slate-200 pt-8 text-center">
+            <h4 class="text-lg font-semibold text-slate-900 mb-2">Hva skjer nå?</h4>
+            <p class="text-slate-600 mb-6">
+                Send MSN-nummeret til din kontaktperson i Averdi for å aktivere dataflyten.
+            </p>
+            <a href="#" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-slate-900 hover:bg-slate-800 md:py-4 md:text-lg md:px-10 transition-colors">
+                Kontakt Support
+            </a>
+            <p class="mt-8 text-xs text-slate-400">
+                [cite_start]Kilde: Emonkey FAQ - Legg til Regnskapspartner [cite: 572]
+            </p>
+        </div>
+    </main>
+
+</body>
+</html>

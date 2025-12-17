@@ -20,6 +20,16 @@ export function VippsSetupWizard() {
   const [step, setStep] = useState(0);
   const [config, setConfig] = useState<WizardConfig>(initialConfig);
 
+  const normalizePartnerConfirmation = (value: string) => {
+    return value
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, ' ')
+      .replace(/\s+as\.?$/i, '')
+      .replace(/[^a-z0-9 ]/g, '')
+      .trim();
+  };
+
   // State updaters
   const updateConfig = (key: string, value: any) => {
     setConfig(prev => ({ ...prev, [key]: value }));
@@ -49,7 +59,18 @@ export function VippsSetupWizard() {
       case 2: return config.modules.length > 0;
       case 3: return !!(config.companyName && config.orgNumber && config.organizationType);
       case 4: return config.integrationPartner !== '';
-      case 5: return !!(config.vippsClientId && config.vippsClientSecret && config.vippsMerchantSerialNumber);
+      case 5:
+        {
+          const partner = integrationPartners.find(p => p.id === config.integrationPartner);
+          const expected = [partner?.id, partner?.name].filter(Boolean)
+            .map(v => normalizePartnerConfirmation(String(v)));
+          const provided = normalizePartnerConfirmation(config.vippsSubscriptionKey || '');
+          const isPartnerConfirmed = expected.includes(provided);
+
+          return config.integrationPartner === 'emonkey'
+          ? !!(config.vippsMerchantSerialNumber && isPartnerConfirmed)
+          : !!(config.vippsClientId && config.vippsClientSecret && config.vippsMerchantSerialNumber);
+        }
       case 6: return !!(config.accountingApiKey && config.accountingApiSecret);
       case 7: return true;
       case 8: return true;
@@ -71,9 +92,11 @@ export function VippsSetupWizard() {
         type: config.organizationType
       },
       vipps: {
-        clientId: config.vippsClientId,
+        clientId: config.integrationPartner === 'emonkey' ? 'HANDLED_BY_EMONKEY' : config.vippsClientId,
         merchantSerialNumber: config.vippsMerchantSerialNumber,
-        subscriptionKey: config.vippsSubscriptionKey || 'NOT_PROVIDED',
+        subscriptionKey: config.integrationPartner === 'emonkey'
+          ? 'NOT_REQUIRED_FOR_EMONKEY'
+          : (config.vippsSubscriptionKey || 'NOT_PROVIDED'),
         environment: 'production',
         apiVersion: 'v2',
         products: modules.filter(m => config.modules.includes(m.id) || m.required)
@@ -290,10 +313,10 @@ FEATURES ENABLED
 
 VIPPS API CREDENTIALS (SECURE - HANDLE WITH CARE)
 --------------------------------------------------
-Client ID: ${config.vippsClientId}
+Client ID: ${config.integrationPartner === 'emonkey' ? '[HANDLED BY EMONKEY]' : config.vippsClientId}
 Merchant Serial Number (MSN): ${config.vippsMerchantSerialNumber}
-Client Secret: [REDACTED - See encrypted config file]
-Subscription Key: ${config.vippsSubscriptionKey ? '[PROVIDED]' : '[NOT PROVIDED]'}
+Client Secret: ${config.integrationPartner === 'emonkey' ? '[HANDLED BY EMONKEY]' : '[REDACTED - See encrypted config file]'}
+Subscription Key: ${config.integrationPartner === 'emonkey' ? '[NOT REQUIRED]' : (config.vippsSubscriptionKey ? '[PROVIDED]' : '[NOT PROVIDED]')}
 
 Portal: https://portal.vippsmobilepay.com
 Environment: Production
@@ -326,7 +349,9 @@ IMPLEMENTATION CHECKLIST FOR AVERDI ACCOUNTING
   - Client logs into portal.vippsmobilepay.com
   - Verify organization number ${config.orgNumber}
   - Activate required products: ${activeModules.map(m => m.vippsProduct).filter(Boolean).join(', ')}
-  - Generate/verify API keys match configuration
+  ${config.integrationPartner === 'emonkey'
+    ? '- Add eMonkey as Regnskapspartner and note MSN'
+    : '- Generate/verify API keys match configuration'}
 
 □ Step 3: Accounting System Setup
   - Verify ${config.accountingSystem === 'poweroffice' ? 'PowerOffice Go' : '24SevenOffice'} account is active
