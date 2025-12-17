@@ -30,6 +30,11 @@ export function VippsSetupWizard() {
       .trim();
   };
 
+  const blurActiveElement = () => {
+    const el = document.activeElement;
+    if (el instanceof HTMLElement) el.blur();
+  };
+
   // State updaters
   const updateConfig = (key: string, value: any) => {
     setConfig(prev => ({ ...prev, [key]: value }));
@@ -239,7 +244,10 @@ Best regards`;
       {/* Navigation */}
       <div className="flex justify-between items-center pt-6 border-t border-gray-200">
         <button
-          onClick={() => setStep(step - 1)}
+          onClick={() => {
+            blurActiveElement();
+            setStep(step - 1);
+          }}
           disabled={step === 0}
           className="px-6 py-3 text-gray-700 hover:bg-gray-100 rounded-lg font-medium flex items-center gap-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
@@ -249,7 +257,10 @@ Best regards`;
 
         {step < steps.length - 1 ? (
           <button
-            onClick={() => setStep(step + 1)}
+            onClick={() => {
+              blurActiveElement();
+              setStep(step + 1);
+            }}
             disabled={!canProceed()}
             className="px-8 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-medium flex items-center gap-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >

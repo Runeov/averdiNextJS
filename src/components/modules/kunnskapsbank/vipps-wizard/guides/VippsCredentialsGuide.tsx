@@ -1,15 +1,147 @@
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
-import { BookOpen, ChevronUp, ChevronDown, ExternalLink, Key, Shield, AlertCircle, Info, Eye } from 'lucide-react';
+import Image, { StaticImageData } from 'next/image';
+import { BookOpen, ChevronUp, ChevronDown, ExternalLink, Key, Shield, AlertCircle, Info, Eye, X, ZoomIn } from 'lucide-react';
 
 import { integrationPartners } from '../constants';
 
+// Desktop images
 import EmonkeyVipps1 from '../images/bilde1.png';
 import EmonkeyVipps2 from '../images/bilde2.png';
 import EmonkeyVipps3 from '../images/bilde3.png';
 
+// Mobile images - import only the ones that exist
+// If a mobile image doesn't exist yet, comment it out or remove it
+// The component will automatically fall back to the resized desktop version
+import EmonkeyVipps1Mobile from '../images/bilde1_mobile.png';
+import EmonkeyVipps2Mobile from '../images/bilde2_mobile.png';
+import EmonkeyVipps3Mobile from '../images/bilde3_mobile.png';
+
+// ============================================
+// ResponsiveGuideImage Component
+// ============================================
+interface ResponsiveGuideImageProps {
+  desktopSrc: StaticImageData;
+  mobileSrc?: StaticImageData;
+  alt: string;
+  showZoomHint?: boolean;
+  caption?: string;
+  darkMode?: boolean;
+}
+
+function ResponsiveGuideImage({ 
+  desktopSrc, 
+  mobileSrc, 
+  alt, 
+  showZoomHint = true,
+  caption,
+  darkMode = false
+}: ResponsiveGuideImageProps) {
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [mobileImageFailed, setMobileImageFailed] = useState(false);
+
+  // Use mobile image if provided and hasn't failed, otherwise fall back to desktop
+  const mobileImage = (mobileSrc && !mobileImageFailed) ? mobileSrc : desktopSrc;
+  const hasDedicatedMobileImage = mobileSrc && !mobileImageFailed;
+
+  const containerClass = darkMode 
+    ? "rounded-lg border border-white/10 bg-white/5"
+    : "rounded-lg border border-slate-200 bg-slate-50";
+
+  return (
+    <>
+      <div className={containerClass}>
+        {/* Mobile Image (tap to zoom) */}
+        <button
+          onClick={() => setIsZoomed(true)}
+          className="block md:hidden w-full text-left group relative"
+          aria-label={`${alt} - Trykk for å forstørre`}
+        >
+          <Image
+            src={mobileImage}
+            alt={alt}
+            className="w-full h-auto rounded-md"
+            sizes="100vw"
+            placeholder="blur"
+            onError={() => {
+              if (mobileSrc) {
+                setMobileImageFailed(true);
+              }
+            }}
+          />
+          
+          {/* Only show zoom hint if using dedicated mobile image (desktop fallback is already full size) */}
+          {showZoomHint && hasDedicatedMobileImage && (
+            <div className="absolute bottom-2 right-2 flex items-center gap-1.5 bg-black/70 text-white text-xs px-2 py-1 rounded-full opacity-80 group-hover:opacity-100 transition-opacity">
+              <ZoomIn className="w-3 h-3" />
+              <span>Trykk for å forstørre</span>
+            </div>
+          )}
+        </button>
+
+        {/* Desktop Image */}
+        <div className="hidden md:block">
+          <Image
+            src={desktopSrc}
+            alt={alt}
+            className="w-full h-auto rounded-md"
+            sizes="(max-width: 768px) 100vw, 700px"
+            placeholder="blur"
+          />
+        </div>
+
+        {caption && (
+          <p className={`text-xs mt-2 text-center ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
+            {caption}
+          </p>
+        )}
+      </div>
+
+      {/* Fullscreen Zoom Modal */}
+      {isZoomed && (
+        <div 
+          className="fixed inset-0 z-50 bg-black/95 flex flex-col cursor-pointer"
+          onClick={() => setIsZoomed(false)}
+        >
+          <div className="flex justify-end p-4">
+            <button
+              onClick={() => setIsZoomed(false)}
+              className="text-white/80 hover:text-white p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+              aria-label="Lukk"
+            >
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+
+          <div className="flex-1 overflow-auto p-4">
+            <Image
+              src={mobileImage}
+              alt={alt}
+              className="rounded-lg"
+              sizes="200vw"
+              placeholder="blur"
+              style={{ 
+                width: `${Math.round(mobileImage.width * 0.7)}px`,
+                maxWidth: 'none',
+                maxHeight: '100vh',
+                height: 'auto'
+              }}
+            />
+          </div>
+
+          <div className="text-center pb-4 text-white/60 text-sm">
+            Dra for å se detaljer • Trykk hvor som helst for å lukke
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+// ============================================
+// Main Component
+// ============================================
 interface Props {
   integrationPartner?: string;
 }
@@ -88,14 +220,11 @@ export function VippsCredentialsGuide({ integrationPartner }: Props) {
                       I menyen til venstre, klikk på <strong>Rapporter</strong> og velg fanen{' '}
                       <strong>Regnskapspartnere</strong>.
                     </p>
-                    <div className="rounded-lg border border-slate-200 bg-slate-50 p-3">
-                      <Image
-                        src={EmonkeyVipps1}
-                        alt="Vipps portal: Rapporter → Regnskapspartnere"
-                        className="h-auto w-full rounded-md"
-                        sizes="(max-width: 768px) 100vw, 700px"
-                      />
-                    </div>
+                    <ResponsiveGuideImage
+                      desktopSrc={EmonkeyVipps1}
+                      mobileSrc={EmonkeyVipps1Mobile}
+                      alt="Vipps portal: Rapporter → Regnskapspartnere"
+                    />
                   </div>
                 </div>
               </div>
@@ -116,21 +245,11 @@ export function VippsCredentialsGuide({ integrationPartner }: Props) {
                     <p className="text-sm bg-blue-50 text-blue-800 p-3 rounded-md mb-4 border-l-4 border-blue-400">
                       <strong>Obs:</strong> Husk å velge hvilke salgssteder (Vipps-numre) integrasjonen skal gjelde for.
                     </p>
-                    <div className="rounded-lg border border-slate-200 bg-slate-50 p-3">
-                      {/* Crop bottom 50% for bilde2 */}
-                      <div
-                        className="relative w-full overflow-hidden rounded-md"
-                        style={{ aspectRatio: `${EmonkeyVipps2.width} / ${Math.round(EmonkeyVipps2.height / 2)}` }}
-                      >
-                        <Image
-                          src={EmonkeyVipps2}
-                          alt="Vipps portal: Søk etter eMonkey og legg til regnskapspartner"
-                          fill
-                          className="object-cover object-top"
-                          sizes="(max-width: 768px) 100vw, 700px"
-                        />
-                      </div>
-                    </div>
+                    <ResponsiveGuideImage
+                      desktopSrc={EmonkeyVipps2}
+                      mobileSrc={EmonkeyVipps2Mobile}
+                      alt="Vipps portal: Søk etter eMonkey og legg til regnskapspartner"
+                    />
                   </div>
                 </div>
               </div>
@@ -165,14 +284,12 @@ export function VippsCredentialsGuide({ integrationPartner }: Props) {
                       For å fullføre integrasjonen trenger vi ditt <strong>MSN (Merchant Serial Number)</strong>. Etter at
                       partner er lagt til, finner du MSN i oversikten for salgssteder.
                     </p>
-                    <div className="rounded-lg border border-white/10 bg-white/5 p-3">
-                      <Image
-                        src={EmonkeyVipps3}
-                        alt="Vipps portal: Oversikt med MSN-nummer"
-                        className="h-auto w-full rounded-md"
-                        sizes="(max-width: 768px) 100vw, 700px"
-                      />
-                    </div>
+                    <ResponsiveGuideImage
+                      desktopSrc={EmonkeyVipps3}
+                      mobileSrc={EmonkeyVipps3Mobile}
+                      alt="Vipps portal: Oversikt med MSN-nummer"
+                      darkMode={true}
+                    />
                   </div>
                 </div>
               </div>
@@ -223,35 +340,24 @@ export function VippsCredentialsGuide({ integrationPartner }: Props) {
             </div>
           </div>
 
-          {/* Step 2 */}
+          {/* Step 2 - Select Company */}
           <div className="space-y-3">
             <div className="flex items-start gap-3">
               <div className="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
                 2
               </div>
               <div className="flex-1">
-                <h3 className="font-bold text-gray-900 mb-2">Velg din organisasjon</h3>
-                <div className="bg-gray-50 p-4 rounded-lg space-y-2 text-sm">
+                <h3 className="font-bold text-gray-900 mb-2">Velg riktig bedrift</h3>
+                <div className="bg-gray-50 p-4 rounded-lg text-sm">
                   <p className="text-gray-700">
-                    Etter innlogging vil du se en liste over organisasjoner du har tilgang til.
+                    Hvis du har tilgang til flere bedrifter, velg den du skal sette opp integrasjon for i øvre høyre hjørne.
                   </p>
-                  <ul className="list-disc list-inside space-y-1 text-gray-700 ml-2">
-                    <li>Velg organisasjonen med riktig organisasjonsnummer</li>
-                    <li>Hvis du har flere "sales units" (salgssteder), velg hovedenheten</li>
-                  </ul>
-                  <div className="bg-blue-50 border border-blue-200 p-3 rounded mt-2">
-                    <p className="text-blue-800 text-xs">
-                      <Key className="w-4 h-4 inline mr-1" />
-                      <strong>Tips:</strong> Organisasjonsnummeret ditt vises øverst på siden.
-                      Verifiser at det stemmer med det du skrev i forrige steg.
-                    </p>
-                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Step 3 */}
+          {/* Step 3 - Navigate to Developer */}
           <div className="space-y-3">
             <div className="flex items-start gap-3">
               <div className="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
@@ -259,91 +365,104 @@ export function VippsCredentialsGuide({ integrationPartner }: Props) {
               </div>
               <div className="flex-1">
                 <h3 className="font-bold text-gray-900 mb-2">Gå til Developer-seksjonen</h3>
-                <div className="bg-gray-50 p-4 rounded-lg space-y-3 text-sm">
-                  <p className="text-gray-700">
-                    I venstre meny, finn og klikk på:
-                  </p>
-                  <div className="bg-white border-2 border-blue-300 p-3 rounded-lg">
-                    <p className="font-mono text-gray-900 font-semibold">
-                      Developer → API keys
+                <div className="bg-gray-50 p-4 rounded-lg text-sm">
+                  <div className="bg-white border-2 border-purple-300 p-3 rounded font-mono text-xs space-y-1 mb-3">
+                    <div>Venstre meny</div>
+                    <div className="pl-4">→ <strong className="text-purple-700">Developer</strong></div>
+                  </div>
+                  <div className="flex items-start gap-2 bg-purple-50 p-3 rounded">
+                    <Info className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" />
+                    <p className="text-purple-800 text-xs">
+                      <strong>Ser du ikke "Developer"?</strong> Du trenger utvikler-tilgang. Kontakt administrator
+                      for bedriften din i Vipps.
                     </p>
                   </div>
-                  <p className="text-gray-700">
-                    Alternativ vei: <span className="font-mono bg-gray-100 px-2 py-1 rounded">Settings → API credentials</span>
-                  </p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Step 4 - Client ID */}
+          {/* Step 4 - Navigate to Keys */}
           <div className="space-y-3">
+            <div className="flex items-start gap-3">
+              <div className="w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
+                4
+              </div>
+              <div className="flex-1">
+                <h3 className="font-bold text-gray-900 mb-2 flex items-center gap-2">
+                  <Key className="w-5 h-5 text-purple-600" />
+                  Finn API-nøklene
+                </h3>
+                <div className="bg-gray-50 p-4 rounded-lg text-sm">
+                  <div className="bg-white border-2 border-purple-300 p-3 rounded font-mono text-xs space-y-1 mb-3">
+                    <div>Developer</div>
+                    <div className="pl-4">→ <strong className="text-purple-700">API Keys</strong> (eller "Credentials")</div>
+                  </div>
+                  <p className="text-gray-700 mb-2">Her finner du de nøklene du trenger:</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Step 4a - Client ID */}
+          <div className="space-y-3 ml-11">
             <div className="flex items-start gap-3">
               <div className="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
                 4a
               </div>
               <div className="flex-1">
                 <h3 className="font-bold text-gray-900 mb-2 flex items-center gap-2">
-                  <Key className="w-5 h-5 text-green-600" />
-                  Finn Client ID
+                  <Shield className="w-5 h-5 text-green-600" />
+                  Client ID
                 </h3>
-                <div className="bg-gray-50 p-4 rounded-lg space-y-2 text-sm">
+                <div className="bg-gray-50 p-4 rounded-lg text-sm space-y-2">
                   <p className="text-gray-700">
-                    På "API keys"-siden finner du <strong>Client ID</strong> under seksjonen "Production keys".
+                    Client ID er alltid synlig på siden. Kopier denne verdien.
                   </p>
                   <div className="space-y-2">
                     <p className="text-gray-700"><strong>Ser ut som:</strong></p>
-                    <div className="bg-white border border-gray-300 p-3 rounded font-mono text-xs text-gray-600">
-                      8a3b5c7d-1234-5678-90ab-cdef12345678
+                    <div className="bg-white border border-gray-300 p-3 rounded font-mono text-xs text-gray-600 break-all">
+                      a1b2c3d4-e5f6-7890-abcd-ef1234567890
                     </div>
+                    <p className="text-gray-500 text-xs">UUID-format (36 tegn med bindestreker)</p>
                   </div>
-                  <div className="flex items-start gap-2 bg-blue-50 p-2 rounded">
-                    <Info className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
-                    <p className="text-blue-800 text-xs">
-                      Dette er en UUID (universally unique identifier) i formatet xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-                    </p>
-                  </div>
-                  <button
-                    className="text-blue-600 hover:underline text-xs flex items-center gap-1"
-                    onClick={() => navigator.clipboard.writeText('Client ID kopieres med "Copy" knappen i portalen')}
-                  >
-                    <Eye className="w-3 h-3" />
-                    Klikk "Copy" knappen ved siden av nøkkelen for å kopiere
-                  </button>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Step 5 - Client Secret */}
-          <div className="space-y-3">
+          {/* Step 4b - Client Secret */}
+          <div className="space-y-3 ml-11">
             <div className="flex items-start gap-3">
-              <div className="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
+              <div className="w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
                 4b
               </div>
               <div className="flex-1">
                 <h3 className="font-bold text-gray-900 mb-2 flex items-center gap-2">
-                  <Shield className="w-5 h-5 text-red-600" />
-                  Finn Client Secret
+                  <Eye className="w-5 h-5 text-red-600" />
+                  Client Secret (VIKTIG!)
                 </h3>
-                <div className="bg-gray-50 p-4 rounded-lg space-y-2 text-sm">
-                  <p className="text-gray-700">
-                    <strong>Client Secret</strong> er IKKE synlig i portalen av sikkerhetshensyn.
-                  </p>
-
-                  <div className="bg-red-50 border-l-4 border-red-500 p-3 space-y-2">
-                    <p className="text-red-900 font-semibold">🔒 Viktig sikkerhetsinformasjon:</p>
-                    <ul className="list-disc list-inside space-y-1 text-red-800 text-xs ml-2">
-                      <li>Client Secret vises KUN når nøkkelen genereres første gang</li>
-                      <li>Hvis du har mistet den, må du regenerere en ny nøkkel</li>
-                      <li>Den gamle nøkkelen slutter da å virke</li>
-                    </ul>
+                <div className="bg-red-50 border border-red-200 p-4 rounded-lg text-sm space-y-3">
+                  <div className="bg-red-100 border-l-4 border-red-500 p-3">
+                    <p className="text-red-900 font-semibold text-xs mb-1">⚠️ Client Secret vises kun én gang!</p>
+                    <p className="text-red-800 text-xs">
+                      Når du genererer en ny Client Secret, må du kopiere og lagre den umiddelbart.
+                      Du kan ikke se den igjen senere.
+                    </p>
                   </div>
 
-                  <div className="space-y-2 mt-3">
-                    <p className="text-gray-700 font-semibold">Hvis du trenger ny Client Secret:</p>
-                    <ol className="list-decimal list-inside space-y-1 text-gray-700 ml-2 text-xs">
-                      <li>Klikk på "Regenerate" knappen ved siden av nøkkelen</li>
+                  <div className="space-y-2">
+                    <p className="text-gray-700"><strong>Ser ut som:</strong></p>
+                    <div className="bg-white border border-gray-300 p-3 rounded font-mono text-xs text-gray-600 break-all">
+                      X7mK9pL2nQ4rT8vB6cW1sD5eF3gH0jN...
+                    </div>
+                    <p className="text-gray-500 text-xs">Lang, tilfeldig streng</p>
+                  </div>
+
+                  <div className="bg-white border border-gray-200 p-3 rounded">
+                    <p className="font-semibold text-gray-800 text-xs mb-2">Hvis du trenger å generere ny Client Secret:</p>
+                    <ol className="list-decimal list-inside space-y-1 text-xs text-gray-700 ml-2">
+                      <li>Klikk "Generate new secret" eller lignende knapp</li>
                       <li>Bekreft at du vil generere ny nøkkel</li>
                       <li>Den nye Client Secret vises på skjermen - <strong>KOPIER DEN NÅ</strong></li>
                       <li>Du får aldri se denne nøkkelen igjen</li>
@@ -502,4 +621,3 @@ export function VippsCredentialsGuide({ integrationPartner }: Props) {
     </div>
   );
 }
-
