@@ -8,12 +8,9 @@ const __dirname = path.dirname(__filename);
 const nextConfig = {
   // Dette peker Next.js til riktig rotmappe for å løse "inferred workspace root" warning
   outputFileTracingRoot: __dirname,
-  
-  // Eksperimentelt flagg for å isolere chart.js ved behov, men la det stå
-  // for å sikre at bygget ikke feiler pga. denne pakken.
-  experimental: {
-    serverComponentsExternalPackages: ['chart.js'], 
-  },
+
+  // Next.js 15: `experimental.serverComponentsExternalPackages` -> `serverExternalPackages`
+  serverExternalPackages: ['chart.js'],
   
   // Setter ignore-flagg for å tillate at bygget fullføres selv om det er warnings i koden
   reactStrictMode: true,

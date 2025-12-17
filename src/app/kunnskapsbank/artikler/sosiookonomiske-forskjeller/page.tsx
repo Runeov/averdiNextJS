@@ -20,7 +20,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import { AverdiBackground } from '@/components/modules/AverdiBackground';
 import { getExpert } from '@/data/experts';
-import logoThumb from '/mnt/data/logo_thumbail.avif';
+import logoThumb from '@/assets/logo_thumbail.avif';
 
 // Brand colours (Averdi)
 const BRAND = {
@@ -48,7 +48,7 @@ const SAMPLE_POSTS: Post[] = [
     timestamp: '12. des 2025',
     likes: 124,
     comments: 8,
-    image: '/mnt/data/logo_thumbail.avif',
+    image: '/logo_thumbail.avif',
   },
   {
     id: 'p2',
@@ -279,7 +279,7 @@ export default function ArtikkelFornesInteractive() {
             <div>
               <Link href="/kontakt" className="inline-flex items-center justify-center px-6 py-3 bg-[#E86C1F] hover:bg-[#d65a10] rounded-full font-bold">
                 Kontakt oss
-n              </Link>
+              </Link>
             </div>
           </div>
         </div>
