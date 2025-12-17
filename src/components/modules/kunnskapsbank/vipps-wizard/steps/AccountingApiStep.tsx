@@ -18,9 +18,9 @@ export function AccountingApiStep({ config, updateConfig }: Props) {
       </div>
 
       {/* How-to Guide - Expandable */}
-      <AccountingCredentialsGuide
-        system={config.accountingSystem}
-        integrationPartner={config.integrationPartner}
+      <AccountingCredentialsGuide 
+        system={config.accountingSystem} 
+        integrationPartner={config.integrationPartner} 
       />
 
       <div className="space-y-4">
@@ -53,4 +53,3 @@ export function AccountingApiStep({ config, updateConfig }: Props) {
     </div>
   );
 }
-

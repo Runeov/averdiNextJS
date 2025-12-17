@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { BookOpen, ChevronUp, ChevronDown, Info, ExternalLink, Key } from 'lucide-react';
+import { BookOpen, ChevronUp, ChevronDown, Info, ExternalLink, Key, CheckCircle2 } from 'lucide-react';
 
 interface Props {
   system: string;
@@ -17,27 +17,31 @@ export function AccountingCredentialsGuide({ system, integrationPartner }: Props
     switch(integrationPartner) {
       case 'iizy':
         return {
-          name: 'iizy fakturaintegrasjon',
+          name: 'iizy',
+          extensionName: 'iizy fakturaintegrasjon',
           url: 'https://www.poweroffice.no/utvidelser/vipps_iizy',
-          description: 'Legg til applikasjon "iizy fakturaintegrasjon" fra PowerOffice utvidelser'
+          description: 'Integrasjon levert av iizy for Vipps-oppgjør'
         };
       case 'emonkey':
         return {
-          name: 'Vipps - Levert av eMonkey',
+          name: 'eMonkey',
+          extensionName: 'Vipps - Levert av eMonkey',
           url: 'https://www.emonkey.no/integrasjoner/vipps',
           description: 'Integrasjon levert av eMonkey for Vipps-oppgjør'
         };
       case 'srh':
         return {
-          name: 'SNN RH - Vipps',
+          name: 'SNN RH',
+          extensionName: 'SNN RH - Vipps',
           url: 'https://www.poweroffice.no/utvidelser/vipps-snnrh',
           description: 'SpareBank 1 regnskapshuset sin Vipps-integrasjon'
         };
       default:
         return {
           name: 'Din integrasjonspartner',
+          extensionName: 'Din integrasjon',
           url: '',
-          description: 'Kontakt din integrasjonspartner for Application Key'
+          description: 'Kontakt din integrasjonspartner for tilgang'
         };
     }
   };
@@ -74,11 +78,12 @@ export function AccountingCredentialsGuide({ system, integrationPartner }: Props
                 </p>
                 <ul className="list-disc list-inside text-sm text-blue-800 space-y-1 ml-2">
                   <li><strong>Application Key</strong> - Fra {partnerConfig.name}</li>
-                  <li><strong>Client Key</strong> - Genereres automatisk i PowerOffice Go</li>
+                  <li><strong>Client Key</strong> - Genereres automatisk når du godkjenner</li>
                 </ul>
               </div>
 
               <div className="space-y-4">
+                {/* Step 1: Login */}
                 <div className="flex items-start gap-3">
                   <div className="w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">1</div>
                   <div className="flex-1">
@@ -93,6 +98,7 @@ export function AccountingCredentialsGuide({ system, integrationPartner }: Props
                   </div>
                 </div>
 
+                {/* Step 2: Navigate to Extensions */}
                 <div className="flex items-start gap-3">
                   <div className="w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">2</div>
                   <div className="flex-1">
@@ -100,174 +106,138 @@ export function AccountingCredentialsGuide({ system, integrationPartner }: Props
                     <div className="bg-gray-50 p-4 rounded-lg text-sm">
                       <div className="bg-white border-2 border-purple-300 p-3 rounded font-mono text-xs space-y-1">
                         <div>Menu (☰)</div>
-                        <div>→ Settings (Innstillinger)</div>
-                        <div>→ Extensions (Utvidelser)</div>
+                        <div className="pl-4">→ Settings (Innstillinger)</div>
+                        <div className="pl-8">→ Extensions (Utvidelser)</div>
                       </div>
                     </div>
                   </div>
                 </div>
 
+                {/* Step 3: Find and Authorize - SIMPLIFIED */}
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">3</div>
+                  <div className="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">3</div>
                   <div className="flex-1">
-                    <h3 className="font-bold text-gray-900 mb-2">Legg til applikasjonen «{partnerConfig.name}»</h3>
-                    <div className="bg-gray-50 p-4 rounded-lg text-sm space-y-3">
+                    <h3 className="font-bold text-gray-900 mb-2">Legg til og godkjenn «{partnerConfig.extensionName}»</h3>
+                    <div className="bg-gray-50 p-4 rounded-lg text-sm space-y-4">
                       <p className="text-gray-700">{partnerConfig.description}</p>
 
-                      {/* Partner-specific instructions */}
-                      <div className="bg-white border-2 border-purple-200 p-4 rounded-lg space-y-3">
-                        <div className="flex items-start gap-2">
-                          <div className="w-6 h-6 bg-purple-500 text-white rounded flex items-center justify-center text-xs font-bold flex-shrink-0">
-                            {integrationPartner === 'iizy' ? 'i' : integrationPartner === 'emonkey' ? 'e' : 'S'}
-                          </div>
-                          <div className="flex-1">
-                            <h4 className="font-bold text-purple-900 mb-1">{partnerConfig.name}</h4>
-                            {partnerConfig.url && (
-                              <a 
-                                href={partnerConfig.url} 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className="text-blue-600 hover:underline text-xs flex items-center gap-1"
-                              >
-                                {partnerConfig.url.replace('https://', '')}
-                                <ExternalLink className="w-3 h-3" />
-                              </a>
-                            )}
-                          </div>
-                        </div>
-
-                        <div className="bg-blue-50 border border-blue-200 p-3 rounded">
-                          <p className="text-blue-900 font-semibold text-xs mb-2">Hvordan få Application Key:</p>
-                          
-                          {integrationPartner === 'iizy' && (
-                            <ol className="list-decimal list-inside text-xs text-blue-800 space-y-1 ml-2">
-                              <li>Gå til PowerOffice utvidelser (lenke over)</li>
-                              <li>Klikk "Bestill" for iizy fakturaintegrasjon</li>
-                              <li>Fyll ut skjema med bedriftsinformasjon</li>
-                              <li>iizy sender deg Application Key per e-post</li>
-                              <li>Vanligvis mottas innen 1-2 virkedager</li>
-                            </ol>
-                          )}
-
-                          {integrationPartner === 'emonkey' && (
-                            <ol className="list-decimal list-inside text-xs text-blue-800 space-y-1 ml-2">
-                              <li>Gå til eMonkey sin side (lenke over)</li>
-                              <li>Kontakt eMonkey via kontaktskjema eller telefon</li>
-                              <li>Be om Vipps-integrasjon for PowerOffice Go</li>
-                              <li>eMonkey gir deg Application Key</li>
-                              <li>De hjelper deg også med oppsett</li>
-                            </ol>
-                          )}
-
-                          {integrationPartner === 'srh' && (
-                            <ol className="list-decimal list-inside text-xs text-blue-800 space-y-1 ml-2">
-                              <li>Kontakt din bankrådgiver i SpareBank 1</li>
-                              <li>Be om "Vipps oppgjørsintegrasjon til PowerOffice Go"</li>
-                              <li>Banken registrerer deg i SNN RH systemet</li>
-                              <li>Du mottar Application Key fra SNN RH</li>
-                              <li>Banken kan også bistå med oppsett</li>
-                            </ol>
-                          )}
-
-                          {integrationPartner === 'direct' && (
-                            <div className="text-xs text-blue-800">
-                              <p className="mb-2">For egen integrasjon må du:</p>
-                              <ol className="list-decimal list-inside space-y-1 ml-2">
-                                <li>Registrere din applikasjon hos PowerOffice</li>
-                                <li>Se dokumentasjon på developer.poweroffice.net</li>
-                                <li>Du får Application Key ved registrering</li>
-                              </ol>
+                      {/* Clear instruction box */}
+                      <div className="bg-white border-2 border-green-300 p-4 rounded-lg">
+                        <p className="text-gray-900 font-semibold mb-3">Godkjenn integrasjonen:</p>
+                        <ol className="space-y-3">
+                          <li className="flex items-start gap-3">
+                            <span className="w-6 h-6 bg-green-100 text-green-700 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>
+                            <div>
+                              <p className="text-gray-800">I Extensions-listen, finn <strong className="text-purple-700">«{partnerConfig.extensionName}»</strong></p>
                             </div>
-                          )}
-                        </div>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="w-6 h-6 bg-green-100 text-green-700 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
+                            <div>
+                              <p className="text-gray-800">Klikk <strong className="text-green-700">«Authorize»</strong></p>
+                            </div>
+                          </li>
+                        </ol>
+                      </div>
 
-                        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-3">
-                          <p className="text-yellow-800 text-xs">
-                            <strong>⏰ Tidsbruk:</strong> Bestilling og mottak av Application Key tar vanligvis 1-3 virkedager. 
-                            Planlegg oppsettet i god tid før du trenger integrasjonen i drift.
-                          </p>
+                      {/* Success indicator */}
+                      <div className="bg-green-50 border border-green-200 p-4 rounded-lg">
+                        <div className="flex items-start gap-2">
+                          <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                          <div>
+                            <p className="text-green-900 font-semibold text-sm">Client Key genereres automatisk!</p>
+                            <p className="text-green-700 text-xs mt-1">
+                              Når du godkjenner, genereres Client Key automatisk og sendes til {partnerConfig.name}. 
+                              Du vil ikke se den i PowerOffice av sikkerhetshensyn.
+                            </p>
+                          </div>
+                        </div>
+                        
+                        <div className="mt-3 pt-3 border-t border-green-200">
+                          <p className="text-green-800 text-xs font-semibold mb-1">✅ Slik vet du at det fungerte:</p>
+                          <ul className="text-green-700 text-xs space-y-1 ml-4 list-disc">
+                            <li>Status endres til <strong>«Active»</strong> eller <strong>«Connected»</strong></li>
+                            <li>Integrasjonen vises under "Mine utvidelser"</li>
+                          </ul>
                         </div>
                       </div>
+
+                      {/* Can't find it? */}
+                      {partnerConfig.url && (
+                        <div className="bg-yellow-50 border border-yellow-200 p-3 rounded-lg">
+                          <p className="text-yellow-800 text-xs font-semibold mb-1">Finner du ikke «{partnerConfig.extensionName}»?</p>
+                          <p className="text-yellow-700 text-xs mb-2">
+                            Integrasjonen må kanskje bestilles/aktiveres først:
+                          </p>
+                          <a 
+                            href={partnerConfig.url} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-blue-600 hover:underline text-xs flex items-center gap-1"
+                          >
+                            Gå til {partnerConfig.name}
+                            <ExternalLink className="w-3 h-3" />
+                          </a>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
 
+                {/* Step 4: Get Client Key from partner */}
                 <div className="flex items-start gap-3">
                   <div className="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">4</div>
                   <div className="flex-1">
-                    <h3 className="font-bold text-gray-900 mb-2">Godkjenn integrasjonen</h3>
-                    <div className="bg-gray-50 p-4 rounded-lg text-sm space-y-2">
+                    <h3 className="font-bold text-gray-900 mb-2">Hent Client Key fra {partnerConfig.name}</h3>
+                    <div className="bg-gray-50 p-4 rounded-lg text-sm space-y-3">
                       <p className="text-gray-700">
-                        I Extensions-listen, finn <strong>"{partnerConfig.name}"</strong> og klikk <strong>"Authorize"</strong>
-                      </p>
-                      <div className="bg-green-50 border border-green-200 p-3 rounded space-y-2">
-                        <p className="text-green-800 text-xs font-semibold">✅ Client Key genereres automatisk!</p>
-                        <p className="text-green-700 text-xs">
-                          Du vil IKKE se Client Key i PowerOffice av sikkerhetshensyn. 
-                          Den sendes automatisk til {partnerConfig.name}.
-                        </p>
-                      </div>
-                      <div className="bg-blue-50 border border-blue-200 p-2 rounded">
-                        <p className="text-blue-800 text-xs">
-                          <strong>Status:</strong> Etter godkjenning skal integrasjonen vise status <strong>"Active"</strong> eller <strong>"Connected"</strong>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">5</div>
-                  <div className="flex-1">
-                    <h3 className="font-bold text-gray-900 mb-2">Få Client Key fra {partnerConfig.name}</h3>
-                    <div className="bg-gray-50 p-4 rounded-lg text-sm space-y-2">
-                      <p className="text-gray-700 mb-2">
-                        Client Key vises ikke i PowerOffice. Du må hente den fra integrasjonspartnerens system:
+                        Client Key vises ikke i PowerOffice. Hent den fra {partnerConfig.name}:
                       </p>
                       
-                      <div className="space-y-2">
-                        {integrationPartner === 'iizy' && (
-                          <div className="bg-white border p-3 rounded">
-                            <p className="font-semibold text-gray-900 text-xs mb-2">Via iizy dashboard:</p>
-                            <ol className="list-decimal list-inside text-xs text-gray-700 space-y-1 ml-2">
-                              <li>Logg inn på iizy.no</li>
-                              <li>Gå til "Mine Integrasjoner" eller "PowerOffice"</li>
-                              <li>Client Key vises under "API Nøkler" (kan være maskert med ••••)</li>
-                              <li>Klikk "Vis" eller "Copy" for å kopiere nøkkelen</li>
-                            </ol>
-                          </div>
-                        )}
+                      {integrationPartner === 'iizy' && (
+                        <div className="bg-white border p-3 rounded">
+                          <ol className="list-decimal list-inside text-xs text-gray-700 space-y-1 ml-2">
+                            <li>Logg inn på <strong>iizy.no</strong></li>
+                            <li>Gå til "Mine Integrasjoner" → "PowerOffice"</li>
+                            <li>Client Key vises under "API Nøkler"</li>
+                            <li>Klikk "Vis" eller "Copy" for å kopiere</li>
+                          </ol>
+                        </div>
+                      )}
 
-                        {integrationPartner === 'emonkey' && (
-                          <div className="bg-white border p-3 rounded">
-                            <p className="font-semibold text-gray-900 text-xs mb-2">Via eMonkey:</p>
-                            <ol className="list-decimal list-inside text-xs text-gray-700 space-y-1 ml-2">
-                              <li>Logg inn på eMonkey sin kundeportal</li>
-                              <li>Gå til "PowerOffice Integrasjoner"</li>
-                              <li>Client Key finnes under "API Tilgang"</li>
-                              <li>Alternativt: Kontakt eMonkey support direkte</li>
-                            </ol>
-                          </div>
-                        )}
+                      {integrationPartner === 'emonkey' && (
+                        <div className="bg-white border p-3 rounded">
+                          <ol className="list-decimal list-inside text-xs text-gray-700 space-y-1 ml-2">
+                            <li>Logg inn på <strong>eMonkey kundeportal</strong></li>
+                            <li>Gå til "PowerOffice Integrasjoner"</li>
+                            <li>Client Key finnes under "API Tilgang"</li>
+                            <li>Eller kontakt eMonkey support direkte</li>
+                          </ol>
+                        </div>
+                      )}
 
-                        {integrationPartner === 'srh' && (
-                          <div className="bg-white border p-3 rounded">
-                            <p className="font-semibold text-gray-900 text-xs mb-2">Via SNN RH eller banken:</p>
-                            <ol className="list-decimal list-inside text-xs text-gray-700 space-y-1 ml-2">
-                              <li>Kontakt din bankrådgiver i SpareBank 1</li>
-                              <li>Be om Client Key for PowerOffice-integrasjonen</li>
-                              <li>Banken henter nøkkelen fra SNN RH systemet</li>
-                              <li>Du mottar Client Key på sikker måte</li>
-                            </ol>
-                          </div>
-                        )}
+                      {integrationPartner === 'srh' && (
+                        <div className="bg-white border p-3 rounded">
+                          <ol className="list-decimal list-inside text-xs text-gray-700 space-y-1 ml-2">
+                            <li>Kontakt din <strong>bankrådgiver i SpareBank 1</strong></li>
+                            <li>Be om Client Key for PowerOffice-integrasjonen</li>
+                            <li>Banken henter nøkkelen fra SNN RH</li>
+                          </ol>
+                        </div>
+                      )}
 
-                        <div className="bg-blue-50 p-3 rounded">
-                          <p className="text-blue-800 text-xs">
-                            <strong>💡 For Averdi-kunder:</strong> Send oss beskjed når du har godkjent integrasjonen i PowerOffice Go. 
-                            Vi kontakter {partnerConfig.name} og henter Client Key for deg.
+                      {integrationPartner === 'direct' && (
+                        <div className="bg-white border p-3 rounded">
+                          <p className="text-xs text-gray-700">
+                            For direkte integrasjon genererer du selv nøklene via PowerOffice Developer Portal.
                           </p>
                         </div>
+                      )}
+
+                      <div className="bg-blue-50 border border-blue-200 p-3 rounded">
+                        <p className="text-blue-800 text-xs">
+                          <strong>💡 Averdi-kunder:</strong> Send oss beskjed når du har godkjent integrasjonen - vi henter Client Key for deg!
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -283,8 +253,8 @@ export function AccountingCredentialsGuide({ system, integrationPartner }: Props
                 <div className="space-y-2 text-sm text-green-800">
                   <p className="font-semibold">I PowerOffice Go → Settings → Extensions:</p>
                   <ul className="list-disc list-inside ml-4 space-y-1 text-xs">
-                    <li>Integrasjonen "{partnerConfig.name}" skal vise status <strong className="text-green-900">"Active"</strong></li>
-                    <li>Hvis status er "Needs Authorization" → Gå tilbake til steg 4</li>
+                    <li>«{partnerConfig.extensionName}» skal vise status <strong className="text-green-900">«Active»</strong></li>
+                    <li>Hvis status er "Needs Authorization" → Gå tilbake til steg 3</li>
                     <li>Hvis integrasjonen ikke vises → Kontakt {partnerConfig.name}</li>
                   </ul>
                 </div>
@@ -322,12 +292,9 @@ export function AccountingCredentialsGuide({ system, integrationPartner }: Props
                     <div className="bg-gray-50 p-4 rounded-lg text-sm">
                       <div className="bg-white border-2 border-purple-300 p-3 rounded font-mono text-xs space-y-1">
                         <div>Innstillinger (Settings/Verktøy)</div>
-                        <div>→ Integrasjoner eller API</div>
-                        <div>→ API-tilgang eller Generer API-nøkler</div>
+                        <div className="pl-4">→ Integrasjoner eller API</div>
+                        <div className="pl-8">→ API-tilgang</div>
                       </div>
-                      <p className="text-xs text-gray-500 mt-2 italic">
-                        Menystrukturen kan variere avhengig av din 24SevenOffice-versjon
-                      </p>
                     </div>
                   </div>
                 </div>
@@ -338,17 +305,10 @@ export function AccountingCredentialsGuide({ system, integrationPartner }: Props
                     <h3 className="font-bold text-gray-900 mb-2">Generer API-nøkler</h3>
                     <div className="bg-gray-50 p-4 rounded-lg text-sm space-y-2">
                       <p className="text-gray-700">Klikk "Generer ny nøkkel" eller "Create API Key"</p>
-                      <div className="bg-white border p-3 rounded space-y-2">
-                        <p className="text-gray-700 text-xs">Gi nøkkelen et beskrivende navn:</p>
-                        <div className="bg-gray-100 p-2 rounded font-mono text-xs">
-                          "Vipps Integration" eller "Vipps - {partnerConfig.name}"
-                        </div>
-                      </div>
                       <div className="bg-red-50 border-l-4 border-red-500 p-3">
                         <p className="text-red-900 font-semibold text-xs mb-1">🔒 Viktig!</p>
                         <p className="text-red-800 text-xs">
-                          <strong>API Secret vises kun én gang!</strong> Kopier og lagre den i en passordmanager umiddelbart. 
-                          Hvis du mister den, må du generere en helt ny nøkkel.
+                          <strong>API Secret vises kun én gang!</strong> Kopier og lagre den umiddelbart.
                         </p>
                       </div>
                     </div>
@@ -361,22 +321,16 @@ export function AccountingCredentialsGuide({ system, integrationPartner }: Props
                     <h3 className="font-bold text-gray-900 mb-2">Kopier nøklene</h3>
                     <div className="bg-gray-50 p-4 rounded-lg text-sm space-y-3">
                       <div>
-                        <p className="text-gray-600 text-xs mb-1 font-semibold">API Key / Username:</p>
+                        <p className="text-gray-600 text-xs mb-1 font-semibold">API Key:</p>
                         <div className="bg-white border p-2 rounded font-mono text-xs text-gray-600">
                           a1b2c3d4-e5f6-7890-abcd-ef1234567890
                         </div>
                       </div>
                       <div>
-                        <p className="text-gray-600 text-xs mb-1 font-semibold">API Secret / Password:</p>
+                        <p className="text-gray-600 text-xs mb-1 font-semibold">API Secret:</p>
                         <div className="bg-white border p-2 rounded font-mono text-xs text-gray-600">
-                          X7mK9pL2nQ4rT8vB6cW1sD5eF3gH0jN
+                          X7mK9pL2nQ4rT8vB6cW1sD5eF3gH0jN...
                         </div>
-                      </div>
-                      <div className="bg-yellow-50 border border-yellow-300 p-3 rounded">
-                        <p className="text-yellow-800 text-xs">
-                          <strong>💡 Tips:</strong> Bruk "Copy"-knappen ved siden av hver nøkkel. 
-                          Sjekk at det ikke er ekstra mellomrom før eller etter når du limer inn.
-                        </p>
                       </div>
                     </div>
                   </div>
@@ -398,17 +352,6 @@ export function AccountingCredentialsGuide({ system, integrationPartner }: Props
                 <ExternalLink className="w-4 h-4" />
                 {isPowerOffice ? 'PowerOffice API dokumentasjon' : '24SevenOffice support'}
               </a>
-              {partnerConfig.url && (
-                <a 
-                  href={partnerConfig.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="text-green-700 hover:underline flex items-center gap-2"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  {partnerConfig.name} support
-                </a>
-              )}
               <a 
                 href="mailto:support@averdi.no" 
                 className="text-green-700 hover:underline flex items-center gap-2"
