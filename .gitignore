@@ -27,3 +27,6 @@ ts-debug.log*
 .env*.local
 .vercel
 .netlify
+
+# Auto Claude data directory
+.auto-claude/

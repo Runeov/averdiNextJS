@@ -50,20 +50,24 @@ export default function OrganisasjonHub() {
             icon={Trophy}
             theme="green"
           />
-          <CategoryCard 
-            title="Momskompensasjon"
-            description="Slik får dere pengene tilbake. Frister og krav til dokumentasjon."
-            href="/kunnskapsbank/organisasjoner/moms"
-            icon={Receipt}
-            theme="green"
-          />
-          <CategoryCard 
-            title="Samiske Foreninger"
-            description="Spesielle støtteordninger for språksentre og kulturhus."
-            href="/kunnskapsbank/organisasjoner/samisk"
-            icon={HeartHandshake}
-            theme="green"
-          />
+          {/* TODO: Create /kunnskapsbank/organisasjoner/moms page */}
+          <div className="flex flex-col p-6 bg-slate-100 border border-slate-200 rounded-2xl opacity-60 h-full">
+            <div className="w-12 h-12 bg-slate-200 rounded-xl flex items-center justify-center mb-4 text-slate-400">
+              <Receipt className="w-6 h-6" />
+            </div>
+            <h3 className="text-xl font-bold text-slate-500 mb-2">Momskompensasjon</h3>
+            <p className="text-sm text-slate-400 leading-relaxed flex-grow">Slik får dere pengene tilbake. Frister og krav til dokumentasjon.</p>
+            <span className="text-xs text-slate-400 mt-4 italic">Kommer snart</span>
+          </div>
+          {/* TODO: Create /kunnskapsbank/organisasjoner/samisk page */}
+          <div className="flex flex-col p-6 bg-slate-100 border border-slate-200 rounded-2xl opacity-60 h-full">
+            <div className="w-12 h-12 bg-slate-200 rounded-xl flex items-center justify-center mb-4 text-slate-400">
+              <HeartHandshake className="w-6 h-6" />
+            </div>
+            <h3 className="text-xl font-bold text-slate-500 mb-2">Samiske Foreninger</h3>
+            <p className="text-sm text-slate-400 leading-relaxed flex-grow">Spesielle støtteordninger for språksentre og kulturhus.</p>
+            <span className="text-xs text-slate-400 mt-4 italic">Kommer snart</span>
+          </div>
         </div>
       </div>
     </main>

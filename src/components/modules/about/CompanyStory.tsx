@@ -66,7 +66,7 @@ export default function CompanyStory() {
           </div>
 
           {/* Quote */}
-          <div className="mt-16 bg-slate-50 rounded-2xl p-8 border-l-4 border-[#E86C1F]">
+          <div className="mt-16 bg-slate-50 rounded-2xl p-8 border-l-4 border-[#E86C1F] text-center">
             <blockquote className="text-lg text-slate-700 italic mb-4">
               "Det offentlige setter rammene. Vi finner mulighetene."
             </blockquote>

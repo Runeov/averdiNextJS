@@ -17,9 +17,9 @@ export default function SametingetPrimaryPage() {
   const janAtle = getExpert('jan-atle');
 
   const faqData = [
-    { question: "Kan jeg få støtte til kjøp av min første sjark?", answer: "Ja. Sametinget prioriterer førstegangsetablerere i fiskerinæringen. Du må være under 35 år (eller kvinne uansett alder) for høyest prioritet, og båten må være under 11 meter." },
-    { question: "Gjelder støtten for brukt utstyr i landbruk?", answer: "Som hovedregel gis det kun støtte til nye investeringer og nybygg. For kjøp av fartøy gjelder egne regler hvor brukte fartøy kan støttes ved førstegangsetablering." },
-    { question: "Må jeg stå i Fiskermanntallet?", answer: "Ja. For å søke støtte til fiskeriformål må du være oppført på blad B i Fiskermanntallet, eller søke om opptak samtidig med investeringen." }
+    { question: "Kan jeg få støtte til kjøp av min første sjark?", answer: "Ja. Sametinget prioriterer førstegangsetablerere i fiskerinæringen. Du må være registrert på blad B i Fiskermanntallet, og båten må være under 11 meter. Både nye og brukte fartøy kan støttes ved førstegangsetablering." },
+    { question: "Gjelder støtten for brukt utstyr i landbruk?", answer: "Som hovedregel gis det kun støtte til nye investeringer og nybygg. Brukte maskiner og utstyr støttes normalt ikke. Nedre grense for tilskudd er 30 000 kr." },
+    { question: "Må jeg stå i Fiskermanntallet?", answer: "Ja. For å søke støtte til fiskeriformål må du være registrert på blad B i Fiskermanntallet. Mottaksanlegg må ha mottaks- og kjøpegodkjenning." }
   ];
 
   const jsonLd = {
@@ -87,7 +87,7 @@ export default function SametingetPrimaryPage() {
             <div className="flex-1">
               <h3 className="font-bold text-blue-900 text-lg">Finansieringsrammer 2026</h3>
               <p className="text-blue-800 text-sm mb-4">
-                Gjelder marine næringer, jordbruk og reindrift. 
+                Satsene varierer etter næring. Jordbruk har høyest tak, marine næringer har egne satser.
               </p>
               
               <div className="grid sm:grid-cols-2 gap-4">
@@ -99,12 +99,12 @@ export default function SametingetPrimaryPage() {
                       id="sameting-marine-maks-sats" 
                       value="500 000" 
                       format="currency" 
-                      source="Sametinget"
+                      source="Sametinget 2026"
                       className="font-bold text-2xl text-slate-900" 
                     />
                     <span className="text-sm text-slate-500 font-medium">NOK</span>
                   </div>
-                  <span className="text-xs text-slate-400 mt-1">Høyere satser kan gjelde for mottaksanlegg</span>
+                  <span className="text-xs text-slate-400 mt-1">Jordbruk maks | Marine: 300 000 kr</span>
                 </div>
 
                 {/* Boks 2: Støttegrad */}
@@ -128,20 +128,20 @@ export default function SametingetPrimaryPage() {
               <CheckCircle2 className="text-green-500 w-5 h-5" /> Hvem kvalifiserer?
             </h3>
             <ul className="space-y-3 text-slate-600 text-sm">
-              <li>• Fiskere på blad B i manntallet</li>
-              <li>• Aktive jordbruksforetak</li>
-              <li>• Mottaksanlegg og landindustri</li>
+              <li>• Fiskere på blad B i Fiskermanntallet</li>
+              <li>• Jordbruksforetak i STN-området</li>
+              <li>• Mottaksanlegg med kjøpegodkjenning</li>
               <li>• Førstegangsetablerere prioriteres</li>
             </ul>
           </div>
           <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
             <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-slate-900">
-              <AlertTriangle className="text-[#E86C1F] w-5 h-5" /> Tekniske krav
+              <AlertTriangle className="text-[#E86C1F] w-5 h-5" /> Viktige begrensninger
             </h3>
             <ul className="space-y-3 text-slate-600 text-sm">
-              <li>• Fartøy må være under 11 meter (som regel)</li>
-              <li>• Investeringen må være "fremtidsrettet"</li>
-              <li>• Krav om lærlingordning for større bedrifter</li>
+              <li>• Fartøy må være under 11 meter</li>
+              <li>• Maks 50% samlet offentlig støtte</li>
+              <li>• Prosjekter over 8 mill. kr støttes ikke</li>
             </ul>
           </div>
         </div>
@@ -180,10 +180,10 @@ export default function SametingetPrimaryPage() {
                 <h3 className="font-bold text-slate-900 text-lg">Marine Næringer</h3>
               </div>
               <ul className="space-y-2 text-sm text-slate-600">
-                <li>• <strong>Fiskefartøy:</strong> Kjøp av fartøy, nyanlegg eller ombygging.</li>
-                <li>• <strong>Redskap:</strong> Investering i linestamp, juksa eller teiner.</li>
-                <li>• <strong>Serviceanlegg:</strong> Kaianlegg, egnebuer og servicebygg.</li>
-                <li>• <strong>Mottak:</strong> Utstyr for mottak og produksjon av fisk.</li>
+                <li>• <strong>Fiskefartøy:</strong> Kjøp/ombygging (førstegangsetablering prioritert).</li>
+                <li>• <strong>Redskap:</strong> Maks 50 000 kr (kun ved fartøykjøp).</li>
+                <li>• <strong>Mottak/service:</strong> Maks 300 000 kr (35%).</li>
+                <li>• <strong>Ungdomsfiske:</strong> Maks 100 000 kr (for kommuner).</li>
               </ul>
             </div>
 
@@ -194,10 +194,10 @@ export default function SametingetPrimaryPage() {
                 <h3 className="font-bold text-slate-900 text-lg">Jordbruk & Tilleggsnæring</h3>
               </div>
               <ul className="space-y-2 text-sm text-slate-600">
-                <li>• <strong>Driftsbygninger:</strong> Nybygg, tilbygg og omfattende renovering.</li>
+                <li>• <strong>Driftsbygninger:</strong> Maks 500 000 kr (35%).</li>
+                <li>• <strong>Maskinringer:</strong> Maks 100 000 kr for fellestiltak.</li>
                 <li>• <strong>Videreforedling:</strong> Utstyr for lokalmatproduksjon.</li>
-                <li>• <strong>Generasjonsskifte:</strong> Tilrettelegging for nye eiere.</li>
-                <li>• <strong>Tilleggsnæring:</strong> Turisme eller tjenester knyttet til gården.</li>
+                <li>• <strong>Rovvilttap:</strong> Dokumentasjonsprosjekter prioritert.</li>
               </ul>
             </div>
           </div>
@@ -216,7 +216,7 @@ export default function SametingetPrimaryPage() {
             <ul className="grid sm:grid-cols-2 gap-4 text-sm text-indigo-800">
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 mt-0.5 text-indigo-600" />
-                <span>Søker må være registrert på blad B.</span>
+                <span>Søker må være registrert på blad B i Fiskermanntallet.</span>
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 mt-0.5 text-indigo-600" />
@@ -224,11 +224,11 @@ export default function SametingetPrimaryPage() {
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 mt-0.5 text-indigo-600" />
-                <span>Gjelder kjøp av både nytt og brukt fartøy (ved første gang).</span>
+                <span>Ikke mottatt fartøystøtte fra Sametinget tidligere.</span>
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 mt-0.5 text-indigo-600" />
-                <span>Nedbetalingstid på lån må dokumenteres.</span>
+                <span>Bosatt i STN-området (majoritetseier ved AS).</span>
               </li>
             </ul>
           </div>

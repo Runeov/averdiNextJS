@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowLeft, GraduationCap, School, BookOpen, CalendarClock, Users, FileCheck, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, GraduationCap, School, BookOpen, CalendarClock, Users, FileCheck, ShieldCheck, AlertTriangle, Sparkles } from 'lucide-react';
 import { ExpertInsight } from '@/components/modules/kunnskapsbank/ExpertInsight';
 import { McpDataSpan } from '@/components/ui/McpDataSpan';
 import { getExpert } from '@/data/experts';
@@ -223,7 +223,28 @@ export default function OffentligPage() {
             Støtten til barnehager er ikke "one-size-fits-all". Nivået på støtten avhenger av hvor sterkt det samiske miljøet er definert i barnehagens struktur. Det lønner seg å være tydelig.
           </p>
 
-          
+          {/* --- NYTT I 2026: TOSPRÅKLIGHETSTILSKUDD --- */}
+          <div className="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-5 mb-6 shadow-sm">
+            <div className="flex items-start gap-3">
+              <div className="p-2 bg-white rounded-lg text-amber-600 shadow-sm">
+                <Sparkles className="w-5 h-5" />
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-xs font-bold text-amber-600 uppercase tracking-wider">Ny modell fra 2026</span>
+                </div>
+                <h4 className="font-bold text-slate-900 mb-2">Tospråklighetstilskudd endres</h4>
+                <p className="text-slate-600 text-sm leading-relaxed mb-3">
+                  Fra 2026 innføres en ny modell for tospråklighetstilskudd til kommuner. Kommunene kategoriseres nå i ulike grupper basert på
+                  <strong> språksituasjon og behov</strong>. Dette påvirker hvordan midlene fordeles.
+                </p>
+                <div className="flex items-start gap-2 text-xs text-amber-800 bg-amber-100/50 p-2 rounded-lg">
+                  <AlertTriangle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                  <span>Kommuner bør gjennomgå sin kategorisering og dokumentere språkbehov for å sikre riktig tilskuddsnivå.</span>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <ul className="list-disc list-inside space-y-2 text-slate-600 mb-8 ml-2 mt-6">
             <li><strong>Samiske barnehager:</strong> Krever vedtektsfestet samisk formål. Utløser høyeste sats.</li>

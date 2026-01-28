@@ -190,6 +190,25 @@ export default function InstitusjonPage() {
           </div>
         )}
 
+        {/* --- STYRKET SPRÅKSENTER-FINANSIERING 2026 --- */}
+        <div className="bg-gradient-to-r from-purple-50 to-violet-50 border border-purple-200 rounded-xl p-6 mb-16 shadow-sm max-w-4xl">
+          <div className="flex items-start gap-4">
+            <div className="p-3 bg-white rounded-xl text-purple-600 shadow-sm">
+              <TrendingUp className="w-6 h-6" />
+            </div>
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-xs font-bold text-purple-600 uppercase tracking-wider">Styrket i 2026</span>
+              </div>
+              <h3 className="font-bold text-lg text-slate-900 mb-2">Økt finansiering til språksentre</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                Flere samiske språksentre får styrket driftstilskudd med <strong className="text-purple-700">+800 000 kr</strong> i 2026.
+                Dette gir økt handlingsrom for ansettelser og aktiviteter. Kontakt oss for å sikre at regnskapet dokumenterer behovet for videre økning.
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Main Content Sections */}
         <div className="bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-slate-100 my-16 max-w-4xl">
           
@@ -198,7 +217,7 @@ export default function InstitusjonPage() {
           </h2>
           
           <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-            Mens prosjektmidler er "bensin" til bålet, er driftstilskuddet selve "grua" – fundamentet som holder varmen året rundt. 
+            Mens prosjektmidler er "bensin" til bålet, er driftstilskuddet selve "grua" – fundamentet som holder varmen året rundt.
             For å bygge sterke samiske institusjoner (Birgejupmi), må økonomistyringen reflektere langsiktighet.
           </p>
           
@@ -208,6 +227,7 @@ export default function InstitusjonPage() {
               <p className="text-sm text-slate-600 mb-3">
                 Språksentre og museer med helårsdrift. Her er nøkkelen å vise stabil aktivitet som rettferdiggjør faste stillinger.
               </p>
+              <span className="text-xs text-purple-600 font-medium">+800 000 kr til flere sentre i 2026</span>
             </div>
             <div className="p-5 bg-blue-50 rounded-xl border border-blue-100">
               <h3 className="font-bold text-slate-900 mb-2 text-lg">Store Festivaler</h3>

@@ -1,5 +1,11 @@
+# *
 User-agent: *
 Allow: /
+Disallow: /team-demo
+Disallow: /api/
 
-# URL to the Sitemap
+# Host
+Host: https://www.averdi.no
+
+# Sitemaps
 Sitemap: https://www.averdi.no/sitemap.xml

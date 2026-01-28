@@ -117,8 +117,9 @@ export function Footer() {
           </div>
           
           <div className="flex items-center gap-8 text-sm font-medium text-slate-500">
-            <Link href="/personvern" className="hover:text-[#E86C1F] transition-colors">Personvern</Link>
-            <Link href="/cookies" className="hover:text-[#E86C1F] transition-colors">Cookies</Link>
+            {/* TODO: Create /personvern and /cookies pages */}
+            <span className="text-slate-400 cursor-not-allowed" title="Kommer snart">Personvern</span>
+            <span className="text-slate-400 cursor-not-allowed" title="Kommer snart">Cookies</span>
           </div>
 
           <button 

@@ -8,7 +8,7 @@ import { AverdiBackground } from '@/components/modules/AverdiBackground';
 import { FaqAccordion } from '@/components/ui/FaqAccordion';
 
 export const metadata: Metadata = {
-  title: 'Duodji-støtte: Få betalt for kulturarv | Inntil 500 000 kr i tilskudd',
+  title: 'Duodji-støtte: Få betalt for kulturarv | Inntil 400 000 kr i tilskudd',
   description: 'Duodji-momsen er din konkurransekraft. Vi forklarer driftstilskudd, verkstedstøtte og hvordan du profesjonaliserer håndverket.',
 };
 
@@ -49,11 +49,11 @@ export default function DuodjiPage() {
     },
     { 
         question: "Hvordan kommer jeg inn i Duodjiregisteret?", 
-        answer: <>Duodjiregisteret er din inngangsbillett. Kravet er enten fagbrev i duodji, relevant utdanning, eller at du kan dokumentere <strong>realkompetanse</strong> gjennom produkter og utstillinger. Vi kan hjelpe deg å strukturere denne dokumentasjonen.</>
+        answer: <>Duodjiregisteret er din inngangsbillett til momsfritak. For driftstilskudd må du i tillegg være godkjent i <strong>Sámi Duodji-merke</strong> ordningen. Kravet er enten fagbrev i duodji, relevant utdanning, eller at du kan dokumentere <strong>realkompetanse</strong> gjennom produkter og utstillinger. Vi kan hjelpe deg å strukturere denne dokumentasjonen.</>
     },
     { 
         question: "Hvor mye må jeg selge for?", 
-        answer: <>For å kvalifisere til driftstilskudd er det et omsetningskrav på minimum <McpDataSpan id='duodji-min-omsetning' value='50 000' format='currency' /> kroner fra egenproduksjon. Dette må være dokumenterbart salg, ikke hobbyinntekt.</>
+        answer: <>For å kvalifisere til driftstilskudd er det et omsetningskrav på minimum <McpDataSpan id='duodji-min-omsetning' value='50 000' format='currency' /> kroner fra egenproduksjon. Du må også være registrert og godkjent i <strong>Sámi Duodji-merke</strong> ordningen. Dette må være dokumenterbart salg, ikke hobbyinntekt.</>
     }
   ];
 
@@ -65,11 +65,11 @@ export default function DuodjiPage() {
     },
     { 
         question: "Hvordan kommer jeg inn i Duodjiregisteret?", 
-        answer: "Duodjiregisteret er din inngangsbillett. Kravet er enten fagbrev i duodji, relevant utdanning, eller at du kan dokumentere realkompetanse gjennom produkter og utstillinger. Vi kan hjelpe deg å strukturere denne dokumentasjonen." 
+        answer: "Duodjiregisteret er din inngangsbillett til momsfritak. For driftstilskudd må du i tillegg være godkjent i Sámi Duodji-merke ordningen. Kravet er enten fagbrev i duodji, relevant utdanning, eller at du kan dokumentere realkompetanse gjennom produkter og utstillinger. Vi kan hjelpe deg å strukturere denne dokumentasjonen." 
     },
     { 
         question: "Hvor mye må jeg selge for?", 
-        answer: "For å kvalifisere til driftstilskudd er det et omsetningskrav på minimum 50 000 kroner fra egenproduksjon. Dette må være dokumenterbart salg, ikke hobbyinntekt." 
+        answer: "For å kvalifisere til driftstilskudd er det et omsetningskrav på minimum 50 000 kroner fra egenproduksjon. Du må også være registrert og godkjent i Sámi Duodji-merke ordningen. Dette må være dokumenterbart salg, ikke hobbyinntekt." 
     }
   ];
 
@@ -171,7 +171,7 @@ export default function DuodjiPage() {
                     <div className="flex items-baseline gap-1">
                         <McpDataSpan 
                         id="sameting-duodji-maks-sats" 
-                        value="500 000" 
+                        value="400 000" 
                         format="currency" 
                         source="Sametinget Duodji"
                         className="font-bold text-2xl text-slate-900" 
@@ -181,7 +181,7 @@ export default function DuodjiPage() {
                     </div>
                     <div className="text-right">
                     <span className="text-xs text-slate-500 uppercase font-bold tracking-wider">Dekning</span>
-                    <div className="font-bold text-lg text-green-600">Inntil <McpDataSpan id="duodji-dekning" value="35" format="percentage"/></div>
+                    <div className="font-bold text-lg text-green-600">Inntil <McpDataSpan id="duodji-dekning" value="40" format="percentage"/></div>
                     </div>
                 </div>
                 </div>
@@ -203,10 +203,11 @@ export default function DuodjiPage() {
             </div>
             <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
                 <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-slate-900">
-                <ShieldCheck className="text-[#E86C1F] w-5 h-5" /> Duodjiregisteret
+                <ShieldCheck className="text-[#E86C1F] w-5 h-5" /> Sámi Duodji-merket
                 </h3>
                 <ul className="space-y-3 text-slate-600 text-sm">
-                <li>• Inngangsbilletten til momsfritak og tilskudd.</li>
+                <li>• <strong>Påkrevd</strong> for driftstilskudd fra 2025.</li>
+                <li>• Garanterer at produktet er ekte samisk duodji.</li>
                 <li>• Krever formell søknad og godkjenning.</li>
                 <li>• Gir deg status som profesjonell utøver.</li>
                 </ul>

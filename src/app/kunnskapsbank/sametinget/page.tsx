@@ -1,18 +1,20 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { 
-  ArrowLeft, 
-  Briefcase, 
-  Anchor, 
-  Scissors, 
-  Scroll, 
-  Landmark, 
-  BookOpen, 
-  ExternalLink, 
-  Coins, 
+import {
+  ArrowLeft,
+  Briefcase,
+  Anchor,
+  Scissors,
+  Scroll,
+  Landmark,
+  BookOpen,
+  ExternalLink,
+  Coins,
   ShieldCheck,
-  Lightbulb, 
-  AlertTriangle 
+  Lightbulb,
+  AlertTriangle,
+  Languages,
+  Sparkles
 } from 'lucide-react';
 import { BudgetAnalysis } from '@/components/modules/kunnskapsbank/BudgetAnalysis';
 import { McpDataSpan } from '@/components/ui/McpDataSpan';
@@ -22,8 +24,8 @@ import { FaqAccordion } from '@/components/ui/FaqAccordion';
 
 // --- 1. SEO & METADATA ---
 export const metadata: Metadata = {
-  title: 'Sametinget støtteordninger 2026 | Hent 500 000 kr i kapital',
-  description: 'Sametinget forvalter 3 mrd. Vi oversetter reglene slik at din bedrift i STN-området kan hente inntil 500 000 kr i investeringsstøtte (gratis egenkapital).',
+  title: 'Sametinget støtteordninger 2026 | Hent 800 000 kr i kapital',
+  description: 'Sametinget forvalter nesten 800 mill. Vi oversetter reglene slik at din bedrift i STN-området kan hente inntil 800 000 kr i investeringsstøtte (gratis egenkapital).',
   metadataBase: new URL('https://www.averdi.no'),
   alternates: {
     canonical: '/kunnskapsbank/sametinget',
@@ -40,7 +42,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Sametinget 2026: 500 000 kr i potten?',
+    title: 'Sametinget 2026: 800 000 kr i potten?',
     description: 'Guide: Slik søker du støtte til næring i Nord-Norge uten å gå deg vill i skjemaene.',
     images: ['/og-images/sametinget-guide-2026.jpg'],
   },
@@ -80,11 +82,11 @@ export default function SametingetHub() {
     },
     {
       question: 'Hva kreves for å få Duodji-støtte?',
-      answer: <>Du må være registrert i <strong>Duodji-registeret</strong>. Dette fungerer som ditt "fagbrev" i systemet. Mangler du formell utdanning? Vi hjelper deg med realkompetansevurdering slik at porten åpnes.</>
+      answer: <>For driftstilskudd må du være registrert og godkjent i <strong>Sámi Duodji-merke</strong> ordningen – dette er nytt krav fra 2025. For momsfritak holder det med <strong>Duodji-registeret</strong>. Mangler du formell utdanning? Vi hjelper deg med realkompetansevurdering slik at porten åpnes.</>
     },
     {
       question: 'Hva er "Variert Næringsliv"?',
-      answer: <>Dette er "gratis egenkapital" for småbedrifter innen service, reiseliv og småindustri. Du kan søke om inntil <strong>500 000 kr</strong> til investeringer, men ikke til ren drift.</>
+      answer: <>Dette er "gratis egenkapital" for småbedrifter innen service, reiseliv og småindustri. Du kan søke om inntil <strong>800 000 kr</strong> til investeringer (40-70% av godkjente kostnader avhengig av type), men ikke til ren drift.</>
     }
   ];
 
@@ -98,8 +100,8 @@ export default function SametingetHub() {
   const jsonLdData = [
     { q: 'Er jeg i "riktig" område (STN)?', a: 'Sjekk kartet nøye! Du kan være i Tiltakssonen (skatt) men utenfor STN (tilskudd). STN inkluderer hele Finnmark og 7 kommuner i Nord-Troms.' },
     { q: 'Får jeg støtte til fiskebåt?', a: 'Ja, men kun hvis båten er under 11 meter og du bor i STN-området.' },
-    { q: 'Hva kreves for å få Duodji-støtte?', a: 'Du må være registrert i Duodji-registeret.' },
-    { q: 'Hva er "Variert Næringsliv"?', a: 'Dette er "gratis egenkapital" for småbedrifter innen service, reiseliv og småindustri. Inntil 500 000 kr.' }
+    { q: 'Hva kreves for å få Duodji-støtte?', a: 'For driftstilskudd må du være registrert og godkjent i Sámi Duodji-merke ordningen (nytt krav fra 2025). For momsfritak holder det med Duodji-registeret.' },
+    { q: 'Hva er "Variert Næringsliv"?', a: 'Dette er "gratis egenkapital" for småbedrifter innen service, reiseliv og småindustri. Inntil 800 000 kr (40-70% av godkjente kostnader avhengig av type).' }
   ];
 
   const jsonLd = {
@@ -163,8 +165,8 @@ export default function SametingetHub() {
             I 2026 ligger det over{' '}
             <McpDataSpan 
               id="sameting-ramme-2026" 
-              source="Statsbudsjettet 2026"
-              value={3000000000}
+              source="Sametingets budsjett 2026"
+              value={788000000}
               format="currency"
               className="font-bold text-slate-900 bg-orange-50 px-2 py-0.5 rounded border-b-2 border-[#E86C1F]"
             />{' '}
@@ -208,7 +210,7 @@ export default function SametingetHub() {
                 <h4 className="font-bold text-lg">Kapital-muligheten</h4>
               </div>
               <p className="text-slate-600 mb-4 leading-relaxed">
-                Sametinget tilbyr inntil 500 000 kr i tilskudd til variert næringsliv. Dette er egenkapital du ikke betaler tilbake.
+                Sametinget tilbyr inntil 800 000 kr i tilskudd til variert næringsliv. Dette er egenkapital du ikke betaler tilbake.
               </p>
               <div className="grid grid-cols-2 gap-4 mt-6">
                 <div>
@@ -216,7 +218,7 @@ export default function SametingetHub() {
                   <McpDataSpan 
                     id="sameting-variert-naering-maks" 
                     source="Sametinget 2026"
-                    value={500000}
+                    value={800000}
                     format="currency" 
                     className="font-bold text-2xl text-slate-900" 
                   />
@@ -224,19 +226,39 @@ export default function SametingetHub() {
                 <div>
                   <span className="text-xs text-slate-500 uppercase font-bold block">Risikoavlastning</span>
                   <div className="flex items-center gap-1">
-                    <span className="font-bold text-2xl text-green-600">Inntil</span>
-                    <McpDataSpan 
-                      id="sameting-stottegrad" 
-                      source="Sametinget 2026"
-                      value={0.5}
-                      format="percentage" 
-                      className="font-bold text-2xl text-green-600" 
-                    />
+                    <span className="font-bold text-2xl text-green-600">40-70%</span>
                   </div>
+                  <span className="text-xs text-slate-400">Avhengig av næringstype</span>
                 </div>
               </div>
             </div>
 
+          </div>
+        </div>
+
+        {/* --- NYTT I 2026: SPRÅKSENTER ETABLERING --- */}
+        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6 mb-20 shadow-sm">
+          <div className="flex items-start gap-4">
+            <div className="p-3 bg-white rounded-xl text-blue-600 shadow-sm">
+              <Languages className="w-6 h-6" />
+            </div>
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-2">
+                <Sparkles className="w-4 h-4 text-blue-500" />
+                <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">Nytt i 2026</span>
+              </div>
+              <h3 className="font-bold text-lg text-slate-900 mb-2">Etablering av nye språksentre</h3>
+              <p className="text-slate-600 text-sm leading-relaxed mb-3">
+                Sametinget har satt av <strong className="text-blue-700">3,7 millioner kroner</strong> til etablering av nye samiske språksentre i 2026.
+                Dette er en unik mulighet for kommuner og organisasjoner som ønsker å styrke samisk språk lokalt.
+              </p>
+              <Link
+                href="/kunnskapsbank/sametinget/kultur-sprak"
+                className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors"
+              >
+                Les mer om språkstøtte →
+              </Link>
+            </div>
           </div>
         </div>
 
@@ -308,17 +330,17 @@ export default function SametingetHub() {
               <div>
                 <p className="font-semibold text-slate-700 mb-1">Averdi Kvalitetssikring</p>
                 <p>
-                  Vi baserer våre råd på <strong>Meld. St. 37 (2020–2021)</strong> og gjeldende satser i <strong>Statsbudsjettet 2026</strong>. 
+                  Vi baserer våre råd på <strong>Sametingets budsjett 2026</strong> (vedtatt desember 2025) og <strong>Meld. St. 37 (2020–2021)</strong>. 
                   Alle søknadsprosesser kvalitetssikres av statsautorisert regnskapsfører for å sikre at begreper som <em>Birgejupmi</em> (bærekraft) brukes riktig.
                 </p>
               </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
-              <a href="https://www.regjeringen.no/no/dokumenter/meld.-st.-37-20202021/id2861398/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-[#E86C1F] transition-colors">
-                Kilde: Meld. St. 37 <ExternalLink className="w-3 h-3" />
+              <a href="https://sametinget.no/stipend-og-tilskudd/oversikt-over-tilskuddsordninger/naring/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-[#E86C1F] transition-colors">
+                Sametinget Næring <ExternalLink className="w-3 h-3" />
               </a>
-              <a href="https://www.ssb.no/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-[#E86C1F] transition-colors">
-                SSB Statistikk <ExternalLink className="w-3 h-3" />
+              <a href="https://www.regjeringen.no/no/dokumenter/meld.-st.-37-20202021/id2861398/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-[#E86C1F] transition-colors">
+                Meld. St. 37 <ExternalLink className="w-3 h-3" />
               </a>
             </div>
           </div>

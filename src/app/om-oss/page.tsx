@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { employees } from '@/../../Temporary/employees';
 import AboutHero from '@/components/modules/about/AboutHero';
 import CompanyStory from '@/components/modules/about/CompanyStory';
-import TeamSection from '@/components/modules/about/TeamSection';
+import TeamSectionModern from '@/components/modules/about/TeamSectionModern';
 import CompanyValues from '@/components/modules/about/CompanyValues';
 import ContactPanel from '@/components/modules/home/ContactPanel';
 
@@ -49,7 +49,7 @@ export default function OmOssPage() {
       <AboutHero />
       <CompanyStory />
       <CompanyValues />
-      <TeamSection employees={Object.values(employees)} />
+      <TeamSectionModern employees={Object.values(employees)} />
       <ContactPanel />
     </main>
   );

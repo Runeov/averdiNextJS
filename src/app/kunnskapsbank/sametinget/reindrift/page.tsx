@@ -135,18 +135,23 @@ export default function ReindriftPage() {
             </h3>
             <ul className="space-y-3 text-slate-600 text-sm">
               <li className="flex items-start gap-2">
-                <span className="text-blue-500 font-bold">•</span> 
+                <span className="text-blue-500 font-bold">•</span>
                 <strong>Tilleggsnæring:</strong> Turisme, matforedling, duodji.
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-blue-500 font-bold">•</span> 
+                <span className="text-blue-500 font-bold">•</span>
                 <strong>Likestilling:</strong> Tiltak for å styrke kvinners posisjon.
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-blue-500 font-bold">•</span> 
+                <span className="text-blue-500 font-bold">•</span>
                 <strong>Infrastruktur:</strong> Felles gjerder og anlegg (via distriktet).
               </li>
             </ul>
+            <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-100">
+              <p className="text-xs text-blue-800 font-medium">
+                <strong>Tilleggsnæring-satser:</strong> Inntil 45% av godkjent kostnadsoverslag, maks kr 500 000.
+              </p>
+            </div>
           </div>
           <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
             <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-slate-900">

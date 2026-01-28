@@ -61,12 +61,12 @@ export function Navbar() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity" aria-label="Gå til forsiden">
-              <Image 
-                src={logoAverdi} 
-                alt="Averdi Logo" 
-                height={50} // Explicit height helps against layout shift
-                className="h-12 w-auto" // Tailwind handles visual size
-                priority 
+              <Image
+                src={logoAverdi}
+                alt="Averdi Logo"
+                height={80} // Match h-20 (80px) - full navbar height
+                className="h-20 w-auto" // Fill navbar completely without padding
+                priority
               />
             </Link>
           </div>

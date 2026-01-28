@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowLeft, Music, BookOpen, CalendarClock, Mic2, AlertCircle, Languages, Check, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, Music, BookOpen, CalendarClock, Mic2, AlertCircle, Languages, Check, ShieldCheck, Sparkles, Building } from 'lucide-react';
 import { ExpertInsight } from '@/components/modules/kunnskapsbank/ExpertInsight';
 import { McpDataSpan } from '@/components/ui/McpDataSpan';
 import { getExpert } from '@/data/experts';
@@ -129,6 +129,31 @@ export default function KulturSprakPage() {
                 Kulturproduksjon i Sápmi er ikke bare kunst; det er samfunnsbygging. 
                 Vi hjelper deg å navigere i tilskuddene som gjør det mulig å leve av musikk, litteratur og språkformidling.
             </p>
+            </div>
+
+            {/* --- NYTT I 2026: SPRÅKSENTER ETABLERING --- */}
+            <div className="bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 rounded-xl p-6 mb-12 shadow-sm">
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-white rounded-xl text-emerald-600 shadow-sm">
+                  <Building className="w-6 h-6" />
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Sparkles className="w-4 h-4 text-emerald-500" />
+                    <span className="text-xs font-bold text-emerald-600 uppercase tracking-wider">Nytt i 2026</span>
+                  </div>
+                  <h3 className="font-bold text-lg text-slate-900 mb-2">Etablering av nye språksentre</h3>
+                  <p className="text-slate-600 text-sm leading-relaxed mb-3">
+                    Sametinget har satt av <strong className="text-emerald-700">3,7 millioner kroner</strong> til etablering av nye samiske språksentre i 2026.
+                    Dette er en unik mulighet for kommuner og organisasjoner som ønsker å styrke samisk språk lokalt.
+                  </p>
+                  <div className="flex flex-wrap gap-3 text-xs">
+                    <span className="px-2 py-1 bg-white rounded-full text-emerald-700 font-medium border border-emerald-200">Kommuner</span>
+                    <span className="px-2 py-1 bg-white rounded-full text-emerald-700 font-medium border border-emerald-200">Organisasjoner</span>
+                    <span className="px-2 py-1 bg-white rounded-full text-emerald-700 font-medium border border-emerald-200">Samiske miljøer</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* FRIST-ALARM: Kritisk informasjon først */}

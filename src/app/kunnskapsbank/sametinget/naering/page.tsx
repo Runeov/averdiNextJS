@@ -10,14 +10,14 @@ import { FaqAccordion } from '@/components/ui/FaqAccordion';
 
 export const metadata: Metadata = {
   title: 'Næringsstøtte fra Sametinget | Guide for Bedrifter',
-  description: 'Slik søker du om tilskudd til Duodji, samisk reiseliv og tilleggsnæringer. Få inntil 500.000 i støtte i STN-området. Vi hjelper deg med søknaden.',
+  description: 'Slik søker du om tilskudd til Duodji, samisk reiseliv og tilleggsnæringer. Få inntil 800.000 i støtte i STN-området. Vi hjelper deg med søknaden.',
 };
 
 export default function SametingetNaeringPage() {
   const janAtle = getExpert('jan-atle');
 
   const faqData = [
-    { question: "Hvor mye kan jeg få i støtte til variert næringsliv?", answer: "Du kan få inntil 500 000 kroner i investeringstilskudd. Støttesatsen er normalt inntil 35 % av godkjente kostnader, men kan være høyere for små prosjekter." },
+    { question: "Hvor mye kan jeg få i støtte til variert næringsliv?", answer: "Du kan få inntil 800 000 kroner i investeringstilskudd. Støttesatsen varierer: inntil 40% for ordinære bedrifter, inntil 50% for mat fra samiske områder, og inntil 70% for samiske organisasjoner. Minimumskostnad for prosjektet er 30 000 kr." },
     { question: "Hvilke bedrifter kan søke Sametinget?", answer: "Ordningen gjelder for bedrifter etablert i STN-området (Sametingets virkeområde for næring). Prosjektet må ha en samisk kulturell forankring eller bidra til lokalsamfunnet." },
     { question: "Kan jeg søke støtte til brukt utstyr?", answer: "Hovedregelen er at Sametinget støtter kjøp av nytt utstyr. Kjøp av brukt utstyr støttes normalt ikke, med mindre det er særskilte grunner for det." }
   ];
@@ -97,7 +97,7 @@ export default function SametingetNaeringPage() {
                   <div className="flex items-baseline gap-1">
                     <McpDataSpan 
                       id="sameting-naering-maks-sats-hero" 
-                      value="500 000" 
+                      value="800 000" 
                       format="currency" 
                       source="Sametinget 2026"
                       className="font-bold text-2xl text-slate-900" 
@@ -111,9 +111,9 @@ export default function SametingetNaeringPage() {
                   <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-1">Dekningsgrad</span>
                   <div className="flex items-center gap-2">
                     <TrendingUp className="w-5 h-5 text-green-500" />
-                    <span className="font-bold text-xl text-slate-900">Inntil 35 - 50%</span>
+                    <span className="font-bold text-xl text-slate-900">40-70%</span>
                   </div>
-                  <span className="text-xs text-slate-400 mt-1">Avhengig av næringstype</span>
+                  <span className="text-xs text-slate-400 mt-1">40% ordinær, 50% mat, 70% org.</span>
                 </div>
               </div>
             </div>
@@ -211,16 +211,24 @@ export default function SametingetNaeringPage() {
           <ul className="list-disc list-inside space-y-2 text-slate-600 mb-8 ml-2">
             <li>
               <strong>Hovedregel:</strong> Inntil{' '}
-              <McpDataSpan id="sameting-investering-prosent" value="35" format="percentage" source="Sametinget" className="font-bold text-slate-900" />{' '}
+              <McpDataSpan id="sameting-investering-prosent" value="40" format="percentage" source="Sametinget 2026" className="font-bold text-slate-900" />{' '}
               av godkjente kostnader.
             </li>
             <li>
               <strong>Nedre grense:</strong> Prosjekter med totalbudsjett under{' '}
-              <McpDataSpan id="sameting-naering-min-grense" value="50 000" format="currency" source="Sametinget" className="font-bold text-slate-900" />{' '}
+              <McpDataSpan id="sameting-naering-min-grense" value="30 000" format="currency" source="Sametinget 2026" className="font-bold text-slate-900" />{' '}
               prioriteres sjelden.
             </li>
             <li>
-              <strong>Unntak:</strong> Enkelte "myke" prosjekter (som forprosjekter eller kompetanseheving) kan i særskilte tilfeller få inntil 50% dekning.
+              <strong>Mat fra samiske områder:</strong> Inntil 50% dekning for videreforedling og økt omsetning av lokal mat (maks kr 800 000).
+            </li>
+            <li>
+              <strong>Samiske organisasjoner:</strong> Inntil 70% dekning for interesse- og næringsorganisasjoner (maks kr 500 000).
+            </li>
+            <li>
+              <strong>Øvre grense:</strong> Maksimalt tilskudd er{' '}
+              <McpDataSpan id="sameting-naering-maks-grense" value="800 000" format="currency" source="Sametinget 2026" className="font-bold text-slate-900" />{' '}
+              per prosjekt.
             </li>
           </ul>
 
