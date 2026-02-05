@@ -1,6 +1,6 @@
 'use client';
 
-import { Employee } from '@/../../Temporary/employees';
+import type { Employee } from '@/lib/schemas/employee.schema';
 import { Mail, Phone, MapPin, Award, Languages } from 'lucide-react';
 import { useState } from 'react';
 

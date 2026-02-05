@@ -1,0 +1,12 @@
+{
+  "initial-admin": {
+    "id": "initial-admin",
+    "email": "admin@averdi.no",
+    "name": "Administrator",
+    "passwordHash": "$2b$10$dT3r5m70OlYa.2KBafhEnuyWc/TlGzbqXjN0TNRc2x6Vx3UYOet0e",
+    "role": "admin",
+    "isActive": true,
+    "createdAt": "2024-01-01T00:00:00Z",
+    "updatedAt": "2024-01-01T00:00:00Z"
+  }
+}

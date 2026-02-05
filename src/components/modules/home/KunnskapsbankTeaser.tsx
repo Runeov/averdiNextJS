@@ -41,7 +41,7 @@ export default function KunnskapsbankTeaser() {
                   Driver du bedrift i et samisk område? Vi har laget en komplett guide om støtteordninger, søknadsprosesser og krav til regnskap. Lær hvordan du unngår avslag og sikrer finansiering.
                 </p>
                 <Link 
-                  href="/kunnskapsbank/organisasjoner/sametinget"
+                  href="/kunnskapsbank/sametinget"
                   className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-gradient-to-r from-[#E86C1F] to-[#F4B223] rounded-full shadow-md hover:shadow-lg hover:shadow-[#E86C1F]/30 hover:-translate-y-0.5 transition-all duration-300 group-hover:scale-105"
                 >
                   Les guiden

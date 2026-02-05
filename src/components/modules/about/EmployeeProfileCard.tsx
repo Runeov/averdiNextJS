@@ -1,6 +1,6 @@
 'use client';
 
-import { Employee, TimelineMilestone } from '@/../../Temporary/employees';
+import { Employee, TimelineMilestone } from '@/types/admin';
 import { MapPin, Mail, Phone, Briefcase, GraduationCap, Award, Star, ChevronDown, ChevronUp } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';

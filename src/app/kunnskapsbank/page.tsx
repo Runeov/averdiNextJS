@@ -75,7 +75,7 @@ export default function KunnskapsbankPage() {
             </div>
             <h2 className="text-2xl font-bold text-slate-900 mb-3">Sametinget & Duodji</h2>
             <p className="text-slate-600 mb-8 leading-relaxed flex-1">
-              I 2026 forvalter Sametinget over <strong>3 milliarder kroner</strong>. Vi hjelper deg å navigere søknadsjungelen for kultur, språk og næring.
+              I 2026 forvalter Sametinget over <strong>over 788 000 000 kr</strong>. Vi hjelper deg å navigere søknadsjungelen for kultur, språk og næring.
             </p>
             <span className="inline-flex items-center text-[#E86C1F] font-bold text-sm group-hover:gap-2 transition-all mt-auto">
               Se støtteordninger <ArrowRight className="w-4 h-4 ml-1" />

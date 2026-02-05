@@ -11,15 +11,8 @@ const nextConfig = {
 
   // Next.js 15: `experimental.serverComponentsExternalPackages` -> `serverExternalPackages`
   serverExternalPackages: ['chart.js'],
-  
-  // Setter ignore-flagg for å tillate at bygget fullføres selv om det er warnings i koden
+
   reactStrictMode: true,
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
 };
 
 export default nextConfig;

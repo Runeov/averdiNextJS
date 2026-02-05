@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { Navbar } from '@/components/layout/Navbar';
-import { Footer } from '@/components/layout/Footer';
 import { Hotjar } from '@/components/analytics/Hotjar';
 import '../index.css'; 
 import { cn } from '@/lib/utils';
+import { RootLayoutContent } from '@/components/layout/RootLayoutContent';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -17,6 +16,11 @@ export const metadata: Metadata = {
     default: 'Averdi - Statsautorisert regnskapsførerselskap i Nord-Norge',
   },
   description: 'Averdi er et statsautorisert regnskapsførerselskap med base i Karasjok...',
+  icons: {
+    icon: '/favicon.png',
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
+  },
 };
 
 export default function RootLayout({
@@ -30,14 +34,8 @@ export default function RootLayout({
         {/* Analytics */}
         <Hotjar hjid={HOTJAR_SITE_ID} />
         
-        {/* ✅ Navbar her = Vises på ALLE sider */}
-        <Navbar />
-        
-        {/* Selve sideinnholdet */}
-        {children}
-        
-        {/* ✅ Footer her = Vises på ALLE sider */}
-        <Footer />
+        {/* Content with conditional Navbar/Footer */}
+        <RootLayoutContent>{children}</RootLayoutContent>
       </body>
     </html>
   );

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { Menu, X, ArrowRight } from 'lucide-react';
-import logoAverdi from '@/assets/logo_averdi.avif';
+import logoAverdi from '@/assets/logo_averdi.png';
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -86,7 +86,7 @@ export function Navbar() {
               <Link href="/om-oss" className={navLinkClass(pathname === '/om-oss')}>
                 Om oss
               </Link>
-              <Link href="/kunnskapsbank" className={navLinkClass(pathname.startsWith('/kunnskapsbank'))}>
+              <Link href="/kunnskapsbank" className={navLinkClass(pathname.startsWith('/kunnskapsbank') && !pathname.startsWith('/kunnskapsbank/artikler'))}>
                 Kunnskapsbank
               </Link>
               <Link href="/kunnskapsbank/artikler" className={navLinkClass(pathname.startsWith('/kunnskapsbank/artikler'))}>
@@ -133,10 +133,10 @@ export function Navbar() {
               <Link href="/om-oss" onClick={() => setIsMenuOpen(false)} className="text-slate-600 hover:bg-slate-50 block px-4 py-3 rounded-xl w-full text-left text-base font-medium">
                 Om oss
               </Link>
-              <Link href="/kunnskapsbank" onClick={() => setIsMenuOpen(false)} className="text-slate-600 hover:bg-slate-50 block px-4 py-3 rounded-xl w-full text-left text-base font-medium">
+              <Link href="/kunnskapsbank" onClick={() => setIsMenuOpen(false)} className={`block px-4 py-3 rounded-xl w-full text-left text-base font-medium ${pathname.startsWith('/kunnskapsbank') && !pathname.startsWith('/kunnskapsbank/artikler') ? 'text-[#E86C1F] bg-[#E86C1F]/10' : 'text-slate-600 hover:bg-slate-50'}`}>
                 Kunnskapsbank
               </Link>
-              <Link href="/kunnskapsbank/artikler" onClick={() => setIsMenuOpen(false)} className="text-slate-600 hover:bg-slate-50 block px-4 py-3 rounded-xl w-full text-left text-base font-medium">
+              <Link href="/kunnskapsbank/artikler" onClick={() => setIsMenuOpen(false)} className={`block px-4 py-3 rounded-xl w-full text-left text-base font-medium ${pathname.startsWith('/kunnskapsbank/artikler') ? 'text-[#E86C1F] bg-[#E86C1F]/10' : 'text-slate-600 hover:bg-slate-50'}`}>
                 Innsikt
               </Link>
               <div className="pt-4 mt-2 border-t border-slate-100">

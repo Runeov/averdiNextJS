@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { employees } from '@/../../Temporary/employees';
+import { getSortedEmployees } from '@/lib/admin/employees';
 import EmployeeProfileCard from '@/components/modules/about/EmployeeProfileCard';
 
 export const metadata: Metadata = {
@@ -7,14 +7,24 @@ export const metadata: Metadata = {
   description: 'Demo av moderne medarbeiderprofiler',
 };
 
-export default function TeamDemoPage() {
-  // Get first employee for demo
-  const employee = Object.values(employees)[0];
+export default async function TeamDemoPage() {
+  const employees = await getSortedEmployees();
+  const employee = employees[0];
+
+  if (!employee) {
+    return (
+      <main className="flex-1 bg-slate-50">
+        <div className="container mx-auto px-4 sm:px-6 py-16">
+          <p>Ingen ansatte funnet.</p>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="flex-1 bg-slate-50">
       <div className="container mx-auto px-4 sm:px-6 py-16">
-        
+
         {/* Demo Header */}
         <div className="text-center mb-12 max-w-3xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
@@ -36,7 +46,7 @@ export default function TeamDemoPage() {
             Hele teamet
           </h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 max-w-7xl mx-auto">
-            {Object.values(employees).map((emp) => (
+            {employees.map((emp) => (
               <EmployeeProfileCard key={emp.id} employee={emp} />
             ))}
           </div>

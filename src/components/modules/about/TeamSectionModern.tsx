@@ -1,7 +1,7 @@
 'use client';
 
-import { Employee } from '@/../../Temporary/employees';
-import EmployeeProfileCard from './EmployeeProfileCard';
+import { Employee } from '@/types/admin';
+import EmployeeCard from './EmployeeCard';
 
 interface TeamSectionModernProps {
   employees: Employee[];
@@ -22,10 +22,10 @@ export default function TeamSectionModern({ employees }: TeamSectionModernProps)
           </p>
         </div>
 
-        {/* Team Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 max-w-7xl mx-auto">
+        {/* Team Grid - 3 columns on large screens */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
           {employees.map((employee) => (
-            <EmployeeProfileCard key={employee.id} employee={employee} />
+            <EmployeeCard key={employee.id} employee={employee} />
           ))}
         </div>
 

@@ -1,12 +1,22 @@
 'use client';
 
 import Image from 'next/image';
-import { useRouter } from 'next/navigation'; // Next.js equivalent of useNavigate
+import { useRouter } from 'next/navigation';
 import { ArrowRight, MessageSquare, TrendingUp, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function SalesPitch() {
   const router = useRouter();
+
+  const scrollToContact = () => {
+    const element = document.getElementById('contact');
+    if (element) {
+      const navbarHeight = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - navbarHeight;
+      window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+    }
+  };
 
   // Using the same image source, but ideally, this should be a local asset in src/assets
   // If keeping external, remember to configure next.config.js
@@ -49,7 +59,7 @@ export default function SalesPitch() {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <button
-                  onClick={() => router.push('/kontakt')}
+                  onClick={scrollToContact}
                   className="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-[#E86C1F] rounded-full hover:bg-[#d65f18] transition-all shadow-lg hover:shadow-[#E86C1F]/40 transform hover:-translate-y-1 gap-2"
                 >
                   <MessageSquare className="w-5 h-5" />

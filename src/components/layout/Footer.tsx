@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { ArrowUp } from 'lucide-react';
-import logoAverdi from '@/assets/logo_averdi.avif';
+import logoAverdi from '@/assets/logo_averdi.png';
 
 export function Footer() {
   const router = useRouter();

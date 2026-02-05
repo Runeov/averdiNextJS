@@ -5,8 +5,18 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-
-  keyframes: {
+  theme: {
+    extend: {
+      colors: {
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        'averdi-orange': '#E86C1F',
+        'averdi-yellow': '#F4B223',
+      },
+      fontFamily: {
+        sans: ['var(--font-inter)', 'sans-serif'],
+      },
+      keyframes: {
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -19,18 +29,6 @@ module.exports = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-      },
-  theme: {
-    extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        // Adding your brand colors here ensures they are available everywhere
-        'averdi-orange': '#E86C1F',
-        'averdi-yellow': '#F4B223',
-      },
-      fontFamily: {
-        sans: ['var(--font-inter)', 'sans-serif'],
       },
     },
   },

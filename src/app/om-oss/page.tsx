@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { employees } from '@/../../Temporary/employees';
+import { getSortedEmployees } from '@/lib/admin/employees';
 import AboutHero from '@/components/modules/about/AboutHero';
 import CompanyStory from '@/components/modules/about/CompanyStory';
 import TeamSectionModern from '@/components/modules/about/TeamSectionModern';
@@ -16,7 +16,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function OmOssPage() {
+export default async function OmOssPage() {
+  const employees = await getSortedEmployees();
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'AboutPage',
@@ -49,7 +51,7 @@ export default function OmOssPage() {
       <AboutHero />
       <CompanyStory />
       <CompanyValues />
-      <TeamSectionModern employees={Object.values(employees)} />
+      <TeamSectionModern employees={employees} />
       <ContactPanel />
     </main>
   );

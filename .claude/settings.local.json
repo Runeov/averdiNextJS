@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node:*)",
+      "Bash(npm run build)",
+      "Bash(curl:*)",
+      "Bash(powershell -Command \"Invoke-RestMethod -Uri ''http://localhost:3000/api/admin/auth'' -Method POST -ContentType ''application/json'' -Body ''{\"\"email\"\":\"\"admin@averdi.no\"\",\"\"password\"\":\"\"admin123\"\"}'' | ConvertTo-Json\")",
+      "Bash(powershell -Command \"\\(Invoke-WebRequest -Uri ''http://localhost:3000/om-oss'' -UseBasicParsing\\).Content\")"
+    ]
+  }
+}
