@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="nb" className="scroll-smooth">
+    <html lang="nb" className="scroll-smooth" data-scroll-behavior="smooth">
       <body className={cn(inter.variable, "font-sans antialiased bg-slate-50 text-slate-900 min-h-screen flex flex-col")}>
         <a
           href="#main-content"
