@@ -262,7 +262,7 @@ Best regards`;
                 idx === step ? 'bg-orange-500 text-white' :
                 'bg-gray-300 text-gray-600'
               }`}>
-                {idx < step ? <Check className="w-5 h-5" /> : idx + 1}
+                {idx < step ? <Check className="w-5 h-5" aria-hidden="true" /> : idx + 1}
               </div>
               {idx < steps.length - 1 && (
                 <div className={`flex-1 h-1 mx-2 ${idx < step ? 'bg-green-500' : 'bg-gray-300'}`} />
@@ -290,7 +290,7 @@ Best regards`;
           disabled={step === 0}
           className="px-6 py-3 text-gray-700 hover:bg-gray-100 rounded-lg font-medium flex items-center gap-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <ChevronLeft className="w-5 h-5" />
+          <ChevronLeft className="w-5 h-5" aria-hidden="true" />
           Back
         </button>
 
@@ -304,7 +304,7 @@ Best regards`;
             className="px-8 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-medium flex items-center gap-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Next
-            <ChevronRight className="w-5 h-5" />
+            <ChevronRight className="w-5 h-5" aria-hidden="true" />
           </button>
         ) : (
           <button

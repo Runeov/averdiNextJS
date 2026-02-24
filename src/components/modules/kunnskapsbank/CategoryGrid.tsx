@@ -49,11 +49,11 @@ export function CategoryCard({
               compact ? "w-10 h-10 mb-3" : "w-12 h-12 mb-4",
               themeClasses[theme]
             )}>
-              <Icon className={cn("w-5 h-5", compact ? "w-5 h-5" : "w-6 h-6")} />
+              <Icon className={cn("w-5 h-5", compact ? "w-5 h-5" : "w-6 h-6")} aria-hidden="true" />
             </div>
             
             {/* Arrow that appears on hover */}
-            <ArrowRight className="w-5 h-5 text-slate-300 opacity-0 -translate-x-2 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-slate-400" />
+            <ArrowRight className="w-5 h-5 text-slate-300 opacity-0 -translate-x-2 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-slate-400" aria-hidden="true" />
           </div>
 
           <CardTitle className={cn("text-slate-900", compact ? "text-base" : "text-xl")}>

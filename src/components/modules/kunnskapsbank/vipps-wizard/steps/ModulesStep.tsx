@@ -34,7 +34,7 @@ export function ModulesStep({ config, modules, toggleModule }: Props) {
             >
               <div className="flex items-start gap-4">
                 <div className={`p-3 rounded-lg ${isSelected ? 'bg-orange-100' : 'bg-gray-100'}`}>
-                  <Icon className={`w-6 h-6 ${isSelected ? 'text-orange-600' : 'text-gray-600'}`} />
+                  <Icon className={`w-6 h-6 ${isSelected ? 'text-orange-600' : 'text-gray-600'}`} aria-hidden="true" />
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2 flex-wrap">
@@ -46,7 +46,7 @@ export function ModulesStep({ config, modules, toggleModule }: Props) {
                   <p className="text-sm text-gray-600 mt-1">{module.description}</p>
                 </div>
                 {isSelected && (
-                  <Check className="w-6 h-6 text-orange-500 flex-shrink-0" />
+                  <Check className="w-6 h-6 text-orange-500 flex-shrink-0" aria-hidden="true" />
                 )}
               </div>
             </button>

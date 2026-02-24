@@ -55,15 +55,15 @@ export function PowerOfficeClientKeyGuide({ integrationPartner }: Props) {
         className="w-full px-6 py-4 flex items-center justify-between hover:bg-purple-100 transition-colors"
       >
         <div className="flex items-center gap-3">
-          <BookOpen className="w-5 h-5 text-purple-600" />
+          <BookOpen className="w-5 h-5 text-purple-600" aria-hidden="true" />
           <span className="font-semibold text-purple-900">
             📖 Hvordan hente Client Key fra PowerOffice Go
           </span>
         </div>
         {isOpen ? (
-          <ChevronUp className="w-5 h-5 text-purple-600" />
+          <ChevronUp className="w-5 h-5 text-purple-600" aria-hidden="true" />
         ) : (
-          <ChevronDown className="w-5 h-5 text-purple-600" />
+          <ChevronDown className="w-5 h-5 text-purple-600" aria-hidden="true" />
         )}
       </button>
 
@@ -87,7 +87,7 @@ export function PowerOfficeClientKeyGuide({ integrationPartner }: Props) {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-white font-medium"
               style={{ backgroundColor: partnerConfig.color }}
             >
-              <Key className="w-4 h-4" />
+              <Key className="w-4 h-4" aria-hidden="true" />
               {partnerConfig.extensionName}
             </span>
           </div>
@@ -96,7 +96,7 @@ export function PowerOfficeClientKeyGuide({ integrationPartner }: Props) {
           <div className="bg-slate-900 rounded-2xl overflow-hidden shadow-lg">
             <div className="p-4 border-b border-slate-700">
               <h4 className="text-white font-semibold flex items-center gap-2">
-                <Play className="w-5 h-5 text-purple-400" />
+                <Play className="w-5 h-5 text-purple-400" aria-hidden="true" />
                 Video: Slik henter du Client Key
               </h4>
             </div>
@@ -117,7 +117,7 @@ export function PowerOfficeClientKeyGuide({ integrationPartner }: Props) {
               {!isVideoPlaying && (
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                   <div className="w-20 h-20 bg-purple-600/80 rounded-full flex items-center justify-center">
-                    <Play className="w-10 h-10 text-white ml-1" fill="white" />
+                    <Play className="w-10 h-10 text-white ml-1" fill="white" aria-hidden="true" />
                   </div>
                 </div>
               )}
@@ -135,7 +135,7 @@ export function PowerOfficeClientKeyGuide({ integrationPartner }: Props) {
               <li className="flex items-start gap-3">
                 <span className="w-6 h-6 bg-purple-500 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">1</span>
                 <span className="text-slate-700">
-                  Logg inn på <a href="https://go.poweroffice.net" target="_blank" rel="noopener noreferrer" className="text-purple-600 underline hover:text-purple-800">go.poweroffice.net</a>
+                  Logg inn på <a href="https://go.poweroffice.net" target="_blank" rel="noopener noreferrer" className="text-purple-600 underline hover:text-purple-800">go.poweroffice.net<span className="sr-only"> (åpnes i ny fane)</span></a>
                 </span>
               </li>
               <li className="flex items-start gap-3">

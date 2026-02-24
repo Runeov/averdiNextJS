@@ -77,15 +77,15 @@ function TimelineIcon({ type, isHighlight }: { type: TimelineMilestone['icon']; 
   
   switch (type) {
     case 'briefcase':
-      return <Briefcase className={iconClass} />;
+      return <Briefcase className={iconClass} aria-hidden="true" />;
     case 'graduation':
-      return <GraduationCap className={iconClass} />;
+      return <GraduationCap className={iconClass} aria-hidden="true" />;
     case 'award':
-      return <Award className={iconClass} />;
+      return <Award className={iconClass} aria-hidden="true" />;
     case 'star':
-      return <Star className={iconClass} />;
+      return <Star className={iconClass} aria-hidden="true" />;
     default:
-      return <Briefcase className={iconClass} />;
+      return <Briefcase className={iconClass} aria-hidden="true" />;
   }
 }
 
@@ -144,7 +144,7 @@ export default function EmployeeProfileCard({ employee }: EmployeeProfileCardPro
         
         {/* Decorative wave background */}
         <div className="absolute bottom-0 left-0 w-full h-16 opacity-5 pointer-events-none">
-          <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+          <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg" className="w-full h-full" aria-hidden="true">
             <path 
               fill="#E86C1F" 
               fillOpacity="1" 
@@ -179,7 +179,7 @@ export default function EmployeeProfileCard({ employee }: EmployeeProfileCardPro
               {employee.role}
             </p>
             <p className="flex items-center justify-center sm:justify-start gap-1 text-sm text-slate-500">
-              <MapPin className="w-3.5 h-3.5" />
+              <MapPin className="w-3.5 h-3.5" aria-hidden="true" />
               <span className="capitalize">{employee.office}</span>
             </p>
           </div>
@@ -226,9 +226,9 @@ export default function EmployeeProfileCard({ employee }: EmployeeProfileCardPro
                 : "bg-slate-100 text-slate-600 group-hover:bg-[#E86C1F]/10 group-hover:text-[#E86C1F]"
             )}>
               {isTimelineExpanded ? (
-                <>Skjul <ChevronUp className="w-3 h-3" /></>
+                <>Skjul <ChevronUp className="w-3 h-3" aria-hidden="true" /></>
               ) : (
-                <>Se historien <ChevronDown className="w-3 h-3" /></>
+                <>Se historien <ChevronDown className="w-3 h-3" aria-hidden="true" /></>
               )}
             </span>
           </button>
@@ -372,8 +372,8 @@ export default function EmployeeProfileCard({ employee }: EmployeeProfileCardPro
                 >
                   <div className="bg-slate-50 rounded-xl p-4 relative">
                     {/* Star badge */}
-                    <div className="absolute top-2 right-2 w-7 h-7 rounded-full bg-[#FFF3DC] flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 hover:bg-[#FFDC91]">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#F6B93B" className="w-4 h-4">
+                    <div className="absolute top-2 right-2 w-7 h-7 rounded-full bg-[#FFF3DC] flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 hover:bg-[#FFDC91]" role="img" aria-label="Anbefalt">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#F6B93B" className="w-4 h-4" aria-hidden="true">
                         <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
                       </svg>
                     </div>
@@ -433,14 +433,14 @@ export default function EmployeeProfileCard({ employee }: EmployeeProfileCardPro
               href={`mailto:${employee.email}`}
               className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-[#E86C1F] to-[#F4B223] rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-[#E86C1F]/30 hover:-translate-y-0.5 focus:outline-none"
             >
-              <Mail className="w-4 h-4" />
+              <Mail className="w-4 h-4" aria-hidden="true" />
               Kontakt
             </a>
             <a
               href={`tel:+47${employee.phone.replace(/\s/g, '')}`}
               className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-semibold text-slate-900 bg-white border-2 border-slate-900 rounded-full transition-all duration-300 hover:bg-slate-900 hover:text-white hover:-translate-y-0.5 focus:outline-none"
             >
-              <Phone className="w-4 h-4" />
+              <Phone className="w-4 h-4" aria-hidden="true" />
               Ring
             </a>
           </div>

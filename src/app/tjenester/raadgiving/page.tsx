@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { TrendingUp, DollarSign, Target, Gift, MapPin, Zap, Users } from 'lucide-react';
+import HeroImage from '@/assets/hero_raadgivning.avif';
 import { ServiceHero } from '@/components/modules/services/ServiceHero';
 import { ServiceOverview } from '@/components/modules/services/ServiceOverview';
 import { ServiceFeatureGrid, type ServiceFeature } from '@/components/modules/services/ServiceFeatureGrid';
@@ -21,22 +22,22 @@ export default function RaadgivingPage() {
     {
       title: 'Budsjett og prognoser',
       description: 'Vi hjelper deg med å lage realistiske budsjetter og prognoser for fremtiden.',
-      icon: <TrendingUp className="w-6 h-6" />
+      icon: <TrendingUp className="w-6 h-6" aria-hidden="true" />
     },
     {
       title: 'Likviditetsstyring og kontantstrøm',
       description: 'Sikre at bedriften har nok penger til å betale regningene når de forfaller.',
-      icon: <DollarSign className="w-6 h-6" />
+      icon: <DollarSign className="w-6 h-6" aria-hidden="true" />
     },
     {
       title: 'Verdivurdering og selskapsstrategi',
       description: 'Strategisk rådgivning for vekst, salg eller generasjonsskifte.',
-      icon: <Target className="w-6 h-6" />
+      icon: <Target className="w-6 h-6" aria-hidden="true" />
     },
     {
       title: 'Støtteordninger og tilskudd',
       description: 'Ekspertise på Sametinget, Innovasjon Norge og andre støtteordninger.',
-      icon: <Gift className="w-6 h-6" />
+      icon: <Gift className="w-6 h-6" aria-hidden="true" />
     }
   ];
 
@@ -64,17 +65,17 @@ export default function RaadgivingPage() {
     {
       title: 'Lokal forankring i Finnmark',
       description: 'Vi forstår de unike utfordringene og mulighetene i nordnorsk næringsliv.',
-      icon: <MapPin className="w-7 h-7" />
+      icon: <MapPin className="w-7 h-7" aria-hidden="true" />
     },
     {
       title: 'Kjenner støtteordninger',
       description: 'Vi har dyp kunnskap om Sametinget, Innovasjon Norge og tiltakssonen.',
-      icon: <Zap className="w-7 h-7" />
+      icon: <Zap className="w-7 h-7" aria-hidden="true" />
     },
     {
       title: 'Langsiktig perspektiv',
       description: 'Vi er ikke bare rådgivere, vi er din strategiske partner over tid.',
-      icon: <Users className="w-7 h-7" />
+      icon: <Users className="w-7 h-7" aria-hidden="true" />
     }
   ];
 
@@ -117,6 +118,8 @@ export default function RaadgivingPage() {
         stats={{ value: '∞', label: 'muligheter' }}
         ctaText="Få et tilbud"
         ctaLink="#contact"
+        heroImage={HeroImage}
+        heroImageAlt="Rådgivning – Averdi"
       />
 
       {/* Overview Section */}

@@ -59,7 +59,7 @@ function LocalCategoryCard({ title, description, href, icon: Icon, theme }: any)
     return (
         <Link href={href} className="group flex flex-col p-6 bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md hover:border-[#E86C1F] transition-all h-full">
             <div className="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center mb-4 text-[#E86C1F] group-hover:bg-[#E86C1F] group-hover:text-white transition-colors">
-                <Icon className="w-6 h-6" />
+                <Icon className="w-6 h-6" aria-hidden="true" />
             </div>
             <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-[#E86C1F] transition-colors">{title}</h3>
             <p className="text-sm text-slate-600 leading-relaxed flex-grow">{description}</p>
@@ -149,7 +149,7 @@ export default function SametingetHub() {
         
         {/* Breadcrumb */}
         <Link href="/kunnskapsbank" className="inline-flex items-center text-slate-500 hover:text-[#E86C1F] mb-8 font-medium transition-colors">
-          <ArrowLeft className="w-4 h-4 mr-2" /> Tilbake til oversikt
+          <ArrowLeft className="w-4 h-4 mr-2" aria-hidden="true" /> Tilbake til oversikt
         </Link>
 
         {/* Hero Section - KORRIGERT IHT. PROTOKOLL */}
@@ -181,7 +181,7 @@ export default function SametingetHub() {
         {/* --- INSIGHT BOX --- */}
         <div className="bg-white border border-slate-200 rounded-xl shadow-lg mb-20 overflow-hidden">
           <div className="bg-[#E86C1F] p-4 text-white flex items-center gap-3">
-            <Lightbulb className="w-6 h-6" />
+            <Lightbulb className="w-6 h-6" aria-hidden="true" />
             <h3 className="font-bold text-lg">Averdi-analysen: Slik vinner du i 2026</h3>
           </div>
           <div className="flex flex-col md:flex-row">
@@ -189,8 +189,8 @@ export default function SametingetHub() {
             {/* Geografi-fellen */}
             <div className="flex-1 p-8 border-b md:border-b-0 md:border-r border-slate-100">
               <div className="flex items-center gap-3 mb-4 text-slate-900">
-                <AlertTriangle className="w-6 h-6 text-[#E86C1F]" />
-                <h4 className="font-bold text-lg">Unngå Geografi-fellen</h4>
+                <AlertTriangle className="w-6 h-6 text-[#E86C1F]" aria-hidden="true" />
+                <h3 className="font-bold text-lg">Unngå Geografi-fellen</h3>
               </div>
               <p className="text-slate-600 mb-4 leading-relaxed">
                 Mange bedrifter taper penger fordi de blander <strong>Tiltakssonen</strong> (skatt) med <strong>STN-området</strong> (tilskudd).
@@ -206,8 +206,8 @@ export default function SametingetHub() {
             {/* Kapital-muligheten */}
             <div className="flex-1 p-8">
               <div className="flex items-center gap-3 mb-4 text-slate-900">
-                <Coins className="w-6 h-6 text-[#E86C1F]" />
-                <h4 className="font-bold text-lg">Kapital-muligheten</h4>
+                <Coins className="w-6 h-6 text-[#E86C1F]" aria-hidden="true" />
+                <h3 className="font-bold text-lg">Kapital-muligheten</h3>
               </div>
               <p className="text-slate-600 mb-4 leading-relaxed">
                 Sametinget tilbyr inntil 800 000 kr i tilskudd til variert næringsliv. Dette er egenkapital du ikke betaler tilbake.
@@ -240,11 +240,11 @@ export default function SametingetHub() {
         <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6 mb-20 shadow-sm">
           <div className="flex items-start gap-4">
             <div className="p-3 bg-white rounded-xl text-blue-600 shadow-sm">
-              <Languages className="w-6 h-6" />
+              <Languages className="w-6 h-6" aria-hidden="true" />
             </div>
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-2">
-                <Sparkles className="w-4 h-4 text-blue-500" />
+                <Sparkles className="w-4 h-4 text-blue-500" aria-hidden="true" />
                 <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">Nytt i 2026</span>
               </div>
               <h3 className="font-bold text-lg text-slate-900 mb-2">Etablering av nye språksentre</h3>
@@ -326,7 +326,7 @@ export default function SametingetHub() {
         <div className="border-t border-slate-200 pt-8 pb-4 mt-20">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-xs text-slate-500">
             <div className="flex items-start gap-3 max-w-2xl">
-              <ShieldCheck className="w-5 h-5 text-slate-400 flex-shrink-0 mt-0.5" />
+              <ShieldCheck className="w-5 h-5 text-slate-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
               <div>
                 <p className="font-semibold text-slate-700 mb-1">Averdi Kvalitetssikring</p>
                 <p>
@@ -337,10 +337,10 @@ export default function SametingetHub() {
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
               <a href="https://sametinget.no/stipend-og-tilskudd/oversikt-over-tilskuddsordninger/naring/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-[#E86C1F] transition-colors">
-                Sametinget Næring <ExternalLink className="w-3 h-3" />
+                Sametinget Næring <span className="sr-only"> (åpnes i ny fane)</span><ExternalLink className="w-3 h-3" aria-hidden="true" />
               </a>
               <a href="https://www.regjeringen.no/no/dokumenter/meld.-st.-37-20202021/id2861398/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-[#E86C1F] transition-colors">
-                Meld. St. 37 <ExternalLink className="w-3 h-3" />
+                Meld. St. 37 <span className="sr-only"> (åpnes i ny fane)</span><ExternalLink className="w-3 h-3" aria-hidden="true" />
               </a>
             </div>
           </div>

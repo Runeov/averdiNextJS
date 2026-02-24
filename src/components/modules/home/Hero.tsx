@@ -49,7 +49,7 @@ export default function Hero() {
                 className="inline-flex items-center justify-center rounded-full text-base font-medium transition-all focus-visible:outline-none bg-gradient-to-r from-[#E86C1F] to-[#F4B223] text-white hover:shadow-lg hover:shadow-[#E86C1F]/30 hover:-translate-y-0.5 h-12 px-8"
               >
                 Kontakt oss
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
               </button>
               <button
                 onClick={() => scrollToSection('services')}
@@ -61,11 +61,11 @@ export default function Hero() {
 
             <div className="flex items-center justify-center lg:justify-start gap-6 text-sm text-slate-500">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-green-600" />
+                <CheckCircle2 className="w-5 h-5 text-green-600" aria-hidden="true" />
                 <span>Etablert 1989</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-green-600" />
+                <CheckCircle2 className="w-5 h-5 text-green-600" aria-hidden="true" />
                 <span>Lokalt forankret</span>
               </div>
             </div>

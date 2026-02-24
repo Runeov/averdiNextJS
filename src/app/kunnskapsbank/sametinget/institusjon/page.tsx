@@ -245,9 +245,9 @@ export default function InstitusjonPage() {
           </p>
 
           <div className="bg-yellow-50 p-6 rounded-xl border-l-4 border-yellow-400">
-            <h4 className="font-bold text-yellow-800 flex items-center gap-2 mb-2 text-lg">
+            <h3 className="font-bold text-yellow-800 flex items-center gap-2 mb-2 text-lg">
               <Coins className="w-5 h-5" /> Unngå tilbakebetaling
-            </h4>
+            </h3>
             <p className="text-sm text-yellow-800 leading-relaxed">
               Ubrukte midler ved årsslutt er et faresignal. Vi hjelper dere med periodisering og søknad om overføring, slik at pengene forblir i institusjonen der de hører hjemme.
             </p>

@@ -32,7 +32,7 @@ function LocalCategoryCard({ title, description, href, icon: Icon, theme }: any)
     return (
         <Link href={href} className={`group flex flex-col p-6 bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md transition-all h-full hover:border-${theme === 'blue' ? 'blue-600' : '[#E86C1F]'}`}>
             <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${themeColor} group-hover:text-white transition-colors`}>
-                <Icon className="w-6 h-6" />
+                <Icon className="w-6 h-6" aria-hidden="true" />
             </div>
             <h3 className={`text-xl font-bold text-slate-900 mb-2 ${hoverText} transition-colors`}>{title}</h3>
             <p className="text-sm text-slate-600 leading-relaxed flex-grow">{description}</p>
@@ -97,7 +97,7 @@ export default function BedriftHub() {
         
         {/* Breadcrumb */}
         <Link href="/kunnskapsbank" className="inline-flex items-center text-slate-500 hover:text-blue-600 mb-8 font-medium transition-colors">
-          <ArrowLeft className="w-4 h-4 mr-2" /> Tilbake til oversikt
+          <ArrowLeft className="w-4 h-4 mr-2" aria-hidden="true" /> Tilbake til oversikt
         </Link>
 
         {/* Hero Section */}
@@ -120,7 +120,7 @@ export default function BedriftHub() {
           <div className="flex flex-col md:flex-row">
             <div className="p-8 md:p-12 md:w-2/5 bg-slate-800 relative">
               <div className="absolute top-0 right-0 p-4 opacity-5">
-                <FileText className="w-32 h-32 text-white" />
+                <FileText className="w-32 h-32 text-white" aria-hidden="true" />
               </div>
               <span className="inline-block px-3 py-1 bg-blue-500/20 text-blue-300 text-xs font-bold uppercase tracking-wider rounded-full mb-4 border border-blue-500/30">
                 Averdi Innsikt
@@ -145,7 +145,7 @@ export default function BedriftHub() {
               <div className="space-y-8">
                 <div className="flex gap-4">
                   <div className="mt-1 bg-green-500/10 p-2 rounded-lg h-fit">
-                    <TrendingUp className="w-5 h-5 text-green-500" />
+                    <TrendingUp className="w-5 h-5 text-green-500" aria-hidden="true" />
                   </div>
                   <div>
                     <h3 className="font-bold text-lg text-white mb-1">Rekruttering blir billigere</h3>
@@ -157,7 +157,7 @@ export default function BedriftHub() {
                 </div>
                 <div className="flex gap-4">
                   <div className="mt-1 bg-blue-500/10 p-2 rounded-lg h-fit">
-                    <ShieldCheck className="w-5 h-5 text-blue-500" />
+                    <ShieldCheck className="w-5 h-5 text-blue-500" aria-hidden="true" />
                   </div>
                   <div>
                     <h3 className="font-bold text-lg text-white mb-1">Nullsatsen ligger fast</h3>
@@ -179,7 +179,7 @@ export default function BedriftHub() {
             {/* Del 1: Regnskapsmessig Kontroll */}
             <div className="flex-1">
               <div className="flex items-center gap-3 mb-3 text-blue-900">
-                <Briefcase className="w-6 h-6 text-blue-600" />
+                <Briefcase className="w-6 h-6 text-blue-600" aria-hidden="true" />
                 <h3 className="font-bold text-lg">Full kontroll på regelverket</h3>
               </div>
               <p className="text-blue-800 text-sm mb-4 leading-relaxed">
@@ -195,7 +195,7 @@ export default function BedriftHub() {
             {/* Del 2: Nøkkeltall 2026 */}
             <div className="flex-1 md:border-l md:border-blue-200 md:pl-8">
               <div className="flex items-center gap-3 mb-3 text-blue-900">
-                <Coins className="w-6 h-6 text-blue-600" />
+                <Coins className="w-6 h-6 text-blue-600" aria-hidden="true" />
                 <h3 className="font-bold text-lg">Satser for 2026</h3>
               </div>
               <div className="grid grid-cols-2 gap-4">
@@ -230,14 +230,7 @@ export default function BedriftHub() {
         <h2 className="text-3xl font-bold text-slate-900 mb-8">Verktøykasse for ledere</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24">
           
-          {/* VERKTØY: KALKULATOREN */}
-          <LocalCategoryCard 
-            title="Innsatssonekalkulatoren"
-            description="Interaktivt verktøy: Se hvor mye du sparer på å flytte bedriften eller ansette i nord. Beregner AGA og ansatt-gevinst."
-            href="/kunnskapsbank/bedrifter/tiltakssonen" 
-            icon={Calculator}
-            theme="blue"
-          />
+          
 
           {/* ARTIKKEL: REKRUTTERING */}
           <LocalCategoryCard 
@@ -287,7 +280,7 @@ export default function BedriftHub() {
         <div className="border-t border-slate-200 pt-8 pb-4 mt-20">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-xs text-slate-500">
             <div className="flex items-start gap-3 max-w-2xl">
-              <BookOpen className="w-5 h-5 text-slate-400 flex-shrink-0 mt-0.5" />
+              <BookOpen className="w-5 h-5 text-slate-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
               <div>
                 <p className="font-semibold text-slate-700 mb-1">Offisielt Regelverk</p>
                 <p>
@@ -297,10 +290,10 @@ export default function BedriftHub() {
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
               <a href="https://www.skatteetaten.no/bedrift-og-organisasjon/arbeidsgiver/arbeidsgiveravgift/soner/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-blue-600 transition-colors">
-                Sonekart (Skatteetaten) <ExternalLink className="w-3 h-3" />
+                Sonekart (Skatteetaten) <span className="sr-only"> (åpnes i ny fane)</span><ExternalLink className="w-3 h-3" aria-hidden="true" />
               </a>
               <a href="https://www.regjeringen.no/no/statsbudsjett/2026/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-blue-600 transition-colors">
-                Statsbudsjettet 2026 <ExternalLink className="w-3 h-3" />
+                Statsbudsjettet 2026 <span className="sr-only"> (åpnes i ny fane)</span><ExternalLink className="w-3 h-3" aria-hidden="true" />
               </a>
             </div>
           </div>

@@ -15,7 +15,7 @@ export default function HomePage() {
     'description': 'Statsautorisert regnskapsførerselskap spesialisert på nordnorsk næringsliv, tiltakssonen og samiske organisasjoner.',
     'address': {
       '@type': 'PostalAddress',
-      'streetAddress': 'Postboks 44',
+      'streetAddress': 'Juhána Rásttoš geaidnu 2',
       'addressLocality': 'Karasjok',
       'postalCode': '9730',
       'addressCountry': 'NO'

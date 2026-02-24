@@ -11,7 +11,7 @@ import {
   Target,
   BarChart3
 } from 'lucide-react';
-import { InnsatssoneCalculator } from '@/components/tools/InnsatssoneCalculator';
+import { NordNorgeKalkulator } from '@/components/tools/NordNorgeKalkulator';
 import { ExpertInsight } from '@/components/modules/kunnskapsbank/ExpertInsight';
 import { McpDataSpan } from '@/components/ui/McpDataSpan';
 import { getExpert } from '@/data/experts';
@@ -108,7 +108,7 @@ export default function RekrutteringPage() {
         
         {/* Breadcrumb */}
         <Link href="/kunnskapsbank/bedrifter" className="inline-flex items-center text-slate-500 hover:text-blue-600 mb-8 font-medium transition-colors">
-          <ArrowLeft className="w-4 h-4 mr-2" /> Tilbake til Bedrift-hub
+          <ArrowLeft className="w-4 h-4 mr-2" aria-hidden="true" /> Tilbake til Bedrift-hub
         </Link>
 
         {/* Hero */}
@@ -126,7 +126,7 @@ export default function RekrutteringPage() {
 
         {/* --- KALKULATOR VERKTØY --- */}
         <div className="my-16">
-          <InnsatssoneCalculator />
+          <NordNorgeKalkulator />
         </div>
 
         {/* Expert Insight: Alida (HR) */}
@@ -136,7 +136,7 @@ export default function RekrutteringPage() {
             quote="Når jeg hjelper bedrifter med lønnspakker, ser vi ofte at en lønn på 650 000 kr i Alta gir samme kjøpekraft som 850 000 kr i Oslo. Men kandidaten vet ikke dette før du viser dem regnestykket."
             expert={alida}
           >
-            <p className="text-slate-700">
+            <p>
               Mange søkere ser seg blinde på bruttolønn. Din jobb i intervjuet er å vise "Total Compensation"-pakken. 
               Med gratis barnehage, el-avgiftsfritak og gjeldsslette, sitter familien igjen med mye mer <strong>Handlingsrom</strong> til ferie og sparing, selv med lavere nominell lønn.
             </p>
@@ -163,7 +163,7 @@ export default function RekrutteringPage() {
             <div className="bg-green-50 p-6 rounded-2xl border border-green-100">
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-2 bg-white rounded-lg shadow-sm text-green-600">
-                  <TrendingUp className="w-6 h-6" />
+                  <TrendingUp className="w-6 h-6" aria-hidden="true" />
                 </div>
                 <h3 className="font-bold text-slate-900 text-lg">Gjeldsslette</h3>
               </div>
@@ -181,7 +181,7 @@ export default function RekrutteringPage() {
             <div className="bg-purple-50 p-6 rounded-2xl border border-purple-100">
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-2 bg-white rounded-lg shadow-sm text-purple-600">
-                  <Wallet className="w-6 h-6" />
+                  <Wallet className="w-6 h-6" aria-hidden="true" />
                 </div>
                 <h3 className="font-bold text-slate-900 text-lg">Lavere Skatt</h3>
               </div>
@@ -199,14 +199,14 @@ export default function RekrutteringPage() {
           <h3 className="text-xl font-bold text-slate-900 mb-4">Slik bruker du dette i stillingsannonsen</h3>
           <ul className="space-y-4 text-slate-600 mb-8">
             <li className="flex items-start gap-3">
-              <Target className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
+              <Target className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" aria-hidden="true" />
               <span>
                 <strong>Ikke skriv:</strong> "Vi følger tariff."<br/>
                 <strong>Skriv heller:</strong> "Hos oss får du en kjøpekraft som tilsvarer 800.000 i Oslo."
               </span>
             </li>
             <li className="flex items-start gap-3">
-              <Target className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
+              <Target className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" aria-hidden="true" />
               <span>
                 <strong>Synliggjør boligmarkedet:</strong> "Selg leiligheten i Oslo, kjøp enebolig her, og bli gjeldfri på 5 år med statlig nedskriving."
               </span>
@@ -235,7 +235,7 @@ export default function RekrutteringPage() {
         <div className="border-t border-slate-200 pt-8 pb-4 mt-20">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-xs text-slate-500">
             <div className="flex items-start gap-3 max-w-2xl">
-              <BookOpen className="w-5 h-5 text-slate-400 flex-shrink-0 mt-0.5" />
+              <BookOpen className="w-5 h-5 text-slate-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
               <div>
                 <p className="font-semibold text-slate-700 mb-1">Kilder</p>
                 <p>
@@ -245,10 +245,10 @@ export default function RekrutteringPage() {
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
               <a href="https://lanekassen.no/nb-NO/gjeld-og-betaling/finnmark-eller-nord-troms/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-blue-600 transition-colors">
-                Lånekassen (Nedskriving) <ExternalLink className="w-3 h-3" />
+                Lånekassen (Nedskriving) <span className="sr-only"> (åpnes i ny fane)</span><ExternalLink className="w-3 h-3" aria-hidden="true" />
               </a>
               <a href="https://www.skatteetaten.no/satser/finnmarksfradraget/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-blue-600 transition-colors">
-                Skatteetaten <ExternalLink className="w-3 h-3" />
+                Skatteetaten <span className="sr-only"> (åpnes i ny fane)</span><ExternalLink className="w-3 h-3" aria-hidden="true" />
               </a>
             </div>
           </div>

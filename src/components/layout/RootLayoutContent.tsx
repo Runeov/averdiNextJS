@@ -22,6 +22,7 @@ export function RootLayoutContent({ children }: RootLayoutContentProps) {
   return (
     <>
       <Navbar />
+      <span id="main-content" tabIndex={-1} className="sr-only" />
       {children}
       <Footer />
       <CookieBanner />

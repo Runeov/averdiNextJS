@@ -33,7 +33,7 @@ export function IntegrationPartnerStep({ config, updateConfig, integrationPartne
                 <p className="text-sm text-gray-600 mt-1">{partner.description}</p>
               </div>
               {config.integrationPartner === partner.id && (
-                <Check className="w-6 h-6 text-orange-500 flex-shrink-0" />
+                <Check className="w-6 h-6 text-orange-500 flex-shrink-0" aria-hidden="true" />
               )}
             </div>
 

@@ -47,7 +47,7 @@ export default function ContactPanel() {
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Left Side: Contact Info & Map */}
-          <div className="space-y-8">
+          <div className="space-y-8 order-2 lg:order-1">
             <Card className="bg-white shadow-xl border-slate-200">
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold mb-6">Kom i kontakt</h3>
@@ -56,14 +56,14 @@ export default function ContactPanel() {
                   {/* Phone */}
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center">
-                      <Phone className="h-6 w-6 text-blue-600" />
+                      <Phone className="h-6 w-6 text-blue-600" aria-hidden="true" />
                     </div>
                     <div className="flex-1">
                       <p className="font-medium mb-1">Ring oss direkte</p>
                       <div className="flex items-center gap-2">
                         <a href="tel:+4790767993" className="text-blue-600 hover:underline">+47 907 67 993</a>
-                        <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => copyToClipboard('+4790767993', 'Telefon')}>
-                          <Copy className="h-3 w-3" />
+                        <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => copyToClipboard('+4790767993', 'Telefon')} aria-label="Kopier telefonnummer">
+                          <Copy className="h-3 w-3" aria-hidden="true" />
                         </Button>
                       </div>
                     </div>
@@ -72,14 +72,14 @@ export default function ContactPanel() {
                   {/* Email */}
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center">
-                      <Mail className="h-6 w-6 text-blue-600" />
+                      <Mail className="h-6 w-6 text-blue-600" aria-hidden="true" />
                     </div>
                     <div className="flex-1">
                       <p className="font-medium mb-1">Send e-post</p>
                       <div className="flex items-center gap-2">
                         <a href="mailto:post@averdi.no" className="text-blue-600 hover:underline">post@averdi.no</a>
-                        <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => copyToClipboard('post@averdi.no', 'E-post')}>
-                          <Copy className="h-3 w-3" />
+                        <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => copyToClipboard('post@averdi.no', 'E-post')} aria-label="Kopier e-postadresse">
+                          <Copy className="h-3 w-3" aria-hidden="true" />
                         </Button>
                       </div>
                     </div>
@@ -88,14 +88,14 @@ export default function ContactPanel() {
                   {/* Address */}
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center">
-                      <MapPin className="h-6 w-6 text-blue-600" />
+                      <MapPin className="h-6 w-6 text-blue-600" aria-hidden="true" />
                     </div>
                     <div className="flex-1">
                       <p className="font-medium mb-2">Vårt kontor</p>
                       <div className="flex items-center gap-2 text-sm text-slate-600">
-                        <span>Hovedgata 15, 9730 Karasjok</span>
-                        <Button variant="ghost" size="icon" className="h-4 w-4" onClick={() => copyToClipboard('Hovedgata 15, 9730 Karasjok', 'Adresse')}>
-                          <Copy className="h-3 w-3" />
+                        <span>Juhána Rásttoš geaidnu 2, 9730 Karasjok</span>
+                        <Button variant="ghost" size="icon" className="h-4 w-4" onClick={() => copyToClipboard('Juhána Rásttoš geaidnu 2, 9730 Karasjok', 'Adresse')} aria-label="Kopier adresse">
+                          <Copy className="h-3 w-3" aria-hidden="true" />
                         </Button>
                       </div>
                     </div>
@@ -120,7 +120,7 @@ export default function ContactPanel() {
           </div>
 
           {/* Right Side: Form */}
-          <Card className="bg-white shadow-xl border-slate-200">
+          <Card className="bg-white shadow-xl border-slate-200 order-1 lg:order-2">
             <CardContent className="p-8">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 relative">
@@ -132,16 +132,19 @@ export default function ContactPanel() {
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">Navn *</label>
-                    <Input 
-                      required 
+                    <label htmlFor="contact-name" className="text-sm font-medium">Navn *</label>
+                    <Input
+                      id="contact-name"
+                      required
+                      aria-required="true"
                       value={formData.name}
                       onChange={(e) => setFormData({...formData, name: e.target.value})}
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">Bedrift</label>
-                    <Input 
+                    <label htmlFor="contact-company" className="text-sm font-medium">Bedrift</label>
+                    <Input
+                      id="contact-company"
                       value={formData.company}
                       onChange={(e) => setFormData({...formData, company: e.target.value})}
                     />
@@ -149,18 +152,21 @@ export default function ContactPanel() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">E-post *</label>
-                  <Input 
+                  <label htmlFor="contact-email" className="text-sm font-medium">E-post *</label>
+                  <Input
+                    id="contact-email"
                     type="email"
-                    required 
+                    required
+                    aria-required="true"
                     value={formData.email}
                     onChange={(e) => setFormData({...formData, email: e.target.value})}
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Telefon</label>
-                  <Input 
+                  <label htmlFor="contact-phone" className="text-sm font-medium">Telefon</label>
+                  <Input
+                    id="contact-phone"
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => setFormData({...formData, phone: e.target.value})}
@@ -168,9 +174,11 @@ export default function ContactPanel() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Melding *</label>
-                  <Textarea 
-                    required 
+                  <label htmlFor="contact-message" className="text-sm font-medium">Melding *</label>
+                  <Textarea
+                    id="contact-message"
+                    required
+                    aria-required="true"
                     className="h-32"
                     placeholder="Hvordan kan vi hjelpe deg?"
                     value={formData.message}

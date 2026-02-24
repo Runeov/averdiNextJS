@@ -24,7 +24,7 @@ export default function CompanyStory() {
             {/* 1989 - Founding */}
             <div className="flex gap-6 items-start">
               <div className="flex-shrink-0 w-16 h-16 rounded-full bg-[#E86C1F]/10 flex items-center justify-center">
-                <Building2 className="w-8 h-8 text-[#E86C1F]" />
+                <Building2 className="w-8 h-8 text-[#E86C1F]" aria-hidden="true" />
               </div>
               <div className="flex-1">
                 <div className="text-sm font-bold text-[#E86C1F] mb-2">1989</div>
@@ -38,7 +38,7 @@ export default function CompanyStory() {
             {/* 2000s - Specialization */}
             <div className="flex gap-6 items-start">
               <div className="flex-shrink-0 w-16 h-16 rounded-full bg-[#E86C1F]/10 flex items-center justify-center">
-                <Heart className="w-8 h-8 text-[#E86C1F]" />
+                <Heart className="w-8 h-8 text-[#E86C1F]" aria-hidden="true" />
               </div>
               <div className="flex-1">
                 <div className="text-sm font-bold text-[#E86C1F] mb-2">2000-tallet</div>
@@ -52,7 +52,7 @@ export default function CompanyStory() {
             {/* Today - The Interpreter */}
             <div className="flex gap-6 items-start">
               <div className="flex-shrink-0 w-16 h-16 rounded-full bg-[#E86C1F]/10 flex items-center justify-center">
-                <TrendingUp className="w-8 h-8 text-[#E86C1F]" />
+                <TrendingUp className="w-8 h-8 text-[#E86C1F]" aria-hidden="true" />
               </div>
               <div className="flex-1">
                 <div className="text-sm font-bold text-[#E86C1F] mb-2">I dag</div>
@@ -70,7 +70,7 @@ export default function CompanyStory() {
             <blockquote className="text-lg text-slate-700 italic mb-4">
               "Det offentlige setter rammene. Vi finner mulighetene."
             </blockquote>
-            <div className="text-sm text-slate-500">— Averdi sitt mantra</div>
+         
           </div>
 
         </div>

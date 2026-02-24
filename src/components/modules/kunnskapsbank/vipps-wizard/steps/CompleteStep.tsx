@@ -20,7 +20,7 @@ export function CompleteStep({
     <div className="space-y-6">
       <div className="text-center">
         <div className="w-20 h-20 bg-green-500 rounded-full mx-auto mb-6 flex items-center justify-center">
-          <Check className="w-10 h-10 text-white" />
+          <Check className="w-10 h-10 text-white" aria-hidden="true" />
         </div>
         <h2 className="text-3xl font-bold text-gray-900 mb-3">Setup Complete!</h2>
         <p className="text-lg text-gray-600">Your configuration is ready</p>
@@ -49,7 +49,7 @@ export function CompleteStep({
           onClick={openExampleJson}
           className="w-full bg-orange-500 hover:bg-orange-600 text-white px-6 py-4 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
         >
-          <ExternalLink className="w-5 h-5" />
+          <ExternalLink className="w-5 h-5" aria-hidden="true" />
           Open Demo Config (ExampleOfJson.html)
         </button>
 
@@ -57,7 +57,7 @@ export function CompleteStep({
           onClick={generateImplementationGuide}
           className="w-full bg-blue-500 hover:bg-blue-600 text-white px-6 py-4 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
         >
-          <Download className="w-5 h-5" />
+          <Download className="w-5 h-5" aria-hidden="true" />
           Download Implementation Guide (TXT)
         </button>
 
@@ -65,7 +65,7 @@ export function CompleteStep({
           onClick={sendToAverdi}
           className="w-full bg-green-500 hover:bg-green-600 text-white px-6 py-4 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
         >
-          <Check className="w-5 h-5" />
+          <Check className="w-5 h-5" aria-hidden="true" />
           Email Configuration to Averdi
         </button>
       </div>

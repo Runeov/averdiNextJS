@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { FileText, Calculator, TrendingUp, Award, MapPin, Zap, Users } from 'lucide-react';
+import HeroImage from '@/assets/Hero_Aarsoppgjor.avif';
 import { ServiceHero } from '@/components/modules/services/ServiceHero';
 import { ServiceOverview } from '@/components/modules/services/ServiceOverview';
 import { ServiceFeatureGrid, type ServiceFeature } from '@/components/modules/services/ServiceFeatureGrid';
@@ -21,22 +22,22 @@ export default function AarsoppgjorPage() {
     {
       title: 'Årsregnskap og noter',
       description: 'Komplett årsregnskap i henhold til regnskapsloven med alle nødvendige noter.',
-      icon: <FileText className="w-6 h-6" />
+      icon: <FileText className="w-6 h-6" aria-hidden="true" />
     },
     {
       title: 'Skattemelding for næringsdrivende',
       description: 'Korrekt utfylling og innlevering av skattemelding for bedrifter og enkeltpersonforetak.',
-      icon: <Calculator className="w-6 h-6" />
+      icon: <Calculator className="w-6 h-6" aria-hidden="true" />
     },
     {
       title: 'Skatteoptimalisering og fradrag',
       description: 'Vi sikrer at du får alle fradrag du har krav på, inkludert Finnmarksfradraget.',
-      icon: <TrendingUp className="w-6 h-6" />
+      icon: <TrendingUp className="w-6 h-6" aria-hidden="true" />
     },
     {
       title: 'Særskilte ordninger for tiltakssonen',
       description: 'Ekspertise på de unike skattefordelene i Finnmark og Nord-Troms.',
-      icon: <Award className="w-6 h-6" />
+      icon: <Award className="w-6 h-6" aria-hidden="true" />
     }
   ];
 
@@ -64,17 +65,17 @@ export default function AarsoppgjorPage() {
     {
       title: 'Ekspertise på tiltakssonen',
       description: 'Vi kjenner alle særordninger og sikrer at du får maksimalt ut av fordelene.',
-      icon: <MapPin className="w-7 h-7" />
+      icon: <MapPin className="w-7 h-7" aria-hidden="true" />
     },
     {
       title: 'Maksimerer fradrag',
       description: 'Vi finner alle fradrag du har krav på, inkludert Finnmarksfradraget.',
-      icon: <Zap className="w-7 h-7" />
+      icon: <Zap className="w-7 h-7" aria-hidden="true" />
     },
     {
       title: 'Rettidig innlevering',
       description: 'Vi holder alle frister og sikrer at alt leveres korrekt første gang.',
-      icon: <Users className="w-7 h-7" />
+      icon: <Users className="w-7 h-7" aria-hidden="true" />
     }
   ];
 
@@ -117,6 +118,8 @@ export default function AarsoppgjorPage() {
         stats={{ value: '0', label: 'forsinkelser' }}
         ctaText="Få et tilbud"
         ctaLink="#contact"
+        heroImage={HeroImage}
+        heroImageAlt="Årsoppgjør & Skatt – Averdi"
       />
 
       {/* Overview Section */}

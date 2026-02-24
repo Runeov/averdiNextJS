@@ -46,7 +46,7 @@ export function ServiceCTA({
               className="group inline-flex items-center justify-center px-8 py-4 text-base font-medium text-[#E86C1F] bg-white rounded-full hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 focus:outline-none"
             >
               {primaryCTA.text}
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </Link>
             
             {/* Secondary CTA */}

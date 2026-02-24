@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import Image from 'next/image';
+import heroSametinget from '@/assets/Hero_sametinget.avif';
 import { BookOpen, ArrowRight } from 'lucide-react';
 
 export default function KunnskapsbankTeaser() {
@@ -13,7 +15,7 @@ export default function KunnskapsbankTeaser() {
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-sm font-medium mb-4">
-            <BookOpen className="h-4 w-4" />
+            <BookOpen className="h-4 w-4" aria-hidden="true" />
             Kunnskapsbank
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-slate-900">
@@ -45,15 +47,18 @@ export default function KunnskapsbankTeaser() {
                   className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-gradient-to-r from-[#E86C1F] to-[#F4B223] rounded-full shadow-md hover:shadow-lg hover:shadow-[#E86C1F]/30 hover:-translate-y-0.5 transition-all duration-300 group-hover:scale-105"
                 >
                   Les guiden
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
                 </Link>
               </div>
               
               <div className="relative h-64 md:h-full min-h-[300px] bg-slate-100 rounded-xl overflow-hidden flex items-center justify-center">
-                 <div className="text-center p-6">
-                   <div className="text-6xl mb-4">🏛️</div>
-                   <p className="text-slate-500 font-medium">Sametingets Tilskuddsordninger</p>
-                 </div>
+                <Image
+                  src={heroSametinget}
+                  alt="Sametingets Tilskuddsordninger"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               </div>
             </div>
           </div>
@@ -65,7 +70,7 @@ export default function KunnskapsbankTeaser() {
             className="inline-flex items-center justify-center text-blue-700 text-lg font-medium hover:text-blue-900 transition-colors group"
           >
             Se hele kunnskapsbanken
-            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
           </Link>
         </div>
       </div>

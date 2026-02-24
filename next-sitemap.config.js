@@ -9,13 +9,15 @@ module.exports = {
   exclude: [
     '/team-demo', // Internal demo page
     '/kunnskapsbank/artikler/sosiookonomiske-forskjeller_Long', // Alternative version
+    '/admin',
+    '/admin/*',
   ],
   robotsTxtOptions: {
     policies: [
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/team-demo', '/api/'],
+        disallow: ['/team-demo', '/api/', '/admin/'],
       },
     ],
     additionalSitemaps: [],

@@ -20,7 +20,7 @@ export function ClientCase({ quote, author, role, company }: ClientCaseProps) {
         <div className="flex flex-col md:flex-row gap-8 items-start">
           {/* Sitatet */}
           <div className="flex-1">
-            <Quote className="w-10 h-10 text-[#E86C1F]/20 mb-4" />
+            <Quote className="w-10 h-10 text-[#E86C1F]/20 mb-4" aria-hidden="true" />
             <blockquote className="text-xl font-medium text-slate-900 leading-relaxed mb-6">
               "{quote}"
             </blockquote>

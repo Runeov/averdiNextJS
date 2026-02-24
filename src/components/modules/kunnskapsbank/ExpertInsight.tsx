@@ -48,7 +48,7 @@ export function ExpertInsight({ title, quote, expert, children }: ExpertInsightP
 
         {/* Høyre: Innhold */}
         <div className="flex-1">
-          <Quote className="w-10 h-10 text-[#E86C1F] mb-6 opacity-80" />
+          <Quote className="w-10 h-10 text-[#E86C1F] mb-6 opacity-80" aria-hidden="true" />
           
           <h3 className="text-2xl font-bold mb-4 text-white">
             {title}

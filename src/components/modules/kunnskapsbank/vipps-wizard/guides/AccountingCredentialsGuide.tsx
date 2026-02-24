@@ -55,12 +55,12 @@ export function AccountingCredentialsGuide({ system, integrationPartner }: Props
         className="w-full px-6 py-4 flex items-center justify-between hover:bg-purple-100 transition-colors"
       >
         <div className="flex items-center gap-3">
-          <BookOpen className="w-5 h-5 text-purple-600" />
+          <BookOpen className="w-5 h-5 text-purple-600" aria-hidden="true" />
           <span className="font-semibold text-purple-900">
             📖 Hvordan få API-tilgang i {isPowerOffice ? 'PowerOffice Go' : '24SevenOffice'}
           </span>
         </div>
-        {isOpen ? <ChevronUp className="w-5 h-5 text-purple-600" /> : <ChevronDown className="w-5 h-5 text-purple-600" />}
+        {isOpen ? <ChevronUp className="w-5 h-5 text-purple-600" aria-hidden="true" /> : <ChevronDown className="w-5 h-5 text-purple-600" aria-hidden="true" />}
       </button>
 
       {isOpen && (
@@ -70,7 +70,7 @@ export function AccountingCredentialsGuide({ system, integrationPartner }: Props
             <>
               <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg">
                 <h4 className="font-semibold text-blue-900 mb-2 flex items-center gap-2">
-                  <Info className="w-5 h-5" />
+                  <Info className="w-5 h-5" aria-hidden="true" />
                   Om PowerOffice Go OAuth 2.0
                 </h4>
                 <p className="text-sm text-blue-800 mb-2">
@@ -91,7 +91,8 @@ export function AccountingCredentialsGuide({ system, integrationPartner }: Props
                     <div className="bg-gray-50 p-4 rounded-lg text-sm">
                       <a href="https://go.poweroffice.net" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline flex items-center gap-1">
                         go.poweroffice.net
-                        <ExternalLink className="w-3 h-3" />
+                        <span className="sr-only"> (åpnes i ny fane)</span>
+                        <ExternalLink className="w-3 h-3" aria-hidden="true" />
                       </a>
                       <p className="text-xs text-gray-600 mt-1">Krever administrator-rettigheter</p>
                     </div>
@@ -143,7 +144,7 @@ export function AccountingCredentialsGuide({ system, integrationPartner }: Props
                       {/* Success indicator */}
                       <div className="bg-green-50 border border-green-200 p-4 rounded-lg">
                         <div className="flex items-start gap-2">
-                          <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
                           <div>
                             <p className="text-green-900 font-semibold text-sm">Client Key genereres automatisk!</p>
                             <p className="text-green-700 text-xs mt-1">
@@ -169,15 +170,16 @@ export function AccountingCredentialsGuide({ system, integrationPartner }: Props
                           <p className="text-yellow-700 text-xs mb-2">
                             Integrasjonen må kanskje bestilles/aktiveres først:
                           </p>
-                          <a 
-                            href={partnerConfig.url} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="text-blue-600 hover:underline text-xs flex items-center gap-1"
-                          >
-                            Gå til {partnerConfig.name}
-                            <ExternalLink className="w-3 h-3" />
-                          </a>
+                          <a
+                           href={partnerConfig.url}
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           className="text-blue-600 hover:underline text-xs flex items-center gap-1"
+                         >
+                           Gå til {partnerConfig.name}
+                           <span className="sr-only"> (åpnes i ny fane)</span>
+                           <ExternalLink className="w-3 h-3" aria-hidden="true" />
+                         </a>
                         </div>
                       )}
                     </div>
@@ -247,7 +249,7 @@ export function AccountingCredentialsGuide({ system, integrationPartner }: Props
               {/* Verification Section */}
               <div className="bg-green-50 border border-green-200 p-4 rounded-lg">
                 <h4 className="font-bold text-green-900 mb-2 flex items-center gap-2">
-                  <Key className="w-5 h-5" />
+                  <Key className="w-5 h-5" aria-hidden="true" />
                   Sjekk at alt er korrekt
                 </h4>
                 <div className="space-y-2 text-sm text-green-800">
@@ -278,7 +280,8 @@ export function AccountingCredentialsGuide({ system, integrationPartner }: Props
                     <div className="bg-gray-50 p-4 rounded-lg text-sm">
                       <a href="https://24sevenoffice.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline flex items-center gap-1">
                         24sevenoffice.com
-                        <ExternalLink className="w-3 h-3" />
+                        <span className="sr-only"> (åpnes i ny fane)</span>
+                        <ExternalLink className="w-3 h-3" aria-hidden="true" />
                       </a>
                       <p className="text-xs text-gray-600 mt-1">Krever administrator-rettigheter</p>
                     </div>
@@ -343,20 +346,21 @@ export function AccountingCredentialsGuide({ system, integrationPartner }: Props
           <div className="bg-green-50 border border-green-200 p-4 rounded-lg">
             <h4 className="font-bold text-green-900 mb-3">Trenger du hjelp?</h4>
             <div className="grid gap-2 text-sm">
-              <a 
-                href={isPowerOffice ? 'https://developer.poweroffice.net' : 'https://24sevenoffice.com/support'} 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href={isPowerOffice ? 'https://developer.poweroffice.net' : 'https://24sevenoffice.com/support'}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-green-700 hover:underline flex items-center gap-2"
               >
-                <ExternalLink className="w-4 h-4" />
+                <ExternalLink className="w-4 h-4" aria-hidden="true" />
                 {isPowerOffice ? 'PowerOffice API dokumentasjon' : '24SevenOffice support'}
+                <span className="sr-only"> (åpnes i ny fane)</span>
               </a>
-              <a 
-                href="mailto:support@averdi.no" 
+              <a
+                href="mailto:support@averdi.no"
                 className="text-green-700 hover:underline flex items-center gap-2"
               >
-                <Key className="w-4 h-4" />
+                <Key className="w-4 h-4" aria-hidden="true" />
                 Averdi support: support@averdi.no
               </a>
             </div>

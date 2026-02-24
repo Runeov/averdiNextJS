@@ -31,7 +31,7 @@ export default async function OmOssPage() {
       'foundingDate': '1989',
       'address': {
         '@type': 'PostalAddress',
-        'streetAddress': 'Postboks 44',
+        'streetAddress': 'Juhána Rásttoš geaidnu 2',
         'addressLocality': 'Karasjok',
         'postalCode': '9730',
         'addressCountry': 'NO'

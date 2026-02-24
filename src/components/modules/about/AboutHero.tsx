@@ -39,7 +39,7 @@ export default function AboutHero() {
             {/* Stat 1 */}
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-sm hover:shadow-md transition-shadow">
               <div className="flex items-center justify-center w-12 h-12 rounded-full bg-[#E86C1F]/10 text-[#E86C1F] mx-auto mb-4">
-                <MapPin className="w-6 h-6" />
+                <MapPin className="w-6 h-6" aria-hidden="true" />
               </div>
               <div className="text-3xl font-bold text-slate-900 mb-1">35+</div>
               <div className="text-sm text-slate-600">År i Karasjok</div>
@@ -48,7 +48,7 @@ export default function AboutHero() {
             {/* Stat 2 */}
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-sm hover:shadow-md transition-shadow">
               <div className="flex items-center justify-center w-12 h-12 rounded-full bg-[#E86C1F]/10 text-[#E86C1F] mx-auto mb-4">
-                <Users className="w-6 h-6" />
+                <Users className="w-6 h-6" aria-hidden="true" />
               </div>
               <div className="text-3xl font-bold text-slate-900 mb-1">7</div>
               <div className="text-sm text-slate-600">Erfarne rådgivere</div>
@@ -57,9 +57,9 @@ export default function AboutHero() {
             {/* Stat 3 */}
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-sm hover:shadow-md transition-shadow">
               <div className="flex items-center justify-center w-12 h-12 rounded-full bg-[#E86C1F]/10 text-[#E86C1F] mx-auto mb-4">
-                <Award className="w-6 h-6" />
+                <Award className="w-6 h-6" aria-hidden="true" />
               </div>
-              <div className="text-3xl font-bold text-slate-900 mb-1">3</div>
+              <div className="text-3xl font-bold text-slate-900 mb-1">2</div>
               <div className="text-sm text-slate-600">Statsautoriserte</div>
             </div>
 

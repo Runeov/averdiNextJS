@@ -95,7 +95,7 @@ export function Footer() {
               <div className="space-y-2">
                 <p className="font-semibold text-slate-900 text-base">Karasjok</p>
                 <div className="flex flex-col gap-1">
-                  <p>Hovedgata 15</p>
+                  <p>Juhána Rásttoš geaidnu 2</p>
                   <p>9730 Karasjok</p>
                 </div>
                 <div className="pt-2">
@@ -129,7 +129,7 @@ export function Footer() {
             className="md:hidden p-3 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors"
             aria-label="Til toppen"
           >
-            <ArrowUp className="h-5 w-5" />
+            <ArrowUp className="h-5 w-5" aria-hidden="true" />
           </button>
         </div>
       </div>

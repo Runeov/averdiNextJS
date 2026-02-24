@@ -93,7 +93,7 @@ export function InnsatssoneCalculator() {
       <div className="bg-slate-900 p-6 text-white flex justify-between items-center">
         <div className="flex items-center gap-3">
           <div className="bg-blue-600 p-2 rounded-lg">
-            <Calculator className="w-6 h-6 text-white" />
+            <Calculator className="w-6 h-6 text-white" aria-hidden="true" />
           </div>
           <div>
             <h3 className="font-bold text-lg">InnsatssoneKalkulator (Næring)</h3>
@@ -117,11 +117,12 @@ export function InnsatssoneCalculator() {
               <div className="grid md:grid-cols-2 gap-8">
                 {/* LOKASJON */}
                 <div className="space-y-4 bg-slate-50 p-6 rounded-2xl border border-slate-100">
-                  <h4 className="font-bold text-slate-900 flex items-center gap-2"><MapPin className="w-4 h-4"/> Flytting / Etablering</h4>
+                  <h4 className="font-bold text-slate-900 flex items-center gap-2"><MapPin className="w-4 h-4" aria-hidden="true" /> Flytting / Etablering</h4>
                   
                   <div>
-                    <label className="text-xs font-bold text-slate-500 uppercase">Fra (Referanse)</label>
-                    <select 
+                    <label htmlFor="calc-location" className="text-xs font-bold text-slate-500 uppercase">Fra (Referanse)</label>
+                    <select
+                      id="calc-location"
                       className="w-full mt-1 p-3 bg-white border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500"
                       value={origin.name}
                       onChange={(e) => setOrigin(ORIGIN_CITIES.find(c => c.name === e.target.value) || origin)}
@@ -131,8 +132,9 @@ export function InnsatssoneCalculator() {
                   </div>
 
                   <div>
-                    <label className="text-xs font-bold text-blue-600 uppercase">Til (Innsatssone)</label>
-                    <select 
+                    <label htmlFor="calc-municipality" className="text-xs font-bold text-blue-600 uppercase">Til (Innsatssone)</label>
+                    <select
+                      id="calc-municipality"
                       className="w-full mt-1 p-3 bg-blue-50 border border-blue-200 text-blue-900 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 font-bold"
                       value={dest.name}
                       onChange={(e) => setDest(DESTINATION_MUNICIPALITIES.find(c => c.name === e.target.value) || dest)}
@@ -144,12 +146,13 @@ export function InnsatssoneCalculator() {
 
                 {/* EIENDOM */}
                 <div className="space-y-4 bg-slate-50 p-6 rounded-2xl border border-slate-100">
-                  <h4 className="font-bold text-slate-900 flex items-center gap-2"><Building2 className="w-4 h-4"/> Næringseiendom</h4>
+                  <h4 className="font-bold text-slate-900 flex items-center gap-2"><Building2 className="w-4 h-4" aria-hidden="true" /> Næringseiendom</h4>
                   
                   <div>
-                    <label className="text-xs font-bold text-slate-500 uppercase">Eiendommens verdi</label>
-                    <input 
-                      type="number" 
+                    <label htmlFor="calc-property-value" className="text-xs font-bold text-slate-500 uppercase">Eiendommens verdi</label>
+                    <input
+                      id="calc-property-value"
+                      type="number"
                       value={propertyValue}
                       onChange={(e) => setPropertyValue(Number(e.target.value))}
                       step="1000000"
@@ -164,7 +167,7 @@ export function InnsatssoneCalculator() {
                   
                   {results.pTaxDiff < 0 && (
                     <div className="bg-orange-100 text-orange-800 text-xs p-2 rounded flex items-start gap-2">
-                      <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                      <AlertCircle className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
                       <span>{dest.name} har høyere promillesats enn {origin.name}.</span>
                     </div>
                   )}
@@ -173,30 +176,30 @@ export function InnsatssoneCalculator() {
 
               {/* LØNNSKOSTNADER */}
               <div className="p-6 bg-white border border-slate-200 rounded-2xl shadow-sm">
-                <h4 className="font-bold text-slate-900 mb-4 flex items-center gap-2"><Users className="w-4 h-4"/> Ansatte & Lønn</h4>
+                <h4 className="font-bold text-slate-900 mb-4 flex items-center gap-2"><Users className="w-4 h-4" aria-hidden="true" /> Ansatte & Lønn</h4>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div>
-                    <label className="text-xs text-slate-500">Antall ansatte</label>
-                    <input type="number" value={employees} onChange={e => setEmployees(Number(e.target.value))} className="w-full p-2 border rounded-lg font-bold" />
+                    <label htmlFor="calc-employees" className="text-xs text-slate-500">Antall ansatte</label>
+                    <input id="calc-employees" type="number" value={employees} onChange={e => setEmployees(Number(e.target.value))} className="w-full p-2 border rounded-lg font-bold" />
                   </div>
                   <div>
-                    <label className="text-xs text-slate-500">Snittlønn</label>
-                    <input type="number" value={avgSalary} onChange={e => setAvgSalary(Number(e.target.value))} className="w-full p-2 border rounded-lg" />
+                    <label htmlFor="calc-salary" className="text-xs text-slate-500">Snittlønn</label>
+                    <input id="calc-salary" type="number" value={avgSalary} onChange={e => setAvgSalary(Number(e.target.value))} className="w-full p-2 border rounded-lg" />
                   </div>
                   <div>
-                    <label className="text-xs text-slate-500">Antall ledere</label>
-                    <input type="number" value={executives} onChange={e => setExecutives(Number(e.target.value))} className="w-full p-2 border rounded-lg font-bold" />
+                    <label htmlFor="calc-executives" className="text-xs text-slate-500">Antall ledere</label>
+                    <input id="calc-executives" type="number" value={executives} onChange={e => setExecutives(Number(e.target.value))} className="w-full p-2 border rounded-lg font-bold" />
                   </div>
                   <div>
-                    <label className="text-xs text-slate-500">Lederlønn</label>
-                    <input type="number" value={execSalary} onChange={e => setExecSalary(Number(e.target.value))} className="w-full p-2 border rounded-lg" />
+                    <label htmlFor="calc-exec-salary" className="text-xs text-slate-500">Lederlønn</label>
+                    <input id="calc-exec-salary" type="number" value={execSalary} onChange={e => setExecSalary(Number(e.target.value))} className="w-full p-2 border rounded-lg" />
                   </div>
                 </div>
               </div>
 
               {/* Advarselboks oppdatert med riktig satsreferanse */}
               <div className="bg-blue-50 p-4 rounded-xl border border-blue-100 flex gap-3 items-start">
-                <AlertCircle className="w-5 h-5 text-blue-600 mt-0.5" />
+                <AlertCircle className="w-5 h-5 text-blue-600 mt-0.5" aria-hidden="true" />
                 <p className="text-sm text-blue-800">
                   Vi sammenligner kostnaden mot en bedrift i {origin.name} (Sone {origin.zone}) med 
                   <McpDataSpan 
@@ -211,7 +214,7 @@ export function InnsatssoneCalculator() {
 
               <div className="flex justify-end">
                 <button onClick={nextStep} className="bg-blue-600 text-white font-bold py-3 px-8 rounded-xl hover:bg-blue-700 transition-all flex items-center gap-2">
-                  Se regnestykket <ArrowRight className="w-5 h-5" />
+                  Se regnestykket <ArrowRight className="w-5 h-5" aria-hidden="true" />
                 </button>
               </div>
 
@@ -248,7 +251,7 @@ export function InnsatssoneCalculator() {
                 {/* Bedriftens Gevinst */}
                 <div className="bg-white border-2 border-blue-100 p-6 rounded-2xl">
                   <h3 className="font-bold text-slate-900 mb-4 flex items-center gap-2">
-                    <Building2 className="w-5 h-5 text-blue-600" /> For Bedriften
+                    <Building2 className="w-5 h-5 text-blue-600" aria-hidden="true" /> For Bedriften
                   </h3>
                   <div className="space-y-3">
                     <div className="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
@@ -273,10 +276,10 @@ export function InnsatssoneCalculator() {
                   )}
                   <div className="flex justify-between items-center mb-4">
                     <h3 className="font-bold text-slate-900 flex items-center gap-2">
-                      <Users className="w-5 h-5 text-green-600" /> Rekrutteringskraft
+                      <Users className="w-5 h-5 text-green-600" aria-hidden="true" /> Rekrutteringskraft
                     </h3>
-                    <label className="relative inline-flex items-center cursor-pointer">
-                      <input type="checkbox" checked={includePersonal} onChange={(e) => setIncludePersonal(e.target.checked)} className="sr-only peer" />
+                    <label htmlFor="calc-include-personal" className="relative inline-flex items-center cursor-pointer">
+                      <input id="calc-include-personal" type="checkbox" checked={includePersonal} onChange={(e) => setIncludePersonal(e.target.checked)} className="sr-only peer" aria-label="Inkluder personlige fordeler" />
                       <div className="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-600"></div>
                     </label>
                   </div>

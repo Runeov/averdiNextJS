@@ -74,7 +74,7 @@ function ResponsiveGuideImage({
           {/* Only show zoom hint if using dedicated mobile image (desktop fallback is already full size) */}
           {showZoomHint && hasDedicatedMobileImage && (
             <div className="absolute bottom-2 right-2 flex items-center gap-1.5 bg-black/70 text-white text-xs px-2 py-1 rounded-full opacity-80 group-hover:opacity-100 transition-opacity">
-              <ZoomIn className="w-3 h-3" />
+              <ZoomIn className="w-3 h-3" aria-hidden="true" />
               <span>Trykk for å forstørre</span>
             </div>
           )}
@@ -110,7 +110,7 @@ function ResponsiveGuideImage({
               className="text-white/80 hover:text-white p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
               aria-label="Lukk"
             >
-              <X className="w-6 h-6" />
+              <X className="w-6 h-6" aria-hidden="true" />
             </button>
           </div>
 
@@ -159,14 +159,14 @@ export function VippsCredentialsGuide({ integrationPartner }: Props) {
         className="w-full px-6 py-4 flex items-center justify-between hover:bg-blue-100 transition-colors"
       >
         <div className="flex items-center gap-3">
-          <BookOpen className="w-5 h-5 text-blue-600" />
+          <BookOpen className="w-5 h-5 text-blue-600" aria-hidden="true" />
           <span className="font-semibold text-blue-900">
             {isEmonkey
               ? '📖 eMonkey: Gi regnskapspartner tilgang i Vipps-portalen (Steg-for-steg)'
               : '📖 Hvordan finne API-nøklene dine (Steg-for-steg guide)'}
           </span>
         </div>
-        {isOpen ? <ChevronUp className="w-5 h-5 text-blue-600" /> : <ChevronDown className="w-5 h-5 text-blue-600" />}
+        {isOpen ? <ChevronUp className="w-5 h-5 text-blue-600" aria-hidden="true" /> : <ChevronDown className="w-5 h-5 text-blue-600" aria-hidden="true" />}
       </button>
 
       {isOpen && (
@@ -199,7 +199,7 @@ export function VippsCredentialsGuide({ integrationPartner }: Props) {
                         rel="noopener noreferrer"
                         className="text-cyan-700 underline hover:text-cyan-900"
                       >
-                        portal.vippsmobilepay.com
+                        portal.vippsmobilepay.com<span className="sr-only"> (åpnes i ny fane)</span>
                       </a>{' '}
                       og logg inn med BankID. Du må ha administratorrettigheter for å utføre endringer.
                     </p>
@@ -323,7 +323,8 @@ export function VippsCredentialsGuide({ integrationPartner }: Props) {
                       className="text-blue-600 hover:underline inline-flex items-center gap-1"
                     >
                       portal.vippsmobilepay.com
-                      <ExternalLink className="w-3 h-3" />
+                      <span className="sr-only"> (åpnes i ny fane)</span>
+                      <ExternalLink className="w-3 h-3" aria-hidden="true" />
                     </a>
                   </p>
                   <p className="text-gray-700">
@@ -371,7 +372,7 @@ export function VippsCredentialsGuide({ integrationPartner }: Props) {
                     <div className="pl-4">→ <strong className="text-purple-700">Developer</strong></div>
                   </div>
                   <div className="flex items-start gap-2 bg-purple-50 p-3 rounded">
-                    <Info className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" />
+                    <Info className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
                     <p className="text-purple-800 text-xs">
                       <strong>Ser du ikke "Developer"?</strong> Du trenger utvikler-tilgang. Kontakt administrator
                       for bedriften din i Vipps.
@@ -390,7 +391,7 @@ export function VippsCredentialsGuide({ integrationPartner }: Props) {
               </div>
               <div className="flex-1">
                 <h3 className="font-bold text-gray-900 mb-2 flex items-center gap-2">
-                  <Key className="w-5 h-5 text-purple-600" />
+                  <Key className="w-5 h-5 text-purple-600" aria-hidden="true" />
                   Finn API-nøklene
                 </h3>
                 <div className="bg-gray-50 p-4 rounded-lg text-sm">
@@ -412,7 +413,7 @@ export function VippsCredentialsGuide({ integrationPartner }: Props) {
               </div>
               <div className="flex-1">
                 <h3 className="font-bold text-gray-900 mb-2 flex items-center gap-2">
-                  <Shield className="w-5 h-5 text-green-600" />
+                  <Shield className="w-5 h-5 text-green-600" aria-hidden="true" />
                   Client ID
                 </h3>
                 <div className="bg-gray-50 p-4 rounded-lg text-sm space-y-2">
@@ -439,7 +440,7 @@ export function VippsCredentialsGuide({ integrationPartner }: Props) {
               </div>
               <div className="flex-1">
                 <h3 className="font-bold text-gray-900 mb-2 flex items-center gap-2">
-                  <Eye className="w-5 h-5 text-red-600" />
+                  <Eye className="w-5 h-5 text-red-600" aria-hidden="true" />
                   Client Secret (VIKTIG!)
                 </h3>
                 <div className="bg-red-50 border border-red-200 p-4 rounded-lg text-sm space-y-3">
@@ -488,7 +489,7 @@ export function VippsCredentialsGuide({ integrationPartner }: Props) {
               </div>
               <div className="flex-1">
                 <h3 className="font-bold text-gray-900 mb-2 flex items-center gap-2">
-                  <Key className="w-5 h-5 text-purple-600" />
+                  <Key className="w-5 h-5 text-purple-600" aria-hidden="true" />
                   Finn Merchant Serial Number (MSN)
                 </h3>
                 <div className="bg-gray-50 p-4 rounded-lg space-y-2 text-sm">
@@ -555,7 +556,7 @@ export function VippsCredentialsGuide({ integrationPartner }: Props) {
           {/* Common Issues */}
           <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
             <h4 className="font-bold text-yellow-900 mb-2 flex items-center gap-2">
-              <AlertCircle className="w-5 h-5" />
+              <AlertCircle className="w-5 h-5" aria-hidden="true" />
               Vanlige feil
             </h4>
             <ul className="space-y-2 text-sm text-yellow-800">
@@ -600,14 +601,15 @@ export function VippsCredentialsGuide({ integrationPartner }: Props) {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-green-700 hover:underline"
               >
-                <ExternalLink className="w-4 h-4" />
+                <ExternalLink className="w-4 h-4" aria-hidden="true" />
                 Offisiell Vipps dokumentasjon om portalen
+                <span className="sr-only"> (åpnes i ny fane)</span>
               </a>
               <a
                 href="mailto:support@averdi.no"
                 className="flex items-center gap-2 text-green-700 hover:underline"
               >
-                <Key className="w-4 h-4" />
+                <Key className="w-4 h-4" aria-hidden="true" />
                 Kontakt Averdi support: support@averdi.no
               </a>
             </div>

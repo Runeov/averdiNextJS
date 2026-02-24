@@ -22,7 +22,7 @@ export default function PersonvernPage() {
           </p>
           <ul className="mt-3 space-y-1 list-none pl-0">
             <li><span className="font-medium">Organisasjonsnummer:</span> 980 383 571</li>
-            <li><span className="font-medium">Adresse:</span> Hovedgata 15, 9730 Karasjok</li>
+            <li><span className="font-medium">Adresse:</span> Juhána Rásttoš geaidnu 2, 9730 Karasjok</li>
             <li>
               <span className="font-medium">E-post:</span>{' '}
               <a href="mailto:post@averdi.no" className="text-[#E86C1F] hover:underline">post@averdi.no</a>
@@ -50,12 +50,13 @@ export default function PersonvernPage() {
           <p className="mb-4">Nettsiden bruker følgende informasjonskapsler:</p>
           <div className="overflow-x-auto rounded border border-slate-200">
             <table className="w-full text-sm text-left">
+              <caption className="sr-only">Oversikt over informasjonskapsler brukt på averdi.no</caption>
               <thead className="bg-slate-100 text-slate-600 uppercase text-xs">
                 <tr>
-                  <th className="px-4 py-3">Navn</th>
-                  <th className="px-4 py-3">Type</th>
-                  <th className="px-4 py-3">Formål</th>
-                  <th className="px-4 py-3">Lagringstid</th>
+                  <th scope="col" className="px-4 py-3">Navn</th>
+                  <th scope="col" className="px-4 py-3">Type</th>
+                  <th scope="col" className="px-4 py-3">Formål</th>
+                  <th scope="col" className="px-4 py-3">Lagringstid</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -109,7 +110,7 @@ export default function PersonvernPage() {
           </p>
           <p className="mt-3">
             Hotjar-data behandles av Hotjar Ltd. (Malta) som databehandler under en databehandleravtale. Data overføres ikke til tredjeland uten tilstrekkelige garantier i henhold til GDPR. Se{' '}
-            <a href="https://www.hotjar.com/legal/policies/privacy/" target="_blank" rel="noopener noreferrer" className="text-[#E86C1F] hover:underline">Hotjars personvernerklæring</a>{' '}
+            <a href="https://www.hotjar.com/legal/policies/privacy/" target="_blank" rel="noopener noreferrer" className="text-[#E86C1F] hover:underline">Hotjars personvernerklæring<span className="sr-only"> (åpner i ny fane)</span></a>{' '}
             for detaljer.
           </p>
           <p className="mt-3">Vi selger ikke personopplysninger til tredjeparter.</p>
@@ -124,7 +125,7 @@ export default function PersonvernPage() {
             <li><span className="font-medium">Retting</span> — kreve at feilaktige opplysninger rettes.</li>
             <li><span className="font-medium">Sletting</span> — be om at opplysninger slettes («retten til å bli glemt»).</li>
             <li><span className="font-medium">Trekke samtykke</span> — du kan når som helst trekke tilbake samtykke til analysecookies uten at det påvirker lovligheten av behandling basert på samtykke før tilbaketrekkingen.</li>
-            <li><span className="font-medium">Klage</span> — du har rett til å klage til <a href="https://www.datatilsynet.no" target="_blank" rel="noopener noreferrer" className="text-[#E86C1F] hover:underline">Datatilsynet</a>.</li>
+            <li><span className="font-medium">Klage</span> — du har rett til å klage til <a href="https://www.datatilsynet.no" target="_blank" rel="noopener noreferrer" className="text-[#E86C1F] hover:underline">Datatilsynet<span className="sr-only"> (åpner i ny fane)</span></a>.</li>
           </ul>
         </div>
 

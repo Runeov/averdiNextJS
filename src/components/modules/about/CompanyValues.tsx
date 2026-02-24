@@ -25,7 +25,7 @@ export default function CompanyValues() {
     {
       icon: Lightbulb,
       title: 'Sofistikert',
-      description: 'Lokalt forankret, men ikke provinsielt. Vi bringer Oslo-nivå ekspertise til Kautokeino. Verdensklasse kompetanse anvendt lokalt.',
+      description: 'Lokalt forankret, men ikke provinsielt. Vi bringer Oslo-nivå ekspertise til Karasjok. Verdensklasse kompetanse anvendt lokalt.',
       color: '#E86C1F'
     }
   ];
@@ -58,7 +58,7 @@ export default function CompanyValues() {
                   className="w-14 h-14 rounded-xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110"
                   style={{ backgroundColor: `${value.color}15` }}
                 >
-                  <Icon className="w-7 h-7" style={{ color: value.color }} />
+                  <Icon className="w-7 h-7" style={{ color: value.color }} aria-hidden="true" />
                 </div>
 
                 {/* Title */}

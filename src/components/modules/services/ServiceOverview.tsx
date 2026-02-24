@@ -33,9 +33,10 @@ export function ServiceOverview({
         <div className="grid md:grid-cols-2 gap-4">
           {benefits.map((benefit, index) => (
             <div key={index} className="flex items-start gap-3">
-              <CheckCircle2 
-                className="w-6 h-6 flex-shrink-0 mt-0.5" 
-                style={{ color: themeColor }} 
+              <CheckCircle2
+                className="w-6 h-6 flex-shrink-0 mt-0.5"
+                style={{ color: themeColor }}
+                aria-hidden="true"
               />
               <span className="text-base text-slate-700 font-medium">
                 {benefit}

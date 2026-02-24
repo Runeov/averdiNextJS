@@ -233,9 +233,9 @@ export default function SametingetNaeringPage() {
           </ul>
 
           <div className="bg-yellow-50 p-6 rounded-xl border-l-4 border-yellow-400">
-            <h4 className="font-bold text-yellow-800 flex items-center gap-2 mb-2 text-lg">
+            <h3 className="font-bold text-yellow-800 flex items-center gap-2 mb-2 text-lg">
               <FileText className="w-5 h-5" /> Husk prosjektregnskap!
-            </h4>
+            </h3>
             <p className="text-sm text-yellow-800 leading-relaxed">
               Mottar du støtte, må du føre eget prosjektregnskap som viser at pengene er brukt til formålet. 
               Dette må ofte attesteres av statsautorisert revisor/regnskapsfører (det er oss!). 

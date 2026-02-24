@@ -231,7 +231,7 @@ Ground abstract advice in human reality (anonymized).
 
 ```
 ✅ USE: "Last month, a fishing business in Vardø asked us about vessel grants. Here's what we found..."
-✅ USE: "A client in Kautokeino wanted to diversify into tourism. The Sametinget application was the key..."
+✅ USE: "A client in Karasjok wanted to diversify into tourism. The Sametinget application was the key..."
 ```
 
 #### 4.4 Mandatory Takeaways

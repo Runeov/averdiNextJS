@@ -233,7 +233,7 @@ export default function OffentligPage() {
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-xs font-bold text-amber-600 uppercase tracking-wider">Ny modell fra 2026</span>
                 </div>
-                <h4 className="font-bold text-slate-900 mb-2">Tospråklighetstilskudd endres</h4>
+                <h3 className="font-bold text-slate-900 mb-2">Tospråklighetstilskudd endres</h3>
                 <p className="text-slate-600 text-sm leading-relaxed mb-3">
                   Fra 2026 innføres en ny modell for tospråklighetstilskudd til kommuner. Kommunene kategoriseres nå i ulike grupper basert på
                   <strong> språksituasjon og behov</strong>. Dette påvirker hvordan midlene fordeles.
@@ -253,9 +253,9 @@ export default function OffentligPage() {
           </ul>
 
           <div className="bg-yellow-50 p-6 rounded-xl border-l-4 border-yellow-400">
-            <h4 className="font-bold text-yellow-800 flex items-center gap-2 mb-2 text-lg">
+            <h3 className="font-bold text-yellow-800 flex items-center gap-2 mb-2 text-lg">
               <BookOpen className="w-5 h-5" /> Mulighet: Læremidler
-            </h4>
+            </h3>
             <p className="text-sm text-yellow-800 leading-relaxed">
               Markedet skriker etter digitale læremidler på lule- og sørsamisk. For teknologiselskaper og forlag er dette en nisje med betydelig investeringsvilje fra Sametinget.
             </p>

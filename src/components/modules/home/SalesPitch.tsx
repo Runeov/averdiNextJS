@@ -36,7 +36,7 @@ export default function SalesPitch() {
               transition={{ duration: 0.6, ease: "easeOut" }}
             >
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E86C1F]/10 text-[#E86C1F] text-sm font-bold mb-6 border border-[#E86C1F]/20">
-                <TrendingUp className="w-4 h-4" />
+                <TrendingUp className="w-4 h-4" aria-hidden="true" />
                 <span>Din vekstpartner i Nord</span>
               </div>
 
@@ -62,7 +62,7 @@ export default function SalesPitch() {
                   onClick={scrollToContact}
                   className="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-[#E86C1F] rounded-full hover:bg-[#d65f18] transition-all shadow-lg hover:shadow-[#E86C1F]/40 transform hover:-translate-y-1 gap-2"
                 >
-                  <MessageSquare className="w-5 h-5" />
+                  <MessageSquare className="w-5 h-5" aria-hidden="true" />
                   Snakk med en rådgiver
                 </button>
 
@@ -71,7 +71,7 @@ export default function SalesPitch() {
                   className="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-slate-700 bg-white border-2 border-slate-200 rounded-full hover:border-[#E86C1F] hover:text-[#E86C1F] transition-all duration-300 group shadow-sm hover:shadow-md"
                 >
                   Bli kjent med oss
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                 </button>
               </div>
             </motion.div>
@@ -104,7 +104,7 @@ export default function SalesPitch() {
                 <div className="absolute bottom-6 left-6 right-6 sm:right-auto bg-white/95 backdrop-blur-md p-5 rounded-2xl shadow-xl border border-slate-100">
                   <div className="flex items-center gap-4">
                     <div className="bg-green-100 p-2 rounded-full text-green-700">
-                        <CheckCircle2 className="w-5 h-5" />
+                        <CheckCircle2 className="w-5 h-5" aria-hidden="true" />
                     </div>
                     <div>
                         <p className="text-slate-900 font-bold text-base">Lokal tilstedeværelse</p>

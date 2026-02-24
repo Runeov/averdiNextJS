@@ -278,9 +278,9 @@ export default function DuodjiPage() {
             </ul>
 
             <div className="bg-yellow-50 p-6 rounded-xl border-l-4 border-yellow-400">
-                <h4 className="font-bold text-yellow-800 flex items-center gap-2 mb-2 text-lg">
+                <h3 className="font-bold text-yellow-800 flex items-center gap-2 mb-2 text-lg">
                 <FileText className="w-5 h-5" /> Varetelling er penger
-                </h4>
+                </h3>
                 <p className="text-sm text-yellow-800 leading-relaxed">
                 Varelageret ditt (ferdige produkter og råvarer som skinn/horn) har en skattemessig verdi. 
                 Ved årsskiftet <strong>må</strong> dette telles. Mange glemmer at varelageret påvirker resultatet direkte. 

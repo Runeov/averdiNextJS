@@ -61,7 +61,7 @@ export function FaqAccordion({
                 color: openIndex === index ? '#fff' : undefined
               }}
             >
-              <HelpCircle className="w-5 h-5" />
+              <HelpCircle className="w-5 h-5" aria-hidden="true" />
             </div>
 
             {/* Tekst */}
@@ -75,11 +75,12 @@ export function FaqAccordion({
             </div>
 
             {/* Pil */}
-            <ChevronRight 
-              className={cn("w-5 h-5 transition-transform duration-300 text-slate-300", 
+            <ChevronRight
+              className={cn("w-5 h-5 transition-transform duration-300 text-slate-300",
                 openIndex === index ? "rotate-90" : "group-hover:text-slate-400"
               )}
               style={{ color: openIndex === index ? themeColor : undefined }}
+              aria-hidden="true"
             />
           </button>
 

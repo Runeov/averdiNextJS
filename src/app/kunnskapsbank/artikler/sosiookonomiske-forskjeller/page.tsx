@@ -93,7 +93,7 @@ export default function ArtikkelFornesInteractive() {
 
       <nav className="relative z-20 container mx-auto px-4 py-6 max-w-6xl flex justify-between items-center">
         <Link href="/kunnskapsbank/artikler" className="flex items-center text-slate-500 hover:text-slate-900 transition-colors font-medium">
-          <ArrowLeft className="w-4 h-4 mr-2" />
+          <ArrowLeft className="w-4 h-4 mr-2" aria-hidden="true" />
           Tilbake til oversikten
         </Link>
 
@@ -113,7 +113,7 @@ export default function ArtikkelFornesInteractive() {
         <header className="mb-8 grid md:grid-cols-3 gap-6 items-start">
           <div className="md:col-span-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100 text-orange-700 text-xs font-bold uppercase tracking-widest mb-4">
-              <AlertTriangle className="w-3 h-3" />
+              <AlertTriangle className="w-3 h-3" aria-hidden="true" />
               Dybdeanalyse
             </div>
 
@@ -185,7 +185,7 @@ export default function ArtikkelFornesInteractive() {
                     )}
 
                     <div className="absolute top-3 left-3 inline-flex items-center gap-2 bg-black/40 text-white text-xs px-2 py-1 rounded-full">
-                      <Instagram className="w-4 h-4" />
+                      <Instagram className="w-4 h-4" aria-hidden="true" />
                       <span>{p.timestamp}</span>
                     </div>
                   </div>
@@ -202,23 +202,25 @@ export default function ArtikkelFornesInteractive() {
                             setLiked((s) => ({ ...s, [p.id]: !s[p.id] }));
                           }}
                           className="flex items-center gap-1"
+                          aria-label={`Lik innlegg: ${p.title}`}
+                          aria-pressed={!!liked[p.id]}
                         >
-                          <Heart className={`w-4 h-4 ${liked[p.id] ? 'text-red-500' : ''}`} />
-                          <span>{p.likes + (liked[p.id] ? 1 : 0)}</span>
+                          <Heart className={`w-4 h-4 ${liked[p.id] ? 'text-red-500' : ''}`} aria-hidden="true" />
+                          <span aria-hidden="true">{p.likes + (liked[p.id] ? 1 : 0)}</span>
                         </button>
 
-                        <button onClick={(e) => e.stopPropagation()} className="flex items-center gap-1">
-                          <MessageSquare className="w-4 h-4" />
-                          <span>{p.comments}</span>
+                        <button onClick={(e) => e.stopPropagation()} className="flex items-center gap-1" aria-label={`Kommenter innlegg: ${p.title}`}>
+                          <MessageSquare className="w-4 h-4" aria-hidden="true" />
+                          <span aria-hidden="true">{p.comments}</span>
                         </button>
                       </div>
 
                       <div className="flex items-center gap-3">
-                        <button onClick={(e) => e.stopPropagation()} className="text-slate-400 hover:text-slate-700">
-                          <Share2 className="w-4 h-4" />
+                        <button onClick={(e) => e.stopPropagation()} className="text-slate-400 hover:text-slate-700" aria-label="Del artikkel">
+                          <Share2 className="w-4 h-4" aria-hidden="true" />
                         </button>
-                        <button onClick={(e) => e.stopPropagation()} className="text-slate-400 hover:text-slate-700">
-                          <ThumbsUp className="w-4 h-4" />
+                        <button onClick={(e) => e.stopPropagation()} className="text-slate-400 hover:text-slate-700" aria-label="Tommel opp">
+                          <ThumbsUp className="w-4 h-4" aria-hidden="true" />
                         </button>
                       </div>
                     </div>
@@ -245,8 +247,8 @@ export default function ArtikkelFornesInteractive() {
                 <button className="flex-1 inline-flex items-center justify-center px-4 py-2 bg-[#E86C1F] hover:bg-[#d65a10] text-white rounded-full font-bold">
                   Les hele saken
                 </button>
-                <button onClick={() => setActive(posts[3])} className="p-2 rounded-full bg-slate-50 border border-slate-100">
-                  <BarChart3 className="w-5 h-5 text-slate-700" />
+                <button onClick={() => setActive(posts[3])} className="p-2 rounded-full bg-slate-50 border border-slate-100" aria-label="Vis visualisering">
+                  <BarChart3 className="w-5 h-5 text-slate-700" aria-hidden="true" />
                 </button>
               </div>
             </div>
@@ -329,12 +331,12 @@ function PostModal({ post, onClose, liked, onToggleLike }: { post: Post; onClose
           </div>
 
           <div className="flex items-center gap-2">
-            <button onClick={onToggleLike} className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-slate-50 border border-slate-100">
-              <Heart className={`w-4 h-4 ${liked ? 'text-red-500' : 'text-slate-500'}`} />
-              <span className="text-sm">{post.likes + (liked ? 1 : 0)}</span>
+            <button onClick={onToggleLike} className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-slate-50 border border-slate-100" aria-label={liked ? 'Fjern like' : 'Lik innlegg'} aria-pressed={liked}>
+              <Heart className={`w-4 h-4 ${liked ? 'text-red-500' : 'text-slate-500'}`} aria-hidden="true" />
+              <span className="text-sm" aria-hidden="true">{post.likes + (liked ? 1 : 0)}</span>
             </button>
-            <button onClick={onClose} className="p-2 rounded-full bg-slate-50 border border-slate-100">
-              <X className="w-4 h-4" />
+            <button onClick={onClose} className="p-2 rounded-full bg-slate-50 border border-slate-100" aria-label="Lukk">
+              <X className="w-4 h-4" aria-hidden="true" />
             </button>
           </div>
         </div>
@@ -350,17 +352,17 @@ function PostModal({ post, onClose, liked, onToggleLike }: { post: Post; onClose
 
             <div className="flex items-center gap-3 text-sm text-slate-500">
               <div className="inline-flex items-center gap-2">
-                <Coins className="w-4 h-4" />
+                <Coins className="w-4 h-4" aria-hidden="true" />
                 <span>Økonomisk vinkel</span>
               </div>
 
               <div className="inline-flex items-center gap-2">
-                <Clock className="w-4 h-4" />
+                <Clock className="w-4 h-4" aria-hidden="true" />
                 <span>5 min lesetid</span>
               </div>
 
               <div className="inline-flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4" />
+                <ShieldCheck className="w-4 h-4" aria-hidden="true" />
                 <span>Faktasjekket</span>
               </div>
             </div>

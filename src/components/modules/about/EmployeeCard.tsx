@@ -39,7 +39,7 @@ export default function EmployeeCard({ employee }: EmployeeCardProps) {
             {employee.role.split('/')[0].trim()}
           </p>
           <p className="flex items-center gap-1 text-xs text-slate-500 mt-1">
-            <MapPin className="w-3 h-3" />
+            <MapPin className="w-3 h-3" aria-hidden="true" />
             <span className="capitalize">{employee.office}</span>
           </p>
         </div>
@@ -81,7 +81,8 @@ export default function EmployeeCard({ employee }: EmployeeCardProps) {
           className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-[#E86C1F] bg-[#E86C1F]/10 rounded-full transition-all duration-300 hover:bg-[#E86C1F] hover:text-white group/btn"
         >
           Se profil
-          <ExternalLink className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-0.5" />
+          <span className="sr-only"> (åpnes i ny fane)</span>
+          <ExternalLink className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-0.5" aria-hidden="true" />
         </Link>
       </div>
     </div>

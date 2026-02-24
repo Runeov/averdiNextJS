@@ -17,6 +17,10 @@
 # Misc
 .DS_Store
 *.pem
+nul
+
+# Compliance/audit reports (generated files)
+docs/compliance_*.html
 
 # Debug
 npm-debug.log*

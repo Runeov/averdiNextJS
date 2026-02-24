@@ -101,7 +101,7 @@ export function ResponsiveGuideImage({
           {/* Only show zoom hint if using dedicated mobile image */}
           {showZoomHint && hasDedicatedMobileImage && (
             <div className="absolute bottom-2 right-2 flex items-center gap-1.5 bg-black/70 text-white text-xs px-2 py-1 rounded-full opacity-80 group-hover:opacity-100 transition-opacity">
-              <ZoomIn className="w-3 h-3" />
+              <ZoomIn className="w-3 h-3" aria-hidden="true" />
               <span>Trykk for å forstørre</span>
             </div>
           )}
@@ -141,7 +141,7 @@ export function ResponsiveGuideImage({
               className="text-white/80 hover:text-white p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
               aria-label="Lukk"
             >
-              <X className="w-6 h-6" />
+              <X className="w-6 h-6" aria-hidden="true" />
             </button>
           </div>
 

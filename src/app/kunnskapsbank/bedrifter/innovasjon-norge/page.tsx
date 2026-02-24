@@ -55,14 +55,15 @@ function OfficeCard({ city, address, phone }: { city: string; address?: string; 
     <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
       <div className="flex items-center gap-3 mb-3">
         <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-          <MapPin className="w-5 h-5 text-blue-600" />
+          <MapPin className="w-5 h-5 text-blue-600" aria-hidden="true" />
         </div>
         <h3 className="font-bold text-slate-900 text-lg">{city}</h3>
       </div>
       {address && <p className="text-slate-600 text-sm mb-2">{address}</p>}
       {phone && (
         <a href={`tel:${phone.replace(/\s/g, '')}`} className="text-blue-600 text-sm font-medium hover:underline flex items-center gap-1">
-          <Phone className="w-4 h-4" /> {phone}
+          <Phone className="w-4 h-4" aria-hidden="true" />
+          {phone}
         </a>
       )}
     </div>
@@ -74,7 +75,7 @@ function ServiceCard({ icon: Icon, title, description }: { icon: React.ElementTy
   return (
     <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-all hover:border-blue-200">
       <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-4">
-        <Icon className="w-6 h-6 text-blue-600" />
+        <Icon className="w-6 h-6 text-blue-600" aria-hidden="true" />
       </div>
       <h3 className="font-bold text-slate-900 text-lg mb-2">{title}</h3>
       <p className="text-slate-600 text-sm leading-relaxed">{description}</p>
@@ -132,7 +133,7 @@ export default function InnovasjonNorgePage() {
         
         {/* Breadcrumb */}
         <Link href="/kunnskapsbank/bedrifter" className="inline-flex items-center text-slate-500 hover:text-blue-600 mb-8 font-medium transition-colors">
-          <ArrowLeft className="w-4 h-4 mr-2" /> Tilbake til Bedrift-hub
+          <ArrowLeft className="w-4 h-4 mr-2" aria-hidden="true" /> Tilbake til Bedrift-hub
         </Link>
 
         {/* Hero Section */}
@@ -153,7 +154,7 @@ export default function InnovasjonNorgePage() {
         {/* Kontorer-seksjon */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
-            <Building2 className="w-6 h-6 text-blue-600" />
+            <Building2 className="w-6 h-6 text-blue-600" aria-hidden="true" />
             Kontorer i regionen
           </h2>
           <div className="grid md:grid-cols-3 gap-4">
@@ -197,7 +198,7 @@ export default function InnovasjonNorgePage() {
         <section className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm mb-16">
           <div className="flex items-start gap-4 mb-6">
             <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
-              <GraduationCap className="w-6 h-6 text-blue-600" />
+              <GraduationCap className="w-6 h-6 text-blue-600" aria-hidden="true" />
             </div>
             <div>
               <h2 className="text-2xl font-bold text-slate-900 mb-2">Kurs og kompetanse</h2>
@@ -214,7 +215,7 @@ export default function InnovasjonNorgePage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-sm font-medium hover:bg-blue-100 transition-colors"
             >
-              Kompetansesenteret <ExternalLink className="w-4 h-4" />
+              Kompetansesenteret <span className="sr-only"> (åpnes i ny fane)</span><ExternalLink className="w-4 h-4" aria-hidden="true" />
             </a>
             <a 
               href="https://www.innovasjonnorge.no/arrangementer" 
@@ -222,7 +223,7 @@ export default function InnovasjonNorgePage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-sm font-medium hover:bg-blue-100 transition-colors"
             >
-              Arrangementer <ExternalLink className="w-4 h-4" />
+              Arrangementer <span className="sr-only"> (åpnes i ny fane)</span><ExternalLink className="w-4 h-4" aria-hidden="true" />
             </a>
           </div>
         </section>
@@ -230,7 +231,7 @@ export default function InnovasjonNorgePage() {
         {/* Regionale ordninger */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
-            <Briefcase className="w-6 h-6 text-blue-600" />
+            <Briefcase className="w-6 h-6 text-blue-600" aria-hidden="true" />
             Regionale ordninger
           </h2>
           <div className="bg-gradient-to-br from-blue-50 to-slate-50 p-6 rounded-2xl border border-blue-100">
@@ -246,7 +247,7 @@ export default function InnovasjonNorgePage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-blue-600 font-medium hover:underline"
             >
-              Les mer om regionale ordninger <ExternalLink className="w-4 h-4" />
+              Les mer om regionale ordninger <span className="sr-only"> (åpnes i ny fane)</span><ExternalLink className="w-4 h-4" aria-hidden="true" />
             </a>
           </div>
         </section>
@@ -261,15 +262,15 @@ export default function InnovasjonNorgePage() {
           </p>
           <ul className="space-y-3 mb-6">
             <li className="flex items-start gap-3">
-              <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
               <span className="text-slate-300">0% arbeidsgiveravgift i hele Finnmark og Nord-Troms</span>
             </li>
             <li className="flex items-start gap-3">
-              <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
               <span className="text-slate-300">Studielånsslette på opptil 60 000 kr per år</span>
             </li>
             <li className="flex items-start gap-3">
-              <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
               <span className="text-slate-300">Finnmarksfradrag på 45 000 kr</span>
             </li>
           </ul>
@@ -310,13 +311,13 @@ export default function InnovasjonNorgePage() {
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs text-slate-500">
             <p>
               Informasjon hentet fra{' '}
-              <a 
-                href="https://www.innovasjonnorge.no/kontor/arktis" 
-                target="_blank" 
+              <a
+                href="https://www.innovasjonnorge.no/kontor/arktis"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:underline"
               >
-                Innovasjon Norge Arktis
+                Innovasjon Norge Arktis<span className="sr-only"> (åpnes i ny fane)</span>
               </a>
             </p>
             <a 
@@ -325,7 +326,7 @@ export default function InnovasjonNorgePage() {
               rel="noopener noreferrer"
               className="flex items-center gap-1 hover:text-blue-600 transition-colors"
             >
-              innovasjonnorge.no <ExternalLink className="w-3 h-3" />
+              innovasjonnorge.no <span className="sr-only"> (åpnes i ny fane)</span><ExternalLink className="w-3 h-3" aria-hidden="true" />
             </a>
           </div>
         </div>

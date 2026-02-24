@@ -66,7 +66,7 @@ export default function TeamSection({ employees }: TeamSectionProps) {
                     href={`mailto:${employee.email}`}
                     className="flex items-center gap-2 text-sm text-slate-600 hover:text-[#E86C1F] transition-colors group"
                   >
-                    <Mail className="w-4 h-4 flex-shrink-0" />
+                    <Mail className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
                     <span className="truncate group-hover:underline">{employee.email}</span>
                   </a>
                   
@@ -74,12 +74,12 @@ export default function TeamSection({ employees }: TeamSectionProps) {
                     href={`tel:+47${employee.phone.replace(/\s/g, '')}`}
                     className="flex items-center gap-2 text-sm text-slate-600 hover:text-[#E86C1F] transition-colors group"
                   >
-                    <Phone className="w-4 h-4 flex-shrink-0" />
+                    <Phone className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
                     <span className="group-hover:underline">+47 {employee.phone}</span>
                   </a>
 
                   <div className="flex items-center gap-2 text-sm text-slate-600">
-                    <MapPin className="w-4 h-4 flex-shrink-0" />
+                    <MapPin className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
                     <span className="capitalize">{employee.office}</span>
                   </div>
                 </div>
@@ -88,7 +88,7 @@ export default function TeamSection({ employees }: TeamSectionProps) {
                 {employee.specialties && employee.specialties.length > 0 && (
                   <div>
                     <div className="flex items-center gap-2 text-xs font-semibold text-slate-700 mb-2">
-                      <Award className="w-4 h-4 text-[#E86C1F]" />
+                      <Award className="w-4 h-4 text-[#E86C1F]" aria-hidden="true" />
                       Spesialområder
                     </div>
                     <div className="flex flex-wrap gap-2">
@@ -108,7 +108,7 @@ export default function TeamSection({ employees }: TeamSectionProps) {
                 {employee.languages && employee.languages.length > 0 && (
                   <div>
                     <div className="flex items-center gap-2 text-xs font-semibold text-slate-700 mb-2">
-                      <Languages className="w-4 h-4 text-[#E86C1F]" />
+                      <Languages className="w-4 h-4 text-[#E86C1F]" aria-hidden="true" />
                       Språk
                     </div>
                     <div className="flex flex-wrap gap-2">

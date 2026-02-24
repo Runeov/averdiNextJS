@@ -94,7 +94,7 @@ function ResponsiveGuideImage({
           <OverlayText />
           {showZoomHint && hasDedicatedMobileImage && (
             <div className="absolute bottom-2 right-2 flex items-center gap-1.5 bg-black/70 text-white text-xs px-2 py-1 rounded-full opacity-80">
-              <ZoomIn className="w-3 h-3" />
+              <ZoomIn className="w-3 h-3" aria-hidden="true" />
               <span>Trykk for å forstørre</span>
             </div>
           )}
@@ -130,7 +130,7 @@ function ResponsiveGuideImage({
               className="text-white/80 hover:text-white p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
               aria-label="Lukk"
             >
-              <X className="w-6 h-6" />
+              <X className="w-6 h-6" aria-hidden="true" />
             </button>
           </div>
           <div className="flex-1 overflow-auto p-4">
@@ -205,15 +205,15 @@ export function PowerOfficeClientKeyGuide({ integrationPartner }: Props) {
         className="w-full px-6 py-4 flex items-center justify-between hover:bg-purple-100 transition-colors"
       >
         <div className="flex items-center gap-3">
-          <BookOpen className="w-5 h-5 text-purple-600" />
+          <BookOpen className="w-5 h-5 text-purple-600" aria-hidden="true" />
           <span className="font-semibold text-purple-900">
             📖 Hvordan hente Client Key fra PowerOffice Go
           </span>
         </div>
         {isOpen ? (
-          <ChevronUp className="w-5 h-5 text-purple-600" />
+          <ChevronUp className="w-5 h-5 text-purple-600" aria-hidden="true" />
         ) : (
-          <ChevronDown className="w-5 h-5 text-purple-600" />
+          <ChevronDown className="w-5 h-5 text-purple-600" aria-hidden="true" />
         )}
       </button>
 
@@ -237,7 +237,7 @@ export function PowerOfficeClientKeyGuide({ integrationPartner }: Props) {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-white font-medium"
               style={{ backgroundColor: partnerConfig.color }}
             >
-              <Key className="w-4 h-4" />
+              <Key className="w-4 h-4" aria-hidden="true" />
               {partnerConfig.extensionName}
             </span>
           </div>
@@ -254,13 +254,13 @@ export function PowerOfficeClientKeyGuide({ integrationPartner }: Props) {
                 <p className="text-slate-600">
                   Gå til{' '}
                   <a
-                    href="https://go.poweroffice.net"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-purple-700 underline hover:text-purple-900"
-                  >
-                    go.poweroffice.net
-                  </a>{' '}
+                   href="https://go.poweroffice.net"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   className="text-purple-700 underline hover:text-purple-900"
+                 >
+                   go.poweroffice.net<span className="sr-only"> (åpnes i ny fane)</span>
+                 </a>{' '}
                   og logg inn. Du må ha administratorrettigheter.
                 </p>
               </div>

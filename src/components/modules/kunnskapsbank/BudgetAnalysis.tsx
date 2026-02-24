@@ -8,7 +8,7 @@ export function BudgetAnalysis() {
         {/* Venstre: Tittel & Intro */}
         <div className="p-8 md:p-12 md:w-2/5 bg-slate-800 relative">
           <div className="absolute top-0 right-0 p-4 opacity-5">
-            <FileText className="w-32 h-32 text-white" />
+            <FileText className="w-32 h-32 text-white" aria-hidden="true" />
           </div>
           <span className="inline-block px-3 py-1 bg-blue-500/20 text-blue-300 text-xs font-bold uppercase tracking-wider rounded-full mb-4 border border-blue-500/30">
             Averdi Innsikt
@@ -33,7 +33,7 @@ export function BudgetAnalysis() {
             {/* Punkt 1 */}
             <div className="flex gap-4">
               <div className="mt-1 bg-yellow-500/10 p-2 rounded-lg h-fit">
-                <AlertTriangle className="w-5 h-5 text-yellow-500" />
+                <AlertTriangle className="w-5 h-5 text-yellow-500" aria-hidden="true" />
               </div>
               <div>
                 <h3 className="font-bold text-lg text-white mb-1">Hardere konkurranse om midlene</h3>
@@ -47,7 +47,7 @@ export function BudgetAnalysis() {
             {/* Punkt 2 */}
             <div className="flex gap-4">
               <div className="mt-1 bg-green-500/10 p-2 rounded-lg h-fit">
-                <TrendingUp className="w-5 h-5 text-green-500" />
+                <TrendingUp className="w-5 h-5 text-green-500" aria-hidden="true" />
               </div>
               <div>
                 <h3 className="font-bold text-lg text-white mb-1">Januar-vinduet er kritisk</h3>

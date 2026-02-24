@@ -72,7 +72,7 @@ function InfoCard({ icon: Icon, title, description, variant = 'default' }: {
   return (
     <div className={`p-6 rounded-xl border shadow-sm ${variants[variant]}`}>
       <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${iconVariants[variant]}`}>
-        <Icon className="w-6 h-6" />
+        <Icon className="w-6 h-6" aria-hidden="true" />
       </div>
       <h3 className="font-bold text-slate-900 text-lg mb-2">{title}</h3>
       <p className="text-slate-600 text-sm leading-relaxed">{description}</p>
@@ -134,13 +134,13 @@ export default function TransportPage() {
         
         {/* Breadcrumb */}
         <Link href="/kunnskapsbank/bedrifter" className="inline-flex items-center text-slate-500 hover:text-blue-600 mb-8 font-medium transition-colors">
-          <ArrowLeft className="w-4 h-4 mr-2" /> Tilbake til Bedrift-hub
+          <ArrowLeft className="w-4 h-4 mr-2" aria-hidden="true" /> Tilbake til Bedrift-hub
         </Link>
 
         {/* Hero Section */}
         <div className="mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-100 text-yellow-700 text-sm font-bold mb-4 uppercase tracking-wider">
-            <AlertTriangle className="w-4 h-4" /> Viktig regelverk
+            <AlertTriangle className="w-4 h-4" aria-hidden="true" /> Viktig regelverk
           </div>
           <h1 className="text-4xl md:text-5xl font-extrabold mb-6 text-slate-900 leading-tight">
             Transport & <span className="text-blue-600">Bagatellstøtte</span>
@@ -154,7 +154,7 @@ export default function TransportPage() {
         {/* Advarselsboks */}
         <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-xl mb-12">
           <div className="flex items-start gap-4">
-            <AlertTriangle className="w-6 h-6 text-red-500 flex-shrink-0 mt-1" />
+            <AlertTriangle className="w-6 h-6 text-red-500 flex-shrink-0 mt-1" aria-hidden="true" />
             <div>
               <h3 className="font-bold text-red-800 text-lg mb-2">Viktig for transportbedrifter</h3>
               <p className="text-red-700 leading-relaxed">
@@ -169,7 +169,7 @@ export default function TransportPage() {
         {/* Hva er De Minimis */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
-            <Scale className="w-6 h-6 text-blue-600" />
+            <Scale className="w-6 h-6 text-blue-600" aria-hidden="true" />
             Hva er De Minimis-reglene?
           </h2>
           <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
@@ -181,16 +181,16 @@ export default function TransportPage() {
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-blue-50 p-6 rounded-xl">
                 <div className="flex items-center gap-3 mb-3">
-                  <Euro className="w-6 h-6 text-blue-600" />
-                  <h4 className="font-bold text-slate-900">Generelt tak</h4>
+                  <Euro className="w-6 h-6 text-blue-600" aria-hidden="true" />
+                  <h3 className="font-bold text-slate-900">Generelt tak</h3>
                 </div>
                 <p className="text-3xl font-extrabold text-blue-600 mb-2">300 000 €</p>
                 <p className="text-slate-600 text-sm">Over en rullerende 3-års periode for de fleste sektorer</p>
               </div>
               <div className="bg-yellow-50 p-6 rounded-xl">
                 <div className="flex items-center gap-3 mb-3">
-                  <Truck className="w-6 h-6 text-yellow-600" />
-                  <h4 className="font-bold text-slate-900">Veitransport</h4>
+                  <Truck className="w-6 h-6 text-yellow-600" aria-hidden="true" />
+                  <h3 className="font-bold text-slate-900">Veitransport</h3>
                 </div>
                 <p className="text-3xl font-extrabold text-yellow-600 mb-2">100 000 €</p>
                 <p className="text-slate-600 text-sm">Lavere tak for godstransport på vei</p>
@@ -206,21 +206,21 @@ export default function TransportPage() {
             <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
-                  <XCircle className="w-5 h-5 text-red-600" />
+                  <XCircle className="w-5 h-5 text-red-600" aria-hidden="true" />
                 </div>
                 <h3 className="font-bold text-slate-900">Omfattes av De Minimis</h3>
               </div>
               <ul className="space-y-3">
                 <li className="flex items-start gap-2 text-slate-700">
-                  <Truck className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+                  <Truck className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
                   <span>Godstransport på vei (lastebiler, varebiler)</span>
                 </li>
                 <li className="flex items-start gap-2 text-slate-700">
-                  <Building2 className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+                  <Building2 className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
                   <span>Finanssektoren (banker, forsikring)</span>
                 </li>
                 <li className="flex items-start gap-2 text-slate-700">
-                  <FileText className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+                  <FileText className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
                   <span>Primærnæringer (jordbruk, fiske, akvakultur)</span>
                 </li>
               </ul>
@@ -228,29 +228,29 @@ export default function TransportPage() {
             <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                  <CheckCircle2 className="w-5 h-5 text-green-600" />
+                  <CheckCircle2 className="w-5 h-5 text-green-600" aria-hidden="true" />
                 </div>
                 <h3 className="font-bold text-slate-900">Full 0% AGA</h3>
               </div>
               <ul className="space-y-3">
                 <li className="flex items-start gap-2 text-slate-700">
-                  <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
                   <span>Handel og detaljhandel</span>
                 </li>
                 <li className="flex items-start gap-2 text-slate-700">
-                  <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
                   <span>Bygg og anlegg</span>
                 </li>
                 <li className="flex items-start gap-2 text-slate-700">
-                  <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
                   <span>IT og teknologi</span>
                 </li>
                 <li className="flex items-start gap-2 text-slate-700">
-                  <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
                   <span>Reiseliv og turisme</span>
                 </li>
                 <li className="flex items-start gap-2 text-slate-700">
-                  <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
                   <span>De fleste andre næringer</span>
                 </li>
               </ul>
@@ -262,7 +262,7 @@ export default function TransportPage() {
         <section className="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden mb-16">
           <div className="bg-slate-900 p-6 text-white">
             <h3 className="text-xl font-bold flex items-center gap-2">
-              <Calculator className="w-5 h-5 text-green-400" />
+              <Calculator className="w-5 h-5 text-green-400" aria-hidden="true" />
               Eksempel: Transportbedrift i Alta
             </h3>
             <p className="text-slate-400 text-sm mt-1">Slik beregner du om du treffer De Minimis-taket</p>
@@ -270,7 +270,7 @@ export default function TransportPage() {
           
           <div className="p-6 md:p-8">
             <div className="mb-8">
-              <h4 className="font-bold text-slate-900 mb-4">Scenario:</h4>
+              <h3 className="font-bold text-slate-900 mb-4">Scenario:</h3>
               <p className="text-slate-700 mb-4">
                 En transportbedrift i Alta har 5 ansatte med en samlet lønnskostnad på <strong>3 000 000 kr</strong> per år.
               </p>
@@ -297,9 +297,9 @@ export default function TransportPage() {
 
             <div className="bg-red-50 p-6 rounded-xl border border-red-200">
               <div className="flex items-start gap-3">
-                <AlertTriangle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+                <AlertTriangle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
                 <div>
-                  <h4 className="font-bold text-red-800 mb-2">Resultat: Taket overskrides</h4>
+                  <h3 className="font-bold text-red-800 mb-2">Resultat: Taket overskrides</h3>
                   <p className="text-red-700 text-sm leading-relaxed">
                     I dette eksempelet overskrider bedriften De Minimis-taket allerede i år 3. 
                     Bedriften må da betale differansen som arbeidsgiveravgift, pluss renter.
@@ -344,7 +344,7 @@ export default function TransportPage() {
         {/* Rapportering */}
         <section className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-xl mb-16">
           <h3 className="font-bold text-blue-900 text-lg mb-3 flex items-center gap-2">
-            <FileText className="w-5 h-5" />
+            <FileText className="w-5 h-5" aria-hidden="true" />
             Rapportering til Skatteetaten
           </h3>
           <p className="text-blue-800 mb-4 leading-relaxed">
@@ -382,7 +382,7 @@ export default function TransportPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-slate-700 rounded-full text-sm font-medium hover:bg-slate-200 transition-colors"
             >
-              Sonekart (Skatteetaten) <ExternalLink className="w-4 h-4" />
+              Sonekart (Skatteetaten) <span className="sr-only"> (åpnes i ny fane)</span><ExternalLink className="w-4 h-4" aria-hidden="true" />
             </a>
             <a 
               href="https://www.skatteetaten.no/bedrift-og-organisasjon/arbeidsgiver/arbeidsgiveravgift/bagatellmessig-stotte/" 
@@ -390,7 +390,7 @@ export default function TransportPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-slate-700 rounded-full text-sm font-medium hover:bg-slate-200 transition-colors"
             >
-              Om bagatellstøtte <ExternalLink className="w-4 h-4" />
+              Om bagatellstøtte <span className="sr-only"> (åpnes i ny fane)</span><ExternalLink className="w-4 h-4" aria-hidden="true" />
             </a>
           </div>
         </div>
@@ -415,7 +415,7 @@ export default function TransportPage() {
               rel="noopener noreferrer"
               className="flex items-center gap-1 hover:text-blue-600 transition-colors"
             >
-              skatteetaten.no <ExternalLink className="w-3 h-3" />
+              skatteetaten.no <span className="sr-only"> (åpnes i ny fane)</span><ExternalLink className="w-3 h-3" aria-hidden="true" />
             </a>
           </div>
         </div>

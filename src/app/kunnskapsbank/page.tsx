@@ -71,42 +71,42 @@ export default function KunnskapsbankPage() {
           {/* 1. SAMETINGET */}
           <Link href="/kunnskapsbank/sametinget" className="group bg-white rounded-3xl p-8 shadow-sm border border-slate-200 hover:border-[#E86C1F]/50 transition-all hover:shadow-2xl hover:shadow-[#E86C1F]/10 relative overflow-hidden flex flex-col h-full">
             <div className="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center mb-6 text-[#E86C1F] group-hover:scale-110 transition-transform">
-              <Landmark className="w-7 h-7" />
+              <Landmark className="w-7 h-7" aria-hidden="true" />
             </div>
             <h2 className="text-2xl font-bold text-slate-900 mb-3">Sametinget & Duodji</h2>
             <p className="text-slate-600 mb-8 leading-relaxed flex-1">
               I 2026 forvalter Sametinget over <strong>over 788 000 000 kr</strong>. Vi hjelper deg å navigere søknadsjungelen for kultur, språk og næring.
             </p>
             <span className="inline-flex items-center text-[#E86C1F] font-bold text-sm group-hover:gap-2 transition-all mt-auto">
-              Se støtteordninger <ArrowRight className="w-4 h-4 ml-1" />
+              Se støtteordninger <ArrowRight className="w-4 h-4 ml-1" aria-hidden="true" />
             </span>
           </Link>
 
           {/* 2. BEDRIFT */}
           <Link href="/kunnskapsbank/bedrifter" className="group bg-white rounded-3xl p-8 shadow-sm border border-slate-200 hover:border-blue-400/50 transition-all hover:shadow-2xl hover:shadow-blue-500/10 relative overflow-hidden flex flex-col h-full">
             <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 text-blue-600 group-hover:scale-110 transition-transform">
-              <Building2 className="w-7 h-7" />
+              <Building2 className="w-7 h-7" aria-hidden="true" />
             </div>
             <h2 className="text-2xl font-bold text-slate-900 mb-3">Bedrift & Handel</h2>
             <p className="text-slate-600 mb-8 leading-relaxed flex-1">
               Maksimer fordelene ved å drive i <strong>Tiltakssonen</strong>. Alt om 0% arbeidsgiveravgift, finnmarksfradrag og smarte kasseløsninger.
             </p>
             <span className="inline-flex items-center text-blue-600 font-bold text-sm group-hover:gap-2 transition-all mt-auto">
-              Beregn besparelser <ArrowRight className="w-4 h-4 ml-1" />
+              Beregn besparelser <ArrowRight className="w-4 h-4 ml-1" aria-hidden="true" />
             </span>
           </Link>
 
           {/* 3. ORGANISASJON */}
           <Link href="/kunnskapsbank/organisasjoner" className="group bg-white rounded-3xl p-8 shadow-sm border border-slate-200 hover:border-green-500/50 transition-all hover:shadow-2xl hover:shadow-green-500/10 relative overflow-hidden flex flex-col h-full">
             <div className="w-14 h-14 bg-green-50 rounded-2xl flex items-center justify-center mb-6 text-green-600 group-hover:scale-110 transition-transform">
-              <Users className="w-7 h-7" />
+              <Users className="w-7 h-7" aria-hidden="true" />
             </div>
             <h2 className="text-2xl font-bold text-slate-900 mb-3">Lag & Forening</h2>
             <p className="text-slate-600 mb-8 leading-relaxed flex-1">
               Forenkle hverdagen for kassereren. Vi guider dere gjennom <strong>momskompensasjon</strong>, medlemsregistre og Vipps-regnskap.
             </p>
             <span className="inline-flex items-center text-green-600 font-bold text-sm group-hover:gap-2 transition-all mt-auto">
-              Få kontroll på laget <ArrowRight className="w-4 h-4 ml-1" />
+              Få kontroll på laget <ArrowRight className="w-4 h-4 ml-1" aria-hidden="true" />
             </span>
           </Link>
 
@@ -118,7 +118,7 @@ export default function KunnskapsbankPage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <div className="inline-flex items-center justify-center p-3 bg-[#E86C1F]/10 rounded-full mb-4 text-[#E86C1F]">
-              <HelpCircle className="w-8 h-8" />
+              <HelpCircle className="w-8 h-8" aria-hidden="true" />
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Ofte stilte spørsmål</h2>
             <p className="text-slate-600 max-w-2xl mx-auto text-lg">

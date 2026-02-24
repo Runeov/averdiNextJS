@@ -29,7 +29,7 @@ export default function ArtikkelOversikt() {
         {/* Header */}
         <header className="mb-16 text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 text-white text-xs font-bold uppercase tracking-widest mb-4">
-            <BookOpen className="w-4 h-4" />
+            <BookOpen className="w-4 h-4" aria-hidden="true" />
             Kunnskapsbanken
           </div>
           <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 mb-6">
@@ -80,7 +80,7 @@ export default function ArtikkelOversikt() {
                         href={pathShort} 
                         className="flex items-center gap-2 px-5 py-3 rounded-full bg-slate-100 border border-slate-200 text-slate-700 font-bold text-sm hover:bg-slate-200 hover:border-slate-300 transition-all"
                     >
-                        <Zap className="w-4 h-4 text-[#E86C1F]" />
+                        <Zap className="w-4 h-4 text-[#E86C1F]" aria-hidden="true" />
                         Kortversjon (3 min)
                     </Link>
 
@@ -89,7 +89,7 @@ export default function ArtikkelOversikt() {
                         href={pathLong} 
                         className="flex items-center gap-2 px-5 py-3 rounded-full bg-slate-900 text-white font-bold text-sm hover:bg-[#E86C1F] transition-all shadow-md"
                     >
-                        <FileText className="w-4 h-4" />
+                        <FileText className="w-4 h-4" aria-hidden="true" />
                         Dybdeanalyse (15 min)
                     </Link>
                 </div>
@@ -113,8 +113,8 @@ export default function ArtikkelOversikt() {
                   </div>
                   
                   {/* Arrow links to Long Version */}
-                  <Link href={pathLong} className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-50 text-slate-400 group-hover:bg-[#E86C1F] group-hover:text-white transition-all">
-                    <ArrowRight className="w-5 h-5" />
+                  <Link href={pathLong} className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-50 text-slate-400 group-hover:bg-[#E86C1F] group-hover:text-white transition-all" aria-label="Les dybdeanalyse: Sosioøkonomiske forskjeller">
+                    <ArrowRight className="w-5 h-5" aria-hidden="true" />
                   </Link>
                 </div>
               </div>
@@ -133,42 +133,42 @@ export default function ArtikkelOversikt() {
             {/* Placeholder Kort 1 */}
             <Link href="/kunnskapsbank/bedrifter/rekruttering" className="group bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-lg transition-all">
               <div className="text-xs font-bold text-blue-600 mb-3 uppercase">Bedrift</div>
-              <h4 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
+              <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
                 Slik vinner du rekrutteringskampen i 2026
-              </h4>
+              </h3>
               <p className="text-slate-600 text-sm mb-6">
                 Med 60.000 i gjeldsslette har du et våpen som matcher Oslo-lønn. Her er oppskriften.
               </p>
               <div className="flex items-center text-xs text-slate-400">
-                <Clock className="w-3 h-3 mr-1" /> 5 min
+                <Clock className="w-3 h-3 mr-1" aria-hidden="true" /> 5 min
               </div>
             </Link>
 
             {/* Placeholder Kort 2 */}
             <Link href="/kunnskapsbank/sametinget/naering" className="group bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-lg transition-all">
               <div className="text-xs font-bold text-[#E86C1F] mb-3 uppercase">Sametinget</div>
-              <h4 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#E86C1F] transition-colors">
+              <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#E86C1F] transition-colors">
                 Næringsstøtte: Førstemann til mølla
-              </h4>
+              </h3>
               <p className="text-slate-600 text-sm mb-6">
                 Hvorfor du må sende søknaden i januar, og hvordan du unngår likviditetsfellen.
               </p>
               <div className="flex items-center text-xs text-slate-400">
-                <Clock className="w-3 h-3 mr-1" /> 4 min
+                <Clock className="w-3 h-3 mr-1" aria-hidden="true" /> 4 min
               </div>
             </Link>
 
             {/* Placeholder Kort 3 */}
             <Link href="/kunnskapsbank/bedrifter/transport" className="group bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-lg transition-all">
               <div className="text-xs font-bold text-slate-500 mb-3 uppercase">Regelverk</div>
-              <h4 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-slate-600 transition-colors">
+              <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-slate-600 transition-colors">
                 Unngå straffeskatt på transport
-              </h4>
+              </h3>
               <p className="text-slate-600 text-sm mb-6">
                 De Minimis-reglene for bagatellstøtte er kompliserte. Sjekk om din bedrift rammes.
               </p>
               <div className="flex items-center text-xs text-slate-400">
-                <Clock className="w-3 h-3 mr-1" /> 6 min
+                <Clock className="w-3 h-3 mr-1" aria-hidden="true" /> 6 min
               </div>
             </Link>
           </div>

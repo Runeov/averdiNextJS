@@ -212,7 +212,7 @@ export default function SametingetPrimaryPage() {
           </p>
 
           <div className="bg-indigo-50 p-6 rounded-xl border border-indigo-100 mb-8">
-            <h4 className="font-bold text-indigo-900 mb-3 text-lg">Kriterier for investeringstilskudd til fartøy:</h4>
+            <h3 className="font-bold text-indigo-900 mb-3 text-lg">Kriterier for investeringstilskudd til fartøy:</h3>
             <ul className="grid sm:grid-cols-2 gap-4 text-sm text-indigo-800">
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 mt-0.5 text-indigo-600" />
@@ -234,9 +234,9 @@ export default function SametingetPrimaryPage() {
           </div>
 
           <div className="bg-yellow-50 p-6 rounded-xl border-l-4 border-yellow-400">
-            <h4 className="font-bold text-yellow-800 flex items-center gap-2 mb-2 text-lg">
+            <h3 className="font-bold text-yellow-800 flex items-center gap-2 mb-2 text-lg">
               <FileText className="w-5 h-5" /> Dokumentasjon er nøkkelen
-            </h4>
+            </h3>
             <p className="text-sm text-yellow-800 leading-relaxed">
               For primærnæringene er kravene til lønnsomhetsberegning strenge. 
               Du må vise et realistisk driftsbudsjett for de neste årene. 

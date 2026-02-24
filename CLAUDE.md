@@ -1,0 +1,1 @@
+@docs/AVERDI_MANIFEST.md

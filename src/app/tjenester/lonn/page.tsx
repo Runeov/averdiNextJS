@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { FileCheck, Receipt, Heart, TrendingDown, MapPin, Zap, Users } from 'lucide-react';
+import HeroImage from '@/assets/Hero_Aarsoppgjor.avif';
 import { ServiceHero } from '@/components/modules/services/ServiceHero';
 import { ServiceOverview } from '@/components/modules/services/ServiceOverview';
 import { ServiceFeatureGrid, type ServiceFeature } from '@/components/modules/services/ServiceFeatureGrid';
@@ -21,22 +22,22 @@ export default function LonnPage() {
     {
       title: 'A-melding og lønnsrapportering',
       description: 'Korrekt rapportering til Skatteetaten og NAV. Vi sørger for at alt er riktig første gang.',
-      icon: <FileCheck className="w-6 h-6" />
+      icon: <FileCheck className="w-6 h-6" aria-hidden="true" />
     },
     {
       title: 'Reiseregninger og utlegg',
       description: 'Håndtering av reiseregninger, diett og utlegg i henhold til gjeldende satser.',
-      icon: <Receipt className="w-6 h-6" />
+      icon: <Receipt className="w-6 h-6" aria-hidden="true" />
     },
     {
       title: 'Sykepenger og refusjoner',
       description: 'Beregning og søknad om refusjon fra NAV for sykepenger og foreldrepenger.',
-      icon: <Heart className="w-6 h-6" />
+      icon: <Heart className="w-6 h-6" aria-hidden="true" />
     },
     {
       title: 'Redusert arbeidsgiveravgift',
       description: 'Ekspertise på tiltakssonen med 0% arbeidsgiveravgift i Finnmark og Nord-Troms.',
-      icon: <TrendingDown className="w-6 h-6" />
+      icon: <TrendingDown className="w-6 h-6" aria-hidden="true" />
     }
   ];
 
@@ -64,17 +65,17 @@ export default function LonnPage() {
     {
       title: 'Kjenner særreglene',
       description: 'Vi har dyp kunnskap om tiltakssonen og hvordan du maksimerer fordelene.',
-      icon: <MapPin className="w-7 h-7" />
+      icon: <MapPin className="w-7 h-7" aria-hidden="true" />
     },
     {
       title: 'Automatisert lønnskjøring',
       description: 'Moderne systemer som sikrer presisjon og effektivitet hver måned.',
-      icon: <Zap className="w-7 h-7" />
+      icon: <Zap className="w-7 h-7" aria-hidden="true" />
     },
     {
       title: 'Personlig oppfølging',
       description: 'Fast kontaktperson som kjenner din bedrift og dine ansatte.',
-      icon: <Users className="w-7 h-7" />
+      icon: <Users className="w-7 h-7" aria-hidden="true" />
     }
   ];
 
@@ -117,6 +118,8 @@ export default function LonnPage() {
         stats={{ value: '100%', label: 'presisjon' }}
         ctaText="Få et tilbud"
         ctaLink="#contact"
+        heroImage={HeroImage}
+        heroImageAlt="Lønn & HR – Averdi"
       />
 
       {/* Overview Section */}
