@@ -116,9 +116,11 @@ export function Footer() {
             <span>© 2025 Averdi AS. Alle rettigheter forbeholdt.</span>
           </div>
           
-          <div className="flex items-center gap-8 text-sm font-medium text-slate-500">
-            {/* TODO: Create /personvern and /cookies pages */}
-            <span className="text-slate-400 cursor-not-allowed" title="Kommer snart">Personvern</span>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-medium text-slate-500">
+            <Link href="/apenhetsloven" className="hover:text-[#E86C1F] transition-colors">Åpenhetsloven</Link>
+            <Link href="/baerekraft" className="hover:text-[#E86C1F] transition-colors">Bærekraft</Link>
+            <Link href="/tilgjengelighet" className="hover:text-[#E86C1F] transition-colors">Tilgjengelighet</Link>
+            <Link href="/personvern" className="hover:text-[#E86C1F] transition-colors">Personvern</Link>
             <span className="text-slate-400 cursor-not-allowed" title="Kommer snart">Cookies</span>
           </div>
 

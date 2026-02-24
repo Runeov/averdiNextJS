@@ -3,6 +3,7 @@
 import { usePathname } from 'next/navigation';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
+import { CookieBanner } from '@/components/layout/CookieBanner';
 
 interface RootLayoutContentProps {
   children: React.ReactNode;
@@ -23,6 +24,7 @@ export function RootLayoutContent({ children }: RootLayoutContentProps) {
       <Navbar />
       {children}
       <Footer />
+      <CookieBanner />
     </>
   );
 }
