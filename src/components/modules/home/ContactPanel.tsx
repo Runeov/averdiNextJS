@@ -24,14 +24,18 @@ export default function ContactPanel() {
     setSubmitStatus('submitting');
 
     try {
-      // Netlify Forms submission via fetch
-      const response = await fetch('/', {
+      const form = e.currentTarget as HTMLFormElement;
+      const formValues = new FormData(form);
+      const payload = new URLSearchParams();
+      formValues.forEach((value, key) => {
+        payload.append(key, String(value));
+      });
+
+      // Netlify Forms submission must post to a static HTML file on Netlify Runtime v5.
+      const response = await fetch('/__forms.html', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-          'form-name': 'contact',
-          ...formData,
-        }).toString(),
+        body: payload.toString(),
       });
 
       if (response.ok) {
@@ -166,8 +170,6 @@ export default function ContactPanel() {
                 <form
                   name="contact"
                   method="POST"
-                  data-netlify="true"
-                  netlify-honeypot="bot-field"
                   onSubmit={handleSubmit}
                   className="space-y-5"
                 >
