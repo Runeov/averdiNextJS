@@ -2,9 +2,28 @@ import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
-const SECRET_KEY = new TextEncoder().encode(
-  process.env.JWT_SECRET || 'averdi-admin-secret-key-change-in-production-32chars'
-);
+let _secretKey: Uint8Array | null = null;
+
+/**
+ * Get the JWT secret key (lazy-loaded to avoid build-time errors).
+ * In production, JWT_SECRET env var is required.
+ * In development, a fallback key is used.
+ */
+function getSecretKey(): Uint8Array {
+  if (_secretKey) return _secretKey;
+
+  const secret = process.env.JWT_SECRET;
+  if (!secret && process.env.NODE_ENV === 'production') {
+    throw new Error(
+      'JWT_SECRET environment variable is required in production. ' +
+      'Generate one with: openssl rand -base64 32'
+    );
+  }
+  _secretKey = new TextEncoder().encode(
+    secret || 'averdi-admin-dev-only-secret-key-32chars-min'
+  );
+  return _secretKey;
+}
 
 const COOKIE_NAME = 'averdi-admin-session';
 const SESSION_DURATION = 24 * 60 * 60; // 24 hours in seconds
@@ -37,7 +56,7 @@ export async function createSession(user: SessionUser): Promise<string> {
     .setProtectedHeader({ alg: 'HS256' })
     .setExpirationTime(`${SESSION_DURATION}s`)
     .setIssuedAt()
-    .sign(SECRET_KEY);
+    .sign(getSecretKey());
 
   return token;
 }
@@ -47,7 +66,7 @@ export async function createSession(user: SessionUser): Promise<string> {
  */
 export async function verifySession(token: string): Promise<SessionPayload | null> {
   try {
-    const { payload } = await jwtVerify(token, SECRET_KEY);
+    const { payload } = await jwtVerify(token, getSecretKey());
     return payload as unknown as SessionPayload;
   } catch {
     return null;

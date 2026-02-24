@@ -7,15 +7,25 @@ import { RootLayoutContent } from '@/components/layout/RootLayoutContent';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.averdi.no'),
   title: {
     template: '%s | Averdi',
     default: 'Averdi - Statsautorisert regnskapsførerselskap i Nord-Norge',
   },
-  description: 'Averdi er et statsautorisert regnskapsførerselskap med base i Karasjok...',
+  description: 'Averdi er et statsautorisert regnskapsførerselskap med base i Karasjok. Spesialist på regnskap for småbedrifter, lag og foreninger i Finnmark og Nord-Troms.',
   icons: {
     icon: '/logo_thumbail.avif',
     shortcut: '/logo_thumbail.avif',
     apple: '/logo_thumbail.avif',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'nb_NO',
+    url: 'https://www.averdi.no',
+    siteName: 'Averdi - Tolken av Nord-Norge',
+  },
+  twitter: {
+    card: 'summary',
   },
 };
 

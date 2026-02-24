@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowLeft, Smartphone, Receipt, Download, Zap, CreditCard } from 'lucide-react';
+import { ArrowLeft, Smartphone, Receipt, Download, Zap, CreditCard, ExternalLink } from 'lucide-react';
 import { ExpertInsight } from '@/components/modules/kunnskapsbank/ExpertInsight';
 import { McpDataSpan } from '@/components/ui/McpDataSpan';
 import { getExpert } from '@/data/experts';
 import { AverdiBackground } from '@/components/modules/AverdiBackground';
+import { FaqAccordion } from '@/components/ui/FaqAccordion';
 
 export const metadata: Metadata = {
   title: 'Regnskap for Idrettslag & Vipps-integrasjon | Averdi',
@@ -14,12 +15,57 @@ export const metadata: Metadata = {
 export default function IdrettslagPage() {
   const alida = getExpert('alida');
 
+  const faqData = [
+    {
+      question: 'Hva koster det å bruke Averdi som regnskapsfører for idrettslaget?',
+      answer: 'Vi tilbyr fastprisavtaler tilpasset lagets størrelse og aktivitetsnivå. Kostnaden tjener seg ofte inn gjennom korrekt momskompensasjon alene. Ta kontakt for et uforpliktende tilbud.',
+    },
+    {
+      question: 'Kan vi integrere Vipps direkte med regnskapssystemet?',
+      answer: 'Ja! Vi har utviklet en metode for å integrere Vipps mot PowerOffice, Fiken og Uni Micro. Salg bokføres automatisk på riktig konto og gebyrer splittes ut – ingen manuell punching av tall.',
+    },
+    {
+      question: 'Hva er momskompensasjon, og kan idrettslaget vårt søke?',
+      answer: 'Momskompensasjon er en ordning der frivillige lag og foreninger får refundert moms betalt på varer og tjenester i driften. De aller fleste NIF-tilknyttede idrettslag kvalifiserer. Fristen er 1. september (eller ca. 15. august via NIF/KlubbAdmin).',
+    },
+    {
+      question: 'Trenger vi revisor?',
+      answer: 'Nei, de fleste idrettslag med under 7 millioner kr i driftskostnader (to år på rad) trenger ikke revisor. En kontrollkomité valgt på årsmøtet holder. Grensen ble hevet i 2026 – se vår guide om årsregnskap for detaljer.',
+    },
+  ];
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'FAQPage',
+        mainEntity: faqData.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: { '@type': 'Answer', text: item.answer },
+        })),
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Kunnskapsbank', item: 'https://www.averdi.no/kunnskapsbank' },
+          { '@type': 'ListItem', position: 2, name: 'Lag & Forening', item: 'https://www.averdi.no/kunnskapsbank/organisasjoner' },
+          { '@type': 'ListItem', position: 3, name: 'Idrettslag & Regnskap', item: 'https://www.averdi.no/kunnskapsbank/organisasjoner/idrettslag' },
+        ],
+      },
+    ],
+  };
+
   return (
     <main className="min-h-screen bg-slate-50 relative overflow-hidden">
       <AverdiBackground />
       
       <article className="relative z-10 container mx-auto px-4 py-12 max-w-4xl">
-        
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+
         <Link href="/kunnskapsbank/organisasjoner" className="inline-flex items-center text-slate-500 hover:text-green-600 mb-8 font-medium transition-colors">
           <ArrowLeft className="w-4 h-4 mr-2" /> Tilbake til Forenings-hub
         </Link>
@@ -61,7 +107,7 @@ export default function IdrettslagPage() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link 
+                <Link
                   href="/kontakt?subject=Bestilling+Vipps+Integrasjon"
                   className="inline-flex items-center justify-center px-6 py-3 bg-green-600 hover:bg-green-500 text-white font-bold rounded-lg transition-all"
                 >
@@ -72,6 +118,15 @@ export default function IdrettslagPage() {
                   <Download className="w-4 h-4 mr-2 group-hover:-translate-y-1 transition-transform" />
                   Last ned teknisk guide (PDF)
                 </button>
+              </div>
+              <div className="mt-5 pt-5 border-t border-white/10">
+                <Link
+                  href="/kunnskapsbank/organisasjoner/vipps"
+                  className="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-white transition-colors group"
+                >
+                  <ArrowLeft className="w-4 h-4 rotate-180 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                  Hvordan registrere seg på Vipps
+                </Link>
               </div>
               <p className="text-xs text-slate-500 mt-4 italic">
                 * Guiden krever teknisk innsikt i API og webhooks. Vi anbefaler bistand til oppsett.
@@ -144,6 +199,30 @@ export default function IdrettslagPage() {
           <p>
             Vi tilbyr fastprisavtaler for små lag og foreninger, slik at dere har forutsigbarhet.
           </p>
+        </div>
+
+        {/* FAQ */}
+        <div className="mt-16">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">Ofte stilte spørsmål</h2>
+          <FaqAccordion items={faqData} themeColor="#16a34a" />
+        </div>
+
+        {/* Kilder */}
+        <div className="border-t border-slate-200 pt-8 mt-12">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs text-slate-500">
+            <div className="max-w-2xl">
+              <p className="font-semibold text-slate-700 mb-1">Kilder</p>
+              <p>Basert på NIFs Lovnorm og Klubbguide for idrettslag samt Lotteri- og stiftelsestilsynets retningslinjer for momskompensasjon (2026).</p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4 shrink-0">
+              <a href="https://www.idrettsforbundet.no/klubbguiden" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-blue-600 transition-colors">
+                idrettsforbundet.no <span className="sr-only">(åpnes i ny fane)</span><ExternalLink className="w-3 h-3" aria-hidden="true" />
+              </a>
+              <a href="https://lottstift.no/momskompensasjon" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-blue-600 transition-colors">
+                lottstift.no <span className="sr-only">(åpnes i ny fane)</span><ExternalLink className="w-3 h-3" aria-hidden="true" />
+              </a>
+            </div>
+          </div>
         </div>
 
       </article>

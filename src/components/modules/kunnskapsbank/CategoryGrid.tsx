@@ -38,7 +38,7 @@ export function CategoryCard({
   className,
 }: CategoryCardProps) {
   return (
-    <Link href={href} className={cn("group block h-full", className)}>
+    <Link href={href} aria-label={`${title} — Les mer`} className={cn("group block h-full", className)}>
       <Card className="h-full transition-all duration-200 hover:shadow-md hover:border-slate-300 relative overflow-hidden">
         
         <CardHeader className={cn("pb-2", compact ? "pt-5 px-5" : "pt-6 px-6")}>

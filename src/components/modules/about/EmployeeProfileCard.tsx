@@ -308,10 +308,10 @@ export default function EmployeeProfileCard({ employee }: EmployeeProfileCardPro
 
         {/* Core Skills */}
         <div className="mb-5">
-          <h3 className="text-[15px] font-semibold text-slate-900 mb-3 relative inline-block group">
+          <h2 className="text-[15px] font-semibold text-slate-900 mb-3 relative inline-block group">
             Spesialområder
             <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#E86C1F] transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
-          </h3>
+          </h2>
           <div className="flex flex-wrap gap-2.5">
             {employee.specialties.map((specialty, idx) => (
               <span
@@ -332,10 +332,10 @@ export default function EmployeeProfileCard({ employee }: EmployeeProfileCardPro
         {/* Languages */}
         {employee.languages && employee.languages.length > 0 && (
           <div className="mb-5">
-            <h3 className="text-[15px] font-semibold text-slate-900 mb-3 relative inline-block group">
+            <h2 className="text-[15px] font-semibold text-slate-900 mb-3 relative inline-block group">
               Språk
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#E86C1F] transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
-            </h3>
+            </h2>
             <div className="flex flex-wrap gap-2.5">
               {employee.languages.map((lang, idx) => (
                 <span
@@ -356,10 +356,10 @@ export default function EmployeeProfileCard({ employee }: EmployeeProfileCardPro
 
         {/* Testimonials Slider */}
         <div className="mb-6">
-          <h3 className="text-[15px] font-semibold text-slate-900 mb-3 relative inline-block group">
+          <h2 className="text-[15px] font-semibold text-slate-900 mb-3 relative inline-block group">
             Anbefalinger
             <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#E86C1F] transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
-          </h3>
+          </h2>
           <div className="overflow-hidden relative">
             <div 
               className="flex transition-transform duration-500 ease-in-out"

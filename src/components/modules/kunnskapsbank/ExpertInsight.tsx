@@ -50,9 +50,9 @@ export function ExpertInsight({ title, quote, expert, children }: ExpertInsightP
         <div className="flex-1">
           <Quote className="w-10 h-10 text-[#E86C1F] mb-6 opacity-80" aria-hidden="true" />
           
-          <h3 className="text-2xl font-bold mb-4 text-white">
+          <h2 className="text-2xl font-bold mb-4 text-white">
             {title}
-          </h3>
+          </h2>
           
           <blockquote className="text-xl font-medium text-slate-200 mb-6 italic border-l-4 border-[#E86C1F] pl-4">
             "{quote}"

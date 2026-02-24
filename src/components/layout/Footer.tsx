@@ -53,7 +53,7 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-bold text-slate-900 mb-6 text-lg">Hurtiglenker</h4>
+            <h3 className="font-bold text-slate-900 mb-6 text-lg">Hurtiglenker</h3>
             <ul className="space-y-4 text-sm text-slate-500">
               <li>
                 <button onClick={() => scrollToSection('home')} className="hover:text-[#E86C1F] transition-colors flex items-center gap-2 group">
@@ -90,7 +90,7 @@ export function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h4 className="font-bold text-slate-900 mb-6 text-lg">Kontakt</h4>
+            <h3 className="font-bold text-slate-900 mb-6 text-lg">Kontakt</h3>
             <div className="space-y-6 text-sm text-slate-500">
               <div className="space-y-2">
                 <p className="font-semibold text-slate-900 text-base">Karasjok</p>

@@ -4,8 +4,19 @@ import { Landmark, Building2, Users, ArrowRight, HelpCircle } from 'lucide-react
 import { AverdiBackground } from '@/components/modules/AverdiBackground';
 import { FaqAccordion } from '@/components/ui/FaqAccordion'; // Ny import
 export const metadata: Metadata = {
-  title: 'Kunnskapsbank | Averdi',
-  description: 'Din guide til næringsliv og frivillighet i Nord. Spesialist på Sametinget, Tiltakssonen og Idrettslag.',
+  title: 'Kunnskapsbank for Nord-Norge | Sametinget, Tiltakssonen & Idrettslag | Averdi',
+  description: 'Din guide til næringsliv og frivillighet i Finnmark og Nord-Troms. Spesialist på Sametinget støtteordninger, 0% AGA i Tiltakssonen og regnskap for idrettslag.',
+  alternates: {
+    canonical: '/kunnskapsbank',
+  },
+  openGraph: {
+    title: 'Kunnskapsbank for Nord-Norge | Averdi',
+    description: 'Gratis fagartikler om Sametinget tilskudd, skattefordeler i Tiltakssonen og regnskap for lag og foreninger i Finnmark.',
+    url: 'https://www.averdi.no/kunnskapsbank',
+    siteName: 'Averdi - Tolken av Nord-Norge',
+    locale: 'nb_NO',
+    type: 'website',
+  },
 };
 
 export default function KunnskapsbankPage() {
@@ -29,15 +40,29 @@ export default function KunnskapsbankPage() {
   // Generer Schema basert på dataene over
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    'mainEntity': faqData.map(item => ({
-      '@type': 'Question',
-      'name': item.question,
-      'acceptedAnswer': {
-        '@type': 'Answer',
-        'text': item.answer
+    '@graph': [
+      {
+        '@type': 'FAQPage',
+        'mainEntity': faqData.map(item => ({
+          '@type': 'Question',
+          'name': item.question,
+          'acceptedAnswer': { '@type': 'Answer', 'text': item.answer }
+        }))
+      },
+      {
+        '@type': 'BreadcrumbList',
+        'itemListElement': [
+          { '@type': 'ListItem', 'position': 1, 'name': 'Kunnskapsbank', 'item': 'https://www.averdi.no/kunnskapsbank' }
+        ]
+      },
+      {
+        '@type': 'CollectionPage',
+        'name': 'Kunnskapsbank for Nord-Norge',
+        'description': 'Fagartikler og guider om Sametinget støtteordninger, Tiltakssonen skattefordeler og regnskap for lag og foreninger i Finnmark og Nord-Troms.',
+        'url': 'https://www.averdi.no/kunnskapsbank',
+        'publisher': { '@type': 'Organization', 'name': 'Averdi AS' }
       }
-    }))
+    ]
   };
 
   return (
@@ -69,7 +94,7 @@ export default function KunnskapsbankPage() {
         <div className="grid md:grid-cols-3 gap-6">
           
           {/* 1. SAMETINGET */}
-          <Link href="/kunnskapsbank/sametinget" className="group bg-white rounded-3xl p-8 shadow-sm border border-slate-200 hover:border-[#E86C1F]/50 transition-all hover:shadow-2xl hover:shadow-[#E86C1F]/10 relative overflow-hidden flex flex-col h-full">
+          <Link href="/kunnskapsbank/sametinget" aria-label="Sametinget støtteordninger — Les mer" className="group bg-white rounded-3xl p-8 shadow-sm border border-slate-200 hover:border-[#E86C1F]/50 transition-all hover:shadow-2xl hover:shadow-[#E86C1F]/10 relative overflow-hidden flex flex-col h-full">
             <div className="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center mb-6 text-[#E86C1F] group-hover:scale-110 transition-transform">
               <Landmark className="w-7 h-7" aria-hidden="true" />
             </div>
@@ -83,7 +108,7 @@ export default function KunnskapsbankPage() {
           </Link>
 
           {/* 2. BEDRIFT */}
-          <Link href="/kunnskapsbank/bedrifter" className="group bg-white rounded-3xl p-8 shadow-sm border border-slate-200 hover:border-blue-400/50 transition-all hover:shadow-2xl hover:shadow-blue-500/10 relative overflow-hidden flex flex-col h-full">
+          <Link href="/kunnskapsbank/bedrifter" aria-label="Bedrift i Tiltakssonen — Les mer" className="group bg-white rounded-3xl p-8 shadow-sm border border-slate-200 hover:border-blue-400/50 transition-all hover:shadow-2xl hover:shadow-blue-500/10 relative overflow-hidden flex flex-col h-full">
             <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 text-blue-600 group-hover:scale-110 transition-transform">
               <Building2 className="w-7 h-7" aria-hidden="true" />
             </div>
@@ -97,7 +122,7 @@ export default function KunnskapsbankPage() {
           </Link>
 
           {/* 3. ORGANISASJON */}
-          <Link href="/kunnskapsbank/organisasjoner" className="group bg-white rounded-3xl p-8 shadow-sm border border-slate-200 hover:border-green-500/50 transition-all hover:shadow-2xl hover:shadow-green-500/10 relative overflow-hidden flex flex-col h-full">
+          <Link href="/kunnskapsbank/organisasjoner" aria-label="Lag og foreninger — Les mer" className="group bg-white rounded-3xl p-8 shadow-sm border border-slate-200 hover:border-green-500/50 transition-all hover:shadow-2xl hover:shadow-green-500/10 relative overflow-hidden flex flex-col h-full">
             <div className="w-14 h-14 bg-green-50 rounded-2xl flex items-center justify-center mb-6 text-green-600 group-hover:scale-110 transition-transform">
               <Users className="w-7 h-7" aria-hidden="true" />
             </div>

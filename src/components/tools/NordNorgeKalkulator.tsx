@@ -192,12 +192,13 @@ export function NordNorgeKalkulator() {
 
         {/* Fra */}
         <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
-          <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-2">
+          <h2 className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-2">
             📍 Fra kommune
-          </h3>
+          </h2>
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-1">Nåværende kommune</label>
+            <label htmlFor="nord-calc-current-mun" className="block text-sm font-semibold text-slate-700 mb-1">Nåværende kommune</label>
             <select
+              id="nord-calc-current-mun"
               className="w-full px-3 py-2.5 border border-slate-200 rounded-xl bg-slate-50 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#E86C1F] focus:border-transparent transition-all"
               value={currentMun.name}
               onChange={e => setCurrentMun(MUNICIPALITIES.find(m => m.name === e.target.value)!)}
@@ -208,8 +209,9 @@ export function NordNorgeKalkulator() {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-1">Årslønn per ansatt (kr)</label>
+            <label htmlFor="nord-calc-salary" className="block text-sm font-semibold text-slate-700 mb-1">Årslønn per ansatt (kr)</label>
             <input
+              id="nord-calc-salary"
               type="number"
               value={salary}
               min={200000} max={3000000} step={10000}
@@ -218,8 +220,9 @@ export function NordNorgeKalkulator() {
             />
           </div>
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-1">Antall ansatte</label>
+            <label htmlFor="nord-calc-employees" className="block text-sm font-semibold text-slate-700 mb-1">Antall ansatte</label>
             <input
+              id="nord-calc-employees"
               type="number"
               value={employees}
               min={1} max={500} step={1}
@@ -231,12 +234,13 @@ export function NordNorgeKalkulator() {
 
         {/* Til */}
         <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
-          <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-2">
+          <h2 className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-2">
             🎯 Til kommune
-          </h3>
+          </h2>
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-1">Målkommune</label>
+            <label htmlFor="nord-calc-target-mun" className="block text-sm font-semibold text-slate-700 mb-1">Målkommune</label>
             <select
+              id="nord-calc-target-mun"
               className="w-full px-3 py-2.5 border border-[#E86C1F]/40 rounded-xl bg-orange-50 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#E86C1F] focus:border-transparent transition-all font-semibold"
               value={targetMun.name}
               onChange={e => setTargetMun(MUNICIPALITIES.find(m => m.name === e.target.value)!)}
@@ -247,8 +251,9 @@ export function NordNorgeKalkulator() {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-1">Antall barn per ansatt (barnehage)</label>
+            <label htmlFor="nord-calc-children" className="block text-sm font-semibold text-slate-700 mb-1">Antall barn per ansatt (barnehage)</label>
             <input
+              id="nord-calc-children"
               type="number"
               value={numChildren}
               min={0} max={10} step={1}
@@ -292,11 +297,12 @@ export function NordNorgeKalkulator() {
       {/* ── CHARTS ── */}
       <div className="grid md:grid-cols-2 gap-4">
         <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
-          <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">
+          <h2 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">
             📊 Arbeidsgiveravgift per ansatt
-          </h3>
+          </h2>
           <div className="h-64">
             <Bar
+              aria-label="Stolpediagram som viser arbeidsgiveravgift per ansatt"
               data={costChartData}
               options={{
                 responsive: true,
@@ -314,11 +320,12 @@ export function NordNorgeKalkulator() {
         </div>
 
         <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
-          <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">
+          <h2 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">
             💰 Fordeler per ansatt – målkommune
-          </h3>
+          </h2>
           <div className="h-64">
             <Doughnut
+              aria-label="Kakediagram som viser fordeler per ansatt i målkommunen"
               data={valueChartData}
               options={{
                 responsive: true,
@@ -339,14 +346,14 @@ export function NordNorgeKalkulator() {
 
       {/* ── BREAKDOWN TABLE ── */}
       <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm overflow-x-auto">
-        <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">🔍 Detaljert oversikt</h3>
-        <table className="w-full text-sm border-collapse">
+        <h2 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">🔍 Detaljert oversikt</h2>
+        <table className="w-full text-sm border-collapse" aria-label="Lønnskostnadsbesparelse per reisedestinasjon">
           <thead>
             <tr className="bg-slate-50">
-              <th className="text-left px-3 py-2 font-semibold text-slate-500 rounded-l-lg">Post</th>
-              <th className="text-left px-3 py-2 font-semibold text-slate-500">Fra-kommune</th>
-              <th className="text-left px-3 py-2 font-semibold text-slate-500">Til-kommune</th>
-              <th className="text-right px-3 py-2 font-semibold text-slate-500 rounded-r-lg">Besparelse</th>
+              <th scope="col" className="text-left px-3 py-2 font-semibold text-slate-500 rounded-l-lg">Post</th>
+              <th scope="col" className="text-left px-3 py-2 font-semibold text-slate-500">Fra-kommune</th>
+              <th scope="col" className="text-left px-3 py-2 font-semibold text-slate-500">Til-kommune</th>
+              <th scope="col" className="text-right px-3 py-2 font-semibold text-slate-500 rounded-r-lg">Besparelse</th>
             </tr>
           </thead>
           <tbody>
@@ -383,12 +390,12 @@ export function NordNorgeKalkulator() {
           aria-expanded={showSources}
         >
           <span className="flex items-center gap-2 text-sm font-semibold text-slate-600">
-            <Info className="w-4 h-4 text-[#E86C1F]" />
+            <Info className="w-4 h-4 text-[#E86C1F]" aria-hidden="true" />
             Datakilder og forutsetninger
           </span>
           {showSources
-            ? <ChevronUp className="w-4 h-4 text-slate-400" />
-            : <ChevronDown className="w-4 h-4 text-slate-400" />
+            ? <ChevronUp className="w-4 h-4 text-slate-400" aria-hidden="true" />
+           : <ChevronDown className="w-4 h-4 text-slate-400" aria-hidden="true" />
           }
         </button>
 
@@ -411,7 +418,7 @@ export function NordNorgeKalkulator() {
                 target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 text-[#E86C1F] hover:underline font-medium"
               >
-                Skatteetaten – AGA-satser <ExternalLink className="w-3 h-3" />
+                Skatteetaten – AGA-satser <ExternalLink className="w-3 h-3" aria-hidden="true" />
               </a>
             </div>
 
@@ -428,7 +435,7 @@ export function NordNorgeKalkulator() {
                 target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 text-purple-700 hover:underline font-medium"
               >
-                SSB – Leiemarkedsundersøkelsen <ExternalLink className="w-3 h-3" />
+                SSB – Leiemarkedsundersøkelsen <ExternalLink className="w-3 h-3" aria-hidden="true" />
               </a>
             </div>
 
@@ -454,7 +461,7 @@ export function NordNorgeKalkulator() {
                 target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 text-yellow-700 hover:underline font-medium"
               >
-                Skatteetaten – Finnmarksfradraget <ExternalLink className="w-3 h-3" />
+                Skatteetaten – Finnmarksfradraget <ExternalLink className="w-3 h-3" aria-hidden="true" />
               </a>
             </div>
 
@@ -470,7 +477,7 @@ export function NordNorgeKalkulator() {
                 target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 text-teal-700 hover:underline font-medium"
               >
-                Lånekassen – Nedskriving i Finnmark/Nord-Troms <ExternalLink className="w-3 h-3" />
+                Lånekassen – Nedskriving i Finnmark/Nord-Troms <ExternalLink className="w-3 h-3" aria-hidden="true" />
               </a>
             </div>
 
@@ -495,7 +502,7 @@ export function NordNorgeKalkulator() {
                 target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 text-pink-700 hover:underline font-medium"
               >
-                Udir – Foreldrebetaling i barnehage <ExternalLink className="w-3 h-3" />
+                Udir – Foreldrebetaling i barnehage <ExternalLink className="w-3 h-3" aria-hidden="true" />
               </a>
             </div>
 
@@ -511,7 +518,7 @@ export function NordNorgeKalkulator() {
                 target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 text-blue-700 hover:underline font-medium"
               >
-                NAV – Barnetrygd <ExternalLink className="w-3 h-3" />
+                NAV – Barnetrygd <ExternalLink className="w-3 h-3" aria-hidden="true" />
               </a>
             </div>
 

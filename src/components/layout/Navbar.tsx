@@ -60,7 +60,7 @@ export function Navbar() {
           
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity" aria-label="Gå til forsiden">
+            <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity" aria-label="Averdi - Gå til forsiden">
               <Image
                 src={logoAverdi}
                 alt="Averdi Logo"

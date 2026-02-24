@@ -1,4 +1,4 @@
-﻿# Dependencies
+﻿o# Dependencies
 /node_modules
 /.pnp
 .pnp.js
@@ -34,3 +34,6 @@ ts-debug.log*
 
 # Auto Claude data directory
 .auto-claude/
+
+# File lock directory (used by admin JSON storage)
+.locks/

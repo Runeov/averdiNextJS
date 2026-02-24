@@ -107,17 +107,25 @@ export default function InnovasjonNorgePage() {
   // JSON-LD Schema
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
-    'headline': 'Innovasjon Norge Arktis – Finansiering og rådgivning for nordnorske bedrifter',
-    'description': 'Komplett guide til Innovasjon Norge Arktis sine tjenester for bedrifter i Troms og Finnmark.',
-    'author': {
-      '@type': 'Organization',
-      'name': 'Averdi'
-    },
-    'publisher': {
-      '@type': 'Organization',
-      'name': 'Averdi'
-    }
+    '@graph': [
+      {
+        '@type': 'FAQPage',
+        mainEntity: [
+          { '@type': 'Question', name: 'Hvem kan få støtte fra Innovasjon Norge Arktis?', acceptedAnswer: { '@type': 'Answer', text: 'Innovasjon Norge Arktis hjelper bedrifter som skal etablere eller drive virksomhet i Troms og Finnmark. De tilbyr finansiering, rådgivning og tjenester som gjør det mulig å bygge en bedre bedrift eller satse internasjonalt.' } },
+          { '@type': 'Question', name: 'Hvor har Innovasjon Norge Arktis kontorer?', acceptedAnswer: { '@type': 'Answer', text: 'Innovasjon Norge Arktis har kontorer i Tromsø, Alta og Vadsø. Du kan ta kontakt med det kontoret som er nærmest deg for veiledning og rådgivning.' } },
+          { '@type': 'Question', name: 'Hva slags finansiering tilbyr Innovasjon Norge?', acceptedAnswer: { '@type': 'Answer', text: 'Innovasjon Norge tilbyr ulike typer finansiering, inkludert tilskudd, lån og garantier. Hvilken type finansiering som passer best avhenger av prosjektets art, risiko og utviklingsfase.' } },
+          { '@type': 'Question', name: 'Kan Innovasjon Norge hjelpe med eksport og internasjonalisering?', acceptedAnswer: { '@type': 'Answer', text: 'Ja, Innovasjon Norge har et omfattende nettverk av kontorer i utlandet og kan hjelpe norske bedrifter med å etablere seg i nye markeder, finne samarbeidspartnere og navigere i internasjonale regelverk.' } },
+        ],
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Kunnskapsbank', item: 'https://www.averdi.no/kunnskapsbank' },
+          { '@type': 'ListItem', position: 2, name: 'Bedrift & Handel', item: 'https://www.averdi.no/kunnskapsbank/bedrifter' },
+          { '@type': 'ListItem', position: 3, name: 'Arktiske Midler', item: 'https://www.averdi.no/kunnskapsbank/bedrifter/innovasjon-norge' },
+        ],
+      },
+    ],
   };
 
   return (

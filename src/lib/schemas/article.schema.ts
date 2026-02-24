@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 export const ArticleCategorySchema = z.enum([
+  'artikler',
   'bedrift',
   'sametinget',
   'organisasjoner',
@@ -51,6 +52,7 @@ export type ArticleCategory = z.infer<typeof ArticleCategorySchema>;
 export type ArticleStatus = z.infer<typeof ArticleStatusSchema>;
 
 export const CATEGORY_LABELS: Record<ArticleCategory, string> = {
+  artikler: 'Innsikt',
   bedrift: 'Bedrift',
   sametinget: 'Sametinget',
   organisasjoner: 'Organisasjoner',
@@ -59,6 +61,7 @@ export const CATEGORY_LABELS: Record<ArticleCategory, string> = {
 };
 
 export const CATEGORY_COLORS: Record<ArticleCategory, string> = {
+  artikler: 'bg-amber-100 text-amber-700',
   bedrift: 'bg-blue-100 text-blue-700',
   sametinget: 'bg-orange-100 text-orange-700',
   organisasjoner: 'bg-green-100 text-green-700',

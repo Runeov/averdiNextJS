@@ -57,7 +57,7 @@ export const metadata: Metadata = {
 // Lokal CategoryCard for stabilitet
 function LocalCategoryCard({ title, description, href, icon: Icon, theme }: any) {
     return (
-        <Link href={href} className="group flex flex-col p-6 bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md hover:border-[#E86C1F] transition-all h-full">
+        <Link href={href} aria-label={`${title} — Les mer`} className="group flex flex-col p-6 bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md hover:border-[#E86C1F] transition-all h-full">
             <div className="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center mb-4 text-[#E86C1F] group-hover:bg-[#E86C1F] group-hover:text-white transition-colors">
                 <Icon className="w-6 h-6" aria-hidden="true" />
             </div>

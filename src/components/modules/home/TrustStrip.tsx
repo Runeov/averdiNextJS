@@ -26,8 +26,8 @@ export default function TrustStrip() {
                 src={partner.logo}
                 alt={`${partner.name} logo`}
                 fill
+                sizes="(max-width: 1024px) 128px, 160px"
                 className="object-contain"
-                // You can remove 'unoptimized' now if the files are valid images
               />
             </div>
           ))}

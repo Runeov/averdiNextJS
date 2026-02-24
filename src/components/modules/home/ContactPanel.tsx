@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { Phone, Mail, MapPin, Copy } from 'lucide-react';
+import { Phone, Mail, MapPin, Copy, CheckCircle2 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -17,12 +17,32 @@ export default function ContactPanel() {
     company: '',
     message: ''
   });
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Connect to a real form handler (e.g., Netlify Forms or API route)
-    alert('Takk for din henvendelse! Vi kontakter deg snart.');
-    setFormData({ name: '', email: '', phone: '', company: '', message: '' });
+    setSubmitStatus('submitting');
+
+    try {
+      // Netlify Forms submission via fetch
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          'form-name': 'contact',
+          ...formData,
+        }).toString(),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', phone: '', company: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch {
+      setSubmitStatus('error');
+    }
   };
 
   const copyToClipboard = (text: string, type: string) => {
@@ -124,72 +144,120 @@ export default function ContactPanel() {
             <CardContent className="p-8">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 relative">
-                   <Image src={contactLogo} alt="Contact Icon" fill className="object-contain" />
+                   <Image src={contactLogo} alt="Contact Icon" fill sizes="48px" className="object-contain" />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900">Send oss en melding</h3>
               </div>
               
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid grid-cols-2 gap-4">
+              {submitStatus === 'success' ? (
+                <div className="text-center py-12">
+                  <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-4" />
+                  <h4 className="text-xl font-bold text-slate-900 mb-2">Takk for din henvendelse!</h4>
+                  <p className="text-slate-600 mb-6">Vi kontakter deg så snart som mulig.</p>
+                  <Button
+                    onClick={() => setSubmitStatus('idle')}
+                    variant="outline"
+                    className="border-[#E86C1F] text-[#E86C1F] hover:bg-[#E86C1F]/10"
+                  >
+                    Send ny melding
+                  </Button>
+                </div>
+              ) : (
+                <form
+                  name="contact"
+                  method="POST"
+                  data-netlify="true"
+                  netlify-honeypot="bot-field"
+                  onSubmit={handleSubmit}
+                  className="space-y-5"
+                >
+                  {/* Hidden fields for Netlify Forms */}
+                  <input type="hidden" name="form-name" value="contact" />
+                  <p className="hidden">
+                    <label>
+                      Don&apos;t fill this out: <input name="bot-field" />
+                    </label>
+                  </p>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label htmlFor="contact-name" className="text-sm font-medium">Navn *</label>
+                      <Input
+                        id="contact-name"
+                        name="name"
+                        required
+                        aria-required="true"
+                        autoComplete="name"
+                        value={formData.name}
+                        onChange={(e) => setFormData({...formData, name: e.target.value})}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label htmlFor="contact-company" className="text-sm font-medium">Bedrift</label>
+                      <Input
+                        id="contact-company"
+                        name="company"
+                        value={formData.company}
+                        onChange={(e) => setFormData({...formData, company: e.target.value})}
+                      />
+                    </div>
+                  </div>
+
                   <div className="space-y-2">
-                    <label htmlFor="contact-name" className="text-sm font-medium">Navn *</label>
+                    <label htmlFor="contact-email" className="text-sm font-medium">E-post *</label>
                     <Input
-                      id="contact-name"
+                      id="contact-email"
+                      name="email"
+                      type="email"
                       required
                       aria-required="true"
-                      value={formData.name}
-                      onChange={(e) => setFormData({...formData, name: e.target.value})}
+                      autoComplete="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({...formData, email: e.target.value})}
                     />
                   </div>
+
                   <div className="space-y-2">
-                    <label htmlFor="contact-company" className="text-sm font-medium">Bedrift</label>
+                    <label htmlFor="contact-phone" className="text-sm font-medium">Telefon</label>
                     <Input
-                      id="contact-company"
-                      value={formData.company}
-                      onChange={(e) => setFormData({...formData, company: e.target.value})}
+                      id="contact-phone"
+                      name="phone"
+                      type="tel"
+                      autoComplete="tel"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
                     />
                   </div>
-                </div>
 
-                <div className="space-y-2">
-                  <label htmlFor="contact-email" className="text-sm font-medium">E-post *</label>
-                  <Input
-                    id="contact-email"
-                    type="email"
-                    required
-                    aria-required="true"
-                    value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  />
-                </div>
+                  <div className="space-y-2">
+                    <label htmlFor="contact-message" className="text-sm font-medium">Melding *</label>
+                    <Textarea
+                      id="contact-message"
+                      name="message"
+                      required
+                      aria-required="true"
+                      className="h-32"
+                      placeholder="Hvordan kan vi hjelpe deg?"
+                      value={formData.message}
+                      onChange={(e) => setFormData({...formData, message: e.target.value})}
+                    />
+                  </div>
 
-                <div className="space-y-2">
-                  <label htmlFor="contact-phone" className="text-sm font-medium">Telefon</label>
-                  <Input
-                    id="contact-phone"
-                    type="tel"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                  />
-                </div>
+                  {submitStatus === 'error' && (
+                    <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+                      Noe gikk galt. Prøv igjen, eller send oss en e-post direkte.
+                    </div>
+                  )}
 
-                <div className="space-y-2">
-                  <label htmlFor="contact-message" className="text-sm font-medium">Melding *</label>
-                  <Textarea
-                    id="contact-message"
-                    required
-                    aria-required="true"
-                    className="h-32"
-                    placeholder="Hvordan kan vi hjelpe deg?"
-                    value={formData.message}
-                    onChange={(e) => setFormData({...formData, message: e.target.value})}
-                  />
-                </div>
-
-                <Button type="submit" className="w-full bg-[#E86C1F] hover:bg-[#d65f18] text-white">
-                  Send melding
-                </Button>
-              </form>
+                  <Button
+                    type="submit"
+                    className="w-full bg-[#E86C1F] hover:bg-[#d65f18] text-white"
+                    disabled={submitStatus === 'submitting'}
+                  >
+                    {submitStatus === 'submitting' ? 'Sender...' : 'Send melding'}
+                  </Button>
+                </form>
+              )}
             </CardContent>
           </Card>
         </div>

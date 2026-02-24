@@ -108,17 +108,26 @@ export default function TransportPage() {
   // JSON-LD Schema
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
-    'headline': 'Transport & Bagatellstøtte – De Minimis-reglene forklart',
-    'description': 'Komplett guide til unntaksreglene for arbeidsgiveravgift i transportsektoren.',
-    'author': {
-      '@type': 'Organization',
-      'name': 'Averdi'
-    },
-    'publisher': {
-      '@type': 'Organization',
-      'name': 'Averdi'
-    }
+    '@graph': [
+      {
+        '@type': 'FAQPage',
+        mainEntity: [
+          { '@type': 'Question', name: 'Hva er bagatellstøtte (De Minimis)?', acceptedAnswer: { '@type': 'Answer', text: 'Bagatellstøtte er offentlig støtte som er så liten at den anses å ikke påvirke konkurransen i EØS-markedet. For de fleste sektorer er taket 300 000 Euro over en 3-års periode. For veitransport gjelder et lavere tak på 100 000 Euro.' } },
+          { '@type': 'Question', name: 'Hvilke bedrifter omfattes av unntaksreglene?', acceptedAnswer: { '@type': 'Answer', text: 'Unntaksreglene gjelder primært for godstransport på vei, finanssektoren og primærnæringer (jordbruk, fiske). Disse sektorene kan ikke benytte full AGA-fritak i Tiltakssonen uten å ta hensyn til De Minimis-taket.' } },
+          { '@type': 'Question', name: 'Hvordan beregnes 3-års perioden?', acceptedAnswer: { '@type': 'Answer', text: '3-års perioden er en rullerende periode. Det betyr at du til enhver tid må se på støtten du har mottatt de siste 3 årene (36 måneder). Når støtte fra mer enn 3 år siden faller ut, får du ny kapasitet.' } },
+          { '@type': 'Question', name: 'Hva skjer hvis jeg overskrider taket?', acceptedAnswer: { '@type': 'Answer', text: 'Hvis du overskrider De Minimis-taket, må du betale tilbake den overskytende støtten med renter. I praksis betyr dette at du må etterbetale arbeidsgiveravgift for perioden der du overskred taket. Dette kan bli en betydelig kostnad.' } },
+          { '@type': 'Question', name: 'Må jeg rapportere bagatellstøtte til Skatteetaten?', acceptedAnswer: { '@type': 'Answer', text: 'Ja, du må føre oversikt over all bagatellstøtte bedriften mottar. Ved søknad om ny støtte må du oppgi tidligere mottatt støtte. Skatteetaten kan kreve dokumentasjon ved kontroll.' } },
+        ],
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Kunnskapsbank', item: 'https://www.averdi.no/kunnskapsbank' },
+          { '@type': 'ListItem', position: 2, name: 'Bedrift & Handel', item: 'https://www.averdi.no/kunnskapsbank/bedrifter' },
+          { '@type': 'ListItem', position: 3, name: 'Transport & Bagatellstøtte', item: 'https://www.averdi.no/kunnskapsbank/bedrifter/transport' },
+        ],
+      },
+    ],
   };
 
   return (
@@ -156,7 +165,7 @@ export default function TransportPage() {
           <div className="flex items-start gap-4">
             <AlertTriangle className="w-6 h-6 text-red-500 flex-shrink-0 mt-1" aria-hidden="true" />
             <div>
-              <h3 className="font-bold text-red-800 text-lg mb-2">Viktig for transportbedrifter</h3>
+              <h2 className="font-bold text-red-800 text-lg mb-2">Viktig for transportbedrifter</h2>
               <p className="text-red-700 leading-relaxed">
                 Transportsektoren og finansforetak omfattes av EØS-reglene for bagatellstøtte. 
                 Det betyr at dere har et <strong>tak på hvor mye avgiftslette</strong> dere kan motta over en 3-års periode. 
@@ -352,15 +361,15 @@ export default function TransportPage() {
           </p>
           <ul className="space-y-2 text-blue-800">
             <li className="flex items-start gap-2">
-              <CheckCircle2 className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
               <span>Fører oversikt over all mottatt bagatellstøtte</span>
             </li>
             <li className="flex items-start gap-2">
-              <CheckCircle2 className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
               <span>Oppgir støttebeløp ved søknad om ny støtte</span>
             </li>
             <li className="flex items-start gap-2">
-              <CheckCircle2 className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
               <span>Kan dokumentere støtten ved kontroll</span>
             </li>
           </ul>

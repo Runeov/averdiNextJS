@@ -78,13 +78,15 @@ export default function Hero() {
               {/* Bakgrunns-glød */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-gradient-to-tr from-[#E86C1F]/20 to-[#F4B223]/20 rounded-full blur-2xl -z-10"></div>
               
-              <Image 
-                src={karasjokImage} 
+              <Image
+                src={karasjokImage}
                 alt="Karasjok oversiktsbilde"
-                className="w-full h-full object-cover rounded-3xl shadow-2xl border-4 border-white/50" 
+                fill
+                className="object-cover rounded-3xl shadow-2xl border-4 border-white/50"
                 priority
-                fetchPriority="high" // Added explicit fetchPriority
                 placeholder="blur"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                quality={90}
               />
               
               {/* Flytende kort - Skjules på de minste skjermene for å spare plass */}

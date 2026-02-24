@@ -83,15 +83,24 @@ export default function RekrutteringPage() {
 
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    'mainEntity': jsonLdData.map(item => ({
-      '@type': 'Question',
-      'name': item.q,
-      'acceptedAnswer': {
-        '@type': 'Answer',
-        'text': item.a
-      }
-    }))
+    '@graph': [
+      {
+        '@type': 'FAQPage',
+        mainEntity: jsonLdData.map(item => ({
+          '@type': 'Question',
+          name: item.q,
+          acceptedAnswer: { '@type': 'Answer', text: item.a },
+        })),
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Kunnskapsbank', item: 'https://www.averdi.no/kunnskapsbank' },
+          { '@type': 'ListItem', position: 2, name: 'Bedrift & Handel', item: 'https://www.averdi.no/kunnskapsbank/bedrifter' },
+          { '@type': 'ListItem', position: 3, name: 'Rekrutteringspakken 2026', item: 'https://www.averdi.no/kunnskapsbank/bedrifter/rekruttering' },
+        ],
+      },
+    ],
   };
 
   return (

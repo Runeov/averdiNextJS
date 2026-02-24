@@ -20,8 +20,19 @@ import { AverdiBackground } from '@/components/modules/AverdiBackground';
 import { FaqAccordion } from '@/components/ui/FaqAccordion';
 
 export const metadata: Metadata = {
-  title: 'Bedrift i Tiltakssonen | Skattefordeler & Regnskap 2026',
-  description: 'Guide til 0% arbeidsgiveravgift, Finnmarksfradraget og skattefordeler i Nord-Troms og Finnmark. Vi har analysert statsbudsjettet for 2026.',
+  title: 'Regnskap for småbedrifter i Tiltakssonen | 0% AGA & Skattefordeler 2026',
+  description: 'Regnskapsfører for små og mellomstore bedrifter i Finnmark og Nord-Troms. Guide til 0% arbeidsgiveravgift, Finnmarksfradraget og skatteoptimalisering i 2026.',
+  alternates: {
+    canonical: '/kunnskapsbank/bedrifter',
+  },
+  openGraph: {
+    title: 'Regnskap for småbedrifter i Tiltakssonen | Averdi',
+    description: 'Vi er regnskapsfører for enkeltmannsforetak, gründere og SMB i Finnmark. 0% arbeidsgiveravgift, Finnmarksfradrag og skatteoptimalisering.',
+    url: 'https://www.averdi.no/kunnskapsbank/bedrifter',
+    siteName: 'Averdi - Tolken av Nord-Norge',
+    locale: 'nb_NO',
+    type: 'website',
+  },
 };
 
 // Lokal CategoryCard for stabilitet
@@ -30,7 +41,7 @@ function LocalCategoryCard({ title, description, href, icon: Icon, theme }: any)
     const hoverText = theme === 'blue' ? 'group-hover:text-blue-600' : 'group-hover:text-[#E86C1F]';
 
     return (
-        <Link href={href} className={`group flex flex-col p-6 bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md transition-all h-full hover:border-${theme === 'blue' ? 'blue-600' : '[#E86C1F]'}`}>
+        <Link href={href} aria-label={`${title} — Les mer`} className={`group flex flex-col p-6 bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md transition-all h-full hover:border-${theme === 'blue' ? 'blue-600' : '[#E86C1F]'}`}>
             <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${themeColor} group-hover:text-white transition-colors`}>
                 <Icon className="w-6 h-6" aria-hidden="true" />
             </div>
@@ -72,15 +83,35 @@ export default function BedriftHub() {
 
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    'mainEntity': jsonLdData.map(item => ({
-      '@type': 'Question',
-      'name': item.q,
-      'acceptedAnswer': {
-        '@type': 'Answer',
-        'text': item.a
+    '@graph': [
+      {
+        '@type': 'FAQPage',
+        'mainEntity': jsonLdData.map(item => ({
+          '@type': 'Question',
+          'name': item.q,
+          'acceptedAnswer': { '@type': 'Answer', 'text': item.a }
+        }))
+      },
+      {
+        '@type': 'BreadcrumbList',
+        'itemListElement': [
+          { '@type': 'ListItem', 'position': 1, 'name': 'Kunnskapsbank', 'item': 'https://www.averdi.no/kunnskapsbank' },
+          { '@type': 'ListItem', 'position': 2, 'name': 'Bedrift & Handel', 'item': 'https://www.averdi.no/kunnskapsbank/bedrifter' }
+        ]
+      },
+      {
+        '@type': 'Service',
+        'name': 'Regnskap for småbedrifter i Tiltakssonen',
+        'serviceType': 'Regnskapsføring og skattrådgivning for små og mellomstore bedrifter',
+        'provider': { '@type': 'Organization', 'name': 'Averdi AS' },
+        'description': 'Vi er regnskapsfører for enkeltmannsforetak, gründere og SMB i Finnmark og Nord-Troms. Spesialisert på 0% arbeidsgiveravgift, Finnmarksfradrag og tiltakssonens skattefordeler.',
+        'areaServed': ['Finnmark', 'Nord-Troms', 'Nord-Norge'],
+        'audience': {
+          '@type': 'Audience',
+          'audienceType': 'Småbedrifter, enkeltmannsforetak og gründere i Nord-Norge'
+        }
       }
-    }))
+    ]
   };
 
   return (

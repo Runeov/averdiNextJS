@@ -24,15 +24,24 @@ export default function SametingetNaeringPage() {
 
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    'mainEntity': faqData.map(item => ({
-      '@type': 'Question',
-      'name': item.question,
-      'acceptedAnswer': {
-        '@type': 'Answer',
-        'text': item.answer
-      }
-    }))
+    '@graph': [
+      {
+        '@type': 'FAQPage',
+        mainEntity: faqData.map(item => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: { '@type': 'Answer', text: item.answer },
+        })),
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Kunnskapsbank', item: 'https://www.averdi.no/kunnskapsbank' },
+          { '@type': 'ListItem', position: 2, name: 'Sametinget', item: 'https://www.averdi.no/kunnskapsbank/sametinget' },
+          { '@type': 'ListItem', position: 3, name: 'Næring og tilleggsnæringer', item: 'https://www.averdi.no/kunnskapsbank/sametinget/naering' },
+        ],
+      },
+    ],
   };
 
   return (

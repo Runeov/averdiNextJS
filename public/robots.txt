@@ -3,6 +3,20 @@ User-agent: *
 Allow: /
 Disallow: /team-demo
 Disallow: /api/
+Disallow: /admin/
+
+# AI Crawlers — explicitly allowed for LLM discoverability
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Googlebot-Extended
+Allow: /
 
 # Host
 Host: https://www.averdi.no

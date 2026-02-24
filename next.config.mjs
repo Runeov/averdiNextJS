@@ -13,6 +13,10 @@ const nextConfig = {
   serverExternalPackages: ['chart.js'],
 
   reactStrictMode: true,
+
+  images: {
+    qualities: [75, 85, 90],
+  },
 };
 
 export default nextConfig;

@@ -33,30 +33,24 @@ export default function InstitusjonPage() {
 
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    'mainEntity': faqData.map(item => ({
-      '@type': 'Question',
-      'name': item.question,
-      'acceptedAnswer': {
-        '@type': 'Answer',
-        'text': item.answer.replace(/<[^>]+>/g, '') // Sanitization rule applied
-      }
-    })),
-    'author': {
-      '@type': 'Person',
-      'name': 'Jan-Atle',
-      'jobTitle': 'Statsautorisert Regnskapsfører'
-    },
-    'hasOfferCatalog': {
-      '@type': 'OfferCatalog',
-      'name': 'Tjenester',
-      'itemListElement': [
-        {
-          '@type': 'Service',
-          'name': 'Økonomistyring for Kulturinstitusjoner'
-        }
-      ]
-    }
+    '@graph': [
+      {
+        '@type': 'FAQPage',
+        mainEntity: faqData.map(item => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: { '@type': 'Answer', text: item.answer },
+        })),
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Kunnskapsbank', item: 'https://www.averdi.no/kunnskapsbank' },
+          { '@type': 'ListItem', position: 2, name: 'Sametinget', item: 'https://www.averdi.no/kunnskapsbank/sametinget' },
+          { '@type': 'ListItem', position: 3, name: 'Institusjon', item: 'https://www.averdi.no/kunnskapsbank/sametinget/institusjon' },
+        ],
+      },
+    ],
   };
 
   return (

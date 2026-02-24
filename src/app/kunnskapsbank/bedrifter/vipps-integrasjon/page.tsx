@@ -33,15 +33,24 @@ export default function VippsIntegrasjonsPage() {
 
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    'mainEntity': faqData.map(item => ({
-      '@type': 'Question',
-      'name': item.question,
-      'acceptedAnswer': {
-        '@type': 'Answer',
-        'text': item.answer
-      }
-    }))
+    '@graph': [
+      {
+        '@type': 'FAQPage',
+        mainEntity: faqData.map(item => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: { '@type': 'Answer', text: item.answer },
+        })),
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Kunnskapsbank', item: 'https://www.averdi.no/kunnskapsbank' },
+          { '@type': 'ListItem', position: 2, name: 'Bedrift & Handel', item: 'https://www.averdi.no/kunnskapsbank/bedrifter' },
+          { '@type': 'ListItem', position: 3, name: 'Vipps Integrasjon', item: 'https://www.averdi.no/kunnskapsbank/bedrifter/vipps-integrasjon' },
+        ],
+      },
+    ],
   };
 
   return (

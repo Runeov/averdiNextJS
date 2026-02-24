@@ -113,7 +113,7 @@
     "office": "karasjok",
     "description": "Spesialist på handel, butikkdrift og integrasjon av kassesystemer.",
     "longDescription": "Hilde er vår ekspert på **handel og butikkdrift**. I en bransje med små marginer er det avgjørende med stålkontroll på varelager og omsetning. Hilde hjelper deg å sette opp effektive rutiner som kobler kassesystemet (POS) direkte mot regnskapet.\n\nDriver du nettbutikk? Hilde kan bistå med integrasjoner mot Shopify eller WooCommerce, og håndtering av betalingsløsninger som Klarna og Vipps. Hun er også en superbruker på PowerOffice GO og hjelper deg å digitalisere bedriften.",
-    "experience": "10+år",
+    "experience": "10+ år",
     "specialties": [
       "Handel og butikk",
       "Kassesystemer (POS)",
@@ -132,7 +132,7 @@
       "Tjenesteyting"
     ],
     "relatedHubs": [
-      { "title": "Regnskap for Handel", "link": "/kunnskapsbank/handel" }
+      { "title": "Bedrift & Handel", "link": "/kunnskapsbank/bedrifter" }
     ],
     "isActive": true,
     "sortOrder": 3,
@@ -219,7 +219,7 @@
     "office": "karasjok",
     "description": "Hjelper gründere og duodji-utøvere med etablering og søknader.",
     "longDescription": "Linda Marja brenner for nyskaping. Hun er den du snakker med når du skal **starte egen bedrift**. Hun hjelper deg med forretningsplan, budsjettering og valg av selskapsform (AS eller ENK).\n\nHun har spesiell kompetanse på **Duodji-næringen** og de spesifikke støtteordningene som finnes der. Trenger du hjelp til å søke etablererstøtte eller investeringsstøtte fra Sametinget? Linda guider deg gjennom søknadsprosessen.",
-    "experience": "10 år",
+    "experience": "10+ år",
     "specialties": [
       "Gründerhjelp",
       "Etablering",
@@ -239,7 +239,7 @@
     ],
     "relatedHubs": [
       { "title": "Støtte til Duodji", "link": "/kunnskapsbank/sametinget/duodji" },
-      { "title": "Variert Næringsliv", "link": "/kunnskapsbank/sametinget/variert-naeringsliv" }
+      { "title": "Variert Næringsliv", "link": "/kunnskapsbank/sametinget/naering" }
     ],
     "isActive": true,
     "sortOrder": 6,
@@ -255,7 +255,7 @@
     "office": "karasjok",
     "description": "Strategisk rådgivning for reiseliv og vekstbedrifter.",
     "longDescription": "John David jobber med tallene som forteller hvor bedriften din er på vei. Han spesialiserer seg på **lønnsomhetsanalyse og strategi** for bedrifter som ønsker å vokse.\n\nJobber du innen **samisk reiseliv** eller opplevelsesnæring? John David hjelper deg å kalkulere riktige priser på produktene dine og sette opp likviditetsbudsjetter som sikrer sunn drift gjennom hele sesongen.",
-    "experience": "5år",
+    "experience": "5+ år",
     "specialties": [
       "Økonomisk analyse",
       "Reiseliv og opplevelser",
@@ -274,7 +274,7 @@
       "Prosjekt"
     ],
     "relatedHubs": [
-      { "title": "Samisk Reiseliv", "link": "/kunnskapsbank/sametinget/samisk-reiseliv" }
+      { "title": "Sametinget Støtte", "link": "/kunnskapsbank/sametinget" }
     ],
     "isActive": true,
     "sortOrder": 7,

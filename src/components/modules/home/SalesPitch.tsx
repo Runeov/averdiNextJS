@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { ArrowRight, MessageSquare, TrendingUp, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import heroImage from '@/assets/Hero_aboutUS.png';
 
 export default function SalesPitch() {
   const router = useRouter();
@@ -17,10 +18,6 @@ export default function SalesPitch() {
       window.scrollTo({ top: offsetPosition, behavior: "smooth" });
     }
   };
-
-  // Using the same image source, but ideally, this should be a local asset in src/assets
-  // If keeping external, remember to configure next.config.js
-  const imageSrc = "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1632&q=80";
 
   return (
     <section className="py-24 bg-slate-50 overflow-hidden font-sans">
@@ -89,15 +86,14 @@ export default function SalesPitch() {
               <div className="absolute inset-0 bg-[#E86C1F]/10 rounded-full blur-3xl transform scale-90 translate-y-4 -z-10"></div>
               
               <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/3] lg:aspect-square border-4 border-white transform rotate-2 hover:rotate-0 transition-transform duration-700 ease-in-out">
-                {/* NOTE: Using unoptimized=true for external images initially to avoid config errors.
-                   Best practice: Download this image to public/ or src/assets/ and import it.
-                */}
                 <Image
-                  src={imageSrc}
+                  src={heroImage}
                   alt="Averdi rådgivning - Vi hjelper bedrifter i Finnmark å vokse"
                   fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover"
-                  unoptimized 
+                  placeholder="blur"
+                  quality={85}
                 />
                 
                 {/* Floating Badge */}
