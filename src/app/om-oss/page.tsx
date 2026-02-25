@@ -7,11 +7,11 @@ import CompanyValues from '@/components/modules/about/CompanyValues';
 import ContactPanel from '@/components/modules/home/ContactPanel';
 
 export const metadata: Metadata = {
-  title: 'Om oss | Averdi AS - Tolken av Nord-Norge',
-  description: 'Møt teamet bak Averdi. Statsautoriserte regnskapsførere med over 30 års erfaring i Finnmark. Vi er din partner for trygg økonomistyring.',
+  title: 'Om oss | Averdi AS - Regnskapsfører i Finnmark og Nord-Troms',
+  description: 'Statsautoriserte regnskapsførere med over 35 års erfaring i Finnmark. Vi er regnskapsfører for små og mellomstore bedrifter i Finnmark og Nord-Troms, med skybasert regnskap og personlig oppfølging.',
   openGraph: {
     title: 'Om oss | Averdi AS',
-    description: 'Møt teamet bak Averdi. Statsautoriserte regnskapsførere med over 30 års erfaring i Finnmark.',
+    description: 'Statsautoriserte regnskapsførere med over 35 års erfaring i Finnmark og Nord-Troms.',
     type: 'website',
   },
 };
@@ -50,6 +50,25 @@ export default async function OmOssPage() {
 
       <AboutHero />
       <CompanyStory />
+
+      {/* Mid-CTA */}
+      <section className="py-14 bg-slate-50">
+        <div className="max-w-2xl mx-auto text-center px-4 sm:px-6">
+          <h2 className="text-2xl font-bold text-slate-900 mb-3">
+            Vil du vite om vi passer for deg?
+          </h2>
+          <p className="text-slate-600 mb-8">
+            Book et møte. Du får en konkret vurdering av hvordan vi kan forbedre regnskapet ditt.
+          </p>
+          <a
+            href="/#contact"
+            className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-[#E86C1F] to-[#F4B223] rounded-full hover:shadow-lg hover:shadow-[#E86C1F]/30 hover:-translate-y-0.5 transition-all duration-300"
+          >
+            Bestill møte
+          </a>
+        </div>
+      </section>
+
       <CompanyValues />
       <TeamSectionModern employees={employees} />
       <ContactPanel />

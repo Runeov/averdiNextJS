@@ -74,7 +74,7 @@ export default function LonnPage() {
     },
     {
       title: 'Personlig oppfølging',
-      description: 'Du snakker med samme rådgiver hver måned.',
+      description: 'Du får en fast kontakt hos oss for oppfølging.',
       icon: <Users className="w-7 h-7" aria-hidden="true" />
     }
   ];

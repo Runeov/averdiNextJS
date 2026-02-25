@@ -30,7 +30,7 @@ export default function AboutHero() {
 
           {/* Description */}
           <p className="text-lg md:text-xl text-slate-600 mb-12 leading-relaxed max-w-3xl mx-auto">
-            Vi guider og coacher deg gjennom regnskap.
+            Statsautoriserte regnskapsførere i Finnmark og Nord-Troms. Vi hjelper små og mellomstore bedrifter med regnskap, lønn og skatt.
           </p>
 
           {/* Stats Grid */}

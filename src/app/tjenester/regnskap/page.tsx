@@ -20,24 +20,9 @@ export default function RegnskapPage() {
   // Features data
   const features: ServiceFeature[] = [
     {
-      title: 'Løpende bokføring',
-      description: 'Bilag rett til regnskapet. Vi bokfører løpende og holder arkivet i orden.',
-      icon: <FileText className="w-6 h-6" />
-    },
-    {
       title: 'MVA',
       description: 'Vi beregner og sender MVA-meldingen innen fristen.',
       icon: <Receipt className="w-6 h-6" />
-    },
-    {
-      title: 'Fakturering',
-      description: 'Vi setter opp fakturaflyt og sender purringer etter avtale.',
-      icon: <CreditCard className="w-6 h-6" />
-    },
-    {
-      title: 'Fast kontaktperson',
-      description: 'Du kan ringe eller sende e-post direkte til din regnskapsfører. Vi svarer raskt.',
-      icon: <Users className="w-6 h-6" />
     },
     {
       title: 'Perioderapportering',
@@ -62,6 +47,11 @@ export default function RegnskapPage() {
     {
       title: 'Timeføring',
       description: 'Med PowerOffice Time registrerer du timer som oppfyller BFF-kravene. Du og dine ansatte har egen innlogging.',
+      icon: <Users className="w-6 h-6" />
+    },
+    {
+      title: 'Fast kontaktperson',
+      description: 'Du kan ringe eller sende e-post direkte til din regnskapsfører. Vi svarer raskt.',
       icon: <Users className="w-6 h-6" />
     }
   ];
@@ -151,6 +141,8 @@ export default function RegnskapPage() {
           'Se resultat og likviditet hver måned.',
           'Send bilag på e-post eller i app. Vi fører dem fortløpende.',
           'Vi varsler deg før MVA og skattemelding.',
+          'Vi kjører lønn og sender A-melding innen fristen.',
+          'Digitale reiseregninger rett i systemet.',
           'Du har én fast kontaktperson.'
         ]}
       />

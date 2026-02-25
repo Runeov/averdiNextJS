@@ -6,20 +6,20 @@ export default function CompanyValues() {
   const values = [
     {
       icon: Target,
-      title: 'Direkte',
-      description: 'Vi snakker klart. Er en regel krevende, sier vi det rett ut. Er en mulighet god, sier vi det også. Aldri ullent, alltid konkret.',
+      title: 'Vi sier det som det er',
+      description: 'Du får klare svar på hva du må gjøre, og når du må gjøre det.',
       color: '#E86C1F'
     },
     {
       icon: Shield,
-      title: 'Kompetanse',
-      description: 'Vi gjetter aldri. Vi bruker data, siterer lover og kjenner detaljer andre overser. Eksakte grenser, spesifikke tak, korrekte paragrafer.',
+      title: 'Vi jobber med tall, ikke antakelser',
+      description: 'Når vi anbefaler noe, viser vi til regelverk, frister og faktiske tall.',
       color: '#E86C1F'
     },
     {
       icon: Users,
-      title: 'Engasjement',
-      description: 'Vi bryr oss om regionens vekst. Din suksess er Nord-Norges suksess. Vi står skulder ved skulder med deg i vær og vind.',
+      title: 'Vi følger med',
+      description: 'Endrer likviditeten seg, tar vi kontakt. Du slipper å oppdage det for sent.',
       color: '#E86C1F'
     }
   ];
@@ -34,7 +34,7 @@ export default function CompanyValues() {
             Våre verdier
           </h2>
           <p className="text-lg text-slate-600">
-            Fire prinsipper som styrer alt vi gjør – fra første møte til siste rapport.
+            Tre prinsipper som styrer alt vi gjør, fra første møte til siste rapport.
           </p>
         </div>
 
