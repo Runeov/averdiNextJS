@@ -30,7 +30,7 @@ export default function AboutHero() {
 
           {/* Description */}
           <p className="text-lg md:text-xl text-slate-600 mb-12 leading-relaxed max-w-3xl mx-auto">
-            Vi er ikke bare regnskapsførere som registrerer historien. Vi er tolker som dekoder regelverket og skaper fremtidig verdi for nordnorsk næringsliv.
+            Vi guider og coacher deg gjennom regnskap.
           </p>
 
           {/* Stats Grid */}

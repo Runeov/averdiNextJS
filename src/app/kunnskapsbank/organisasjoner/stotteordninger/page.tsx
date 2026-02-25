@@ -80,7 +80,7 @@ const frister = [
 ];
 
 export default function StotteordningerPage() {
-  const alida = getExpert('alida');
+  const janAtle = getExpert('jan-atle');
 
   const faqData = [
     {
@@ -293,14 +293,14 @@ export default function StotteordningerPage() {
         </section>
 
         {/* Expert Insight */}
-        {alida && (
+        {janAtle && (
           <ExpertInsight
-            title="Sett opp en tilskuddskalender – nå"
-            quote="Lag som mister tilskudd gjør det nesten alltid av én grunn: de glemmer fristen. Vi ser det hvert år. Sett opp en enkel kalender med alle fristene nå i januar, og følg den."
-            expert={alida}
+            title="De fleste lag søker på under halvparten de har krav på"
+            quote="Etter 30 år med søknadsarbeid ser jeg det fortsatt: lag som sliter med underskudd fordi de ikke visste om en ordning de oppfylte alle kravene til. Pengene finnes – men fristen gikk ut."
+            expert={janAtle}
           >
             <p>
-              Vi kartlegger hvilke ordninger laget ditt kvalifiserer for, fyller ut søknadene og
+              Jeg kartlegger hvilke ordninger laget ditt kvalifiserer for, fyller ut søknadene og
               sørger for at dokumentasjonen er på plass – inkludert regnskapsrapporter og
               årsberetning. Første kartlegging er gratis.
             </p>

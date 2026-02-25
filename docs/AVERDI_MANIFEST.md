@@ -147,6 +147,92 @@ If you can DO it, use a VERB. Kill nouns ending in -else, -ing, -sjon.
 - "I forbindelse med" → say "ved" or "når"
 - "For så vidt angår" → say "for"
 
+## English Content Anti-Patterns — BANNED
+
+| ❌ Banned              | ✅ Use Instead                              |
+|------------------------|---------------------------------------------|
+| a bit / a little       | remove, or be specific (how much, exactly?) |
+| actual / actually      | remove entirely                             |
+| agile                  | smidig / konkret / specific to what it does |
+| arguably               | remove, or make the case directly           |
+| assistance             | help                                        |
+| attempt                | try / do                                    |
+| battle tested          | show the proof, or remove                   |
+| business logic         | name the specific rule or process           |
+| rettidig               | innen fristen / til rett tid                |
+| skatteoptimalisering   | lovlig skatteplanlegging / name the specific action (fradrag, fritak, etc.) |
+| utnytt / utnytte       | bruk / hent ut / vær konkret om hva ordningen gir |
+| dra nytte av           | bruk / si konkret hva ordningen gir         |
+
+## LLM Anti-Patterns — NEVER USE
+
+These patterns expose AI-generated text. Every one of them weakens the Averdi voice.
+
+Dashes and punctuation:
+- No em dashes (—) or hyphens used as dashes in prose. Restructure the sentence or use a period.
+- No hyphen as a separator mid-sentence. Split into two sentences.
+
+Cliché openers (delete on sight):
+- "In today's world..." / "In this article..." / "It's worth noting..."
+- "Navigating the complex landscape of..."
+- Any opener that could belong to any company
+
+Cliché closers (delete on sight):
+- "Hope this helps" / "Feel free to reach out" / "Don't hesitate to contact us"
+- "I hope this answers your question"
+- "Let me know if you need anything else"
+
+Self-referential disclaimers:
+- "As an AI..." / "I should note that..." / "Please consult a professional before..."
+
+Overused transitions (cut or vary):
+- "Furthermore" / "Moreover" / "In addition" / "Additionally" / "It is important to note"
+
+Hedging phrases:
+- "Generally speaking" / "It's worth mentioning" / "It could be argued"
+- "This may vary" / "Results may differ"
+
+Lists:
+- Never use numbered lists when bullets serve the same purpose
+- Never create a list just to look structured
+
+Headings:
+- No Title Case For Every Word In A Heading. Use sentence case.
+- No heading that could appear on any generic website
+
+Unicode artifacts:
+- No decorative symbols outside the brand emoji set (✅ 📉 💡 📋)
+
+## Voice — Human Standards
+
+These rules apply to ALL content in all languages:
+
+- Write like a smart person talking, not a consultant presenting
+- 'You' over 'we' wherever possible. The reader's world comes first.
+- Use contractions where natural: you'll, it's, we're, don't, can't
+- Positive phrasing: say what something IS, not what it isn't
+- Short sentences signal confidence. Long sentences signal uncertainty.
+- Back every claim with specifics: a number, a date, a named rule, a real case
+- "We" is for team culture and values. "You" is for everything else.
+
+## Title Rules
+
+Every title must do one of four things:
+- Promise a specific benefit the reader gets ("Spar 60 000 kr på neste skattemelding")
+- Make a contrarian point worth disagreeing with ("Regnskapsfører er din billigste ansatte")
+- Offer information the reader cannot find anywhere else
+- Be directly actionable: the reader knows what to do after reading
+
+Use sentence case for all headings. Not Title Case. Not ALL CAPS.
+
+## Formatting
+
+- Oxford comma: "bilag, regnskap, og frist" not "bilag, regnskap og frist"
+- Exclamation points: max one per piece. Never in technical or advisory sections.
+- Sentences can start with "But" and "And." It reads as direct and human.
+- Prefer periods over commas. Split long sentences into short ones.
+- No dashes used as separators in prose. Period. New sentence.
+
 ---
 
 # 4. BRAND VOCABULARY
@@ -386,11 +472,24 @@ Before publishing ANY content:
 - [ ] 90%+ active voice
 - [ ] Filler phrases deleted
 - [ ] "Undertegnede" → "vi/jeg"
+- [ ] No English anti-pattern words (a bit, actually, arguably, assistance, attempt, battle tested, business logic)
+
+**LLM Patterns:**
+- [ ] No em dashes or hyphens as sentence separators
+- [ ] No cliché openers or closers
+- [ ] No hedging phrases or self-referential disclaimers
+- [ ] No numbered lists where bullets work
+- [ ] No title-case headings
+- [ ] No overused transitions (Furthermore, Moreover, Additionally)
 
 **Voice:**
 - [ ] Correct pillar blend for content type
 - [ ] Translation function applied (government data → commercial insight)
 - [ ] Appropriate persona assigned
+- [ ] 'You' dominates over 'we'
+- [ ] Contractions used where natural
+- [ ] Every claim backed by a specific number, rule, or example
+- [ ] Title follows the four-title-rules (benefit / contrarian / unique / actionable)
 
 **Brand:**
 - [ ] Brand vocabulary used consistently (Tiltakssonen, Handlingsrom, etc.)

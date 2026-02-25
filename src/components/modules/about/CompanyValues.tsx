@@ -1,31 +1,25 @@
 'use client';
 
-import { Target, Users, Lightbulb, Shield } from 'lucide-react';
+import { Target, Users, Shield } from 'lucide-react';
 
 export default function CompanyValues() {
   const values = [
     {
       icon: Target,
       title: 'Direkte',
-      description: 'Vi snakker klart og tydelig. Hvis en regel er utfordrende, sier vi det. Hvis en mulighet er gyllen, sier vi det også. Ingen ullent språk.',
+      description: 'Vi snakker klart. Er en regel krevende, sier vi det rett ut. Er en mulighet god, sier vi det også. Aldri ullent, alltid konkret.',
       color: '#E86C1F'
     },
     {
       icon: Shield,
-      title: 'Kompetent',
+      title: 'Kompetanse',
       description: 'Vi gjetter aldri. Vi bruker data, siterer lover og kjenner detaljer andre overser. Eksakte grenser, spesifikke tak, korrekte paragrafer.',
       color: '#E86C1F'
     },
     {
       icon: Users,
-      title: 'Engasjert',
+      title: 'Engasjement',
       description: 'Vi bryr oss om regionens vekst. Din suksess er Nord-Norges suksess. Vi står skulder ved skulder med deg i vær og vind.',
-      color: '#E86C1F'
-    },
-    {
-      icon: Lightbulb,
-      title: 'Sofistikert',
-      description: 'Lokalt forankret, men ikke provinsielt. Vi bringer Oslo-nivå ekspertise til Karasjok. Verdensklasse kompetanse anvendt lokalt.',
       color: '#E86C1F'
     }
   ];
@@ -75,17 +69,6 @@ export default function CompanyValues() {
           })}
         </div>
 
-        {/* Bottom Statement */}
-        <div className="mt-16 max-w-3xl mx-auto text-center">
-          <div className="bg-white rounded-2xl p-8 border-2 border-[#E86C1F]/20 shadow-sm">
-            <h3 className="text-2xl font-bold text-slate-900 mb-4">
-              Den pragmatiske nordnorske vokteren
-            </h3>
-            <p className="text-lg text-slate-600 leading-relaxed">
-              Vi ser ikke ned på klienter fra et elfenbenstårn i Oslo. Vi står skulder ved skulder med deg i vær og vind i Finnmark. Vi er dypt forankret i det nordlige samfunnet – din suksess er vår suksess.
-            </p>
-          </div>
-        </div>
 
       </div>
     </section>

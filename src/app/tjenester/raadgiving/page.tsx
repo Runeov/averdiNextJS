@@ -11,8 +11,8 @@ import { ServiceCTA } from '@/components/modules/services/ServiceCTA';
 
 export const metadata: Metadata = {
   title: 'Rådgivning | Averdi - Strategisk rådgivning i Nord-Norge',
-  description: 'Strategisk sparringspartner for vekst. Budsjett, likviditetsstyring og støtteordninger. Ekspertise på Sametinget og tiltakssonen.',
-  keywords: 'rådgivning, budsjett, likviditetsstyring, sametinget, støtteordninger, tiltakssonen, nordnorge',
+  description: 'Få kontroll på budsjett, likviditet, og investeringer. Vi hjelper deg å ta riktige valg før du binder kapital.',
+  keywords: 'rådgivning, budsjett, likviditetsstyring, sametinget, tiltakssonen, nordnorge',
 };
 
 export default function RaadgivingPage() {
@@ -21,24 +21,14 @@ export default function RaadgivingPage() {
   const features: ServiceFeature[] = [
     {
       title: 'Budsjett og prognoser',
-      description: 'Vi hjelper deg med å lage realistiske budsjetter og prognoser for fremtiden.',
+      description: 'Vi lager budsjett per måned og oppdaterer prognosen når forutsetningene endrer seg.',
       icon: <TrendingUp className="w-6 h-6" aria-hidden="true" />
     },
     {
       title: 'Likviditetsstyring og kontantstrøm',
-      description: 'Sikre at bedriften har nok penger til å betale regningene når de forfaller.',
+      description: 'Vi viser når kontoen går i minus hvis ingenting endres. Så foreslår vi tiltak.',
       icon: <DollarSign className="w-6 h-6" aria-hidden="true" />
     },
-    {
-      title: 'Verdivurdering og selskapsstrategi',
-      description: 'Strategisk rådgivning for vekst, salg eller generasjonsskifte.',
-      icon: <Target className="w-6 h-6" aria-hidden="true" />
-    },
-    {
-      title: 'Støtteordninger og tilskudd',
-      description: 'Ekspertise på Sametinget, Innovasjon Norge og andre støtteordninger.',
-      icon: <Gift className="w-6 h-6" aria-hidden="true" />
-    }
   ];
 
   // Process steps
@@ -46,17 +36,17 @@ export default function RaadgivingPage() {
     {
       number: '1',
       title: 'Kartlegging',
-      description: 'Vi starter med å forstå din bedrift, dine mål og utfordringer.'
+      description: 'Vi går gjennom regnskap, gjeld, og faste kostnader. Vi definerer målet ditt i kroner og dato.'
     },
     {
       number: '2',
       title: 'Analyse',
-      description: 'Vi analyserer tallene og identifiserer muligheter og risikoer.'
+      description: 'Vi lager budsjett og likviditetsprognose. Du ser beste og verste scenario.'
     },
     {
       number: '3',
       title: 'Handlingsplan',
-      description: 'Vi lager en konkret plan med tiltak og oppfølging.'
+      description: 'Vi lager en plan med konkrete tiltak og datoer. Vi følger opp månedlig eller kvartalsvis.'
     }
   ];
 
@@ -64,17 +54,17 @@ export default function RaadgivingPage() {
   const whyPoints: WhyPoint[] = [
     {
       title: 'Lokal forankring i Finnmark',
-      description: 'Vi forstår de unike utfordringene og mulighetene i nordnorsk næringsliv.',
+      description: 'Vi jobber med bedrifter i Finnmark og Nord-Troms. Vi vet hvordan tiltakssonen påvirker kostnader og investeringer.',
       icon: <MapPin className="w-7 h-7" aria-hidden="true" />
     },
     {
-      title: 'Kjenner støtteordninger',
-      description: 'Vi har dyp kunnskap om Sametinget, Innovasjon Norge og tiltakssonen.',
+      title: 'Kjenner tiltakssonen',
+      description: 'Vi vurderer arbeidsgiveravgift, Finnmarksfradrag, og støtteordninger før du tar beslutninger.',
       icon: <Zap className="w-7 h-7" aria-hidden="true" />
     },
     {
       title: 'Langsiktig perspektiv',
-      description: 'Vi er ikke bare rådgivere, vi er din strategiske partner over tid.',
+      description: 'Du snakker med samme rådgiver gjennom hele prosessen. Vi følger opp og justerer planen når tallene endrer seg.',
       icon: <Users className="w-7 h-7" aria-hidden="true" />
     }
   ];
@@ -87,19 +77,11 @@ export default function RaadgivingPage() {
     },
     {
       question: 'Kan dere hjelpe med Sametinget-søknader?',
-      answer: 'Ja, vi har omfattende erfaring med søknader til Sametinget. Vi hjelper med å finne riktig ordning, skrive søknaden og følge opp underveis.'
+      answer: 'Ja. Vi hjelper deg å dokumentere budsjett, finansiering, og måloppnåelse i søknaden. Vi har jobbet med Sametinget-søknader i over 35 år.'
     },
     {
       question: 'Hva koster rådgivning?',
-      answer: 'Det avhenger av omfanget. Vi tilbyr både timebasert fakturering og fastprisavtaler for løpende rådgivning. Kontakt oss for et skreddersydd tilbud.'
-    },
-    {
-      question: 'Hvor ofte bør vi ha rådgivningsmøter?',
-      answer: 'Det varierer. Noen bedrifter trenger månedlige møter, andre kvartalsvis. Vi tilpasser oss dine behov og bedriftens situasjon.'
-    },
-    {
-      question: 'Kan dere hjelpe med å søke om lån?',
-      answer: 'Vi kan hjelpe med å forberede søknaden, lage budsjetter og prognoser, og gi råd om hvilke banker eller støtteordninger som passer best.'
+      answer: 'Du kan velge timepris eller fast månedlig avtale. Fastpris passer hvis vi følger deg opp jevnlig gjennom året.'
     },
     {
       question: 'Hva er tiltakssonen?',
@@ -113,9 +95,9 @@ export default function RaadgivingPage() {
       {/* Hero Section */}
       <ServiceHero
         title="Rådgivning"
-        subtitle="Strategisk sparringspartner for vekst"
-        description="Bruk oss som din strategiske sparringspartner. Vi hjelper deg med budsjett, likviditetsstyring og verdivurdering, slik at du kan ta trygge valg for fremtiden. Med vår lokale forankring og kunnskap om støtteordninger, åpner vi dører du ikke visste eksisterte."
-        stats={{ value: '∞', label: 'muligheter' }}
+        subtitle="Ta beslutninger basert på tall. Ikke magefølelse."
+        description="Vi hjelper deg å lage budsjett, styre likviditeten, og vurdere investeringer før du bestemmer deg. Du ser konsekvensene i tall før du signerer."
+        stats={{ value: '35+', label: 'års erfaring' }}
         ctaText="Få et tilbud"
         ctaLink="#contact"
         heroImage={HeroImage}
@@ -125,12 +107,11 @@ export default function RaadgivingPage() {
       {/* Overview Section */}
       <ServiceOverview
         title="Hva vi gjør"
-        description="Vi tilbyr strategisk rådgivning tilpasset nordnorske bedrifter. Fra budsjett og likviditetsstyring til støtteordninger og vekststrategier, vi er din partner for langsiktig suksess."
+        description="Du får konkrete analyser og en plan du kan bruke i styremøte eller bankmøte."
         benefits={[
-          'Budsjett og prognoser - Realistiske planer for fremtiden',
-          'Likviditetsstyring - Sikre at pengene strekker til',
-          'Støtteordninger - Sametinget, Innovasjon Norge og mer',
-          'Strategisk planlegging - Vekst, salg eller generasjonsskifte'
+          'Vi lager budsjett med konkrete månedstall.',
+          'Vi vurderer lønnsomhet før investering, salg, eller generasjonsskifte.',
+          'Vi viser deg beste og verste scenario, så du kan ta beslutninger med åpne øyne.'
         ]}
       />
 
@@ -165,8 +146,8 @@ export default function RaadgivingPage() {
 
       {/* CTA Section */}
       <ServiceCTA
-        title="Klar for strategisk vekst?"
-        description="La oss ta en uforpliktende prat om hvordan vi kan hjelpe din bedrift."
+        title="Vil du vite om planen din faktisk tåler neste 12 måneder?"
+        description="Book et møte. Du får en konkret gjennomgang av tallene dine og hva som må justeres."
         primaryCTA={{
           text: 'Kontakt oss',
           link: '/#contact'
@@ -191,7 +172,7 @@ export default function RaadgivingPage() {
               'url': 'https://averdi.no'
             },
             'areaServed': 'Nord-Norge',
-            'description': 'Strategisk rådgivning for nordnorske bedrifter med ekspertise på støtteordninger, tiltakssonen og langsiktig vekst.'
+            'description': 'Strategisk rådgivning for nordnorske bedrifter med ekspertise på tiltakssonen og langsiktig vekst.'
           })
         }}
       />

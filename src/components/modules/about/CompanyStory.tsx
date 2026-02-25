@@ -44,7 +44,7 @@ export default function CompanyStory() {
                 <div className="text-sm font-bold text-[#E86C1F] mb-2">2000-tallet</div>
                 <h3 className="text-xl font-bold text-slate-900 mb-3">Spesialisering på samiske organisasjoner</h3>
                 <p className="text-slate-600 leading-relaxed">
-                  Vi utviklet spisskompetanse på regnskap for samiske organisasjoner, institusjoner og primærnæringer. Gjennom tett samarbeid med Sametinget og lokale aktører ble vi eksperter på tilskuddsforvaltning, prosjektregnskap og kulturell forretningsforståelse.
+                  Vi har utviklet spisskompetanse på regnskap for samiske organisasjoner, institusjoner og primærnæringer. Gjennom tett samarbeid med Sametinget og lokale aktører ble vi eksperter på tilskuddsforvaltning, prosjektregnskap og kulturell forretningsforståelse.
                 </p>
               </div>
             </div>
@@ -58,20 +58,13 @@ export default function CompanyStory() {
                 <div className="text-sm font-bold text-[#E86C1F] mb-2">I dag</div>
                 <h3 className="text-xl font-bold text-slate-900 mb-3">Tolken av Nord-Norge</h3>
                 <p className="text-slate-600 leading-relaxed">
-                  Vi har utviklet oss fra tradisjonelt regnskapskontor til strategisk rådgiver. Vi dekoder komplekse regelverk – fra Tiltakssonens skattefordeler til Sametingets tilskuddsordninger – og oversetter dem til konkrete forretningsmuligheter. Når våre klienter vokser, vokser Nord-Norge.
+                  Vi har utviklet oss fra tradisjonelt regnskapskontor til strategisk rådgiver. Vi dekoder komplekse regelverk og oversetter skattefordeler, tilskuddsordninger og særregler til konkrete forretningsmuligheter. Når våre klienter vokser, vokser Nord-Norge.
                 </p>
               </div>
             </div>
 
           </div>
 
-          {/* Quote */}
-          <div className="mt-16 bg-slate-50 rounded-2xl p-8 border-l-4 border-[#E86C1F] text-center">
-            <blockquote className="text-lg text-slate-700 italic mb-4">
-              "Det offentlige setter rammene. Vi finner mulighetene."
-            </blockquote>
-         
-          </div>
 
         </div>
       </div>

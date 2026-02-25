@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default function MomskompensasjonPage() {
-  const alida = getExpert('alida');
+  const ingvald = getExpert('ingvald-laiti');
 
   const faqData = [
     {
@@ -186,16 +186,16 @@ export default function MomskompensasjonPage() {
         </section>
 
         {/* Expert Insight */}
-        {alida && (
+        {ingvald && (
           <ExpertInsight
-            title="Ikke gå glipp av 'gratis penger'"
-            quote="For 2024 fikk våre kunder refundert betydelige summer rett i klubbkassa. Det er penger som er der og venter – men kun hvis regnskapet er satt opp riktig fra start og fristen overholdes."
-            expert={alida}
+            title="Regnskapet avgjør om søknaden godkjennes"
+            quote="Momskompensasjon er i bunn og grunn en dokumentasjonsoppgave. Søknaden faller gjennom ikke fordi laget ikke kvalifiserer, men fordi én bilagsrekke mangler. Vi ser det hvert år – og det er alltid unødvendig."
+            expert={ingvald}
           >
             <p>
-              Vi velger riktig søknadsmodell for laget ditt, forbereder all dokumentasjon og sender inn
-              søknaden. Du slipper å bruke en eneste kveld på det – og vi sørger for at dere får
-              maksimalt ut av ordningen.
+              Vi setter opp regnskapet riktig fra start, velger riktig søknadsmodell og sikrer at
+              dokumentasjonen holder for Lotteri- og stiftelsestilsynets krav. Du slipper å bekymre
+              deg for den tekniske biten.
             </p>
           </ExpertInsight>
         )}

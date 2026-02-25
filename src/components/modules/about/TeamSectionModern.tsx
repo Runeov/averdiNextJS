@@ -18,7 +18,7 @@ export default function TeamSectionModern({ employees }: TeamSectionModernProps)
             Møt teamet
           </h2>
           <p className="text-lg text-slate-600 leading-relaxed">
-            Erfarne regnskapsførere og rådgivere med dyp lokal forankring og spisskompetanse på nordnorsk næringsliv.
+            Erfarne regnskapsførere med dyp lokal forankring og spisskompetanse på nordnorsk næringsliv.
           </p>
         </div>
 

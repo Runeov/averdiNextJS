@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 export default function StyreansvarPage() {
-  const alida = getExpert('alida');
+  const hildeMarie = getExpert('Hilde-Marie');
 
   const faqData = [
     {
@@ -201,11 +201,11 @@ export default function StyreansvarPage() {
         </section>
 
         {/* Expert Insight */}
-        {alida && (
+        {hildeMarie && (
           <ExpertInsight
-            title="Protokollen er styrets viktigste dokument"
-            quote="Vi ser hvert år at lag får problemer fordi protokollen er mangelfull. En protokoll som mangler underskrifter eller avstemningsresultat kan gjøre hele årsmøtet ugyldig – og da må dere kalle inn på nytt."
-            expert={alida}
+            title="Styremedlemmer kan holdes personlig ansvarlig"
+            quote="Mange nye styremedlemmer tror rollen er å 'hjelpe til'. Men et styremedlem som godkjenner en forpliktelse laget ikke kan innfri, kan stå personlig ansvarlig for det. Det er viktig kunnskap fra dag én."
+            expert={hildeMarie}
           >
             <p>
               Vi hjelper dere med å forberede hele pakken: regnskap, årsberetning, budsjett, og

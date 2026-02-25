@@ -11,7 +11,7 @@ import { ServiceCTA } from '@/components/modules/services/ServiceCTA';
 
 export const metadata: Metadata = {
   title: 'Lønn & HR | Averdi - Lønnstjenester i Nord-Norge',
-  description: 'Korrekt lønn til rett tid – hver gang. Ekspertise på tiltakssonen og redusert arbeidsgiveravgift. Kontakt oss for tilbud.',
+  description: 'Vi kjører lønn, sender A-melding innen fristen, og håndterer skatt og arbeidsgiveravgift for bedrifter i Nord-Norge.',
   keywords: 'lønn, lønnskjøring, a-melding, arbeidsgiveravgift, tiltakssonen, nordnorge, finnmark',
 };
 
@@ -21,22 +21,22 @@ export default function LonnPage() {
   const features: ServiceFeature[] = [
     {
       title: 'A-melding og lønnsrapportering',
-      description: 'Korrekt rapportering til Skatteetaten og NAV. Vi sørger for at alt er riktig første gang.',
+      description: 'Vi bruker riktige satser og sender A-melding innen fristen.',
       icon: <FileCheck className="w-6 h-6" aria-hidden="true" />
     },
     {
       title: 'Reiseregninger og utlegg',
-      description: 'Håndtering av reiseregninger, diett og utlegg i henhold til gjeldende satser.',
+      description: 'Vi beregner reiseregninger, diett og utlegg etter gjeldende satser. Du sender kvitteringene, vi ordner resten.',
       icon: <Receipt className="w-6 h-6" aria-hidden="true" />
     },
     {
       title: 'Sykepenger og refusjoner',
-      description: 'Beregning og søknad om refusjon fra NAV for sykepenger og foreldrepenger.',
+      description: 'Vi kan bistå med søknadshjelp til nav for både sykepenger og foreldrepenger.',
       icon: <Heart className="w-6 h-6" aria-hidden="true" />
     },
     {
       title: 'Redusert arbeidsgiveravgift',
-      description: 'Ekspertise på tiltakssonen med 0% arbeidsgiveravgift i Finnmark og Nord-Troms.',
+      description: 'I Finnmark og Nord-Troms kan arbeidsgiveravgiften være 0 %. Vi beregner riktig sats for hver ansatt.',
       icon: <TrendingDown className="w-6 h-6" aria-hidden="true" />
     }
   ];
@@ -46,17 +46,17 @@ export default function LonnPage() {
     {
       number: '1',
       title: 'Oppsett',
-      description: 'Vi setter opp lønnssystemet og registrerer alle ansatte med korrekte data.'
+      description: 'Vi setter opp lønnssystemet og registrerer ansatte med riktig stillingsprosent, skattekort, og arbeidsforhold.'
     },
     {
       number: '2',
       title: 'Månedlig kjøring',
-      description: 'Du sender oss timedata og fravær. Vi kjører lønn og sender lønnslipper.'
+      description: 'Du sender timedata innen avtalt dato. Vi kjører lønn og sender lønnslipper som avtalt.'
     },
     {
       number: '3',
       title: 'Rapportering',
-      description: 'Vi sender A-melding til myndighetene og håndterer alle refusjoner.'
+      description: 'Vi sender A-melding og betaler forskuddstrekk og arbeidsgiveravgift etter avtale.'
     }
   ];
 
@@ -64,17 +64,17 @@ export default function LonnPage() {
   const whyPoints: WhyPoint[] = [
     {
       title: 'Kjenner særreglene',
-      description: 'Vi har dyp kunnskap om tiltakssonen og hvordan du maksimerer fordelene.',
+      description: 'Vi jobber med selskaper i tiltakssonen og vet hvordan 0 % arbeidsgiveravgift slår ut i praksis.',
       icon: <MapPin className="w-7 h-7" aria-hidden="true" />
     },
     {
       title: 'Automatisert lønnskjøring',
-      description: 'Moderne systemer som sikrer presisjon og effektivitet hver måned.',
+      description: 'Du registrerer timer digitalt. Systemet beregner lønn. Vi kontrollerer før utbetaling.',
       icon: <Zap className="w-7 h-7" aria-hidden="true" />
     },
     {
       title: 'Personlig oppfølging',
-      description: 'Fast kontaktperson som kjenner din bedrift og dine ansatte.',
+      description: 'Du snakker med samme rådgiver hver måned.',
       icon: <Users className="w-7 h-7" aria-hidden="true" />
     }
   ];
@@ -83,11 +83,11 @@ export default function LonnPage() {
   const faqItems: FaqItem[] = [
     {
       question: 'Hva koster lønnstjenester?',
-      answer: 'Prisen avhenger av antall ansatte og kompleksitet. Vi tilbyr fastpris per ansatt per måned for forutsigbarhet. Kontakt oss for et skreddersydd tilbud.'
+      answer: 'Du betaler fast pris per ansatt per måned. Prisen avhenger av antall ansatte og om dere har variabel lønn.'
     },
     {
       question: 'Hvor raskt kan dere starte?',
-      answer: 'Vi kan normalt starte fra neste lønnskjøring. Vi trenger noen dager til oppsett og dataoverføring fra eventuell tidligere leverandør.'
+      answer: 'Vi kan normalt starte fra neste lønnskjøring. Vi trenger normalt 3–5 arbeidsdager til oppsett og dataoverføring fra eventuell tidligere leverandør.'
     },
     {
       question: 'Håndterer dere sykepenger?',
@@ -99,11 +99,11 @@ export default function LonnPage() {
     },
     {
       question: 'Kan dere hjelpe med ansettelseskontrakter?',
-      answer: 'Vi kan gi råd om lønnsvilkår og standardkontrakter, men anbefaler juridisk bistand for komplekse avtaler.'
+      answer: 'Vi kan gi råd om lønnsvilkår og standardkontrakter, men anbefaler juridisk hjelp for komplekse avtaler.'
     },
     {
       question: 'Hva er fordelen med 0% arbeidsgiveravgift?',
-      answer: 'I tiltakssonen (Finnmark og deler av Troms) er arbeidsgiveravgiften 0% mot 14,1% i Oslo. Dette gir betydelig besparelse på lønnskostnader.'
+      answer: 'En ansatt med 600 000 kr i lønn gir 84 600 kr i arbeidsgiveravgift ved 14,1 %. I tiltakssonen kan satsen være 0 %. Det er en direkte besparelse på lønnskostnaden.'
     }
   ];
 
@@ -113,7 +113,7 @@ export default function LonnPage() {
       {/* Hero Section */}
       <ServiceHero
         title="Lønn & HR"
-        subtitle="Korrekt lønn til rett tid – hver gang"
+        subtitle="Korrekt lønn til rett tid. Hver gang."
         description="Vi håndterer alt det praktiske rundt lønn, fra A-melding og reiseregninger til sykepenger og arbeidsgiveravgift. Dine ansatte får riktig lønn til riktig tid, og du får ro i sjela."
         stats={{ value: '100%', label: 'presisjon' }}
         ctaText="Få et tilbud"
@@ -125,12 +125,11 @@ export default function LonnPage() {
       {/* Overview Section */}
       <ServiceOverview
         title="Hva vi gjør"
-        description="Vi tilbyr komplett lønnstjeneste tilpasset nordnorske bedrifter. Med vår ekspertise på tiltakssonen og redusert arbeidsgiveravgift, sikrer vi at du får maksimalt ut av de fordelene som finnes i regionen."
+        description="Vi tilbyr komplett lønnstjeneste tilpasset nordnorske bedrifter. Vi bruker ordningene i tiltakssonen riktig, inkludert 0 % arbeidsgiveravgift der det gjelder."
         benefits={[
-          'Automatisert lønnskjøring - Presisjon og effektivitet hver måned',
-          'A-melding og rapportering - Alt håndteres korrekt til myndighetene',
-          'Refusjonshåndtering - Vi søker om sykepenger og foreldrepenger',
-          'Tiltakssone-ekspertise - Maksimer fordelene med 0% arbeidsgiveravgift'
+          'Vi kjører lønn fast hver måned og sender lønnslipper digitalt.',
+          'Vi sender A-melding innen fristen.',
+          'Vi beregner arbeidsgiveravgift etter riktig sone.'
         ]}
       />
 
@@ -165,8 +164,8 @@ export default function LonnPage() {
 
       {/* CTA Section */}
       <ServiceCTA
-        title="Klar for enklere lønnskjøring?"
-        description="La oss ta en uforpliktende prat om hvordan vi kan hjelpe din bedrift."
+        title="Vil du slippe å tenke på A-melding og frister hver måned?"
+        description="Book et møte. Du får en konkret plan for hvordan vi setter opp lønn hos deg. Hvis Skatteetaten eller NAV har spørsmål, følger vi opp saken sammen med deg."
         primaryCTA={{
           text: 'Kontakt oss',
           link: '/#contact'

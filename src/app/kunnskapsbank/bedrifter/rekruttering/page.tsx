@@ -51,7 +51,7 @@ function LocalCtaBlock({ title, description, primaryButtonText, primaryButtonLin
 }
 
 export default function RekrutteringPage() {
-  const alida = getExpert('alida'); // Alida er HR/Lønn ekspert
+  const ingvald = getExpert('ingvald-laiti');
 
   // FAQ Data for Rekruttering (JSX for visning)
   const faqData = [
@@ -139,11 +139,11 @@ export default function RekrutteringPage() {
         </div>
 
         {/* Expert Insight: Alida (HR) */}
-        {alida && (
-          <ExpertInsight 
-            title="Ikke selg bruttolønn – selg disponibel inntekt" 
-            quote="Når jeg hjelper bedrifter med lønnspakker, ser vi ofte at en lønn på 650 000 kr i Alta gir samme kjøpekraft som 850 000 kr i Oslo. Men kandidaten vet ikke dette før du viser dem regnestykket."
-            expert={alida}
+        {ingvald && (
+          <ExpertInsight
+            title="Selg kjøpekraft, ikke bruttolønn"
+            quote="Når jeg hjelper bedrifter med lønnspakker, ser vi at 650 000 kr i Alta gir samme kjøpekraft som 850 000 kr i Oslo. Kandidaten vet ikke dette – til du viser dem regnestykket. Det er et rekrutteringsargument i verdensklasse."
+            expert={ingvald}
           >
             <p>
               Mange søkere ser seg blinde på bruttolønn. Din jobb i intervjuet er å vise "Total Compensation"-pakken. 

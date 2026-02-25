@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 const NIF_BASE = 'https://www.nif.no/contentassets/f82f01cf954f4d7496b3e52ca412b531';
 
 export default function ArsregnskapPage() {
-  const alida = getExpert('alida');
+  const ingvald = getExpert('ingvald-laiti');
 
   const faqData = [
     {
@@ -298,11 +298,11 @@ export default function ArsregnskapPage() {
         </section>
 
         {/* Expert Insight */}
-        {alida && (
+        {ingvald && (
           <ExpertInsight
-            title="Start regnskapet i januar – ikke mars"
-            quote="De aller fleste problemene vi ser oppstår fordi kasserer venter til siste liten. Et regnskap som er løpende ført gjennom året tar noen timer å avslutte. Begynner du i mars tar det dager."
-            expert={alida}
+            title="Årsregnskapet er nøkkelen til neste års tilskudd"
+            quote="Uten et godkjent årsregnskap kan laget ikke søke spillemidler, og mange banker krever det for å fornye kontoer. Det er ikke papirarbeid – det er lagets viktigste strategiske dokument."
+            expert={ingvald}
           >
             <p>
               Vi tar over det løpende regnskapet, sørger for at alt er avstemt mot bank og Vipps,

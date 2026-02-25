@@ -11,8 +11,8 @@ import { ServiceCTA } from '@/components/modules/services/ServiceCTA';
 
 export const metadata: Metadata = {
   title: 'Årsoppgjør & Skatt | Averdi - Skattetjenester i Nord-Norge',
-  description: 'Trygg avslutning av regnskapsåret med ekspertise på tiltakssonen. Skatteoptimalisering og maksimering av fradrag. Kontakt oss for tilbud.',
-  keywords: 'årsoppgjør, skattemelding, skatteoptimalisering, finnmarksfradrag, tiltakssonen, nordnorge',
+  description: 'Årsoppgjør og skattemelding levert innen 31. mai og 31. juli. Vi sikrer at du bruker alle fradrag, inkludert Finnmarksfradraget.',
+  keywords: 'årsoppgjør, skattemelding, finnmarksfradrag, tiltakssonen, nordnorge, fradrag',
 };
 
 export default function AarsoppgjorPage() {
@@ -21,22 +21,22 @@ export default function AarsoppgjorPage() {
   const features: ServiceFeature[] = [
     {
       title: 'Årsregnskap og noter',
-      description: 'Komplett årsregnskap i henhold til regnskapsloven med alle nødvendige noter.',
+      description: 'Vi utarbeider årsregnskapet ditt etter regnskapsloven og skriver alle nødvendige noter.',
       icon: <FileText className="w-6 h-6" aria-hidden="true" />
     },
     {
-      title: 'Skattemelding for næringsdrivende',
-      description: 'Korrekt utfylling og innlevering av skattemelding for bedrifter og enkeltpersonforetak.',
+      title: 'Skattemelding',
+      description: 'Vi fyller ut og sender skattemeldingen for aksjeselskap og enkeltpersonforetak.',
       icon: <Calculator className="w-6 h-6" aria-hidden="true" />
     },
     {
-      title: 'Skatteoptimalisering og fradrag',
-      description: 'Vi sikrer at du får alle fradrag du har krav på, inkludert Finnmarksfradraget.',
+      title: 'Alle fradrag du har krav på',
+      description: 'Vi går gjennom fradragene du kan bruke, inkludert Finnmarksfradraget.',
       icon: <TrendingUp className="w-6 h-6" aria-hidden="true" />
     },
     {
       title: 'Særskilte ordninger for tiltakssonen',
-      description: 'Ekspertise på de unike skattefordelene i Finnmark og Nord-Troms.',
+      description: 'Vi vurderer arbeidsgiveravgift, Finnmarksfradrag, og andre ordninger i tiltakssonen.',
       icon: <Award className="w-6 h-6" aria-hidden="true" />
     }
   ];
@@ -46,35 +46,35 @@ export default function AarsoppgjorPage() {
     {
       number: '1',
       title: 'Forberedelse',
-      description: 'Vi gjennomgår regnskapet og sikrer at alt er korrekt før årsavslutning.'
+      description: 'Vi avstemmer bank, MVA, og balanseposter før vi starter årsoppgjøret.'
     },
     {
       number: '2',
       title: 'Årsoppgjør',
-      description: 'Vi utarbeider årsregnskap med noter og kontrollerer alle tall.'
+      description: 'Vi utarbeider årsregnskap og noter. Du får det til gjennomgang før vi sender inn.'
     },
     {
       number: '3',
       title: 'Skattemelding',
-      description: 'Vi fyller ut og leverer skattemelding, og maksimerer alle fradrag.'
+      description: 'Vi bruker relevante fradrag og sender skattemeldingen innen 31. mai.'
     }
   ];
 
   // Why Averdi points
   const whyPoints: WhyPoint[] = [
     {
-      title: 'Ekspertise på tiltakssonen',
-      description: 'Vi kjenner alle særordninger og sikrer at du får maksimalt ut av fordelene.',
+      title: 'Vi kjenner tiltakssonen i praksis',
+      description: 'Vi jobber med selskaper i Finnmark og Nord-Troms og vet hvordan ordningene påvirker skatt og arbeidsgiveravgift.',
       icon: <MapPin className="w-7 h-7" aria-hidden="true" />
     },
     {
-      title: 'Maksimerer fradrag',
-      description: 'Vi finner alle fradrag du har krav på, inkludert Finnmarksfradraget.',
+      title: 'Vi leverer innen fristen',
+      description: 'Skattemelding innen 31. mai. Årsregnskap innen 31. juli.',
       icon: <Zap className="w-7 h-7" aria-hidden="true" />
     },
     {
-      title: 'Rettidig innlevering',
-      description: 'Vi holder alle frister og sikrer at alt leveres korrekt første gang.',
+      title: 'Du får en fast rådgiver',
+      description: 'Du snakker med samme person gjennom hele prosessen.',
       icon: <Users className="w-7 h-7" aria-hidden="true" />
     }
   ];
@@ -83,28 +83,24 @@ export default function AarsoppgjorPage() {
   const faqItems: FaqItem[] = [
     {
       question: 'Når må årsoppgjøret leveres?',
-      answer: 'Årsregnskapet må leveres til Regnskapsregisteret innen 7 måneder etter regnskapsårets slutt. For kalenderår betyr det 31. juli. Skattemeldingen har frist 31. mai.'
+      answer: 'Skattemeldingen har fast frist 31. mai. Årsregnskapet leveres til Regnskapsregisteret innen 31. juli. Vi sender deg en tidsplan tidlig på året og minner deg på hva vi trenger.'
     },
     {
       question: 'Hva er forskjellen på årsregnskap og skattemelding?',
-      answer: 'Årsregnskapet viser bedriftens økonomiske stilling og resultat etter regnskapsloven. Skattemeldingen beregner skattepliktig inntekt etter skatteloven. Vi håndterer begge deler.'
+      answer: 'Årsregnskapet viser hva bedriften din eide, tjente og skyldte gjennom året. Det går til Regnskapsregisteret. Skattemeldingen bruker de samme tallene til å beregne hva du skylder i skatt. Den går til Skatteetaten. Vi håndterer begge.'
     },
     {
       question: 'Kan dere hjelpe med skatteplanlegging?',
-      answer: 'Ja, vi tilbyr proaktiv skatteplanlegging gjennom året. Vi hjelper deg med å ta beslutninger som optimaliserer skatten din lovlig.'
+      answer: 'Ja, vi tilbyr skatteplanlegging gjennom året. Vi hjelper deg med å ta beslutninger som reduserer skatten din innenfor lovverket.'
     },
     {
       question: 'Hva med revisjonsplikt?',
-      answer: 'De fleste små bedrifter er fritatt for revisjonsplikt. Vi kan vurdere om din bedrift må ha revisor, og hjelpe med å finne en hvis nødvendig.'
+      answer: 'Aksjeselskap slipper revisjon hvis de er under grensene for omsetning, balansesum, og ansatte. Vi vurderer tallene dine og sier om du må ha revisor.'
     },
     {
       question: 'Hva er Finnmarksfradraget?',
       answer: 'Finnmarksfradraget er et særfradrag for personer bosatt i Finnmark og Nord-Troms. For 2026 er forslaget 45 000 kr, som gir betydelig skattelette.'
     },
-    {
-      question: 'Kan dere hjelpe med å rette feil i tidligere årsoppgjør?',
-      answer: 'Ja, vi kan hjelpe med å korrigere feil i tidligere innleverte årsregnskap og skattemeldinger.'
-    }
   ];
 
   return (
@@ -113,8 +109,8 @@ export default function AarsoppgjorPage() {
       {/* Hero Section */}
       <ServiceHero
         title="Årsoppgjør & Skatt"
-        subtitle="Trygg avslutning av regnskapsåret"
-        description="Vi sørger for at årsoppgjøret blir korrekt og levert i tide. Med vår ekspertise på tiltakssonen og skatteoptimalisering, sikrer vi at du får maksimalt ut av alle fradrag og fordeler."
+        subtitle="Årsregnskap og skattemelding levert innen fristen"
+        description="Vi utarbeider årsregnskapet ditt og leverer skattemeldingen innen fristen. Driver du i Finnmark eller Nord-Troms, sørger vi for at du bruker ordningene i tiltakssonen riktig."
         stats={{ value: '0', label: 'forsinkelser' }}
         ctaText="Få et tilbud"
         ctaLink="#contact"
@@ -125,12 +121,12 @@ export default function AarsoppgjorPage() {
       {/* Overview Section */}
       <ServiceOverview
         title="Hva vi gjør"
-        description="Vi tilbyr komplett årsoppgjør og skattetjenester tilpasset nordnorske bedrifter. Fra årsregnskap til skattemelding, vi håndterer alt det praktiske og sikrer at du får alle fradrag du har krav på."
+        description="Du får årsregnskap, noter, og skattemelding på ett sted. Vi kontrollerer regnskapet, avstemmer kontoer, utarbeider noter, og sender inn alt til riktige registre."
         benefits={[
-          'Komplett årsregnskap - I henhold til regnskapsloven med alle noter',
-          'Skattemelding - Korrekt utfylling og rettidig innlevering',
-          'Skatteoptimalisering - Maksimerer alle fradrag lovlig',
-          'Tiltakssone-fordeler - Finnmarksfradrag og andre særordninger'
+          'Vi utarbeider årsregnskap etter regnskapsloven, med alle noter.',
+          'Vi fyller ut og sender skattemeldingen innen 31. mai.',
+          'Du bruker alle fradrag, inkludert Finnmarksfradraget.',
+          'Vi vurderer om du omfattes av ordninger i tiltakssonen.'
         ]}
       />
 
@@ -165,8 +161,8 @@ export default function AarsoppgjorPage() {
 
       {/* CTA Section */}
       <ServiceCTA
-        title="Klar for trygt årsoppgjør?"
-        description="La oss ta en uforpliktende prat om hvordan vi kan hjelpe din bedrift."
+        title="Vil du være ferdig med årsoppgjøret i god tid før fristen?"
+        description="Book et møte. Du får en konkret plan for årsoppgjøret ditt. Hvis Skatteetaten stiller spørsmål, tar vi dialogen sammen med deg."
         primaryCTA={{
           text: 'Kontakt oss',
           link: '/#contact'
@@ -191,7 +187,7 @@ export default function AarsoppgjorPage() {
               'url': 'https://averdi.no'
             },
             'areaServed': 'Nord-Norge',
-            'description': 'Komplett årsoppgjør og skattetjenester for nordnorske bedrifter med ekspertise på tiltakssonen og skatteoptimalisering.'
+            'description': 'Komplett årsoppgjør og skattetjenester for nordnorske bedrifter med ekspertise på tiltakssonen og Finnmarksfradraget.'
           })
         }}
       />
