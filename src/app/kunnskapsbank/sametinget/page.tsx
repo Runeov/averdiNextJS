@@ -9,12 +9,13 @@ import {
   Landmark,
   BookOpen,
   ExternalLink,
-  Coins,
   ShieldCheck,
-  Lightbulb,
   AlertTriangle,
   Languages,
-  Sparkles
+  Sparkles,
+  FileText,
+  Clock,
+  CheckCircle
 } from 'lucide-react';
 import { BudgetAnalysis } from '@/components/modules/kunnskapsbank/BudgetAnalysis';
 import { McpDataSpan } from '@/components/ui/McpDataSpan';
@@ -24,16 +25,16 @@ import { FaqAccordion } from '@/components/ui/FaqAccordion';
 
 // --- 1. SEO & METADATA ---
 export const metadata: Metadata = {
-  title: 'Sametinget støtteordninger 2026 | Hent 800 000 kr i kapital',
-  description: 'Sametinget forvalter nesten 800 mill. Vi oversetter reglene slik at din bedrift i STN-området kan hente inntil 800 000 kr i investeringsstøtte (gratis egenkapital).',
+  title: 'Sametingets budsjett 2026 | Prosjektregnskap og tilskuddsforvaltning',
+  description: '1,98 milliarder kroner til samiske formål i 2026. Sametinget forvalter 788 millioner. Vi hjelper med prosjektregnskap, dokumentasjon og rapportering.',
   metadataBase: new URL('https://www.averdi.no'),
   alternates: {
     canonical: '/kunnskapsbank/sametinget',
   },
   authors: [{ name: 'Jan Atle - Averdi', url: 'https://www.averdi.no/eksperter/jan-atle' }],
   openGraph: {
-    title: 'Sametinget 2026: Slik knekker du koden',
-    description: 'Geografi-fellen koster bedrifter millioner. Vi viser forskjellen på STN og Tiltakssonen, og hvordan du bruker "Birgejupmi" for å vinne søknaden.',
+    title: 'Sametingets budsjett 2026 | Averdi',
+    description: '1,98 milliarder kroner til samiske formål. Sametinget forvalter 788 millioner. Krav til prosjektregnskap, rapportering og dokumentasjon.',
     url: 'https://www.averdi.no/kunnskapsbank/sametinget',
     siteName: 'Averdi - Tolken av Nord-Norge',
     images: [{ url: '/og-images/sametinget-guide-2026.jpg', width: 1200, height: 630, alt: 'Averdi guide til Sametinget 2026' }],
@@ -42,8 +43,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Sametinget 2026: 800 000 kr i potten?',
-    description: 'Guide: Slik søker du støtte til næring i Nord-Norge uten å gå deg vill i skjemaene.',
+    title: 'Sametingets budsjett 2026 | Prosjektregnskap og tilskuddsforvaltning',
+    description: '1,98 milliarder kroner til samiske formål. Vi hjelper med prosjektregnskap, dokumentasjon og rapportering.',
     images: ['/og-images/sametinget-guide-2026.jpg'],
   },
   robots: {
@@ -54,54 +55,48 @@ export const metadata: Metadata = {
   }
 };
 
-// Lokal CategoryCard for stabilitet
-function LocalCategoryCard({ title, description, href, icon: Icon, theme }: any) {
-    return (
-        <Link href={href} aria-label={`${title} — Les mer`} className="group flex flex-col p-6 bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md hover:border-[#E86C1F] transition-all h-full">
-            <div className="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center mb-4 text-[#E86C1F] group-hover:bg-[#E86C1F] group-hover:text-white transition-colors">
-                <Icon className="w-6 h-6" aria-hidden="true" />
-            </div>
-            <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-[#E86C1F] transition-colors">{title}</h3>
-            <p className="text-sm text-slate-600 leading-relaxed flex-grow">{description}</p>
-        </Link>
-    );
+// Lokal CategoryCard
+function LocalCategoryCard({ title, description, href, icon: Icon }: { title: string; description: string; href: string; icon: React.ElementType }) {
+  return (
+    <Link href={href} aria-label={`${title} — Les mer`} className="group flex flex-col p-6 bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md hover:border-[#E86C1F] transition-all h-full">
+      <div className="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center mb-4 text-[#E86C1F] group-hover:bg-[#E86C1F] group-hover:text-white transition-colors">
+        <Icon className="w-6 h-6" aria-hidden="true" />
+      </div>
+      <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-[#E86C1F] transition-colors">{title}</h3>
+      <p className="text-sm text-slate-600 leading-relaxed flex-grow">{description}</p>
+    </Link>
+  );
 }
 
 export default function SametingetHub() {
   const janAtle = getExpert('jan-atle');
-  
-  // --- 2. FAQ CONTENT (Med JSX) ---
+
+  // --- FAQ CONTENT ---
   const sametingetFaq = [
     {
-      question: 'Er jeg i "riktig" område (STN)?',
-      answer: <>Sjekk kartet nøye! Du kan være i Tiltakssonen (skatt) men utenfor STN (tilskudd). STN inkluderer hele <strong>Finnmark</strong> og <strong>7 kommuner i Nord-Troms</strong>, pluss spesifikke kretser i Troms og Nordland. Er du utenfor disse, kvalifiserer du ikke til næringsstøtte.</>
+      question: 'Er jeg i riktig område (STN)?',
+      answer: <>Du kan være i Tiltakssonen (skattfordeler) men utenfor STN-området (tilskudd). STN inkluderer hele <strong>Finnmark</strong> og <strong>7 kommuner i Nord-Troms</strong>, pluss spesifikke kretser i Troms og Nordland. Vi sjekker postnummeret ditt mot gjeldende kart før søknad sendes.</>
     },
     {
-      question: 'Får jeg støtte til fiskebåt?',
-      answer: <>Ja, men kun hvis båten er under <strong>11 meter</strong> og du bor i STN-området. Dette er din "inngangsbillett" som førstegangsetablerer. Vi hjelper deg å dokumentere lønnsomhet.</>
+      question: 'Hva er forskjellen på Sametingets budsjett og samlet bevilgning til samiske formål?',
+      answer: <>Sametinget forvalter <McpDataSpan id="sametinget-budsjett" source="Sametingets budsjettvedtak" value={788000000} format="currency" className="font-bold text-slate-900 bg-orange-50 px-2 py-0.5 rounded border-b-2 border-[#E86C1F]" />. Totalt foreslås <strong>1 979 731 000 kroner</strong> til samiske formål i 2026. Forskjellen ligger i at midler også bevilges gjennom andre departement og ordninger utenfor Sametingets direkte forvaltning.</>
     },
     {
-      question: 'Hva kreves for å få Duodji-støtte?',
-      answer: <>For driftstilskudd må du være registrert og godkjent i <strong>Sámi Duodji-merke</strong> ordningen – dette er nytt krav fra 2025. For momsfritak holder det med <strong>Duodji-registeret</strong>. Mangler du formell utdanning? Vi hjelper deg med realkompetansevurdering slik at porten åpnes.</>
+      question: 'Hva kreves av prosjektregnskap?',
+      answer: <>Midlene forutsetter separat prosjektregnskap. Det holder ikke å føre alt samlet i ordinært regnskap. Kostnader må knyttes direkte til det godkjente formålet, og regnskapet skal kunne fremlegges ved kontroll.</>
     },
     {
-      question: 'Hva er "Variert Næringsliv"?',
-      answer: <>Dette er "gratis egenkapital" for småbedrifter innen service, reiseliv og småindustri. Du kan søke om inntil <strong>800 000 kr</strong> til investeringer (40-70% av godkjente kostnader avhengig av type), men ikke til ren drift.</>
+      question: 'Hva skjer hvis rapporteringen ikke er korrekt?',
+      answer: <>Tilskuddet kan reduseres. Midler kan kreves tilbakebetalt. Fremtidige søknader kan bli svekket. Vi setter opp strukturen slik at rapporteringen stemmer med vedtaket.</>
     }
   ];
 
-  // --- 3. JSON-LD (String only) ---
-  const faqJsonData = sametingetFaq.map(item => ({
-      question: item.question,
-      answer: typeof item.answer === 'string' ? item.answer : "Se nettsiden for detaljert svar." // Fallback for complex JSX in JSON-LD if needed, but here we can just strip tags manually if we had the text version
-  }));
-  
-  // Manuell tekst-versjon for JSON-LD for å være 100% sikker
+  // --- JSON-LD ---
   const jsonLdData = [
-    { q: 'Er jeg i "riktig" område (STN)?', a: 'Sjekk kartet nøye! Du kan være i Tiltakssonen (skatt) men utenfor STN (tilskudd). STN inkluderer hele Finnmark og 7 kommuner i Nord-Troms.' },
-    { q: 'Får jeg støtte til fiskebåt?', a: 'Ja, men kun hvis båten er under 11 meter og du bor i STN-området.' },
-    { q: 'Hva kreves for å få Duodji-støtte?', a: 'For driftstilskudd må du være registrert og godkjent i Sámi Duodji-merke ordningen (nytt krav fra 2025). For momsfritak holder det med Duodji-registeret.' },
-    { q: 'Hva er "Variert Næringsliv"?', a: 'Dette er "gratis egenkapital" for småbedrifter innen service, reiseliv og småindustri. Inntil 800 000 kr (40-70% av godkjente kostnader avhengig av type).' }
+    { q: 'Er jeg i riktig område (STN)?', a: 'Du kan være i Tiltakssonen (skattfordeler) men utenfor STN-området (tilskudd). STN inkluderer hele Finnmark og 7 kommuner i Nord-Troms.' },
+    { q: 'Hva er forskjellen på Sametingets budsjett og samlet bevilgning?', a: 'Sametinget forvalter 788 millioner kroner. Totalt foreslås 1 979 731 000 kroner til samiske formål i 2026.' },
+    { q: 'Hva kreves av prosjektregnskap?', a: 'Midlene forutsetter separat prosjektregnskap. Kostnader må knyttes direkte til det godkjente formålet.' },
+    { q: 'Hva skjer hvis rapporteringen ikke er korrekt?', a: 'Tilskuddet kan reduseres. Midler kan kreves tilbakebetalt. Fremtidige søknader kan bli svekket.' }
   ];
 
   const jsonLd = {
@@ -112,25 +107,22 @@ export default function SametingetHub() {
         'mainEntity': jsonLdData.map(item => ({
           '@type': 'Question',
           'name': item.q,
-          'acceptedAnswer': {
-            '@type': 'Answer',
-            'text': item.a
-          }
+          'acceptedAnswer': { '@type': 'Answer', 'text': item.a }
         }))
       },
       {
         '@type': 'BreadcrumbList',
         'itemListElement': [
           { '@type': 'ListItem', 'position': 1, 'name': 'Kunnskapsbank', 'item': 'https://www.averdi.no/kunnskapsbank' },
-          { '@type': 'ListItem', 'position': 2, 'name': 'Sametinget Støtte', 'item': 'https://www.averdi.no/kunnskapsbank/sametinget' }
+          { '@type': 'ListItem', 'position': 2, 'name': 'Sametinget', 'item': 'https://www.averdi.no/kunnskapsbank/sametinget' }
         ]
       },
       {
         '@type': 'Service',
-        'name': 'Søknadshjelp Sametinget',
-        'serviceType': 'Rådgivning for Sametingets næringsstøtte',
+        'name': 'Prosjektregnskap og tilskuddsforvaltning — Sametinget',
+        'serviceType': 'Regnskap og rådgivning for samiske midler',
         'provider': { '@type': 'Organization', 'name': 'Averdi' },
-        'description': 'Vi oversetter byråkratiske krav til kommersiell fordel. Hjelp med søknad, budsjett og "kulturell trygghet"-beskrivelser.',
+        'description': 'Vi setter opp prosjektregnskap, sørger for at dokumentasjon stemmer med vedtaket, og følger opp rapportering.',
         'areaServed': 'Nord-Troms og Finnmark'
       }
     ]
@@ -139,20 +131,20 @@ export default function SametingetHub() {
   return (
     <main className="min-h-screen bg-slate-50 relative overflow-hidden font-sans">
       <AverdiBackground />
-      
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      
-      <div className="relative z-10 container mx-auto px-4 py-12 max-w-6xl">
-        
+
+      <div className="relative z-10 container mx-auto px-4 py-12 max-w-4xl">
+
         {/* Breadcrumb */}
         <Link href="/kunnskapsbank" className="inline-flex items-center text-slate-500 hover:text-[#E86C1F] mb-8 font-medium transition-colors">
           <ArrowLeft className="w-4 h-4 mr-2" aria-hidden="true" /> Tilbake til oversikt
         </Link>
 
-        {/* Hero Section - KORRIGERT IHT. PROTOKOLL */}
+        {/* --- HERO --- */}
         <div className="mb-12">
           <span className="text-[#E86C1F] font-bold tracking-wider uppercase text-sm mb-3 block">
             Tolken av Nord-Norge
@@ -162,73 +154,88 @@ export default function SametingetHub() {
             <span className="text-[#E86C1F]">Vi finner mulighetene.</span>
           </h1>
           <p className="text-xl text-slate-600 max-w-3xl leading-relaxed">
-            I 2026 ligger det over{' '}
-            <McpDataSpan 
-              id="sameting-ramme-2026" 
-              source="Sametingets budsjett 2026"
+            Sametinget har et budsjett på {' '}.
+            <McpDataSpan
+              id="sametinget-budsjett"
+              source="Sametingets budsjettvedtak"
               value={788000000}
               format="currency"
               className="font-bold text-slate-900 bg-orange-50 px-2 py-0.5 rounded border-b-2 border-[#E86C1F]"
             />{' '}
-            i potten. Det er ikke bare støtte – det er en <strong>Investeringsmotor</strong>. 
-            Pengene utløses når du bruker regelverket til å bygge <em>Kulturell trygghet</em> og <em>Birgejupmi</em>.
+           Pengene fordeles på ulike områder. Vi deler vår innsikt slik at din bedrift kan navigere dette enklere.
           </p>
         </div>
 
         {/* --- BUDSJETTANALYSE --- */}
         <BudgetAnalysis />
 
-        {/* --- INSIGHT BOX --- */}
-        <div className="bg-white border border-slate-200 rounded-xl shadow-lg mb-20 overflow-hidden">
-          <div className="bg-[#E86C1F] p-4 text-white flex items-center gap-3">
-            <Lightbulb className="w-6 h-6" aria-hidden="true" />
-            <h3 className="font-bold text-lg">Averdi-analysen: Slik vinner du i 2026</h3>
+        {/* --- KORT ANALYSE --- */}
+        <div className="mb-16">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">Hva betyr dette i praksis?</h2>
+          <div className="bg-white border border-slate-200 rounded-xl p-6">
+            <p className="text-slate-600 text-sm mb-4">
+              <McpDataSpan id="sametinget-budsjett" source="Sametingets budsjettvedtak" value={788000000} format="currency" className="font-bold text-slate-900 bg-orange-50 px-2 py-0.5 rounded border-b-2 border-[#E86C1F]" /> skal fordeles på:
+            </p>
+            <ul className="space-y-2 mb-6">
+              {['Næring', 'Kultur', 'Språk', 'Opplæring', 'Institusjoner', 'Prosjekter'].map(area => (
+                <li key={area} className="flex items-center gap-3 text-slate-600 text-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#E86C1F] flex-shrink-0" />
+                  {area}
+                </li>
+              ))}
+            </ul>
+            <div className="border-l-4 border-[#E86C1F] pl-4 space-y-1.5">
+              <p className="text-slate-700 text-sm">Dette er ikke frie midler.</p>
+              <p className="text-slate-700 text-sm">Hver ordning har krav til budsjett, egenandel, dokumentasjon, og rapportering.</p>
+              <p className="text-slate-900 text-sm font-semibold">Det er her mange gjør feil.</p>
+            </div>
           </div>
-          <div className="flex flex-col md:flex-row">
-            
-            {/* Geografi-fellen */}
-            <div className="flex-1 p-8 border-b md:border-b-0 md:border-r border-slate-100">
-              <div className="flex items-center gap-3 mb-4 text-slate-900">
-                <AlertTriangle className="w-6 h-6 text-[#E86C1F]" aria-hidden="true" />
-                <h3 className="font-bold text-lg">Unngå Geografi-fellen</h3>
-              </div>
-              <p className="text-slate-600 mb-4 leading-relaxed">
-                Mange bedrifter taper penger fordi de blander <strong>Tiltakssonen</strong> (skatt) med <strong>STN-området</strong> (tilskudd).
-              </p>
-              <div className="bg-slate-50 p-4 rounded-lg text-sm border-l-4 border-[#E86C1F]">
-                <p className="font-bold text-slate-900 mb-1">Pekefingeren:</p>
-                <p className="text-slate-600">
-                  Du kan ha 0% arbeidsgiveravgift (Tiltakssonen) men null rett på investeringsstøtte (utenfor STN). Vi sjekker postnummeret ditt mot de nyeste kartene før du ber om hjelp til søknaden.
-                </p>
+        </div>
+
+        {/* --- TRE FORHOLD --- */}
+        <div className="mb-16">
+          <h2 className="text-2xl font-bold text-slate-900 mb-2">Tre forhold du må være oppmerksom på i budsjettet for 2026</h2>
+          <p className="text-slate-500 text-sm mb-8">Basert på Sametingets budsjettvedtak og gjeldende tilskuddsregelverk.</p>
+          <div className="space-y-4">
+
+            <div className="bg-white border border-slate-200 rounded-xl p-6">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-lg bg-[#E86C1F]/10 flex items-center justify-center flex-shrink-0">
+                  <FileText className="w-5 h-5 text-[#E86C1F]" aria-hidden="true" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-slate-900 mb-1">Krav til prosjektregnskap</h3>
+                  <p className="text-slate-600 text-sm leading-relaxed">
+                    Midlene forutsetter separat prosjektregnskap. Det holder ikke å føre alt samlet i ordinært regnskap.
+                  </p>
+                </div>
               </div>
             </div>
 
-            {/* Kapital-muligheten */}
-            <div className="flex-1 p-8">
-              <div className="flex items-center gap-3 mb-4 text-slate-900">
-                <Coins className="w-6 h-6 text-[#E86C1F]" aria-hidden="true" />
-                <h3 className="font-bold text-lg">Kapital-muligheten</h3>
-              </div>
-              <p className="text-slate-600 mb-4 leading-relaxed">
-                Sametinget tilbyr inntil 800 000 kr i tilskudd til variert næringsliv. Dette er egenkapital du ikke betaler tilbake.
-              </p>
-              <div className="grid grid-cols-2 gap-4 mt-6">
-                <div>
-                  <span className="text-xs text-slate-500 uppercase font-bold block">Maks Tilskudd</span>
-                  <McpDataSpan 
-                    id="sameting-variert-naering-maks" 
-                    source="Sametinget 2026"
-                    value={800000}
-                    format="currency" 
-                    className="font-bold text-2xl text-slate-900" 
-                  />
+            <div className="bg-white border border-slate-200 rounded-xl p-6">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-lg bg-[#E86C1F]/10 flex items-center justify-center flex-shrink-0">
+                  <Clock className="w-5 h-5 text-[#E86C1F]" aria-hidden="true" />
                 </div>
                 <div>
-                  <span className="text-xs text-slate-500 uppercase font-bold block">Risikoavlastning</span>
-                  <div className="flex items-center gap-1">
-                    <span className="font-bold text-2xl text-green-600">40-70%</span>
-                  </div>
-                  <span className="text-xs text-slate-400">Avhengig av næringstype</span>
+                  <h3 className="font-bold text-slate-900 mb-1">Rapportering og frister</h3>
+                  <p className="text-slate-600 text-sm leading-relaxed">
+                    Manglende rapportering kan føre til avkorting eller tilbakebetaling. Fristene gjelder uavhengig av om prosjektet er ferdigstilt.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white border border-slate-200 rounded-xl p-6">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-lg bg-[#E86C1F]/10 flex items-center justify-center flex-shrink-0">
+                  <CheckCircle className="w-5 h-5 text-[#E86C1F]" aria-hidden="true" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-slate-900 mb-1">Dokumentasjon av bruk</h3>
+                  <p className="text-slate-600 text-sm leading-relaxed">
+                    Kostnader må kunne dokumenteres og knyttes direkte til formålet. Generelle driftskostnader godkjennes ikke uten at de er spesifisert i vedtaket.
+                  </p>
                 </div>
               </div>
             </div>
@@ -236,111 +243,170 @@ export default function SametingetHub() {
           </div>
         </div>
 
-        {/* --- NYTT I 2026: SPRÅKSENTER ETABLERING --- */}
-        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6 mb-20 shadow-sm">
-          <div className="flex items-start gap-4">
-            <div className="p-3 bg-white rounded-xl text-blue-600 shadow-sm">
-              <Languages className="w-6 h-6" aria-hidden="true" />
+        {/* --- RISIKO --- */}
+        <div className="mb-16">
+          <div className="bg-white border border-slate-200 rounded-xl p-6">
+            <div className="flex items-start gap-3 mb-4">
+              <AlertTriangle className="w-5 h-5 text-slate-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
+              <h2 className="text-lg font-bold text-slate-900">Hva skjer hvis rapporteringen ikke er korrekt?</h2>
             </div>
-            <div className="flex-1">
+            <ul className="space-y-3">
+              <li className="flex items-start gap-3 text-slate-600 text-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-slate-400 flex-shrink-0 mt-1.5" />
+                Tilskuddet kan reduseres.
+              </li>
+              <li className="flex items-start gap-3 text-slate-600 text-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-slate-400 flex-shrink-0 mt-1.5" />
+                Midler kan kreves tilbakebetalt.
+              </li>
+              <li className="flex items-start gap-3 text-slate-600 text-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-slate-400 flex-shrink-0 mt-1.5" />
+                Fremtidige søknader kan bli svekket.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* --- VÅR ROLLE --- */}
+        <div className="mb-16">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">Slik jobber vi med samiske midler</h2>
+          <div className="space-y-3">
+            <p className="text-slate-700">Vi jobber med prosjektregnskap og tilskuddsordninger knyttet til samiske formål.</p>
+            <p className="text-slate-700">Vi setter opp struktur før søknad sendes.</p>
+            <p className="text-slate-700">Vi sørger for at rapporteringen stemmer med vedtaket.</p>
+          </div>
+        </div>
+
+        {/* --- FAGLIG PRESISERING --- */}
+        <div className="bg-slate-100 border border-slate-200 rounded-xl p-6 mb-16">
+          <h3 className="font-bold text-slate-900 mb-3">Sametingets budsjett er ikke det samme som samlet bevilgning</h3>
+          <p className="text-slate-600 text-sm leading-relaxed mb-2">
+            Sametinget forvalter <McpDataSpan id="sametinget-budsjett" source="Sametingets budsjettvedtak" value={788000000} format="currency" className="font-bold text-slate-900 bg-orange-50 px-2 py-0.5 rounded border-b-2 border-[#E86C1F]" />.
+            Totalt foreslås nesten 2 milliarder til samiske formål.
+          </p>
+          <p className="text-slate-600 text-sm leading-relaxed">
+            Forskjellen ligger i at midler også bevilges gjennom andre departement og ordninger utenfor Sametingets direkte forvaltning.
+          </p>
+        </div>
+
+        {/* --- NYTT I 2026: SPRÅKSENTER --- */}
+        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6 mb-16">
+          <div className="flex items-start gap-4">
+            <div className="p-3 bg-white rounded-xl text-blue-600 shadow-sm flex-shrink-0">
+              <Languages className="w-5 h-5" aria-hidden="true" />
+            </div>
+            <div>
               <div className="flex items-center gap-2 mb-2">
                 <Sparkles className="w-4 h-4 text-blue-500" aria-hidden="true" />
                 <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">Nytt i 2026</span>
               </div>
-              <h3 className="font-bold text-lg text-slate-900 mb-2">Etablering av nye språksentre</h3>
+              <h3 className="font-bold text-slate-900 mb-2">Etablering av nye språksentre</h3>
               <p className="text-slate-600 text-sm leading-relaxed mb-3">
                 Sametinget har satt av <strong className="text-blue-700">3,7 millioner kroner</strong> til etablering av nye samiske språksentre i 2026.
-                Dette er en unik mulighet for kommuner og organisasjoner som ønsker å styrke samisk språk lokalt.
+                Kommuner og organisasjoner som ønsker å styrke samisk språk lokalt kan søke om midler.
               </p>
               <Link
                 href="/kunnskapsbank/sametinget/kultur-sprak"
                 className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors"
               >
-                Les mer om språkstøtte →
+                Les om språkstøtte →
               </Link>
             </div>
           </div>
         </div>
 
-        {/* Navigation Grid */}
-        <h2 className="text-3xl font-bold text-slate-900 mb-8">Hva vil du bygge i dag?</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24">
-          
-          <LocalCategoryCard 
+        {/* --- NAVIGATION GRID --- */}
+        <h2 className="text-2xl font-bold text-slate-900 mb-6">Ordningene</h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+
+          <LocalCategoryCard
             title="Variert Næringsliv"
-            description="Gratis egenkapital. For deg som driver service, reiseliv eller småindustri i STN."
+            description="Støtte til service, reiseliv og småindustri i STN-området. Inntil 800 000 kr. Støttesats 40–70 %."
             href="/kunnskapsbank/sametinget/naering"
             icon={Briefcase}
-            theme="orange"
           />
 
-          <LocalCategoryCard 
-            title="Fiske & Primærnæring"
-            description="Skal du kjøpe din første båt? Vi sikrer at du får investeringsstøtten du har krav på."
+          <LocalCategoryCard
+            title="Fiske og primærnæring"
+            description="Investeringsstøtte til primærnæringer i STN-området. Krav til bosted i sonen og fartøy under 11 meter."
             href="/kunnskapsbank/sametinget/primaernaering"
             icon={Anchor}
-            theme="orange"
           />
 
-          <LocalCategoryCard 
-            title="Duodji & Håndverk"
-            description="Gjør tradisjon til levebrød. Vi hjelper med driftstilskudd og markedstilgang."
+          <LocalCategoryCard
+            title="Duodji og håndverk"
+            description="Driftstilskudd og markedsutvikling for duodji-utøvere. Krav til registrering i Sámi Duodji-merke."
             href="/kunnskapsbank/sametinget/duodji"
             icon={Scissors}
-            theme="orange"
           />
 
-          <LocalCategoryCard 
-            title="Kultur & Språk"
-            description="Finansiering av kulturprosjekter. Vi oversetter 'kulturell trygghet' til regnskapsspråk."
+          <LocalCategoryCard
+            title="Kultur og språk"
+            description="Kulturprosjekter, språktiltak og nye språksentre. 3,7 mill. kr satt av til språksentre i 2026. Nordisk Kulturfond: frister 13. feb og 4. sept."
             href="/kunnskapsbank/sametinget/kultur-sprak"
             icon={Scroll}
-            theme="orange"
-          />
-          
-          <LocalCategoryCard 
-            title="Institusjonsutvikling"
-            description="Forvalter du et samisk hus eller teater? Vi sikrer driftsgrunnlaget."
-            href="/kunnskapsbank/sametinget/institusjon"
-            icon={Landmark}
-            theme="orange"
           />
 
-          <LocalCategoryCard 
-            title="Offentlig Sektor"
-            description="Barnehage og skole: Slik henter dere midler til samisk språkopplæring."
+          <LocalCategoryCard
+            title="Institusjonsutvikling"
+            description="Driftstilskudd til samiske institusjoner. Prioritert over prosjekttilskudd i 2026. Krav til årsregnskap og aktivitetsrapport."
+            href="/kunnskapsbank/sametinget/institusjon"
+            icon={Landmark}
+          />
+
+          <LocalCategoryCard
+            title="Offentlig sektor"
+            description="Samisk språkopplæring i barnehage og skole. Divvun tildelt 13,9 mill. kr til digitale språkverktøy i 2026."
             href="/kunnskapsbank/sametinget/offentlig"
             icon={BookOpen}
-            theme="orange"
           />
 
         </div>
 
-        {/* FAQ Section */}
+        {/* --- FAQ --- */}
         <div className="max-w-3xl mx-auto mb-20">
-          <h2 className="text-2xl font-bold text-slate-900 mb-6 text-center">Spørsmål vi ofte løser</h2>
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">Spørsmål vi ofte løser</h2>
           <FaqAccordion items={sametingetFaq} themeColor="#E86C1F" />
         </div>
 
-        {/* --- KILDER & AUTORITET --- */}
-        <div className="border-t border-slate-200 pt-8 pb-4 mt-20">
+        {/* --- FAGLIG AVSLUTNING --- */}
+        <div className="border border-slate-200 rounded-xl p-8 mb-20 bg-white">
+          <h2 className="text-xl font-bold text-slate-900 mb-3">Jobber du med samiske midler?</h2>
+          <p className="text-slate-600 mb-2 leading-relaxed">
+            Da bør prosjektregnskapet settes opp riktig fra start.
+            Strukturen avgjør om rapporteringen blir enkel eller krevende.
+          </p>
+          <p className="text-slate-600 mb-6 leading-relaxed">
+            Kontakt oss hvis du vil gjennomgå oppsettet før søknad eller rapportering.
+          </p>
+          <Link
+            href="/#contact"
+            className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-[#E86C1F] to-[#F4B223] rounded-full hover:shadow-lg hover:shadow-[#E86C1F]/30 hover:-translate-y-0.5 transition-all duration-300"
+          >
+            Ta kontakt
+          </Link>
+        </div>
+
+        {/* --- KILDER --- */}
+        <div className="border-t border-slate-200 pt-8 pb-4">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-xs text-slate-500">
             <div className="flex items-start gap-3 max-w-2xl">
               <ShieldCheck className="w-5 h-5 text-slate-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
               <div>
-                <p className="font-semibold text-slate-700 mb-1">Averdi Kvalitetssikring</p>
+                <p className="font-semibold text-slate-700 mb-1">Kilder</p>
                 <p>
-                  Vi baserer våre råd på <strong>Sametingets budsjett 2026</strong> (vedtatt desember 2025) og <strong>Meld. St. 37 (2020–2021)</strong>. 
-                  Alle søknadsprosesser kvalitetssikres av statsautorisert regnskapsfører for å sikre at begreper som <em>Birgejupmi</em> (bærekraft) brukes riktig.
+                  Sametingets budsjett 2026 (vedtatt desember 2025).
+                  Meld. St. 37 (2020–2021).
+                  Sametingets tilskuddsregelverk.
                 </p>
               </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
               <a href="https://sametinget.no/stipend-og-tilskudd/oversikt-over-tilskuddsordninger/naring/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-[#E86C1F] transition-colors">
-                Sametinget Næring <span className="sr-only"> (åpnes i ny fane)</span><ExternalLink className="w-3 h-3" aria-hidden="true" />
+                Sametinget.no — Næring <span className="sr-only">(åpnes i ny fane)</span><ExternalLink className="w-3 h-3" aria-hidden="true" />
               </a>
               <a href="https://www.regjeringen.no/no/dokumenter/meld.-st.-37-20202021/id2861398/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-[#E86C1F] transition-colors">
-                Meld. St. 37 <span className="sr-only"> (åpnes i ny fane)</span><ExternalLink className="w-3 h-3" aria-hidden="true" />
+                Meld. St. 37 <span className="sr-only">(åpnes i ny fane)</span><ExternalLink className="w-3 h-3" aria-hidden="true" />
               </a>
             </div>
           </div>

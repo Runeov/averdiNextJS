@@ -1,59 +1,76 @@
-import { FileText, TrendingUp, AlertTriangle, ArrowRight } from 'lucide-react';
+import { FileText, TrendingUp, AlertTriangle, Shield, AlertCircle } from 'lucide-react';
 
 export function BudgetAnalysis() {
   return (
     <section className="my-16 bg-slate-900 text-white rounded-2xl overflow-hidden shadow-xl border border-slate-700">
       <div className="flex flex-col md:flex-row">
-        
-        {/* Venstre: Tittel & Intro */}
-        <div className="p-8 md:p-12 md:w-2/5 bg-slate-800 relative">
+
+        {/* Venstre */}
+        <div className="p-8 md:p-12 md:w-2/5 bg-slate-800 relative flex flex-col justify-between">
           <div className="absolute top-0 right-0 p-4 opacity-5">
             <FileText className="w-32 h-32 text-white" aria-hidden="true" />
           </div>
           <span className="inline-block px-3 py-1 bg-blue-500/20 text-blue-300 text-xs font-bold uppercase tracking-wider rounded-full mb-4 border border-blue-500/30">
             Averdi Innsikt
           </span>
-          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">
-            Statsbudsjettet 2026: Hva betyr det for deg?
-          </h2>
-          <p className="text-slate-300 leading-relaxed mb-6">
-            Vi har analysert Kapittel 560 i Statsbudsjettet og Sametingets budsjettvedtak. 
-            Her er de regnskapsmessige konsekvensene for din bedrift.
-          </p>
-          <div className="flex items-center gap-3 text-sm text-slate-400">
-            <div className="h-8 w-8 rounded-full bg-slate-700 flex items-center justify-center font-bold">AV</div>
+          <div className="flex items-center gap-3 text-sm text-slate-400 mt-auto">
+            <div className="h-8 w-8 rounded-full bg-slate-700 flex items-center justify-center font-bold text-white">AV</div>
             <span>Analysert av Averdi-teamet</span>
           </div>
         </div>
 
-        {/* Høyre: Nøkkelpunkter */}
+        {/* Høyre: 4 punkter */}
         <div className="p-8 md:p-12 md:w-3/5 bg-slate-900">
-          <div className="space-y-8">
-            
+          <div className="space-y-7">
+
             {/* Punkt 1 */}
             <div className="flex gap-4">
-              <div className="mt-1 bg-yellow-500/10 p-2 rounded-lg h-fit">
+              <div className="mt-1 bg-yellow-500/10 p-2 rounded-lg h-fit flex-shrink-0">
                 <AlertTriangle className="w-5 h-5 text-yellow-500" aria-hidden="true" />
               </div>
               <div>
-                <h3 className="font-bold text-lg text-white mb-1">Hardere konkurranse om midlene</h3>
+                <h3 className="font-bold text-base text-white mb-1">Variert næringsliv: taket er 800 000 kr</h3>
                 <p className="text-slate-400 text-sm leading-relaxed">
-                  Bevilgningen øker kun med 3,4% (prisjustering). Realveksten er null. 
-                  Dette betyr at Sametinget må prioritere hardere. Søknader som ikke treffer "Sannhets- og forsonings"-kriteriene vil bli avvist.
+                  Mange søker fremdeles om 500 000 kr. Sametinget hevet maksgrensen i 2025. Sjekk utlysningen før du setter søknadsbeløp.
                 </p>
               </div>
             </div>
 
             {/* Punkt 2 */}
             <div className="flex gap-4">
-              <div className="mt-1 bg-green-500/10 p-2 rounded-lg h-fit">
+              <div className="mt-1 bg-red-500/10 p-2 rounded-lg h-fit flex-shrink-0">
+                <Shield className="w-5 h-5 text-red-400" aria-hidden="true" />
+              </div>
+              <div>
+                <h3 className="font-bold text-base text-white mb-1">De minimis-grensen er en skjult risiko</h3>
+                <p className="text-slate-400 text-sm leading-relaxed">
+                  Alle offentlige tilskudd telles samlet — Sametinget, Innovasjon Norge, fylkeskommunen. Grensen er ca. 2,3 mill. kr over tre år. Overskrides den, kan midler kreves tilbake.
+                </p>
+              </div>
+            </div>
+
+            {/* Punkt 3 */}
+            <div className="flex gap-4">
+              <div className="mt-1 bg-orange-500/10 p-2 rounded-lg h-fit flex-shrink-0">
+                <AlertCircle className="w-5 h-5 text-orange-400" aria-hidden="true" />
+              </div>
+              <div>
+                <h3 className="font-bold text-base text-white mb-1">Doarjja avviser før noen har lest søknaden</h3>
+                <p className="text-slate-400 text-sm leading-relaxed">
+                  Utdatert styreregistrering i Enhetsregisteret blokkerer innsending — uavhengig av søknadens kvalitet. Vi sjekker dette før vi sender.
+                </p>
+              </div>
+            </div>
+
+            {/* Punkt 4 */}
+            <div className="flex gap-4">
+              <div className="mt-1 bg-green-500/10 p-2 rounded-lg h-fit flex-shrink-0">
                 <TrendingUp className="w-5 h-5 text-green-500" aria-hidden="true" />
               </div>
               <div>
-                <h3 className="font-bold text-lg text-white mb-1">Januar-vinduet er kritisk</h3>
+                <h3 className="font-bold text-base text-white mb-1">Midler kan gå tomme før fristen</h3>
                 <p className="text-slate-400 text-sm leading-relaxed">
-                  Søknadsportalen er stengt frem til 1. januar. Vår anbefaling: Bruk desember til å ferdigstille budsjett og prosjektbeskrivelse. 
-                  Send søknaden første arbeidsdag i 2026 for å sikre behandling av "friske midler".
+                  Mange ordninger har løpende behandling. Det betyr at potten kan være tom lenge før søknadsfristen. Vi anbefaler å søke så tidlig på året som mulig.
                 </p>
               </div>
             </div>

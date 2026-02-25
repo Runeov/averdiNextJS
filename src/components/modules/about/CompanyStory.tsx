@@ -30,7 +30,7 @@ export default function CompanyStory() {
                 <div className="text-sm font-bold text-[#E86C1F] mb-2">1989</div>
                 <h3 className="text-xl font-bold text-slate-900 mb-3">Behovet var lokalt og konkret</h3>
                 <p className="text-slate-600 leading-relaxed">
-                  Ingvald startet Laitis Regnskapskontor i 1989. Han hadde jobbet i bank etter endt utdanning og så at mange bedrifter manglet tett økonomisk oppfølging. Banken kunne gi lån, men bedriftene trengte noen som fulgte tallene hver måned. Målet var enkelt: gi lokale bedrifter kontroll på økonomien. Flere av kundene fra 1989 er fortsatt kunder i dag.
+                  Ingvald startet Laitis Regnskapskontor i 1989. Han hadde jobbet i bank etter endt utdanning og så at mange bedrifter manglet tett økonomisk oppfølging. Banken kunne gi lån, men bedriftene trengte noen som fulgte tallene hver måned. Målet var enkelt: gi lokale bedrifter kontroll på økonomien. Vi har samarbeidet med lokale bedrifter siden 90-tallet.
                 </p>
               </div>
             </div>
