@@ -6,7 +6,7 @@ import {
   LayoutDashboard, 
   Users, 
   FileText, 
-  Settings,
+  BookOpen,
   ChevronRight,
   Plus
 } from 'lucide-react';
@@ -42,6 +42,11 @@ const navItems: NavItem[] = [
       { label: 'Alle artikler', href: '/admin/articles' },
       { label: 'Ny artikkel', href: '/admin/articles/new' },
     ],
+  },
+  {
+    label: 'Kunnskapsbank',
+    href: '/admin/kunnskapsbank',
+    icon: <BookOpen className="w-5 h-5" />,
   },
 ];
 

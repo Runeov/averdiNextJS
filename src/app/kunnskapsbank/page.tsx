@@ -3,6 +3,10 @@ import Link from 'next/link';
 import { Landmark, Building2, Users, ArrowRight, HelpCircle } from 'lucide-react';
 import { AverdiBackground } from '@/components/modules/AverdiBackground';
 import { FaqAccordion } from '@/components/ui/FaqAccordion'; // Ny import
+import { getAllKunnskapsbankSectionsSorted } from '@/lib/admin/kunnskapsbank';
+
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Kunnskapsbank for Nord-Norge | Sametinget, Tiltakssonen & Idrettslag | Averdi',
   description: 'Din guide til næringsliv og frivillighet i Finnmark og Nord-Troms. Spesialist på Sametinget støtteordninger, 0% AGA i Tiltakssonen og regnskap for idrettslag.',
@@ -19,7 +23,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function KunnskapsbankPage() {
+export default async function KunnskapsbankPage() {
   
   // Data for både JSON-LD (skjult) og FAQ-visning (synlig)
   const faqData = [
@@ -38,6 +42,11 @@ export default function KunnskapsbankPage() {
   ];
 
   // Generer Schema basert på dataene over
+  const sections = await getAllKunnskapsbankSectionsSorted();
+  const publishedSections = new Set(
+    sections.filter((section) => section.isPublished).map((section) => section.id)
+  );
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -94,6 +103,7 @@ export default function KunnskapsbankPage() {
         <div className="grid md:grid-cols-3 gap-6">
           
           {/* 1. SAMETINGET */}
+          {publishedSections.has('sametinget') && (
           <Link href="/kunnskapsbank/sametinget" aria-label="Sametinget støtteordninger — Les mer" className="group bg-white rounded-3xl p-8 shadow-sm border border-slate-200 hover:border-[#E86C1F]/50 transition-all hover:shadow-2xl hover:shadow-[#E86C1F]/10 relative overflow-hidden flex flex-col h-full">
             <div className="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center mb-6 text-[#E86C1F] group-hover:scale-110 transition-transform">
               <Landmark className="w-7 h-7" aria-hidden="true" />
@@ -106,8 +116,10 @@ export default function KunnskapsbankPage() {
               Se støtteordninger <ArrowRight className="w-4 h-4 ml-1" aria-hidden="true" />
             </span>
           </Link>
+          )}
 
           {/* 2. BEDRIFT */}
+          {publishedSections.has('bedrifter') && (
           <Link href="/kunnskapsbank/bedrifter" aria-label="Bedrift i Tiltakssonen — Les mer" className="group bg-white rounded-3xl p-8 shadow-sm border border-slate-200 hover:border-blue-400/50 transition-all hover:shadow-2xl hover:shadow-blue-500/10 relative overflow-hidden flex flex-col h-full">
             <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 text-blue-600 group-hover:scale-110 transition-transform">
               <Building2 className="w-7 h-7" aria-hidden="true" />
@@ -120,8 +132,10 @@ export default function KunnskapsbankPage() {
               Beregn besparelser <ArrowRight className="w-4 h-4 ml-1" aria-hidden="true" />
             </span>
           </Link>
+          )}
 
           {/* 3. ORGANISASJON */}
+          {publishedSections.has('organisasjoner') && (
           <Link href="/kunnskapsbank/organisasjoner" aria-label="Lag og foreninger — Les mer" className="group bg-white rounded-3xl p-8 shadow-sm border border-slate-200 hover:border-green-500/50 transition-all hover:shadow-2xl hover:shadow-green-500/10 relative overflow-hidden flex flex-col h-full">
             <div className="w-14 h-14 bg-green-50 rounded-2xl flex items-center justify-center mb-6 text-green-600 group-hover:scale-110 transition-transform">
               <Users className="w-7 h-7" aria-hidden="true" />
@@ -134,6 +148,13 @@ export default function KunnskapsbankPage() {
               Få kontroll på laget <ArrowRight className="w-4 h-4 ml-1" aria-hidden="true" />
             </span>
           </Link>
+          )}
+
+          {publishedSections.size === 0 && (
+            <div className="md:col-span-3 bg-white rounded-3xl p-8 border border-slate-200 text-center">
+              <p className="text-slate-600">Ingen kategorier er publisert akkurat nå.</p>
+            </div>
+          )}
 
         </div>
       </section>
@@ -159,3 +180,4 @@ export default function KunnskapsbankPage() {
     </main>
   );
 }
+

@@ -64,7 +64,7 @@ export default function ArtikkelOversikt() {
                 </Link>
                 
                 <p className="text-slate-600 text-lg mb-8 line-clamp-3">
-                  Det ligger over 788 millioner kroner i potten fra Sametinget alene — og de fleste bedrifter i nord vet ikke hvordan de henter dem. Vi har bygget averdi.no fra grunnen av som et verktøy som oversetter byråkrati til muligheter.
+                  Sametinget disponerer 788 millioner kroner i 2026. Mange bedrifter er i målgruppen uten å vite om dette. Vi har bygget averdi.no fra grunnen av som et verktøy som oversetter byråkrati til muligheter.
                 </p>
 
                 {/* --- CTA BUTTON --- */}

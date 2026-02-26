@@ -129,23 +129,20 @@ export default function SametingetHub() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-50 relative overflow-hidden font-sans">
-      <AverdiBackground />
+    <main className="min-h-screen font-sans">
 
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="relative z-10 container mx-auto px-4 py-12 max-w-4xl">
-
-        {/* Breadcrumb */}
-        <Link href="/kunnskapsbank" className="inline-flex items-center text-slate-500 hover:text-[#E86C1F] mb-8 font-medium transition-colors">
-          <ArrowLeft className="w-4 h-4 mr-2" aria-hidden="true" /> Tilbake til oversikt
-        </Link>
-
-        {/* --- HERO --- */}
-        <div className="mb-12">
+      {/* ── HERO — bg-slate-50 ── */}
+      <section className="bg-slate-50 relative overflow-hidden pt-12 pb-16">
+        <AverdiBackground />
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 max-w-4xl">
+          <Link href="/kunnskapsbank" className="inline-flex items-center text-slate-500 hover:text-[#E86C1F] mb-10 font-medium transition-colors">
+            <ArrowLeft className="w-4 h-4 mr-2" aria-hidden="true" /> Tilbake til oversikt
+          </Link>
           <span className="text-[#E86C1F] font-bold tracking-wider uppercase text-sm mb-3 block">
             Tolken av Nord-Norge
           </span>
@@ -153,48 +150,39 @@ export default function SametingetHub() {
             Sametinget setter rammene. <br className="hidden md:block" />
             <span className="text-[#E86C1F]">Vi finner mulighetene.</span>
           </h1>
-          <p className="text-xl text-slate-600 max-w-3xl leading-relaxed">
-            Sametinget har et budsjett på {' '}.
-            <McpDataSpan
-              id="sametinget-budsjett"
-              source="Sametingets budsjettvedtak"
-              value={788000000}
-              format="currency"
-              className="font-bold text-slate-900 bg-orange-50 px-2 py-0.5 rounded border-b-2 border-[#E86C1F]"
-            />{' '}
-           Pengene fordeles på ulike områder. Vi deler vår innsikt slik at din bedrift kan navigere dette enklere.
-          </p>
-        </div>
-
-        {/* --- BUDSJETTANALYSE --- */}
-        <BudgetAnalysis />
-
-        {/* --- KORT ANALYSE --- */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold text-slate-900 mb-6">Hva betyr dette i praksis?</h2>
-          <div className="bg-white border border-slate-200 rounded-xl p-6">
-            <p className="text-slate-600 text-sm mb-4">
-              <McpDataSpan id="sametinget-budsjett" source="Sametingets budsjettvedtak" value={788000000} format="currency" className="font-bold text-slate-900 bg-orange-50 px-2 py-0.5 rounded border-b-2 border-[#E86C1F]" /> skal fordeles på:
+          <div className="max-w-3xl space-y-4">
+            <p className="text-xl text-slate-600 leading-relaxed">
+              Sametinget forvalter et budsjett på{' '}
+              <McpDataSpan
+                id="sametinget-budsjett"
+                source="Sametingets budsjettvedtak"
+                value={788000000}
+                format="currency"
+                className="font-bold text-slate-900 bg-orange-50 px-2 py-0.5 rounded border-b-2 border-[#E86C1F]"
+              />.
+              Det er mer enn støtteordninger. Det er en investeringsmotor.
             </p>
-            <ul className="space-y-2 mb-6">
-              {['Næring', 'Kultur', 'Språk', 'Opplæring', 'Institusjoner', 'Prosjekter'].map(area => (
-                <li key={area} className="flex items-center gap-3 text-slate-600 text-sm">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#E86C1F] flex-shrink-0" />
-                  {area}
-                </li>
-              ))}
-            </ul>
-            <div className="border-l-4 border-[#E86C1F] pl-4 space-y-1.5">
-              <p className="text-slate-700 text-sm">Dette er ikke frie midler.</p>
-              <p className="text-slate-700 text-sm">Hver ordning har krav til budsjett, egenandel, dokumentasjon, og rapportering.</p>
-              <p className="text-slate-900 text-sm font-semibold">Det er her mange gjør feil.</p>
-            </div>
+            <p className="text-lg text-slate-600 leading-relaxed">
+              Når du forstår regelverket og bruker det riktig, kan midlene bidra til å bygge både kulturell trygghet og birgejupmi.
+            </p>
+            <p className="text-lg text-slate-700 font-medium">
+              Vi hjelper deg å gjøre regelverk om til reelle muligheter.
+            </p>
           </div>
         </div>
+      </section>
 
-        {/* --- TRE FORHOLD --- */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold text-slate-900 mb-2">Tre forhold du må være oppmerksom på i budsjettet for 2026</h2>
+      {/* ── AVERDI INNSIKT — bg-white ── */}
+      <section className="bg-white py-16">
+        <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
+          <BudgetAnalysis />
+        </div>
+      </section>
+
+      {/* ── TRE FORHOLD — bg-slate-50 ── */}
+      <section className="bg-slate-50 py-16">
+        <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
+          <h2 className="text-2xl font-bold text-slate-900 mb-2">Tre forhold du må være oppmerksom på</h2>
           <p className="text-slate-500 text-sm mb-8">Basert på Sametingets budsjettvedtak og gjeldende tilskuddsregelverk.</p>
           <div className="space-y-4">
 
@@ -242,15 +230,18 @@ export default function SametingetHub() {
 
           </div>
         </div>
+      </section>
 
-        {/* --- RISIKO --- */}
-        <div className="mb-16">
-          <div className="bg-white border border-slate-200 rounded-xl p-6">
+      {/* ── RISIKO + FAGLIG PRESISERING — bg-white ── */}
+      <section className="bg-white py-16">
+        <div className="container mx-auto px-4 sm:px-6 max-w-4xl space-y-6">
+
+          <div className="border border-slate-200 rounded-xl p-6">
             <div className="flex items-start gap-3 mb-4">
               <AlertTriangle className="w-5 h-5 text-slate-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
               <h2 className="text-lg font-bold text-slate-900">Hva skjer hvis rapporteringen ikke er korrekt?</h2>
             </div>
-            <ul className="space-y-3">
+            <ul className="space-y-3 mb-6">
               <li className="flex items-start gap-3 text-slate-600 text-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-slate-400 flex-shrink-0 mt-1.5" />
                 Tilskuddet kan reduseres.
@@ -264,155 +255,159 @@ export default function SametingetHub() {
                 Fremtidige søknader kan bli svekket.
               </li>
             </ul>
-          </div>
-        </div>
-
-        {/* --- VÅR ROLLE --- */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold text-slate-900 mb-6">Slik jobber vi med samiske midler</h2>
-          <div className="space-y-3">
-            <p className="text-slate-700">Vi jobber med prosjektregnskap og tilskuddsordninger knyttet til samiske formål.</p>
-            <p className="text-slate-700">Vi setter opp struktur før søknad sendes.</p>
-            <p className="text-slate-700">Vi sørger for at rapporteringen stemmer med vedtaket.</p>
-          </div>
-        </div>
-
-        {/* --- FAGLIG PRESISERING --- */}
-        <div className="bg-slate-100 border border-slate-200 rounded-xl p-6 mb-16">
-          <h3 className="font-bold text-slate-900 mb-3">Sametingets budsjett er ikke det samme som samlet bevilgning</h3>
-          <p className="text-slate-600 text-sm leading-relaxed mb-2">
-            Sametinget forvalter <McpDataSpan id="sametinget-budsjett" source="Sametingets budsjettvedtak" value={788000000} format="currency" className="font-bold text-slate-900 bg-orange-50 px-2 py-0.5 rounded border-b-2 border-[#E86C1F]" />.
-            Totalt foreslås nesten 2 milliarder til samiske formål.
-          </p>
-          <p className="text-slate-600 text-sm leading-relaxed">
-            Forskjellen ligger i at midler også bevilges gjennom andre departement og ordninger utenfor Sametingets direkte forvaltning.
-          </p>
-        </div>
-
-        {/* --- NYTT I 2026: SPRÅKSENTER --- */}
-        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6 mb-16">
-          <div className="flex items-start gap-4">
-            <div className="p-3 bg-white rounded-xl text-blue-600 shadow-sm flex-shrink-0">
-              <Languages className="w-5 h-5" aria-hidden="true" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <Sparkles className="w-4 h-4 text-blue-500" aria-hidden="true" />
-                <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">Nytt i 2026</span>
-              </div>
-              <h3 className="font-bold text-slate-900 mb-2">Etablering av nye språksentre</h3>
-              <p className="text-slate-600 text-sm leading-relaxed mb-3">
-                Sametinget har satt av <strong className="text-blue-700">3,7 millioner kroner</strong> til etablering av nye samiske språksentre i 2026.
-                Kommuner og organisasjoner som ønsker å styrke samisk språk lokalt kan søke om midler.
-              </p>
+            <div className="border-t border-slate-100 pt-5 flex flex-col sm:flex-row sm:items-center gap-4">
+              <p className="text-slate-600 text-sm flex-1">Vi setter opp strukturen riktig fra start. Book et møte før søknad sendes.</p>
               <Link
-                href="/kunnskapsbank/sametinget/kultur-sprak"
-                className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors"
+                href="/#contact"
+                className="inline-flex items-center justify-center px-5 py-2 text-sm font-medium text-white bg-gradient-to-r from-[#E86C1F] to-[#F4B223] rounded-full hover:shadow-lg hover:shadow-[#E86C1F]/30 hover:-translate-y-0.5 transition-all duration-300 whitespace-nowrap flex-shrink-0"
               >
-                Les om språkstøtte →
+                Book møte
               </Link>
             </div>
           </div>
-        </div>
 
-        {/* --- NAVIGATION GRID --- */}
-        <h2 className="text-2xl font-bold text-slate-900 mb-6">Ordningene</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
-
-          <LocalCategoryCard
-            title="Variert Næringsliv"
-            description="Støtte til service, reiseliv og småindustri i STN-området. Inntil 800 000 kr. Støttesats 40–70 %."
-            href="/kunnskapsbank/sametinget/naering"
-            icon={Briefcase}
-          />
-
-          <LocalCategoryCard
-            title="Fiske og primærnæring"
-            description="Investeringsstøtte til primærnæringer i STN-området. Krav til bosted i sonen og fartøy under 11 meter."
-            href="/kunnskapsbank/sametinget/primaernaering"
-            icon={Anchor}
-          />
-
-          <LocalCategoryCard
-            title="Duodji og håndverk"
-            description="Driftstilskudd og markedsutvikling for duodji-utøvere. Krav til registrering i Sámi Duodji-merke."
-            href="/kunnskapsbank/sametinget/duodji"
-            icon={Scissors}
-          />
-
-          <LocalCategoryCard
-            title="Kultur og språk"
-            description="Kulturprosjekter, språktiltak og nye språksentre. 3,7 mill. kr satt av til språksentre i 2026. Nordisk Kulturfond: frister 13. feb og 4. sept."
-            href="/kunnskapsbank/sametinget/kultur-sprak"
-            icon={Scroll}
-          />
-
-          <LocalCategoryCard
-            title="Institusjonsutvikling"
-            description="Driftstilskudd til samiske institusjoner. Prioritert over prosjekttilskudd i 2026. Krav til årsregnskap og aktivitetsrapport."
-            href="/kunnskapsbank/sametinget/institusjon"
-            icon={Landmark}
-          />
-
-          <LocalCategoryCard
-            title="Offentlig sektor"
-            description="Samisk språkopplæring i barnehage og skole. Divvun tildelt 13,9 mill. kr til digitale språkverktøy i 2026."
-            href="/kunnskapsbank/sametinget/offentlig"
-            icon={BookOpen}
-          />
 
         </div>
+      </section>
 
-        {/* --- FAQ --- */}
-        <div className="max-w-3xl mx-auto mb-20">
-          <h2 className="text-2xl font-bold text-slate-900 mb-6">Spørsmål vi ofte løser</h2>
-          <FaqAccordion items={sametingetFaq} themeColor="#E86C1F" />
-        </div>
-
-        {/* --- FAGLIG AVSLUTNING --- */}
-        <div className="border border-slate-200 rounded-xl p-8 mb-20 bg-white">
-          <h2 className="text-xl font-bold text-slate-900 mb-3">Jobber du med samiske midler?</h2>
-          <p className="text-slate-600 mb-2 leading-relaxed">
-            Da bør prosjektregnskapet settes opp riktig fra start.
-            Strukturen avgjør om rapporteringen blir enkel eller krevende.
-          </p>
-          <p className="text-slate-600 mb-6 leading-relaxed">
-            Kontakt oss hvis du vil gjennomgå oppsettet før søknad eller rapportering.
-          </p>
-          <Link
-            href="/#contact"
-            className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-[#E86C1F] to-[#F4B223] rounded-full hover:shadow-lg hover:shadow-[#E86C1F]/30 hover:-translate-y-0.5 transition-all duration-300"
-          >
-            Ta kontakt
-          </Link>
-        </div>
-
-        {/* --- KILDER --- */}
-        <div className="border-t border-slate-200 pt-8 pb-4">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-xs text-slate-500">
-            <div className="flex items-start gap-3 max-w-2xl">
-              <ShieldCheck className="w-5 h-5 text-slate-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
-              <div>
-                <p className="font-semibold text-slate-700 mb-1">Kilder</p>
-                <p>
-                  Sametingets budsjett 2026 (vedtatt desember 2025).
-                  Meld. St. 37 (2020–2021).
-                  Sametingets tilskuddsregelverk.
-                </p>
+      {/* ── NYTT I 2026 — bg-slate-50 ── */}
+      <section className="bg-slate-50 py-16">
+        <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6">
+            <div className="flex items-start gap-4">
+              <div className="p-3 bg-white rounded-xl text-blue-600 shadow-sm flex-shrink-0">
+                <Languages className="w-5 h-5" aria-hidden="true" />
               </div>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a href="https://sametinget.no/stipend-og-tilskudd/oversikt-over-tilskuddsordninger/naring/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-[#E86C1F] transition-colors">
-                Sametinget.no — Næring <span className="sr-only">(åpnes i ny fane)</span><ExternalLink className="w-3 h-3" aria-hidden="true" />
-              </a>
-              <a href="https://www.regjeringen.no/no/dokumenter/meld.-st.-37-20202021/id2861398/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-[#E86C1F] transition-colors">
-                Meld. St. 37 <span className="sr-only">(åpnes i ny fane)</span><ExternalLink className="w-3 h-3" aria-hidden="true" />
-              </a>
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <Sparkles className="w-4 h-4 text-blue-500" aria-hidden="true" />
+                  <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">Nytt i 2026</span>
+                </div>
+                <h3 className="font-bold text-slate-900 mb-2">Etablering av nye språksentre</h3>
+                <p className="text-slate-600 text-sm leading-relaxed mb-3">
+                  Sametinget har satt av <strong className="text-blue-700">3,7 millioner kroner</strong> til etablering av nye samiske språksentre i 2026.
+                  Kommuner og organisasjoner som ønsker å styrke samisk språk lokalt kan søke om midler.
+                </p>
+                <Link
+                  href="/kunnskapsbank/sametinget/kultur-sprak"
+                  className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors"
+                >
+                  Les om språkstøtte →
+                </Link>
+              </div>
             </div>
           </div>
         </div>
+      </section>
 
-      </div>
+      {/* ── ORDNINGENE — bg-white ── */}
+      <section className="bg-white py-16">
+        <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">Utvalgte ordninger</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <LocalCategoryCard
+              title="Variert Næringsliv"
+              description="Støtte til service, reiseliv og småindustri i STN-området. Inntil 800 000 kr. Støttesats 40–70 %."
+              href="/kunnskapsbank/sametinget/naering"
+              icon={Briefcase}
+            />
+
+            <LocalCategoryCard
+              title="Fiske og primærnæring"
+              description="Investeringsstøtte til primærnæringer i STN-området. Krav til bosted i sonen og fartøy under 11 meter."
+              href="/kunnskapsbank/sametinget/primaernaering"
+              icon={Anchor}
+            />
+
+            <LocalCategoryCard
+              title="Duodji og håndverk"
+              description="Driftstilskudd og markedsutvikling for duodji-utøvere. Krav til registrering i Sámi Duodji-merke."
+              href="/kunnskapsbank/sametinget/duodji"
+              icon={Scissors}
+            />
+
+            <LocalCategoryCard
+              title="Kultur og språk"
+              description="Kulturprosjekter, språktiltak og nye språksentre. 3,7 mill. kr satt av til språksentre i 2026. Nordisk Kulturfond: frister 13. feb og 4. sept."
+              href="/kunnskapsbank/sametinget/kultur-sprak"
+              icon={Scroll}
+            />
+
+            <LocalCategoryCard
+              title="Institusjonsutvikling"
+              description="Driftstilskudd til samiske institusjoner. Prioritert over prosjekttilskudd i 2026. Krav til årsregnskap og aktivitetsrapport."
+              href="/kunnskapsbank/sametinget/institusjon"
+              icon={Landmark}
+            />
+
+            <LocalCategoryCard
+              title="Offentlig sektor"
+              description="Samisk språkopplæring i barnehage og skole. Divvun tildelt 13,9 mill. kr til digitale språkverktøy i 2026."
+              href="/kunnskapsbank/sametinget/offentlig"
+              icon={BookOpen}
+            />
+
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ — bg-slate-50 ── */}
+      <section className="bg-slate-50 py-16">
+        <div className="container mx-auto px-4 sm:px-6 max-w-3xl">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">Spørsmål vi ofte løser</h2>
+          <FaqAccordion items={sametingetFaq} themeColor="#E86C1F" />
+        </div>
+      </section>
+
+      {/* ── AVSLUTNING + KILDER — bg-white ── */}
+      <section className="bg-white py-16">
+        <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
+
+          <div className="border border-slate-200 rounded-xl p-8 mb-12">
+            <h2 className="text-xl font-bold text-slate-900 mb-3">Jobber du med samiske midler?</h2>
+            <p className="text-slate-600 mb-2 leading-relaxed">
+              Da bør prosjektregnskapet settes opp riktig fra start.
+              Strukturen avgjør om rapporteringen blir enkel eller krevende.
+            </p>
+            <p className="text-slate-600 mb-6 leading-relaxed">
+              Kontakt oss hvis du vil gjennomgå oppsettet før søknad eller rapportering.
+            </p>
+            <Link
+              href="/#contact"
+              className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-[#E86C1F] to-[#F4B223] rounded-full hover:shadow-lg hover:shadow-[#E86C1F]/30 hover:-translate-y-0.5 transition-all duration-300"
+            >
+              Ta kontakt
+            </Link>
+          </div>
+
+          <div className="border-t border-slate-200 pt-8 pb-4">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-xs text-slate-500">
+              <div className="flex items-start gap-3 max-w-2xl">
+                <ShieldCheck className="w-5 h-5 text-slate-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                <div>
+                  <p className="font-semibold text-slate-700 mb-1">Kilder</p>
+                  <p>
+                    Sametingets budsjett 2026 (vedtatt desember 2025).
+                    Meld. St. 37 (2020–2021).
+                    Sametingets tilskuddsregelverk.
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a href="https://sametinget.no/stipend-og-tilskudd/oversikt-over-tilskuddsordninger/naring/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-[#E86C1F] transition-colors">
+                  Sametinget.no — Næring <span className="sr-only">(åpnes i ny fane)</span><ExternalLink className="w-3 h-3" aria-hidden="true" />
+                </a>
+                <a href="https://www.regjeringen.no/no/dokumenter/meld.-st.-37-20202021/id2861398/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-[#E86C1F] transition-colors">
+                  Meld. St. 37 <span className="sr-only">(åpnes i ny fane)</span><ExternalLink className="w-3 h-3" aria-hidden="true" />
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
     </main>
   );
 }

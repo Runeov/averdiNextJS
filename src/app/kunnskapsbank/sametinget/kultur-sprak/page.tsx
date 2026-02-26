@@ -212,7 +212,7 @@ export default function KulturSprakPage() {
                 quote="Det hjelper ikke at musikken din er i verdensklasse hvis du mangler forlagsavtale ved midnatt. Sametinget sjekker formalia først. Er ikke papirene i orden, blir søknaden avvist uten at de hører på en eneste tone."
                 expert={janAtle}
             >
-                <p className="text-slate-700">
+                <p className="text-slate-900">
                 Vi fungerer som din <strong>kvalitetskontroll</strong>. Vi sjekker at budsjettet balanserer, at språkplanen holder mål, og at alle vedlegg er lastet opp. 
                 Slik sikrer vi at søknaden din faktisk blir realitetsbehandlet.
                 </p>
