@@ -29,6 +29,12 @@ export async function getUsers(): Promise<UsersData> {
       }
     }
 
+    // Override initial-admin password hash from environment variable if set
+    const envHash = process.env.ADMIN_PASSWORD_HASH;
+    if (envHash && validated['initial-admin']) {
+      validated['initial-admin'] = { ...validated['initial-admin'], passwordHash: envHash };
+    }
+
     return validated;
   } catch (error) {
     console.error('Error reading users:', error);
