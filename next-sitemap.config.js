@@ -1,6 +1,35 @@
+function resolveSiteUrl() {
+  const fallback = 'https://averdi-next-js-git-main-pro-design.vercel.app';
+  const candidates = [
+    process.env.SITE_URL,
+    process.env.NEXT_PUBLIC_SITE_URL,
+    process.env.VERCEL_PROJECT_PRODUCTION_URL,
+    process.env.VERCEL_URL,
+  ];
+
+  for (const value of candidates) {
+    if (!value) continue;
+    const trimmed = value.trim();
+    if (!trimmed) continue;
+    const withProtocol = /^https?:\/\//i.test(trimmed)
+      ? trimmed
+      : `https://${trimmed}`;
+    try {
+      const url = new URL(withProtocol);
+      url.hash = '';
+      url.search = '';
+      return url.toString().replace(/\/$/, '');
+    } catch {
+      // Try next candidate
+    }
+  }
+
+  return fallback;
+}
+
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.SITE_URL || 'https://www.averdi.no',
+  siteUrl: resolveSiteUrl(),
   generateRobotsTxt: true,
   generateIndexSitemap: false,
   changefreq: 'weekly',

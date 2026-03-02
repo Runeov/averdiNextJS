@@ -4,14 +4,16 @@ import Services from '@/components/modules/home/Services';
 import SalesPitch from '@/components/modules/home/SalesPitch';
 import KunnskapsbankTeaser from '@/components/modules/home/KunnskapsbankTeaser';
 import ContactPanel from '@/components/modules/home/ContactPanel';
+import { getSiteUrl } from '@/lib/site-url';
 
 export default function HomePage() {
+  const siteUrl = getSiteUrl();
   
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'AccountingService',
     'name': 'Averdi AS',
-    'image': 'https://averdi.no/logo_averdi.png',
+    'image': `${siteUrl}/logo_averdi.png`,
     'description': 'Statsautorisert regnskapsførerselskap spesialisert på nordnorsk næringsliv, tiltakssonen og samiske organisasjoner. Regnskap for småbedrifter, lag og foreninger i Finnmark og Nord-Troms.',
     'slogan': 'Tolken av Nord-Norge',
     'foundingDate': '1989',
@@ -27,7 +29,7 @@ export default function HomePage() {
       'latitude': '69.4719',
       'longitude': '25.5114'
     },
-    'url': 'https://www.averdi.no',
+    'url': siteUrl,
     'telephone': '+47 78 46 61 16',
     'priceRange': '$$',
     'areaServed': [

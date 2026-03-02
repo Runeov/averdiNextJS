@@ -3,11 +3,13 @@ import { Inter } from 'next/font/google';
 import '../index.css';
 import { cn } from '@/lib/utils';
 import { RootLayoutContent } from '@/components/layout/RootLayoutContent';
+import { getSiteUrl } from '@/lib/site-url';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.averdi.no'),
+  metadataBase: new URL(siteUrl),
   title: {
     template: '%s | Averdi',
     default: 'Averdi - Statsautorisert regnskapsførerselskap i Nord-Norge',
@@ -21,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'nb_NO',
-    url: 'https://www.averdi.no',
+    url: siteUrl,
     siteName: 'Averdi - Tolken av Nord-Norge',
   },
   twitter: {

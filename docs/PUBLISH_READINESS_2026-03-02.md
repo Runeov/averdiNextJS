@@ -42,3 +42,9 @@ Recommended soon after publishing:
 1. Reduce lint warning count.
 2. Align legacy docs with current auth architecture.
 3. Add smoke tests for admin login and CRUD endpoints.
+
+## Temporary Domain Mode (Vercel)
+- If `averdi.no` is not yet available in this Vercel project, set:
+  - `SITE_URL=https://averdi-next-js-git-main-pro-design.vercel.app`
+  - `NEXT_PUBLIC_SITE_URL=https://averdi-next-js-git-main-pro-design.vercel.app`
+- Deploy on Vercel subdomain first, then switch both values to `https://www.averdi.no` when DNS/cutover is ready.

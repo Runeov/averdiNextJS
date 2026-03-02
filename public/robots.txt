@@ -6,7 +6,7 @@ Disallow: /api/
 Disallow: /admin/
 
 # Host
-Host: https://www.averdi.no
+Host: https://averdi-next-js-git-main-pro-design.vercel.app
 
 # Sitemaps
-Sitemap: https://www.averdi.no/sitemap.xml
+Sitemap: https://averdi-next-js-git-main-pro-design.vercel.app/sitemap.xml

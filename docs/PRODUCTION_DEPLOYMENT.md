@@ -25,6 +25,10 @@ Optional:
 | `NEXT_PUBLIC_GA_MEASUREMENT_ID` | Google Analytics 4 |
 | `OPENAI_API_KEY` / `ANTHROPIC_API_KEY` | AI social post generation |
 
+Domain note:
+- If custom domain is not connected yet, set `SITE_URL` to your active Vercel domain (for example `https://averdi-next-js-git-main-pro-design.vercel.app`).
+- When `www.averdi.no` is ready, update `SITE_URL` and redeploy.
+
 ## Generate Secrets
 Generate `JWT_SECRET`:
 
