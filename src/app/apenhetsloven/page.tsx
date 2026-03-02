@@ -173,9 +173,6 @@ export default function ApenhetslovanPage() {
 
         {/* Footer nav */}
         <div className="flex flex-wrap gap-4 pt-4 border-t border-slate-100 text-sm">
-          <Link href="/baerekraft" className="text-[#E86C1F] hover:underline">
-            → Bærekraft og CSRD
-          </Link>
           <Link href="/tilgjengelighet" className="text-[#E86C1F] hover:underline">
             → Tilgjengelighetserklæring
           </Link>

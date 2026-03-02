@@ -15,7 +15,7 @@ Set these in the production environment:
 | `JWT_SECRET` | Yes | Minimum 32 chars, used for admin session JWT |
 | `SITE_URL` | Yes | Canonical URL for sitemap/metadata |
 | `ADMIN_PASSWORD_HASH` | Yes (current setup) | Bcrypt hash for `initial-admin` override |
-| `ADMIN_WRITE_ENABLED` | Optional | Production write toggle (`true` by default if unset) |
+| `ADMIN_WRITE_ENABLED` | Optional | Production write toggle (`false` by default if unset) |
 
 Optional:
 
@@ -47,9 +47,9 @@ node -e "const bcrypt=require('bcrypt'); bcrypt.hash('StrongPasswordHere',10).th
   - In this repository, `src/data/users.json` uses placeholder hash (`"$env$"`), so set `ADMIN_PASSWORD_HASH` in production
 
 ## Production Write Policy
-Production admin mutation APIs are write-enabled by default.
+Production admin mutation APIs are read-only by default.
 
-- In production (`NODE_ENV=production`), write endpoints are enabled unless `ADMIN_WRITE_ENABLED=false`.
+- In production (`NODE_ENV=production`), write endpoints are disabled unless `ADMIN_WRITE_ENABLED=true`.
 - For serverless hosts, runtime file writes may still be non-persistent.
 
 Recommended workflow for important content updates:
@@ -58,8 +58,8 @@ Recommended workflow for important content updates:
 3. Deploy/redeploy.
 
 Read-only lock mode (optional):
-- Set `ADMIN_WRITE_ENABLED=false` when you want to prevent dashboard writes.
-- Set it back to `true` (or remove it) to re-enable writes.
+- Keep `ADMIN_WRITE_ENABLED` unset or set it to `false` to prevent dashboard writes.
+- Set `ADMIN_WRITE_ENABLED=true` to re-enable writes.
 
 ## Deployment Checklist
 Pre-deploy:
@@ -98,8 +98,8 @@ Always keep `src/data` under version control:
 
 ## Troubleshooting
 ### "Admin skriveoperasjoner er deaktivert i produksjon"
-- Expected when `ADMIN_WRITE_ENABLED=false`.
-- Set `ADMIN_WRITE_ENABLED=true` (or remove the variable) and redeploy.
+- Expected when `ADMIN_WRITE_ENABLED` is unset or set to `false`.
+- Set `ADMIN_WRITE_ENABLED=true` and redeploy.
 
 ### Admin login fails
 - Check `JWT_SECRET`

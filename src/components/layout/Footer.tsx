@@ -118,7 +118,6 @@ export function Footer() {
           
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-medium text-slate-500">
             <Link href="/apenhetsloven" className="hover:text-[#E86C1F] transition-colors">Åpenhetsloven</Link>
-            <Link href="/baerekraft" className="hover:text-[#E86C1F] transition-colors">Bærekraft</Link>
             <Link href="/tilgjengelighet" className="hover:text-[#E86C1F] transition-colors">Tilgjengelighet</Link>
             <Link href="/personvern" className="hover:text-[#E86C1F] transition-colors">Personvern</Link>
             <span className="text-slate-400 cursor-not-allowed" title="Kommer snart">Cookies</span>

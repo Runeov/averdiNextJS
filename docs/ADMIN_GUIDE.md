@@ -17,7 +17,7 @@ This guide explains how to operate the admin panel, manage content, and safely r
 - `JWT_SECRET` (required in production)
 - `ADMIN_PASSWORD_HASH` (required in current setup for `initial-admin`)
 - `SITE_URL` (used by sitemap generation)
-- `ADMIN_WRITE_ENABLED` (production write toggle; default behavior is write-enabled)
+- `ADMIN_WRITE_ENABLED` (production write toggle; default behavior is read-only)
 - Optional:
   - `NEXT_PUBLIC_HOTJAR_ID`
   - `NEXT_PUBLIC_GA_MEASUREMENT_ID`
@@ -72,8 +72,8 @@ Backup policy:
 - Keep offsite repository backup enabled
 
 ## Production Write Mode
-- In `NODE_ENV=production`, mutation endpoints are enabled by default.
-- Set `ADMIN_WRITE_ENABLED=false` to force read-only mode.
+- In `NODE_ENV=production`, mutation endpoints are disabled by default.
+- Set `ADMIN_WRITE_ENABLED=true` to allow write mode.
 - On serverless infrastructure, runtime file writes can still be ephemeral/non-persistent.
 - Recommended safe workflow for important content:
   - edit content in repository (`src/data/*.json`) or local/dev admin
@@ -116,7 +116,7 @@ Then replace `passwordHash` for the target user in `src/data/users.json`, redepl
 - Move to persistent storage (database or managed KV/object store) for production CMS behavior
 
 ### API returns "Admin skriveoperasjoner er deaktivert i produksjon"
-- Expected when `NODE_ENV=production` and `ADMIN_WRITE_ENABLED=false`
+- Expected when `NODE_ENV=production` and `ADMIN_WRITE_ENABLED` is unset or `false`
 - Enable writes by setting `ADMIN_WRITE_ENABLED=true` and redeploy
 
 ## Pre-Publish Admin Checklist

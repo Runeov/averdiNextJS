@@ -144,9 +144,6 @@ export default function TilgjengelighetPage() {
           <Link href="/apenhetsloven" className="text-[#E86C1F] hover:underline">
             → Åpenhetsloven
           </Link>
-          <Link href="/baerekraft" className="text-[#E86C1F] hover:underline">
-            → Bærekraft
-          </Link>
           <Link href="/" className="text-slate-500 hover:underline ml-auto">
             ← Tilbake til forsiden
           </Link>

@@ -6,8 +6,8 @@ function isTrue(value: string | undefined): boolean {
 }
 
 /**
- * In production, writes are enabled unless explicitly disabled.
- * Set ADMIN_WRITE_ENABLED=false to force read-only mode.
+ * In production, writes are disabled unless explicitly enabled.
+ * Set ADMIN_WRITE_ENABLED=true to allow write operations.
  */
 export function isAdminWriteEnabled(): boolean {
   if (process.env.NODE_ENV !== 'production') {
@@ -16,9 +16,9 @@ export function isAdminWriteEnabled(): boolean {
 
   const configured = process.env.ADMIN_WRITE_ENABLED;
 
-  // Default to enabled when not configured
+  // Default to read-only in production when not configured
   if (!configured || configured.trim() === '') {
-    return true;
+    return false;
   }
 
   return isTrue(configured);
@@ -33,7 +33,7 @@ export function getAdminReadOnlyResponse(): NextResponse | null {
     {
       success: false,
       error:
-        'Admin skriveoperasjoner er deaktivert i produksjon (ADMIN_WRITE_ENABLED=false).',
+        'Admin skriveoperasjoner er deaktivert i produksjon (sett ADMIN_WRITE_ENABLED=true for å aktivere).',
     },
     { status: 403 }
   );
