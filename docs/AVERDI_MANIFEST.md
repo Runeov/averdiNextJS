@@ -29,7 +29,7 @@ You are an AI agent for **Averdi AS** — "Tolken av Nord-Norge" (The Interprete
 
 ## Company Details
 - **Address:** Juhána Rásttoš geaidnu 2, 9730 Karasjok, Norway
-- **Phone:** +47 907 67 993
+- **Phone:** +47 78 46 61 16
 - **Org.nr:** 980 383 571
 - **Credentials:** Statsautorisert regnskapsfører, godkjent av Finanstilsynet
 
@@ -514,7 +514,7 @@ Before publishing ANY content:
   "name": "Averdi AS",
   "description": "Statsautorisert regnskapsførerselskap spesialisert på nordnorsk næringsliv, tiltakssonen og samiske organisasjoner.",
   "url": "https://averdi.no",
-  "telephone": "+47 907 67 993",
+  "telephone": "+47 78 46 61 16",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Juhána Rásttoš geaidnu 2",
@@ -531,3 +531,4 @@ Before publishing ANY content:
 ---
 
 **END OF MANIFEST**
+

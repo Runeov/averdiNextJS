@@ -99,8 +99,8 @@ export function Footer() {
                   <p>9730 Karasjok</p>
                 </div>
                 <div className="pt-2">
-                  <a href="tel:+4790767993" className="text-[#E86C1F] font-medium hover:text-[#E86C1F]/80 transition-colors inline-flex items-center gap-2">
-                    <span>📞</span> +47 907 67 993
+                  <a href="tel:+4778466116" className="text-[#E86C1F] font-medium hover:text-[#E86C1F]/80 transition-colors inline-flex items-center gap-2">
+                    <span>📞</span> 78 46 61 16
                   </a>
                 </div>
               </div>

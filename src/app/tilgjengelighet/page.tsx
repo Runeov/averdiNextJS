@@ -105,13 +105,13 @@ export default function TilgjengelighetPage() {
               </div>
             </a>
             <a
-              href="tel:+4790767993"
+              href="tel:+4778466116"
               className="flex items-center gap-3 bg-white border border-blue-200 rounded-xl p-4 hover:border-[#E86C1F] transition-colors group"
             >
               <span className="text-2xl">📞</span>
               <div>
                 <p className="font-semibold text-slate-900 group-hover:text-[#E86C1F] transition-colors">Ring oss</p>
-                <p className="text-sm text-slate-500">+47 907 67 993</p>
+                <p className="text-sm text-slate-500">78 46 61 16</p>
               </div>
             </a>
           </div>

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getEmployee, updateEmployee, deleteEmployee } from '@/lib/admin/employees';
+import { getAdminReadOnlyResponse } from '@/lib/admin/write-access';
 
 interface RouteParams {
   params: Promise<{ id: string }>;
@@ -35,6 +36,11 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
  */
 export async function PUT(request: NextRequest, { params }: RouteParams) {
   try {
+    const readOnlyResponse = getAdminReadOnlyResponse();
+    if (readOnlyResponse) {
+      return readOnlyResponse;
+    }
+
     const { id } = await params;
     const body = await request.json();
     
@@ -62,6 +68,11 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
  */
 export async function DELETE(request: NextRequest, { params }: RouteParams) {
   try {
+    const readOnlyResponse = getAdminReadOnlyResponse();
+    if (readOnlyResponse) {
+      return readOnlyResponse;
+    }
+
     const { id } = await params;
     const success = await deleteEmployee(id);
     

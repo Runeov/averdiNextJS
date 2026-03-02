@@ -28,7 +28,7 @@ export default function HomePage() {
       'longitude': '25.5114'
     },
     'url': 'https://www.averdi.no',
-    'telephone': '+47 907 67 993',
+    'telephone': '+47 78 46 61 16',
     'priceRange': '$$',
     'areaServed': [
       { '@type': 'AdministrativeArea', 'name': 'Finnmark' },

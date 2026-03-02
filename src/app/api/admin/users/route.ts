@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAllUsersSafe, createUser, updateUser, deleteUser } from '@/lib/admin/users';
 import { getSessionFromRequest } from '@/lib/admin/auth';
+import { getAdminReadOnlyResponse } from '@/lib/admin/write-access';
 import { UserCreateSchema, UserUpdateSchema } from '@/lib/schemas/user.schema';
 import { ZodError } from 'zod';
 
@@ -51,6 +52,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const readOnlyResponse = getAdminReadOnlyResponse();
+    if (readOnlyResponse) {
+      return readOnlyResponse;
+    }
+
     const body = await request.json();
 
     // Validate input
@@ -97,6 +103,11 @@ export async function PUT(request: NextRequest) {
         { success: false, error: 'Ingen tilgang' },
         { status: 403 }
       );
+    }
+
+    const readOnlyResponse = getAdminReadOnlyResponse();
+    if (readOnlyResponse) {
+      return readOnlyResponse;
     }
 
     const body = await request.json();
@@ -160,6 +171,11 @@ export async function DELETE(request: NextRequest) {
         { success: false, error: 'Ingen tilgang' },
         { status: 403 }
       );
+    }
+
+    const readOnlyResponse = getAdminReadOnlyResponse();
+    if (readOnlyResponse) {
+      return readOnlyResponse;
     }
 
     const { searchParams } = new URL(request.url);

@@ -85,8 +85,8 @@ export default function ContactPanel() {
                     <div className="flex-1">
                       <p className="font-medium mb-1">Ring oss direkte</p>
                       <div className="flex items-center gap-2">
-                        <a href="tel:+4790767993" className="text-blue-600 hover:underline">+47 907 67 993</a>
-                        <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => copyToClipboard('+4790767993', 'Telefon')} aria-label="Kopier telefonnummer">
+                        <a href="tel:+4778466116" className="text-blue-600 hover:underline">78 46 61 16</a>
+                        <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => copyToClipboard('78 46 61 16', 'Telefon')} aria-label="Kopier telefonnummer">
                           <Copy className="h-3 w-3" aria-hidden="true" />
                         </Button>
                       </div>
@@ -131,14 +131,14 @@ export default function ContactPanel() {
             {/* Map */}
             <Card className="overflow-hidden shadow-xl border-slate-200">
                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1676.8622876657922!2d25.5092!3d69.4719!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNjnCsDI4JzE4LjgiTiAyNcKwMzAnNDEuMCJF!5e0!3m2!1sno!2sno!4v1620000000000!5m2!1sno!2sno"
+                  src="https://www.google.com/maps?q=Juh%C3%A1na%20R%C3%A1stto%C5%A1%20geaidnu%202%2C%209730%20Karasjok&output=embed"
                   width="100%"
                   height="250"
                   style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Averdi Karasjok Office Location"
+                  title="Averdi kontor, Juhána Rásttoš geaidnu 2"
                 />
             </Card>
           </div>

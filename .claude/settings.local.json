@@ -24,7 +24,10 @@
       "Bash(cd /c/dev/November_2025/averdiNextJS && npx tsc --noEmit 2>&1)",
       "Bash(ls:*)",
       "WebSearch",
-      "Bash(ping:*)"
+      "Bash(ping:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git:*)"
     ]
   }
 }

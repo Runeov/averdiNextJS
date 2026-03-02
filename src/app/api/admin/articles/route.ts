@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAllArticlesSorted, createArticle } from '@/lib/admin/articles';
+import { getAdminReadOnlyResponse } from '@/lib/admin/write-access';
 import type { ArticleFormData } from '@/types/admin';
 
 // GET /api/admin/articles - List all articles
@@ -19,6 +20,11 @@ export async function GET() {
 // POST /api/admin/articles - Create new article
 export async function POST(request: NextRequest) {
   try {
+    const readOnlyResponse = getAdminReadOnlyResponse();
+    if (readOnlyResponse) {
+      return readOnlyResponse;
+    }
+
     const body: ArticleFormData = await request.json();
     
     // Validate required fields

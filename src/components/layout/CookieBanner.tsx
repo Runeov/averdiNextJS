@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Hotjar } from '@/components/analytics/Hotjar';
+import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics';
 
 type ConsentValue = 'all' | 'necessary' | null;
 
@@ -39,7 +40,10 @@ export function CookieBanner() {
   return (
     <>
       {consent === 'all' && (
-        <Hotjar hjid={process.env.NEXT_PUBLIC_HOTJAR_ID || ''} />
+        <>
+          <Hotjar hjid={process.env.NEXT_PUBLIC_HOTJAR_ID || ''} />
+          <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || ''} />
+        </>
       )}
 
       {visible && (

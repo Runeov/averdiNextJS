@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getEmployees, getEmployee } from '@/lib/admin/employees';
+import { getEmployee } from '@/lib/admin/employees';
 import EmployeeProfileCard from '@/components/modules/about/EmployeeProfileCard';
 import { ArrowLeft, Users } from 'lucide-react';
 import Link from 'next/link';
@@ -9,13 +9,8 @@ interface PageProps {
   params: Promise<{ employee: string }>;
 }
 
-// Generate static params for all employees
-export async function generateStaticParams() {
-  const employees = await getEmployees();
-  return Object.keys(employees).map((id) => ({
-    employee: id,
-  }));
-}
+// Keep employee pages dynamic so admin updates are reflected without rebuild.
+export const dynamic = 'force-dynamic';
 
 // Generate metadata for each employee page
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

@@ -188,7 +188,7 @@ WHAT LLMs KNOW:
 ├── Type: AccountingService
 ├── Location: Karasjok (from JSON-LD)
 ├── Area: Finnmark, Troms, Nord-Norge (vague)
-├── Phone: +47 907 67 993
+├── Phone: +47 78 46 61 16
 └── Topics: Sametinget grants (strong signal from FAQ schemas)
 
 WHAT LLMs DON'T KNOW:
@@ -352,7 +352,7 @@ const jsonLd = {
   'image': 'https://averdi.no/logo_averdi.png',
   'description': 'Statsautorisert regnskapsførerselskap spesialisert på nordnorsk næringsliv, tiltakssonen og samiske organisasjoner.',
   'url': 'https://www.averdi.no',
-  'telephone': '+47 907 67 993',
+  'telephone': '+47 78 46 61 16',
   'slogan': 'Tolken av Nord-Norge',
   'foundingDate': '1989',
   'address': {
@@ -493,7 +493,7 @@ assistance for businesses, organizations, and Sami institutions in Northern Norw
 
 ## Contact
 - Address: Juhána Rásttoš geaidnu 2, 9730 Karasjok, Norway
-- Phone: +47 907 67 993
+- Phone: +47 78 46 61 16
 - Org.nr: 980 383 571
 
 ## Credentials
@@ -546,3 +546,4 @@ Despite the technical SEO gaps, the **content quality is exceptional**:
 **END OF SEO AUDIT REPORT**
 *Generated: February 2026*
 *Auditor: Kilo Code SEO Analysis*
+

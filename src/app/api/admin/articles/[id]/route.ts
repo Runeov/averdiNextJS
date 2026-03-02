@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getArticle, updateArticle, deleteArticle } from '@/lib/admin/articles';
+import { getAdminReadOnlyResponse } from '@/lib/admin/write-access';
 import type { ArticleFormData } from '@/types/admin';
 
 interface RouteParams {
@@ -32,6 +33,11 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 // PUT /api/admin/articles/[id] - Update article
 export async function PUT(request: NextRequest, { params }: RouteParams) {
   try {
+    const readOnlyResponse = getAdminReadOnlyResponse();
+    if (readOnlyResponse) {
+      return readOnlyResponse;
+    }
+
     const { id } = await params;
     const body: ArticleFormData = await request.json();
     
@@ -82,6 +88,11 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
 // DELETE /api/admin/articles/[id] - Delete article
 export async function DELETE(request: NextRequest, { params }: RouteParams) {
   try {
+    const readOnlyResponse = getAdminReadOnlyResponse();
+    if (readOnlyResponse) {
+      return readOnlyResponse;
+    }
+
     const { id } = await params;
     const success = await deleteArticle(id);
     

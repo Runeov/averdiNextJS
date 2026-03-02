@@ -159,11 +159,11 @@ export default function ApenhetslovanPage() {
               post@averdi.no
             </a>
             <a
-              href="tel:+4790767993"
+              href="tel:+4778466116"
               className="flex items-center gap-3 text-[#E86C1F] font-semibold hover:underline"
             >
               <span aria-hidden="true" className="text-xl">📞</span>
-              +47 907 67 993
+              78 46 61 16
             </a>
             <p className="text-sm text-slate-500 mt-2">
               Averdi AS, Juhána Rásttoš geaidnu 2, 9730 Karasjok

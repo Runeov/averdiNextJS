@@ -1,228 +1,111 @@
 # Production Deployment Guide
 
-**Project:** Averdi.no Admin System  
-**Repository:** https://github.com/Runeov/averdiNextJS  
-**Last Updated:** 2026-02-05
+Project: Averdi Next.js  
+Repository: https://github.com/Runeov/averdiNextJS  
+Last Updated: 2026-03-02
 
----
+## Deployment Target
+Current setup supports standard Next.js deployment on Vercel/Netlify.
 
-## 🚀 Quick Deploy to Vercel
+## Required Environment Variables
+Set these in the production environment:
 
-```bash
-# Install Vercel CLI if not installed
-npm i -g vercel
+| Variable | Required | Notes |
+| --- | --- | --- |
+| `JWT_SECRET` | Yes | Minimum 32 chars, used for admin session JWT |
+| `SITE_URL` | Yes | Canonical URL for sitemap/metadata |
+| `ADMIN_PASSWORD_HASH` | Yes (current setup) | Bcrypt hash for `initial-admin` override |
+| `ADMIN_WRITE_ENABLED` | Optional | Production write toggle (`true` by default if unset) |
 
-# Login to Vercel
-vercel login
+Optional:
 
-# Navigate to project
-cd C:\dev\November_2025\averdiNextJS
+| Variable | Purpose |
+| --- | --- |
+| `NEXT_PUBLIC_HOTJAR_ID` | Hotjar analytics |
+| `NEXT_PUBLIC_GA_MEASUREMENT_ID` | Google Analytics 4 |
+| `OPENAI_API_KEY` / `ANTHROPIC_API_KEY` | AI social post generation |
 
-# Link to existing project (first time only)
-vercel link
-
-# Deploy to production
-vercel --prod
-```
-
----
-
-## 🔧 Environment Variables (Vercel Dashboard)
-
-Go to **Vercel Dashboard** → **Project** → **Settings** → **Environment Variables**
-
-### Required for Production
-
-| Variable | Value | Environment |
-|----------|-------|-------------|
-| `SITE_URL` | `https://www.averdi.no` | Production |
-| `ADMIN_PASSWORD` | `[secure password]` | Production |
-| `JWT_SECRET` | `[32+ char random string]` | Production |
-
-### Optional
-
-| Variable | Value | Purpose |
-|----------|-------|---------|
-| `NEXT_PUBLIC_HOTJAR_ID` | `[Hotjar Site ID]` | User analytics |
-
-### Generating JWT_SECRET
+## Generate Secrets
+Generate `JWT_SECRET`:
 
 ```powershell
-# PowerShell
-$r = [byte[]]::new(32); [Security.Cryptography.RNGCryptoServiceProvider]::Create().GetBytes($r); [Convert]::ToBase64String($r)
-
-# Or use Node.js
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 ```
 
----
+Generate `ADMIN_PASSWORD_HASH`:
 
-## 🌐 DNS Configuration
+```powershell
+node -e "const bcrypt=require('bcrypt'); bcrypt.hash('StrongPasswordHere',10).then(h=>console.log(h))"
+```
 
-### If domain not already pointing to Vercel:
+## Admin Access
+- Login URL: `https://www.averdi.no/admin/login`
+- Default account id/email in data: `initial-admin` / `admin@averdi.no`
+- Password source:
+  - If `ADMIN_PASSWORD_HASH` is set, that hash is used for `initial-admin`
+  - Otherwise, hash from `src/data/users.json` is used
+  - In this repository, `src/data/users.json` uses placeholder hash (`"$env$"`), so set `ADMIN_PASSWORD_HASH` in production
 
-1. **Add domain in Vercel:**
-   - Dashboard → Settings → Domains
-   - Add: `averdi.no` and `www.averdi.no`
+## Production Write Policy
+Production admin mutation APIs are write-enabled by default.
 
-2. **Update DNS at registrar:**
-   ```
-   Type: CNAME
-   Name: www
-   Value: cname.vercel-dns.com
-   
-   Type: A
-   Name: @
-   Value: 76.76.21.21
-   ```
+- In production (`NODE_ENV=production`), write endpoints are enabled unless `ADMIN_WRITE_ENABLED=false`.
+- For serverless hosts, runtime file writes may still be non-persistent.
 
-3. **SSL:** Automatic via Vercel (let's Encrypt)
+Recommended workflow for important content updates:
+1. Update content in repo (`src/data/*.json`) or in local/dev environment.
+2. Commit and push.
+3. Deploy/redeploy.
 
----
+Read-only lock mode (optional):
+- Set `ADMIN_WRITE_ENABLED=false` when you want to prevent dashboard writes.
+- Set it back to `true` (or remove it) to re-enable writes.
 
-## 👤 Initial Admin Access
+## Deployment Checklist
+Pre-deploy:
+- [ ] `JWT_SECRET` configured
+- [ ] `SITE_URL` configured
+- [ ] `ADMIN_PASSWORD_HASH` configured
+- [ ] `ADMIN_WRITE_ENABLED` explicitly set (`true` for normal editing, `false` for lock mode)
+- [ ] Local quality checks pass:
+  - [ ] `npm run lint`
+  - [ ] `npx tsc --noEmit`
+  - [ ] `npm run build`
 
-| Field | Value |
-|-------|-------|
-| URL | `https://www.averdi.no/admin/login` |
-| Email | `admin@averdi.no` |
-| Password | `HildeErRoot1-_-` |
+Post-deploy:
+- [ ] Verify home page and key routes
+- [ ] Verify `https://www.averdi.no/sitemap.xml`
+- [ ] Verify admin login
+- [ ] Verify Google Analytics loaded after cookie consent (`Godta alle`)
+- [ ] Verify admin write attempts return expected read-only message (when lock is enabled)
+- [ ] Check deployment logs for API/runtime errors
 
-⚠️ **IMPORTANT:** Change password immediately after first login!
-
----
-
-## 📋 Deployment Checklist
-
-### Pre-Deployment
-- [ ] Environment variables configured in Vercel
-- [ ] Domain DNS configured
-- [ ] Build verified locally (`npm run build`)
-- [ ] No uncommitted production changes
-
-### Post-Deployment
-- [ ] Verify homepage loads: `https://www.averdi.no`
-- [ ] Verify sitemap: `https://www.averdi.no/sitemap.xml`
-- [ ] Test admin login: `https://www.averdi.no/admin/login`
-- [ ] Check browser console for errors
-- [ ] Verify all pages accessible
-- [ ] Test 2-3 employee profiles
-- [ ] Test 2-3 article pages
-
-### First Week
-- [ ] Monitor Vercel analytics
-- [ ] Check error logs daily
-- [ ] Performance check (Lighthouse)
-- [ ] User feedback collection
-
----
-
-## 🔄 Updating the Site
-
-### Method 1: Git Push (Recommended)
-
+## Update Workflow (Git + Redeploy)
 ```bash
-# Make changes to code
 git add .
-git commit -m "Description of changes"
+git commit -m "content: update employees/articles"
 git push origin main
 ```
 
-Vercel auto-deploys on push to `main`.
+Then verify deployed pages.
 
-### Method 2: Vercel CLI
-
-```bash
-# Deploy preview
-vercel
-
-# Deploy to production
-vercel --prod
-```
-
-### Method 3: Content Update (Admin Panel)
-
-1. Go to `/admin`
-2. Edit employees or articles
-3. Changes reflect immediately (JSON files update)
-
----
-
-## 🔒 Security Checklist
-
-### Immediately After Deployment
-- [ ] Change default admin password
-- [ ] Add strong JWT_SECRET
-- [ ] Verify HTTPS is working
-- [ ] Check no sensitive data in client bundles
-
-### Ongoing
-- [ ] Keep dependencies updated (`npm update`)
-- [ ] Review security advisories weekly
-- [ ] Monitor failed login attempts
-- [ ] Regular backups of `src/data/*.json`
-
----
-
-## 💾 Backup Strategy
-
-### Automated (Git)
-```bash
-# Commit data changes
-git add src/data/
-git commit -m "Update employees/articles"
-git push
-```
-
-### Manual Backup
-Copy these files regularly:
+## Backup Strategy
+Always keep `src/data` under version control:
+- `src/data/users.json`
 - `src/data/employees.json`
 - `src/data/articles.json`
-- `src/data/users.json`
+- `src/data/kunnskapsbank.json`
 
----
+## Troubleshooting
+### "Admin skriveoperasjoner er deaktivert i produksjon"
+- Expected when `ADMIN_WRITE_ENABLED=false`.
+- Set `ADMIN_WRITE_ENABLED=true` (or remove the variable) and redeploy.
 
-## 🚨 Troubleshooting
+### Admin login fails
+- Check `JWT_SECRET`
+- Check `ADMIN_PASSWORD_HASH` and `src/data/users.json`
+- Check function/runtime logs
 
-### Build Fails
-```bash
-# Clear cache and rebuild
-npm run clean
-npm run build
-```
-
-### Admin Login 500 Error
-- Check Vercel environment variables
-- Verify `ADMIN_PASSWORD` is set
-- Check Vercel function logs
-
-### Pages Not Loading
-- Check domain DNS propagation (can take 24-48 hours)
-- Verify SSL certificate (Vercel Dashboard)
-- Check Vercel deployment status
-
----
-
-## 📊 Monitoring
-
-### Vercel Dashboard
-- **Analytics:** Traffic, bandwidth, function invocations
-- **Function Logs:** API errors, runtime errors
-- **Performance:** Core Web Vitals
-
-### Recommended Tools
-- **Uptime Monitor:** UptimeRobot (free tier)
-- **Error Tracking:** Sentry.io (free tier)
-- **Analytics:** Hotjar (optional)
-
----
-
-## 📞 Support
-
-- **Vercel Support:** vercel.com/support
-- **Next.js Docs:** nextjs.org/docs
-- **Project Issues:** github.com/Runeov/averdiNextJS/issues
-
----
-
-*Document auto-generated for AverdiNextJS production deployment*
+### Content change not visible
+- Some pages are statically generated and require redeploy.
+- Confirm deployment completed and cache is updated.

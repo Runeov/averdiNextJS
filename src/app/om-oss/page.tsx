@@ -36,7 +36,7 @@ export default async function OmOssPage() {
         'postalCode': '9730',
         'addressCountry': 'NO'
       },
-      'telephone': '+47 907 67 993',
+      'telephone': '+47 78 46 61 16',
       'areaServed': ['Finnmark', 'Troms', 'Nord-Norge']
     }
   };

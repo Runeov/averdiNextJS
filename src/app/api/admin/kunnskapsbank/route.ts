@@ -4,6 +4,7 @@ import {
   updateKunnskapsbankSectionPublishStatus,
 } from '@/lib/admin/kunnskapsbank';
 import { KunnskapsbankSectionIdSchema } from '@/lib/schemas/kunnskapsbank.schema';
+import { getAdminReadOnlyResponse } from '@/lib/admin/write-access';
 
 interface UpdateKunnskapsbankBody {
   id?: string;
@@ -27,6 +28,11 @@ export async function GET() {
 // PATCH /api/admin/kunnskapsbank - Update section publish status
 export async function PATCH(request: NextRequest) {
   try {
+    const readOnlyResponse = getAdminReadOnlyResponse();
+    if (readOnlyResponse) {
+      return readOnlyResponse;
+    }
+
     const body: UpdateKunnskapsbankBody = await request.json();
     const parsedId = KunnskapsbankSectionIdSchema.safeParse(body.id);
 

@@ -560,7 +560,7 @@
                 </div>
                 <div class="flow-arrow">↓</div>
                 <div class="flow-row">
-                    <div class="flow-box secondary">4. API verifies against ADMIN_PASSWORD</div>
+                    <div class="flow-box secondary">4. API verifies credentials against users.json + bcrypt hash</div>
                 </div>
                 <div class="flow-arrow">↓</div>
                 <div class="flow-row">
@@ -570,7 +570,7 @@
         </div>
 
         <div class="highlight-box">
-            <p><strong>Security Note:</strong> The admin panel uses HTTP-only cookies with JWT tokens. Sessions expire after 24 hours. The password is stored in environment variables, never in code.</p>
+            <p><strong>Security Note:</strong> The admin panel uses HTTP-only cookies with JWT tokens. Sessions expire after 24 hours. Passwords are stored as bcrypt hashes (users.json), with optional hash override via environment variables.</p>
         </div>
     </section>
 
@@ -772,10 +772,14 @@ npm start</code></pre>
         <h3>Environment Variables</h3>
         <p>Create a <code>.env.local</code> file in the project root:</p>
         <pre><code># Required for admin panel
-ADMIN_PASSWORD=your-secure-password-here
+JWT_SECRET=your-secure-jwt-secret
+
+# Optional initial-admin password hash override
+ADMIN_PASSWORD_HASH=your-bcrypt-hash-here
 
 # Optional analytics
-NEXT_PUBLIC_HOTJAR_ID=your-hotjar-site-id</code></pre>
+NEXT_PUBLIC_HOTJAR_ID=your-hotjar-site-id
+NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX</code></pre>
     </section>
 
     <!-- Brand Colors -->

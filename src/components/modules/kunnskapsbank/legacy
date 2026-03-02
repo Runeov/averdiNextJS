@@ -886,7 +886,7 @@ Vipps Support: https://vippsmobilepay.com/support
 ${config.accountingSystem === 'poweroffice' ? 'PowerOffice Support: https://www.poweroffice.no/support' : '24SevenOffice Support: https://24sevenoffice.com/support'}
 ${partner ? `${partner.name}: ${partner.url || '[Contact via accounting software]'}` : ''}
 Averdi Accounting: support@averdi.no
-Phone: +47 907 67 993
+Phone: +47 78 46 61 16
 
 SECURITY NOTES
 --------------

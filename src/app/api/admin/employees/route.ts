@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAllEmployeesSorted, createEmployee } from '@/lib/admin/employees';
+import { getAdminReadOnlyResponse } from '@/lib/admin/write-access';
 
 /**
  * GET /api/admin/employees - List all employees
@@ -22,6 +23,11 @@ export async function GET() {
  */
 export async function POST(request: NextRequest) {
   try {
+    const readOnlyResponse = getAdminReadOnlyResponse();
+    if (readOnlyResponse) {
+      return readOnlyResponse;
+    }
+
     const body = await request.json();
     
     // Validate required fields
