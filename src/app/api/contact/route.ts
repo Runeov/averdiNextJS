@@ -1,13 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 const RECIPIENT_EMAIL = 'post@averdi.no';
 const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL || 'noreply@averdi.no';
 
 export async function POST(request: NextRequest) {
   try {
+    if (!process.env.RESEND_API_KEY) {
+      return NextResponse.json(
+        { error: 'E-posttjenesten er ikke konfigurert.' },
+        { status: 503 }
+      );
+    }
+
+    const resend = new Resend(process.env.RESEND_API_KEY);
     const body = await request.json();
     const { name, email, phone, company, message } = body;
 

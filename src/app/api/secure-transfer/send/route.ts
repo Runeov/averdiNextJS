@@ -2,13 +2,19 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { getSiteUrl } from '@/lib/site-url';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 const RECIPIENT_EMAIL = process.env.SECURE_TRANSFER_RECIPIENT || 'support@averdi.no';
 const FROM_EMAIL = process.env.SECURE_TRANSFER_FROM || 'sikker@averdi.no';
 
 export async function POST(request: NextRequest) {
   try {
+    if (!process.env.RESEND_API_KEY) {
+      return NextResponse.json(
+        { error: 'E-posttjenesten er ikke konfigurert.' },
+        { status: 503 }
+      );
+    }
+
+    const resend = new Resend(process.env.RESEND_API_KEY);
     const formData = await request.formData();
     const file = formData.get('file') as File | null;
     const senderName = formData.get('senderName') as string;
