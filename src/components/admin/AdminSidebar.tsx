@@ -2,11 +2,13 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { 
-  LayoutDashboard, 
-  Users, 
-  FileText, 
+import {
+  LayoutDashboard,
+  Users,
+  FileText,
   BookOpen,
+  Shield,
+  HelpCircle,
   ChevronRight,
   Plus
 } from 'lucide-react';
@@ -47,6 +49,16 @@ const navItems: NavItem[] = [
     label: 'Kunnskapsbank',
     href: '/admin/kunnskapsbank',
     icon: <BookOpen className="w-5 h-5" />,
+  },
+  {
+    label: 'Dekrypter',
+    href: '/admin/dekrypter',
+    icon: <Shield className="w-5 h-5" />,
+  },
+  {
+    label: 'Hjelp',
+    href: '/admin/hjelp',
+    icon: <HelpCircle className="w-5 h-5" />,
   },
 ];
 

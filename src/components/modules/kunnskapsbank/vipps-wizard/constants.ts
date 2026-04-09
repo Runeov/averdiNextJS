@@ -51,7 +51,8 @@ export const integrationPartners: IntegrationPartner[] = [
     description: 'Bank-independent middleware solution',
     features: ['Daily settlement import', 'Fee calculation', 'MVA handling', 'Multi-entity support'],
     pricing: '150-500 kr/month',
-    url: 'https://iizy.no'
+    url: 'https://iizy.no',
+    contactEmail: 'support@iizy.no',
   },
   {
     id: 'srh',
@@ -59,7 +60,8 @@ export const integrationPartners: IntegrationPartner[] = [
     description: 'Integrated solution for SpareBank 1 customers',
     features: ['Bank integration', 'Automated posting', 'Settlement reports'],
     pricing: 'Contact bank',
-    url: 'https://smnregnskap.no'
+    url: 'https://smnregnskap.no',
+    contactEmail: 'support@smnregnskap.no',
   },
   {
     id: 'emonkey',
@@ -67,7 +69,8 @@ export const integrationPartners: IntegrationPartner[] = [
     description: 'Middleware / integration partner for Vipps settlement import',
     features: ['Daily settlement import', 'Automated posting', 'Reconciliation support'],
     pricing: 'Contact Emonkey',
-    url: 'https://emonkey.no'
+    url: 'https://emonkey.no',
+    contactEmail: 'support@emonkey.no',
   },
   {
     id: 'direct',
@@ -75,7 +78,7 @@ export const integrationPartners: IntegrationPartner[] = [
     description: 'Build your own integration using APIs',
     features: ['Full control', 'Custom workflows', 'Requires development'],
     pricing: 'Developer time',
-    url: ''
+    url: '',
   }
 ];
 

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { ArrowRight, MessageSquare, TrendingUp, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import heroImage from '@/assets/Hero_aboutUS.png';
+import heroImage from '@/../public/averdi_omoss.png';
 
 export default function SalesPitch() {
   const router = useRouter();

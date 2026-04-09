@@ -162,17 +162,6 @@ export function VippsSetupWizard() {
     URL.revokeObjectURL(url);
   };
 
-  // Demo helper: store JSON in localStorage and open the example page.
-  const openExampleJson = () => {
-    const configData = buildConfigData(config);
-    const json = JSON.stringify(configData, null, 2);
-
-    localStorage.setItem('vippsWizardConfigJson', json);
-    localStorage.setItem('vippsWizardConfigJsonUpdatedAt', new Date().toISOString());
-
-    window.open('/kunnskapsbank/bedrifter/vipps-integrasjon/example-json', '_blank', 'noopener,noreferrer');
-  };
-
   const generateImplementationGuide = () => {
     const partner = integrationPartners.find(p => p.id === config.integrationPartner);
     const activeModules = modules.filter(m => config.modules.includes(m.id) || m.required);
@@ -240,7 +229,7 @@ Best regards`;
       component: (
         <CompleteStep
           config={config}
-          openExampleJson={openExampleJson}
+          configData={buildConfigData(config)}
           generateImplementationGuide={generateImplementationGuide}
           sendToAverdi={sendToAverdi}
         />

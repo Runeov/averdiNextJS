@@ -61,7 +61,7 @@ export default async function OmOssPage() {
             Book et møte. Du får en konkret vurdering av hvordan vi kan forbedre regnskapet ditt.
           </p>
           <a
-            href="/#contact"
+            href="#contact"
             className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-[#E86C1F] to-[#F4B223] rounded-full hover:shadow-lg hover:shadow-[#E86C1F]/30 hover:-translate-y-0.5 transition-all duration-300"
           >
             Bestill møte

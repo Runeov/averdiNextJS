@@ -103,9 +103,10 @@ export default function OffentligPage() {
                   <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-1">Studiepermisjon (Lærere)</span>
                   <div className="flex items-center gap-2">
                     <McpDataSpan 
-                      id="frist-studiepermisjon-2026-v2" 
-                      value="01.04.2026" 
+                      id="frist-studiepermisjon-2026-v2"
+                      value="01.04.2026"
                       source="Statsforvalteren"
+                      deadline="2026-04-01"
                       className="font-bold text-xl text-slate-900" 
                     />
                   </div>
@@ -117,9 +118,10 @@ export default function OffentligPage() {
                   <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-1">Barnehagetilskudd</span>
                   <div className="flex items-center gap-2">
                     <McpDataSpan 
-                      id="frist-barnehage-2026-v2" 
-                      value="01.09.2026" 
+                      id="frist-barnehage-2026-v2"
+                      value="01.09.2026"
                       source="Sametinget"
+                      deadline="2026-09-01"
                       className="font-bold text-xl text-slate-900" 
                     />
                   </div>
@@ -277,7 +279,7 @@ export default function OffentligPage() {
             title="Trenger kommunen hjelp?"
             description="Averdi avlaster oppvekstetaten. Vi sikrer at søknader sendes rett, frister holdes, og at refusjonskravet er dokumentert slik revisor krever."
             primaryButtonText="Kontakt oss"
-            primaryButtonLink="/kontakt"
+            primaryButtonLink="/#contact"
             secondaryButtonText="Se kulturstøtte"
             secondaryButtonLink="/kunnskapsbank/sametinget/kultur-sprak"
           />

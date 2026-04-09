@@ -303,7 +303,7 @@ export default function DuodjiPage() {
             title="Vil du leve av hendene dine?"
             description="Vi hjelper deg med søknad om opptak i Duodjiregisteret og setter opp et regnskapssystem som håndterer momsfritaket automatisk."
             primaryButtonText="Få hjelp med regnskapet"
-            primaryButtonLink="/kontakt"
+            primaryButtonLink="/#contact"
             secondaryButtonText="Se annen næringsstøtte"
             secondaryButtonLink="/kunnskapsbank/sametinget/naering"
             />

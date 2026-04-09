@@ -103,9 +103,10 @@ export default function InstitusjonPage() {
                   <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-1">Innsending</span>
                   <div className="flex items-center gap-2">
                     <McpDataSpan 
-                      id="sameting-frist-institusjon-hero-v2" 
-                      value="01.03.2026" 
+                      id="sameting-frist-institusjon-hero-v2"
+                      value="01.03.2026"
                       source="Sametinget"
+                      deadline="2026-03-01"
                       className="font-bold text-2xl text-slate-900" 
                     />
                   </div>
@@ -254,7 +255,7 @@ export default function InstitusjonPage() {
             title="Trenger styret avlastning?"
             description="La Averdi fungere som deres økonomiavdeling. Vi kjenner reglene, dere kjenner kulturen. Sammen skaper vi resultater."
             primaryButtonText="Kontakt Jan-Atle"
-            primaryButtonLink="/kontakt"
+            primaryButtonLink="/#contact"
             secondaryButtonText="Se Næringsstøtte"
             secondaryButtonLink="/kunnskapsbank/sametinget/naering"
           />

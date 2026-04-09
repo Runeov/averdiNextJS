@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prosjektrapport - Averdi.no 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+    :root {
+      --brand-orange: #E86C1F;
+      --brand-yellow: #F4B223;
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --bg-page: #ffffff;
+      --bg-card: #f8fafc;
+      --bg-highlight: #fff7ed;
+      --border: #e2e8f0;
+      --border-accent: #fed7aa;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    @page {
+      size: A4;
+      margin: 20mm 18mm 25mm 18mm;
+    }
+
+    @media print {
+      body { font-size: 9.5pt; }
+      .page-break { page-break-before: always; }
+      .no-break { page-break-inside: avoid; }
+      .cover-page { height: 100vh; }
+      h2 { page-break-after: avoid; }
+      table { page-break-inside: avoid; }
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-primary);
+      line-height: 1.6;
+      background: var(--bg-page);
+      max-width: 210mm;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Cover Page */
+    .cover-page {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      position: relative;
+      padding: 60px 40px;
+    }
+
+    .cover-logo {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--brand-orange), var(--brand-yellow));
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 40px;
+      letter-spacing: -1px;
+    }
+
+    .cover-title {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .cover-subtitle {
+      font-size: 18px;
+      color: var(--brand-orange);
+      font-weight: 600;
+      margin-bottom: 40px;
+    }
+
+    .cover-meta {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 2;
+    }
+
+    .cover-meta strong {
+      color: var(--text-secondary);
+    }
+
+    .cover-line {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--brand-orange), var(--brand-yellow));
+      border-radius: 2px;
+      margin: 30px auto;
+    }
+
+    .cover-badge {
+      display: inline-block;
+      background: var(--bg-highlight);
+      border: 1px solid var(--border-accent);
+      border-radius: 100px;
+      padding: 8px 24px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--brand-orange);
+      margin-top: 20px;
+    }
+
+    /* Section styling */
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin: 40px 0 20px;
+      letter-spacing: -0.3px;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 36px 0 14px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    h2 .section-num {
+      color: var(--brand-orange);
+      margin-right: 6px;
+    }
+
+    h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 24px 0 10px;
+    }
+
+    h4 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 20px 0 8px;
+    }
+
+    p {
+      margin-bottom: 12px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    /* Summary box */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 20px 0 30px;
+    }
+
+    .summary-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .summary-card .value {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--brand-orange);
+      display: block;
+    }
+
+    .summary-card .label {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-top: 4px;
+      display: block;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 20px;
+      font-size: 12px;
+    }
+
+    thead th {
+      background: var(--bg-card);
+      font-weight: 600;
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 2px solid var(--border);
+      color: var(--text-primary);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    tbody td {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+      vertical-align: top;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .total-row td {
+      font-weight: 700;
+      color: var(--text-primary);
+      border-top: 2px solid var(--text-primary);
+      border-bottom: 2px solid var(--text-primary);
+      background: var(--bg-card);
+    }
+
+    .highlight-row td {
+      background: var(--bg-highlight);
+      font-weight: 600;
+      color: var(--brand-orange);
+    }
+
+    /* Callout box */
+    .callout {
+      background: var(--bg-highlight);
+      border-left: 4px solid var(--brand-orange);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin: 20px 0;
+    }
+
+    .callout p {
+      color: var(--text-primary);
+      font-weight: 500;
+      margin: 0;
+      font-size: 13px;
+    }
+
+    .callout .callout-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--brand-orange);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    /* Estimate box */
+    .estimate-box {
+      background: linear-gradient(135deg, #fff7ed 0%, #fffbeb 100%);
+      border: 2px solid var(--border-accent);
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin: 24px 0;
+      text-align: center;
+    }
+
+    .estimate-box .estimate-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .estimate-box .estimate-value {
+      font-size: 42px;
+      font-weight: 800;
+      color: var(--brand-orange);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .estimate-box .estimate-range {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* Phase timeline */
+    .phase {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 20px;
+      border-left: 2px solid var(--border);
+    }
+
+    .phase::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 4px;
+      width: 10px;
+      height: 10px;
+      background: var(--brand-orange);
+      border-radius: 50%;
+    }
+
+    .phase-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+
+    .phase-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .phase-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .phase-badge {
+      display: inline-block;
+      background: var(--bg-highlight);
+      border: 1px solid var(--border-accent);
+      border-radius: 100px;
+      padding: 2px 10px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--brand-orange);
+      margin-left: 8px;
+    }
+
+    .phase ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .phase li {
+      font-size: 12px;
+      color: var(--text-secondary);
+      padding: 2px 0;
+      line-height: 1.5;
+    }
+
+    .phase li::before {
+      content: '>';
+      color: var(--brand-orange);
+      font-weight: 700;
+      margin-right: 6px;
+    }
+
+    /* Achievement list */
+    .achievements {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .achievement {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+
+    .achievement .ach-value {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--brand-orange);
+    }
+
+    .achievement .ach-label {
+      font-size: 11px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* Footer */
+    .doc-footer {
+      margin-top: 40px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    ul.plain {
+      list-style: none;
+      padding: 0;
+    }
+    ul.plain li {
+      font-size: 12px;
+      color: var(--text-secondary);
+      padding: 3px 0;
+    }
+    ul.plain li::before {
+      content: '>';
+      color: var(--brand-orange);
+      font-weight: 700;
+      margin-right: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- COVER PAGE -->
+  <div class="cover-page">
+    <div class="cover-logo">A</div>
+    <div class="cover-title">Prosjektrapport</div>
+    <div class="cover-subtitle">averdi.no - Nettplattform</div>
+    <div class="cover-line"></div>
+    <div class="cover-meta">
+      <strong>Utarbeidet:</strong> April 2026<br>
+      <strong>Prosjektperiode:</strong> November 2025 - Mars 2026<br>
+      <strong>Oppdragsgiver:</strong> Averdi AS<br>
+      <strong>Org.nr:</strong> 980 383 571
+    </div>
+    <div class="cover-badge">Konfidensielt</div>
+  </div>
+
+  <!-- PAGE 2: SAMMENDRAG -->
+  <div class="page-break"></div>
+
+  <h2><span class="section-num">1.</span> Sammendrag</h2>
+
+  <div class="summary-grid">
+    <div class="summary-card">
+      <span class="value">54</span>
+      <span class="label">Sider totalt (Next.js)</span>
+    </div>
+    <div class="summary-card">
+      <span class="value">89</span>
+      <span class="label">Komponenter</span>
+    </div>
+    <div class="summary-card">
+      <span class="value">~340</span>
+      <span class="label">Estimerte timer</span>
+    </div>
+    <div class="summary-card">
+      <span class="value">138</span>
+      <span class="label">Commits (begge repo)</span>
+    </div>
+  </div>
+
+  <p>Prosjektet startet etter en samtale med Ingvald, der behovet for en ny digital tilstedeværelse ble definert. Første versjon ble utviklet som en React/Vite-applikasjon (github.com/Runeov/react-averdi) med 77 commits over november-desember 2025. Etter hvert som ambisjonen vokste, ble prosjektet migrert til Next.js for bedre SEO, server-side rendering, og en mer skalerbar arkitektur.</p>
+
+  <p>Den endelige plattformen er en fullstendig nybygging av averdi.no. Fra enkel statisk side til intelligent kunnskapsplattform, bygget med Next.js 16, TypeScript og Tailwind CSS. Plattformen dekker fire hovedområder:</p>
+
+  <ul class="plain">
+    <li><strong>Kunnskapsbank</strong> med 19+ fagartikler om Sametinget, bedrifter, organisasjoner og skatteforhold</li>
+    <li><strong>Administrasjonspanel</strong> med autentisering, rollebasert tilgang og innholdsstyring</li>
+    <li><strong>Interaktive verktøy</strong> inkl. kalkulatorer, Vipps-veiviser og kryptert filoverlevering</li>
+    <li><strong>Juridisk compliance</strong> med ferdig implementert GDPR, WCAG 2.1 AA og Åpenhetsloven</li>
+  </ul>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Metrikk</th>
+        <th>Verdi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Prosjektperiode (totalt)</td><td>21. november 2025 - 24. mars 2026 (124 dager)</td></tr>
+      <tr><td>Fase 1: React/Vite (react-averdi)</td><td>21. nov - 6. des 2025 (77 commits)</td></tr>
+      <tr><td>Fase 2: Next.js-migrering (averdiNextJS)</td><td>9. des 2025 - 24. mar 2026 (61 commits)</td></tr>
+      <tr><td>Aktive arbeidsdager (med commits)</td><td>25 dager</td></tr>
+      <tr><td>Kodelinjer i src/ (nåværende)</td><td>~28 700</td></tr>
+      <tr><td>Offentlige sider</td><td>37</td></tr>
+      <tr><td>Admin-sider</td><td>17</td></tr>
+      <tr><td>API-endepunkter</td><td>9</td></tr>
+      <tr><td>Teknisk stack (endelig)</td><td>Next.js 16 + TypeScript + Tailwind CSS</td></tr>
+    </tbody>
+  </table>
+
+  <!-- PAGE 3: OMFANG -->
+  <div class="page-break"></div>
+
+  <h2><span class="section-num">2.</span> Prosjektets omfang</h2>
+
+  <h3>2.1 Offentlige sider (37)</h3>
+  <table>
+    <thead>
+      <tr><th>Seksjon</th><th>Antall sider</th><th>Innhold</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Forsiden</td><td>1</td><td>Hero, tjenester, salgspitch, kunnskapsbankteaser, kontaktpanel</td></tr>
+      <tr><td>Tjenester</td><td>4</td><td>Regnskap, årsoppgjør/skatt, lønn/HR, rådgivning</td></tr>
+      <tr><td>Kunnskapsbank: Bedrifter</td><td>5</td><td>Hovedside, rekruttering, transport/bagatellstøtte, Vipps-integrasjon, Innovasjon Norge</td></tr>
+      <tr><td>Kunnskapsbank: Sametinget</td><td>8</td><td>Hovedside + 7 tilskuddskategorier</td></tr>
+      <tr><td>Kunnskapsbank: Organisasjoner</td><td>8</td><td>Hovedside, MVA-kompensasjon, styreansvar, årsregnskap, idrettslag, Vipps, arrangementer, støtteordninger</td></tr>
+      <tr><td>Kunnskapsbank: Artikler</td><td>3</td><td>Hovedside + fagartikler</td></tr>
+      <tr><td>Om oss</td><td>2</td><td>Teamside + dynamiske ansattprofiler</td></tr>
+      <tr><td>Sikker overlevering</td><td>2</td><td>Kryptering og dekryptering av sensitive filer</td></tr>
+      <tr><td>Juridisk</td><td>3</td><td>Personvern, tilgjengelighet, apenhetsloven</td></tr>
+      <tr><td>Annet</td><td>1</td><td>Team-demo</td></tr>
+    </tbody>
+  </table>
+
+  <h3>2.2 Administrasjonspanel (17 sider)</h3>
+  <ul class="plain">
+    <li>Dashboard med statistikk (ansatte, artikler, utkast)</li>
+    <li>Artikkelhåndtering: opprett, rediger, slett, publiser/avpubliser, utkast</li>
+    <li>Ansatthåndtering: profiler, aktiv/inaktiv, tidslinje, hub-tilknytning</li>
+    <li>Brukerstyring: admin/redaktor-roller, passordhåndtering</li>
+    <li>Kunnskapsbank-publiseringskontroll</li>
+    <li>JWT-autentisering med 24-timers sesjoner og bcrypt-passord</li>
+    <li>TipTap-basert rich text-editor for artikler</li>
+  </ul>
+
+  <h3>2.3 Interaktive verktøy</h3>
+
+  <div class="no-break">
+    <h4>Innsatssone-kalkulator</h4>
+    <p>Trestegs veiviser som beregner fordeler ved etablering i vekstsoner. Viser AGA-besparelser, eiendomsskattdifferanse, personlig verdi for ansatte (låneettergivelse, Finnmarksfradrag, skattereduksjon) og brutto-ekvivalent lønn sammenlignet med Oslo.</p>
+  </div>
+
+  <div class="no-break">
+    <h4>Nord-Norge-kalkulator</h4>
+    <p>Sammenligner to kommuner side-ved-side. Beregner AGA etter sone, leiedifferanse (33+ kommuner med SSB/Finn.no-data), gratis barnehage, Finnmarkstillegg, studielånsavskrivning, lavere inntektsskatt og ekstra barnetillegg. Viser total årlig besparelse per ansatt og aggregert for 5-500 ansatte.</p>
+  </div>
+
+  <div class="no-break">
+    <h4>Vipps-integrasjonsveiviser</h4>
+    <p>18 komponentfiler som dekker hele integrasjonskjeden: API-oppsett, OAuth-flyt, PowerOffice-kobling, NS 4102-kontering, MVA-koder, feilsøking og demo.</p>
+  </div>
+
+  <div class="no-break">
+    <h4>Sikker filoverlevering</h4>
+    <p>Krypteringsløsning med AES-256-GCM, PBKDF2 (600 000 iterasjoner), eget .averdi-filformat. Nullavhengig - bruker Web Crypto API direkte. Støtter drag-and-drop, 6-sifret PIN, og inntil 25 MB per fil.</p>
+  </div>
+
+  <!-- PAGE 4: UTVIKLINGSTIDSLINJE -->
+  <div class="page-break"></div>
+
+  <h2><span class="section-num">3.</span> Utviklingstidslinje</h2>
+
+  <div class="callout" style="margin-bottom: 24px;">
+    <span class="callout-label">Bakgrunn</span>
+    <p>Prosjektet ble igangsatt etter en samtale med Ingvald om behovet for en ny, profesjonell nettplattform for Averdi. Første fase ble utviklet som en React/Vite-applikasjon for å raskt teste konsepter og innholdsstruktur. Etter hvert som prosjektets ambisjon vokste, ble plattformen migrert til Next.js for å oppnå bedre SEO, server-side rendering og skalerbarhet.</p>
+  </div>
+
+  <h3 style="margin-bottom: 16px; color: var(--brand-orange);">Fase 0: React/Vite-prototypen (react-averdi)</h3>
+
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-title">Prosjektoppstart og grunnstruktur</span>
+      <span class="phase-meta">21. nov 2025 <span class="phase-badge">10 commits</span></span>
+    </div>
+    <ul>
+      <li>Initial prosjektoppsett med React 19, TypeScript, Vite 7 og Tailwind CSS</li>
+      <li>GitHub Pages deployment konfigurert</li>
+      <li>Averdi-branding, logo og bilderessurser</li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-title">Landingsside og kjernekomponenter</span>
+      <span class="phase-meta">24. nov 2025 <span class="phase-badge">25 commits</span></span>
+    </div>
+    <ul>
+      <li>Hero-seksjon, tjenestekort, kontaktpanel og footer</li>
+      <li>Om oss-side og ansatteprofiler ("ingvald solo")</li>
+      <li>Navbar, About og ServiceCard-komponenter</li>
+      <li>TypeScript-fikser og importoppdateringer</li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-title">Innholdssider og GitHub-publisering</span>
+      <span class="phase-meta">1.-3. des 2025 <span class="phase-badge">18 commits</span></span>
+    </div>
+    <ul>
+      <li>Primarnæringsside lagt til</li>
+      <li>Route-basert code-splitting (lazy loading) implementert</li>
+      <li>Organisasjonssider og individuelle ansattsider</li>
+      <li>Artikkelseksjon som presentasjon</li>
+      <li>Debugging-runder (AI-assistert og manuell)</li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-title">Tjenestesider og V4 ferdigstilt</span>
+      <span class="phase-meta">4.-6. des 2025 <span class="phase-badge">24 commits</span></span>
+    </div>
+    <ul>
+      <li>Tjenestesider: lønn, rådgivning, fakturering</li>
+      <li>Sametinget CTA-seksjon</li>
+      <li>Trust strip og bakgrunnsstyling</li>
+      <li>Mobiloptimalisering og responsivt design</li>
+      <li>V4 ferdigstilt som stabil prototype</li>
+    </ul>
+  </div>
+
+  <h3 style="margin: 28px 0 16px; color: var(--brand-orange);">Fase 1-8: Next.js-plattformen (averdiNextJS)</h3>
+
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-title">Fase 1: Migrering til Next.js</span>
+      <span class="phase-meta">9.-10. des 2025 <span class="phase-badge">7 commits</span></span>
+    </div>
+    <ul>
+      <li>Migrering fra React/Vite til Next.js App Router</li>
+      <li>Landingsside re-implementert med server components</li>
+      <li>Kunnskapsbanken v1 opprettet (MCP/CMS-klar struktur)</li>
+      <li>Sametinget-innhold: 7 underseksjoner</li>
+      <li>JSON-LD-skjemaer, a11y-forbedringer, bildeoptimalisering</li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-title">Fase 2: Sametinget og kalkulatorer</span>
+      <span class="phase-meta">11.-12. des 2025 <span class="phase-badge">8 commits</span></span>
+    </div>
+    <ul>
+      <li>Komplett Sametinget-seksjon med FAQ og JSON-skjemaer</li>
+      <li>Innsatssone-kalkulator V1</li>
+      <li>Forfatterprofilfunksjonalitet</li>
+      <li>Kvalitetsrevisjon av Sametinget-innhold</li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-title">Fase 3: Agent og oppgraderinger</span>
+      <span class="phase-meta">13.-14. des 2025 <span class="phase-badge">4 commits</span></span>
+    </div>
+    <ul>
+      <li>AI-agent/manifest for innholdsgenerering</li>
+      <li>Kunnskapsbanken til v5, Bedrifter til v8</li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-title">Fase 4: Vipps og PowerOffice</span>
+      <span class="phase-meta">16.-17. des 2025 <span class="phase-badge">8 commits</span></span>
+    </div>
+    <ul>
+      <li>Full Vipps MobilePay-integrasjonskomponent (2 527 nye linjer)</li>
+      <li>Flerstegs veiviser med 4 guider og feilsøking</li>
+      <li>PowerOffice/eMonkey-guide med demo</li>
+      <li>Responsivt design og mobiloptimalisering</li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-title">Fase 5: Innhold og infrastruktur</span>
+      <span class="phase-meta">Jan 2026 <span class="phase-badge">6 commits</span></span>
+    </div>
+    <ul>
+      <li>Årsoppgjør & Skatt-seksjon med faginnhold</li>
+      <li>Om oss-side med team og bedriftshistorie</li>
+      <li>Automatisk sitemap, Hotjar-analyse</li>
+      <li>Prosjektdokumentasjon for PDF-eksport</li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-title">Fase 6: Produksjonslansering</span>
+      <span class="phase-meta">5. feb 2026 <span class="phase-badge">105 filer endret</span></span>
+    </div>
+    <ul>
+      <li>Komplett admin-system med JWT og rollebasert tilgang</li>
+      <li>Full CRUD for artikler, ansatte og brukere</li>
+      <li>Zod-validering, TipTap-editor, filbasert lagring med mutex</li>
+      <li>54 sider fullt operasjonelle</li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-title">Fase 7: Produksjonsherding</span>
+      <span class="phase-meta">24.-26. feb 2026 <span class="phase-badge">18 commits</span></span>
+    </div>
+    <ul>
+      <li>GDPR cookie-samtykke og personvernside</li>
+      <li>Migrering til Next.js 16.1.6</li>
+      <li>Kalkulatorer ferdigstilt med 33+ kommuners data</li>
+      <li>Tilgjengelighet og Åpenhetsloven implementert</li>
+      <li>Innholdsforedling og publiseringskontroller</li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-title">Fase 8: Finpuss og analyse</span>
+      <span class="phase-meta">Mar 2026 <span class="phase-badge">9 commits</span></span>
+    </div>
+    <ul>
+      <li>Sikkerhetsherding (miljøvariabel for passord)</li>
+      <li>Vercel-produksjonsinnstillinger</li>
+      <li>Vercel Web Analytics</li>
+      <li>Sitemap og metadata-optimalisering</li>
+    </ul>
+  </div>
+
+  <!-- PAGE 5: RESEARCH -->
+  <div class="page-break"></div>
+
+  <h2><span class="section-num">4.</span> Faglig research</h2>
+
+  <p>Bak hver faktaside, hvert tall og hver lovhenvisning ligger grundig kildearbeid. Denne researchen er den mest tidkrevende delen av prosjektet og er ikke direkte sporbar i kodehistorikken.</p>
+
+  <h3>4.1 Sametinget-tilskuddsordninger</h3>
+  <p><strong>Estimert tidsbruk: 20-30 timer</strong></p>
+
+  <table>
+    <thead>
+      <tr><th>Område</th><th>Kartlagt kunnskap</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Næringstilskudd</td><td>Støttetak (800 000 kr), satser (40-70%), STN-områdets geografiske avgrensning, kulturelt forankringskrav</td></tr>
+      <tr><td>Duodji</td><td>Definisjon av samisk husflid, tilskuddskriterier, kulturell trygghet som vurderingsfaktor</td></tr>
+      <tr><td>Primarnæring</td><td>Reindrift, fiske, jordbruk i samisk kjerneområde, særregler for tilleggsnæring</td></tr>
+      <tr><td>Institusjon</td><td>Institusjonell utvikling, organisasjonskrav, forvaltningsmaler</td></tr>
+      <tr><td>Kultur-sprak</td><td>Sprakbevaring, kulturprosjekter, søknadsprosesser og frister</td></tr>
+      <tr><td>Offentlig</td><td>Offentlig sektor-tilskudd, samisk forvaltningsområde, interkommunalt samarbeid</td></tr>
+      <tr><td>Reindrift</td><td>Reindriftsavtalen, siidaandeler, saregne regelverk og støtteordninger</td></tr>
+    </tbody>
+  </table>
+
+  <p>Kildegrunnlag: Sametingets tilskuddsregelverk, STN-virkeområdekart, retningslinjer for hvert tilskuddsprogram, FN-konvensjoner om urfolksrettigheter, søknadportaler og frister.</p>
+
+  <h3>4.2 Skatte- og avgiftsresearch</h3>
+  <p><strong>Estimert tidsbruk: 20-25 timer</strong></p>
+
+  <table>
+    <thead>
+      <tr><th>Tema</th><th>Detaljer kartlagt</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Arbeidsgiveravgift (AGA)</td><td>5 soner (0%-14.1%), fribelopgrenser, A-melding-rapportering, hjemmekontor-regler (&gt;50%)</td></tr>
+      <tr><td>De Minimis/bagatellstøtte</td><td>EU-forordning, 100 000 EUR tak (veitransport) vs 300 000 EUR (generelt), 3-arig rullering</td></tr>
+      <tr><td>Finnmarksfradraget</td><td>45 000 kr (2026-forslag), historisk utvikling, tiltakssone-avgrensning</td></tr>
+      <tr><td>Studielansavskrivning</td><td>60 000 kr/ar i Tiltakssonen, Lånekassens vilkar, bostedskrav</td></tr>
+      <tr><td>Trinnskatt</td><td>Lavere satser i Tiltakssonen (18.5% vs 22%), trinnvis beregning</td></tr>
+      <tr><td>Eiendomsskatt</td><td>Satser for 33+ kommuner, SSB-data, promillesatser</td></tr>
+      <tr><td>MVA-kompensasjon</td><td>Forenklet (8%) vs dokumentert modell, takbelop (7M), Frivilligregisteret</td></tr>
+    </tbody>
+  </table>
+
+  <p>Kildegrunnlag: Skatteloven (spesifikt &sect;&sect; 6-4, 14-60 m.fl.), Skatteetatens rundskriv, Statsbudsjettet 2026, SSB statistikkbanken, Lånekassens regelverk, NAV-satser.</p>
+
+  <h3>4.3 Regnskap og næringsregler</h3>
+  <p><strong>Estimert tidsbruk: 12-18 timer</strong></p>
+  <ul class="plain">
+    <li>Regnskapsloven: bokføringskrav, årsoppgjørsfrister, revisjonspliktgrenser</li>
+    <li>NS 4102: kontoplan for frivillige organisasjoner, mellomregning (konto 1580)</li>
+    <li>A-melding: månedlig innrapportering, friststruktur, sonebasert AGA-beregning</li>
+    <li>Årsoppgjør: skattemelding (frist 31. mai), fradragsoptimalisering</li>
+    <li>Innovasjon Norge: tilskuddsprogrammer, garantier, regionalkontorer</li>
+  </ul>
+
+  <h3>4.4 Vipps/PowerOffice API</h3>
+  <p><strong>Estimert tidsbruk: 10-15 timer</strong></p>
+  <ul class="plain">
+    <li>Vipps ePayment API-dokumentasjon (ny standard etter 2022-fusjonen)</li>
+    <li>OAuth 2.0-autorisasjonsflyt for Vipps-integrasjon</li>
+    <li>PowerOffice GO API og eMonkey-mellomvare</li>
+    <li>NS 4102 mellomregningskonto-oppsett og MVA-koder</li>
+    <li>Bankidentifikasjonskrav og avstemmingsprosedyrer</li>
+  </ul>
+
+  <h3>4.5 Juridisk compliance</h3>
+  <p><strong>Estimert tidsbruk: 8-12 timer</strong></p>
+
+  <table>
+    <thead>
+      <tr><th>Regelverk</th><th>Implementert</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>GDPR</td><td>Behandlingsgrunnlag (Art. 6), informasjonsplikt, cookie-samtykke, lagringsperioder, rettigheter</td></tr>
+      <tr><td>WCAG 2.1 AA</td><td>Tastaturnavigasjon, fargekontrastkrav, ARIA-attributter, skip-to-content</td></tr>
+      <tr><td>Åpenhetsloven</td><td>Aktsomhetsvurdering, 5-trinns prosess, FNs veiledende prinsipper</td></tr>
+      <tr><td>EAA (EU 2019/882)</td><td>European Accessibility Act, norsk implementering</td></tr>
+    </tbody>
+  </table>
+
+  <!-- PAGE 6: TIMEESTIMAT -->
+  <div class="page-break"></div>
+
+  <h2><span class="section-num">5.</span> Timeestimat</h2>
+
+  <h3>5.1 Utvikling og koding</h3>
+  <table>
+    <thead>
+      <tr><th>Fase</th><th>Periode</th><th>Lavt</th><th>Høyt</th></tr>
+    </thead>
+    <tbody>
+      <tr class="highlight-row"><td colspan="4"><strong>Fase 0: React/Vite-prototypen (react-averdi, 77 commits)</strong></td></tr>
+      <tr><td>Planlegging etter samtale med Ingvald</td><td>Nov 2025</td><td>6 t</td><td>10 t</td></tr>
+      <tr><td>Prosjektoppsett og grunnstruktur</td><td>Nov 21</td><td>6 t</td><td>8 t</td></tr>
+      <tr><td>Landingsside og kjernekomponenter</td><td>Nov 24</td><td>10 t</td><td>14 t</td></tr>
+      <tr><td>Innholdssider og debugging</td><td>Des 1-3</td><td>12 t</td><td>16 t</td></tr>
+      <tr><td>Tjenestesider og V4 ferdigstilt</td><td>Des 4-6</td><td>14 t</td><td>18 t</td></tr>
+      <tr class="highlight-row"><td colspan="4"><strong>Fase 1-8: Next.js-plattformen (averdiNextJS, 61 commits)</strong></td></tr>
+      <tr><td>Migrering til Next.js</td><td>Des 9-10</td><td>18 t</td><td>22 t</td></tr>
+      <tr><td>Sametinget og kalkulatorer</td><td>Des 11-12</td><td>16 t</td><td>20 t</td></tr>
+      <tr><td>Agent og oppgraderinger</td><td>Des 13-14</td><td>8 t</td><td>12 t</td></tr>
+      <tr><td>Vipps/PowerOffice</td><td>Des 16-17</td><td>16 t</td><td>20 t</td></tr>
+      <tr><td>Innholdsvekst</td><td>Jan 7-15</td><td>6 t</td><td>8 t</td></tr>
+      <tr><td>Infrastruktur/dokumentasjon</td><td>Jan 28</td><td>8 t</td><td>10 t</td></tr>
+      <tr><td>Produksjonslansering</td><td>Feb 5</td><td>25 t</td><td>35 t</td></tr>
+      <tr><td>Produksjonsherding</td><td>Feb 24</td><td>16 t</td><td>22 t</td></tr>
+      <tr><td>Innholdsforedling</td><td>Feb 25-26</td><td>12 t</td><td>16 t</td></tr>
+      <tr><td>Finpuss og analyse</td><td>Mar 2-24</td><td>9 t</td><td>11 t</td></tr>
+      <tr class="total-row"><td><strong>Sum utvikling</strong></td><td></td><td><strong>182 t</strong></td><td><strong>242 t</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h3>5.2 Research og fagarbeid</h3>
+  <table>
+    <thead>
+      <tr><th>Tema</th><th>Lavt</th><th>Høyt</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Sametinget-tilskuddsordninger (7 kategorier)</td><td>20 t</td><td>30 t</td></tr>
+      <tr><td>Skatt, avgift og AGA-soner (5 soner, De Minimis, Finnmark)</td><td>20 t</td><td>25 t</td></tr>
+      <tr><td>Regnskap og næringsregler (NS 4102, A-melding, revisjon)</td><td>12 t</td><td>18 t</td></tr>
+      <tr><td>Vipps/PowerOffice API-integrasjon</td><td>10 t</td><td>15 t</td></tr>
+      <tr><td>Juridisk compliance (GDPR, WCAG, Åpenhetsloven)</td><td>8 t</td><td>12 t</td></tr>
+      <tr><td>Kommunedata (eiendomsskatt, leiepriser, 33+ kommuner)</td><td>5 t</td><td>8 t</td></tr>
+      <tr class="total-row"><td><strong>Sum research</strong></td><td><strong>75 t</strong></td><td><strong>108 t</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h3>5.3 Prosjektstyring og øvrig</h3>
+  <table>
+    <thead>
+      <tr><th>Aktivitet</th><th>Lavt</th><th>Høyt</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Arkitekturplanlegging og designbeslutninger</td><td>5 t</td><td>8 t</td></tr>
+      <tr><td>Testing, debugging og feilretting</td><td>8 t</td><td>12 t</td></tr>
+      <tr><td>Innholdsproduksjon (fagskriving, formulering)</td><td>10 t</td><td>15 t</td></tr>
+      <tr><td>Deploymentoppsett (Netlify, Vercel, GitHub Pages)</td><td>4 t</td><td>6 t</td></tr>
+      <tr class="total-row"><td><strong>Sum øvrig</strong></td><td><strong>27 t</strong></td><td><strong>41 t</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h3>5.4 Totalresultat</h3>
+
+  <table>
+    <thead>
+      <tr><th>Kategori</th><th>Lavt estimat</th><th>Høyt estimat</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Utvikling og koding (inkl. React-prototypen)</td><td>182 t</td><td>242 t</td></tr>
+      <tr><td>Research og fagarbeid</td><td>75 t</td><td>108 t</td></tr>
+      <tr><td>Prosjektstyring og øvrig</td><td>27 t</td><td>41 t</td></tr>
+      <tr class="total-row"><td><strong>Totalt</strong></td><td><strong>284 t</strong></td><td><strong>391 t</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="estimate-box">
+    <div class="estimate-label">Beste estimat - totalt timeforbruk</div>
+    <div class="estimate-value">~340 timer</div>
+    <div class="estimate-range">Intervall: 284 - 391 timer</div>
+  </div>
+
+  <!-- PAGE 7: LEVERANSER -->
+  <div class="page-break"></div>
+
+  <h2><span class="section-num">6.</span> Nøkkelleveranser</h2>
+
+  <div class="achievements">
+    <div class="achievement">
+      <div class="ach-value">54</div>
+      <div class="ach-label">Produksjonsklare sider med dypt faginnhold</div>
+    </div>
+    <div class="achievement">
+      <div class="ach-value">17</div>
+      <div class="ach-label">Admin-sider med full CRUD og autentisering</div>
+    </div>
+    <div class="achievement">
+      <div class="ach-value">2</div>
+      <div class="ach-label">Interaktive kalkulatorer (33+ kommuner)</div>
+    </div>
+    <div class="achievement">
+      <div class="ach-value">7</div>
+      <div class="ach-label">Sametinget-tilskuddssider med korrekte satser</div>
+    </div>
+    <div class="achievement">
+      <div class="ach-value">18</div>
+      <div class="ach-label">Komponentfiler for Vipps-veiviseren</div>
+    </div>
+    <div class="achievement">
+      <div class="ach-value">AES-256</div>
+      <div class="ach-label">Kryptert filoverlevering (.averdi-format)</div>
+    </div>
+    <div class="achievement">
+      <div class="ach-value">11+</div>
+      <div class="ach-label">JSON-LD-skjemaer for SEO</div>
+    </div>
+    <div class="achievement">
+      <div class="ach-value">3</div>
+      <div class="ach-label">Juridiske compliance-sider (GDPR, WCAG, Åpenhetsloven)</div>
+    </div>
+  </div>
+
+  <h3>Teknisk kvalitet</h3>
+  <table>
+    <thead>
+      <tr><th>Område</th><th>Standard</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Typesikkerhet</td><td>Full TypeScript + Zod-validering på alle skjemaer</td></tr>
+      <tr><td>Krypteringssikkerhet</td><td>AES-256-GCM, PBKDF2 (600 000 iterasjoner), per-fil salt</td></tr>
+      <tr><td>Autentisering</td><td>JWT + HTTP-only cookies, 24-timers sesjoner, rollebasert</td></tr>
+      <tr><td>Datapersistens</td><td>Filbasert med mutex-låsing for samtidig tilgang</td></tr>
+      <tr><td>SEO</td><td>JSON-LD-skjemaer, dynamisk sitemap, Open Graph, strukturerte data</td></tr>
+      <tr><td>Tilgjengelighet</td><td>WCAG 2.1 AA: skip-to-content, ARIA, tastaturnavigasjon, kontrast</td></tr>
+      <tr><td>MCP-integrasjon</td><td>Dataelementer med mcp-target-id for ekstern validering av skattetall</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <h2><span class="section-num">7.</span> Metodologisk note</h2>
+
+  <p>Estimatet er basert på commit-tidsstempler fra to repositories (react-averdi: 77 commits, averdiNextJS: 61 commits), diff-størrelse (totalt ~65 000+ linjer endret i Next.js-repoet alene), innholdskompleksitet vurdert opp mot nødvendig kildearbeid, og bransjestandard for lignende prosjekter.</p>
+
+  <p>React-prototypen (github.com/Runeov/react-averdi) representerer en betydelig arbeidsinnsats som la grunnlaget for hele prosjektet. Designbeslutninger, komponentstruktur, innholdsarkitektur og visuell identitet ble utforsket og validert her før de ble overfort til Next.js-plattformen.</p>
+
+  <div class="callout">
+    <span class="callout-label">Viktig</span>
+    <p>Timene mellom commits fanges ikke alltid opp. Arbeidet med å lese, forstå og sammenstille regelverk fra Sametinget, Skatteetaten, Lånekassen og Statsbudsjettet er usynlig i git-loggen, men utgjør en vesentlig del av leveransen. I tillegg kommer planleggingsarbeid etter samtalen med Ingvald, designiterasjoner og den strategiske beslutningen om a migrere fra React til Next.js.</p>
+  </div>
+
+  <p>Prosjektets reelle verdi ligger ikke i antall kodelinjer, men i oversettelsen fra offentlig regelverk til kommersiell innsikt for nordnorsk næringsliv.</p>
+
+  <div class="doc-footer">
+    <p>Averdi AS &bull; Juhána Rásttoš geaidnu 2, 9730 Karasjok &bull; Org.nr 980 383 571</p>
+    <p style="margin-top: 4px; font-size: 10px;">Rapporten er generert april 2026. Alle tall og estimater er basert på faktisk prosjektdata.</p>
+  </div>
+
+</body>
+</html>

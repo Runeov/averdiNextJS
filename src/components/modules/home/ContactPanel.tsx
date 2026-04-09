@@ -24,18 +24,10 @@ export default function ContactPanel() {
     setSubmitStatus('submitting');
 
     try {
-      const form = e.currentTarget as HTMLFormElement;
-      const formValues = new FormData(form);
-      const payload = new URLSearchParams();
-      formValues.forEach((value, key) => {
-        payload.append(key, String(value));
-      });
-
-      // Netlify Forms submission must post to a static HTML file on Netlify Runtime v5.
-      const response = await fetch('/__forms.html', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: payload.toString(),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
       });
 
       if (response.ok) {
@@ -168,18 +160,9 @@ export default function ContactPanel() {
                 </div>
               ) : (
                 <form
-                  name="contact"
-                  method="POST"
                   onSubmit={handleSubmit}
                   className="space-y-5"
                 >
-                  {/* Hidden fields for Netlify Forms */}
-                  <input type="hidden" name="form-name" value="contact" />
-                  <p className="hidden">
-                    <label>
-                      Don&apos;t fill this out: <input name="bot-field" />
-                    </label>
-                  </p>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">

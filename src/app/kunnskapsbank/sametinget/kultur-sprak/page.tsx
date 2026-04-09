@@ -183,20 +183,22 @@ export default function KulturSprakPage() {
                     <div className="bg-white p-4 rounded-lg border border-red-100 shadow-sm">
                     <span className="block text-xs text-slate-500 uppercase font-bold tracking-wider">Vårfrist</span>
                     <McpDataSpan 
-                        id="sameting-frist-kultur-var" 
-                        value="01.03.2026" 
-                        className="font-bold text-2xl text-slate-900" 
+                        id="sameting-frist-kultur-var"
+                        value="01.03.2026"
+                        className="font-bold text-2xl text-slate-900"
                         source="Sametinget Fristkalender"
+                        deadline="2026-03-01"
                     />
                     <span className="text-sm text-slate-600 block mt-1 font-medium">Institusjoner & faste tiltak</span>
                     </div>
                     <div className="bg-white p-4 rounded-lg border border-red-100 shadow-sm">
                     <span className="block text-xs text-slate-500 uppercase font-bold tracking-wider">Høstfrist (Hoved)</span>
                     <McpDataSpan 
-                        id="sameting-frist-kultur-host" 
-                        value="01.10.2026" 
-                        className="font-bold text-2xl text-slate-900" 
+                        id="sameting-frist-kultur-host"
+                        value="01.10.2026"
+                        className="font-bold text-2xl text-slate-900"
                         source="Sametinget Fristkalender"
+                        deadline="2026-10-01"
                     />
                     <span className="text-sm text-slate-600 block mt-1 font-medium">Prosjektstøtte (Bøker, Musikk)</span>
                     </div>
@@ -337,7 +339,7 @@ export default function KulturSprakPage() {
             title="Skal dere søke i år?"
             description="Vi kan ta rollen som prosjektøkonom i søknaden. Da vet Sametinget at budsjett, regnskap og rapportering blir håndtert profesjonelt."
             primaryButtonText="Kontakt oss om søknadshjelp"
-            primaryButtonLink="/kontakt"
+            primaryButtonLink="/#contact"
             secondaryButtonText="Se Institusjonsstøtte"
             secondaryButtonLink="/kunnskapsbank/sametinget/institusjon"
             />

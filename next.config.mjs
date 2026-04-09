@@ -14,6 +14,12 @@ const nextConfig = {
 
   reactStrictMode: true,
 
+  async redirects() {
+    return [
+      { source: '/kontakt', destination: '/#contact', permanent: true },
+    ];
+  },
+
   images: {
     qualities: [75, 85, 90],
   },

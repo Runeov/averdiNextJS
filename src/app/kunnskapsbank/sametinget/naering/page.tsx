@@ -258,7 +258,7 @@ export default function SametingetNaeringPage() {
           title="Har du en forretningsidé?"
           description="Vi kan hjelpe deg å vurdere om prosjektet kvalifiserer til støtte, og bistå med budsjett og søknadsskriving."
           primaryButtonText="Bestill rådgivningstime"
-          primaryButtonLink="/kontakt"
+          primaryButtonLink="/#contact"
           secondaryButtonText="Les om Kulturstøtte i stedet"
           secondaryButtonLink="/kunnskapsbank/sametinget/kultur-sprak"
         />

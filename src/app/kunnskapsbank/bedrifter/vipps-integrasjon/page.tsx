@@ -295,7 +295,7 @@ export default function VippsIntegrasjonsPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
-              href="/kontakt" 
+              href="/#contact" 
               className="px-8 py-4 bg-white text-blue-600 rounded-xl font-bold hover:bg-blue-50 transition-colors inline-flex items-center justify-center"
             >
               Bestill konsultasjon

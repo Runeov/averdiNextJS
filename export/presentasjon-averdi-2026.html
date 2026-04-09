@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Averdi.no - Presentasjon</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+    :root {
+      --brand-orange: #E86C1F;
+      --brand-yellow: #F4B223;
+      --dark: #0f172a;
+      --dark-card: #1e293b;
+      --text-white: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-secondary: #cbd5e1;
+      --bg-page: #ffffff;
+      --bg-card: #f8fafc;
+      --border: #e2e8f0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    @page {
+      size: A4 landscape;
+      margin: 0;
+    }
+
+    @media print {
+      .slide { page-break-after: always; height: 100vh; }
+      .slide:last-child { page-break-after: avoid; }
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0f172a;
+      color: var(--text-white);
+    }
+
+    /* Slide base */
+    .slide {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide-dark { background: var(--dark); }
+    .slide-white { background: var(--bg-page); color: var(--dark); }
+    .slide-gradient {
+      background: linear-gradient(135deg, var(--dark) 0%, #1a1f3a 50%, var(--dark) 100%);
+    }
+    .slide-brand {
+      background: linear-gradient(135deg, var(--brand-orange) 0%, var(--brand-yellow) 100%);
+    }
+
+    /* Decorative blobs */
+    .blob-tr {
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 400px;
+      height: 400px;
+      background: var(--brand-orange);
+      opacity: 0.06;
+      border-radius: 50%;
+      filter: blur(80px);
+    }
+    .blob-bl {
+      position: absolute;
+      bottom: -100px;
+      left: -100px;
+      width: 400px;
+      height: 400px;
+      background: var(--brand-yellow);
+      opacity: 0.06;
+      border-radius: 50%;
+      filter: blur(80px);
+    }
+
+    /* Slide number */
+    .slide-num {
+      position: absolute;
+      bottom: 30px;
+      right: 40px;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .slide-white .slide-num { color: #94a3b8; }
+
+    /* Slide footer */
+    .slide-footer {
+      position: absolute;
+      bottom: 30px;
+      left: 80px;
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+    .slide-white .slide-footer { color: #94a3b8; }
+
+    /* Typography */
+    .slide-tag {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--brand-orange);
+      margin-bottom: 16px;
+    }
+
+    .slide-title {
+      font-size: 48px;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+
+    .slide-title .accent {
+      background: linear-gradient(90deg, var(--brand-orange), var(--brand-yellow));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .slide-subtitle {
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      max-width: 700px;
+      line-height: 1.5;
+    }
+    .slide-white .slide-subtitle { color: #64748b; }
+
+    .slide-body {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      max-width: 800px;
+    }
+
+    h2.section-title {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 30px;
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    /* Grid layouts */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+    .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; }
+
+    /* Cards */
+    .card {
+      background: var(--dark-card);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 28px;
+    }
+    .slide-white .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--brand-orange), var(--brand-yellow));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .slide-white .card-desc { color: #64748b; }
+
+    /* Stat cards */
+    .stat-card {
+      background: var(--dark-card);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 42px;
+      font-weight: 900;
+      background: linear-gradient(90deg, var(--brand-orange), var(--brand-yellow));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Feature list */
+    .feature-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      font-size: 15px;
+      color: var(--text-secondary);
+    }
+    .slide-white .feature-list li { color: #475569; }
+
+    .feature-list .check {
+      width: 22px;
+      height: 22px;
+      background: linear-gradient(135deg, var(--brand-orange), var(--brand-yellow));
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Two column layout */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    table th {
+      text-align: left;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .slide-white table th {
+      color: #64748b;
+      border-bottom: 1px solid var(--border);
+    }
+
+    table td {
+      padding: 10px 14px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .slide-white table td {
+      color: #475569;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(232, 108, 31, 0.15);
+      color: var(--brand-orange);
+      border-radius: 100px;
+      padding: 3px 12px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    /* Timeline */
+    .timeline-item {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 16px;
+    }
+
+    .timeline-dot {
+      width: 12px;
+      height: 12px;
+      background: var(--brand-orange);
+      border-radius: 50%;
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+
+    .timeline-content {
+      flex: 1;
+    }
+
+    .timeline-date {
+      font-size: 12px;
+      color: var(--brand-orange);
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .timeline-text {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    /* Cover specific */
+    .cover-logo-large {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, var(--brand-orange), var(--brand-yellow));
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 42px;
+      font-weight: 900;
+      color: white;
+      margin-bottom: 40px;
+      box-shadow: 0 20px 60px rgba(232, 108, 31, 0.3);
+    }
+
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--brand-orange), var(--brand-yellow));
+      border-radius: 2px;
+      margin: 20px 0;
+    }
+
+    /* CTA slide */
+    .cta-box {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .cta-box .slide-title {
+      font-size: 42px;
+    }
+
+    .cta-info {
+      font-size: 14px;
+      color: rgba(255,255,255,0.8);
+      margin-top: 30px;
+    }
+
+    .cta-info strong {
+      color: white;
+    }
+
+    /* Pill tags */
+    .tech-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .pill {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+    .slide-white .pill {
+      background: #f1f5f9;
+      border-color: var(--border);
+      color: #475569;
+    }
+
+    .pill-accent {
+      background: rgba(232, 108, 31, 0.12);
+      border-color: rgba(232, 108, 31, 0.25);
+      color: var(--brand-orange);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SLIDE 1: COVER -->
+  <div class="slide slide-dark" style="justify-content: center; align-items: center; text-align: center;">
+    <div class="blob-tr"></div>
+    <div class="blob-bl"></div>
+    <div class="cover-logo-large">A</div>
+    <div class="slide-tag">Prosjektpresentasjon 2026</div>
+    <div class="slide-title" style="max-width: 800px;">
+      Averdi.no<br>
+      <span class="accent">Ny digital plattform</span>
+    </div>
+    <div class="slide-subtitle" style="text-align: center;">
+      Fra statisk nettside til intelligent kunnskapsplattform for nordnorsk næring
+    </div>
+    <div class="divider" style="margin: 30px auto;"></div>
+    <div style="font-size: 14px; color: var(--text-muted);">
+      Averdi AS &bull; Karasjok &bull; April 2026
+    </div>
+  </div>
+
+  <!-- SLIDE 2: ORIGIN STORY -->
+  <div class="slide slide-gradient">
+    <div class="blob-tr"></div>
+    <div class="slide-tag">Bakgrunn</div>
+    <div class="slide-title" style="max-width: 800px;">
+      Det startet med<br>
+      <span class="accent">en samtale med Ingvald.</span>
+    </div>
+    <div class="divider"></div>
+    <div class="slide-subtitle">
+      Behovet var tydelig: Averdi trengte en digital plattform som matchet ambisjonene. Første versjon ble bygget som en React-prototype (77 commits, nov-des 2025). Da visjonen vokste, ble plattformen migrert til Next.js for bedre SEO, ytelse og skalerbarhet.
+    </div>
+    <div class="two-col" style="margin-top: 30px;">
+      <div class="card">
+        <div class="card-title">Fase 1: React-prototype</div>
+        <div class="card-desc" style="margin-bottom: 12px;">github.com/Runeov/react-averdi</div>
+        <div class="tech-pills">
+          <span class="pill">React 19</span>
+          <span class="pill">Vite 7</span>
+          <span class="pill">TypeScript</span>
+          <span class="pill">77 commits</span>
+          <span class="pill">Nov-Des 2025</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Fase 2: Next.js-plattformen</div>
+        <div class="card-desc" style="margin-bottom: 12px;">Produksjonsversjon med SSR, admin og kunnskapsbank</div>
+        <div class="tech-pills">
+          <span class="pill pill-accent">Next.js 16</span>
+          <span class="pill pill-accent">Server Components</span>
+          <span class="pill">61 commits</span>
+          <span class="pill">Des 2025 - Mar 2026</span>
+        </div>
+      </div>
+    </div>
+    <div class="slide-num">02</div>
+    <div class="slide-footer">averdi.no</div>
+  </div>
+
+  <!-- SLIDE 3: VISION -->
+  <div class="slide slide-dark">
+    <div class="blob-bl"></div>
+    <div class="slide-tag">Visjon</div>
+    <div class="slide-title" style="max-width: 800px;">
+      Ikke bare en nettside.<br>
+      <span class="accent">Et verktøy for vekst.</span>
+    </div>
+    <div class="divider"></div>
+    <div class="slide-subtitle">
+      Averdi.no er bygget for å gjøre nordnorsk næring sterkere. Plattformen oversetter offentlig regelverk til kommersiell innsikt, og gir kundene verktøy for å ta bedre beslutninger.
+    </div>
+    <div class="slide-num">03</div>
+    <div class="slide-footer">averdi.no</div>
+  </div>
+
+  <!-- SLIDE 4: NUMBERS -->
+  <div class="slide slide-dark">
+    <div class="blob-tr"></div>
+    <div class="blob-bl"></div>
+    <div class="slide-tag">Prosjektet i tall</div>
+    <h2 class="section-title">Hva vi har bygget</h2>
+    <div class="grid-4" style="margin-bottom: 30px;">
+      <div class="stat-card">
+        <div class="stat-value">54</div>
+        <div class="stat-label">Produksjonsklare sider</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">138</div>
+        <div class="stat-label">Commits (begge repo)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">~340</div>
+        <div class="stat-label">Timer investert</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">28 700</div>
+        <div class="stat-label">Linjer kode</div>
+      </div>
+    </div>
+    <div class="grid-4">
+      <div class="stat-card">
+        <div class="stat-value">89</div>
+        <div class="stat-label">Skreddersydde komponenter</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">9</div>
+        <div class="stat-label">API-endepunkter</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">33+</div>
+        <div class="stat-label">Kommuner i kalkulatorene</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">8</div>
+        <div class="stat-label">Sametinget-sider</div>
+      </div>
+    </div>
+    <div class="slide-num">04</div>
+    <div class="slide-footer">averdi.no</div>
+  </div>
+
+  <!-- SLIDE 5: PLATFORM OVERVIEW -->
+  <div class="slide slide-dark">
+    <div class="blob-bl"></div>
+    <div class="slide-tag">Plattformens struktur</div>
+    <h2 class="section-title">Fire hovedområder</h2>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-icon">&#128218;</div>
+        <div class="card-title">Kunnskapsbank</div>
+        <div class="card-desc">
+          19+ fagartikler fordelt på bedrifter, Sametinget-tilskudd, organisasjoner og artikler. Dypt innhold om AGA-soner, rekruttering, Vipps-integrasjon, MVA-kompensasjon og mer. Hvert tema er grundig researched med korrekte lovhenvisninger og satser.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">&#9881;</div>
+        <div class="card-title">Administrasjonspanel</div>
+        <div class="card-desc">
+          Komplett innholdsstyring med JWT-autentisering og rollebasert tilgang. Full CRUD for artikler, ansatte og brukere. TipTap-basert rich text-editor. Publiseringskontroller for kunnskapsbanken. Dashboard med statistikk.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">&#128295;</div>
+        <div class="card-title">Interaktive verktøy</div>
+        <div class="card-desc">
+          To kalkulatorer med reelle kommunedata. Innsatssone-kalkulator viser AGA-besparelser og brutto-ekvivalent lønn. Nord-Norge-kalkulator sammenligner kommuner på 8+ faktorer. Vipps-veiviser med 18 komponentfiler.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">&#128274;</div>
+        <div class="card-title">Sikkerhet og compliance</div>
+        <div class="card-desc">
+          Kryptert filoverlevering med AES-256-GCM og eget .averdi-format. GDPR-samtykke implementert. WCAG 2.1 AA tilgjengelighet. Åpenhetsloven-redegjoring. Alle juridiske sider på plass.
+        </div>
+      </div>
+    </div>
+    <div class="slide-num">05</div>
+    <div class="slide-footer">averdi.no</div>
+  </div>
+
+  <!-- SLIDE 6: KUNNSKAPSBANKEN -->
+  <div class="slide slide-gradient">
+    <div class="blob-tr"></div>
+    <div class="slide-tag">Innhold</div>
+    <h2 class="section-title">Kunnskapsbanken i detalj</h2>
+    <div class="grid-3">
+      <div class="card">
+        <h3 style="color: var(--brand-orange); margin-bottom: 14px;">Bedrifter (5 sider)</h3>
+        <ul class="feature-list">
+          <li><span class="check">&#10003;</span> 0% AGA og Tiltakssonen</li>
+          <li><span class="check">&#10003;</span> Rekruttering i Nord-Norge</li>
+          <li><span class="check">&#10003;</span> Transport og bagatellstøtte</li>
+          <li><span class="check">&#10003;</span> Vipps-integrasjon med PowerOffice</li>
+          <li><span class="check">&#10003;</span> Innovasjon Norge Arktis</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="color: var(--brand-orange); margin-bottom: 14px;">Sametinget (8 sider)</h3>
+        <ul class="feature-list">
+          <li><span class="check">&#10003;</span> Næringstilskudd (opptil 800 000 kr)</li>
+          <li><span class="check">&#10003;</span> Duodji (samisk husflid)</li>
+          <li><span class="check">&#10003;</span> Primarnæring og reindrift</li>
+          <li><span class="check">&#10003;</span> Institusjon og offentlig</li>
+          <li><span class="check">&#10003;</span> Kultur og sprak</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="color: var(--brand-orange); margin-bottom: 14px;">Organisasjoner (8 sider)</h3>
+        <ul class="feature-list">
+          <li><span class="check">&#10003;</span> MVA-kompensasjon (2 modeller)</li>
+          <li><span class="check">&#10003;</span> Styreansvar</li>
+          <li><span class="check">&#10003;</span> Årsregnskap for lag og foreninger</li>
+          <li><span class="check">&#10003;</span> Vipps for organisasjoner</li>
+          <li><span class="check">&#10003;</span> Støtteordninger og arrangementer</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-num">06</div>
+    <div class="slide-footer">averdi.no</div>
+  </div>
+
+  <!-- SLIDE 7: TJENESTER -->
+  <div class="slide slide-dark">
+    <div class="blob-bl"></div>
+    <div class="slide-tag">Tjenester</div>
+    <h2 class="section-title">Fire tjenestesider</h2>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">&#128202; Regnskap</div>
+        <div class="card-desc">Manedlig bokforing, MVA-rapportering, perioderapporter, prosjektregnskap, skybaserte systemer (PowerOffice GO, 24SevenOffice), tidsregistrering med BFF-compliance. FAQ med prising og overgang.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">&#128200; Årsoppgjør og skatt</div>
+        <div class="card-desc">Årsregnskap etter regnskapsloven, skattemelding (frist 31. mai), fradragsoptimalisering inkl. Finnmarksfradrag, Tiltakssone-spesifikk veiledning, revisjonsplikt-vurdering.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">&#128176; Lønn og HR</div>
+        <div class="card-desc">A-melding, korrekt skattetrekk, reiseutgifter og diett, sykefravær og NAV-refusjon, redusert AGA-håndtering (0% i sone V), soneoversikt og hjemmekontorregler.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">&#128161; Rådgivning</div>
+        <div class="card-desc">Budsjett og prognoser, likviditetsstyring, investeringsvurdering (ROI), Sametinget-søknadsstøtte, Tiltakssone-økonomisk effekt, strategisk skatteplanlegging.</div>
+      </div>
+    </div>
+    <div class="slide-num">07</div>
+    <div class="slide-footer">averdi.no</div>
+  </div>
+
+  <!-- SLIDE 8: RESEARCH -->
+  <div class="slide slide-white">
+    <div class="slide-tag">Faglig dybde</div>
+    <h2 class="section-title" style="color: var(--dark);">Researchen bak innholdet</h2>
+    <p style="color: #64748b; font-size: 15px; margin-bottom: 24px; max-width: 700px;">
+      Hvert faktatall, hver prosentsats og hver lovhenvisning er verifisert mot primaarkilder. Denne researchen er usynlig i koden, men utgjør en vesentlig del av prosjektets verdi.
+    </p>
+    <table>
+      <thead>
+        <tr><th>Forskningsområde</th><th>Omfang</th><th>Estimert tid</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sametinget-tilskudd</strong></td>
+          <td>7 tilskuddskategorier, STN-område, kulturkrav, søknadsprosesser</td>
+          <td><span class="badge">20-30 timer</span></td>
+        </tr>
+        <tr>
+          <td><strong>Skatt og AGA</strong></td>
+          <td>5 AGA-soner, De Minimis, Finnmarksfradrag, trinnskatt, eiendomsskatt</td>
+          <td><span class="badge">20-25 timer</span></td>
+        </tr>
+        <tr>
+          <td><strong>Regnskap og næring</strong></td>
+          <td>Regnskapsloven, NS 4102, A-melding, Innovasjon Norge</td>
+          <td><span class="badge">12-18 timer</span></td>
+        </tr>
+        <tr>
+          <td><strong>Vipps/PowerOffice</strong></td>
+          <td>ePayment API, OAuth, Report API, MVA-koder, NS 4102 mellomregning</td>
+          <td><span class="badge">10-15 timer</span></td>
+        </tr>
+        <tr>
+          <td><strong>Juridisk compliance</strong></td>
+          <td>GDPR, WCAG 2.1 AA, Åpenhetsloven, EAA (EU 2019/882)</td>
+          <td><span class="badge">8-12 timer</span></td>
+        </tr>
+        <tr>
+          <td><strong>Kommunedata</strong></td>
+          <td>Eiendomsskatt, leiepriser, barnehage for 33+ kommuner</td>
+          <td><span class="badge">5-8 timer</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="color: #64748b; font-size: 13px; margin-top: 16px; font-style: italic;">
+      Kilder: Skatteloven, Skatteetaten, Statsbudsjettet 2026, SSB, Lånekassen, NAV, Sametingets tilskuddsregelverk, Vipps Developer Portal, WCAG 2.1-standarden
+    </p>
+    <div class="slide-num" style="color: #94a3b8;">08</div>
+    <div class="slide-footer">averdi.no</div>
+  </div>
+
+  <!-- SLIDE 9: TECH STACK -->
+  <div class="slide slide-dark">
+    <div class="blob-tr"></div>
+    <div class="slide-tag">Teknologi</div>
+    <h2 class="section-title">Bygget med moderne teknologi</h2>
+    <div class="two-col">
+      <div>
+        <h3 style="margin-bottom: 16px;">Frontend</h3>
+        <div class="tech-pills">
+          <span class="pill pill-accent">Next.js 16</span>
+          <span class="pill pill-accent">React 19</span>
+          <span class="pill pill-accent">TypeScript</span>
+          <span class="pill">Tailwind CSS</span>
+          <span class="pill">Framer Motion</span>
+          <span class="pill">Radix UI</span>
+          <span class="pill">Lucide Icons</span>
+          <span class="pill">Chart.js</span>
+        </div>
+
+        <h3 style="margin-top: 28px; margin-bottom: 16px;">Backend og sikkerhet</h3>
+        <div class="tech-pills">
+          <span class="pill pill-accent">JWT (Jose)</span>
+          <span class="pill pill-accent">bcrypt</span>
+          <span class="pill pill-accent">AES-256-GCM</span>
+          <span class="pill">Zod-validering</span>
+          <span class="pill">PBKDF2 (600k iter.)</span>
+          <span class="pill">Web Crypto API</span>
+        </div>
+
+        <h3 style="margin-top: 28px; margin-bottom: 16px;">Verktøy og editor</h3>
+        <div class="tech-pills">
+          <span class="pill">TipTap Editor</span>
+          <span class="pill">next-sitemap</span>
+          <span class="pill">ESLint 9</span>
+          <span class="pill">PostCSS</span>
+        </div>
+      </div>
+      <div>
+        <ul class="feature-list">
+          <li><span class="check">&#10003;</span> <strong>Full typesikkerhet</strong> med TypeScript og Zod-validering på alle skjemaer</li>
+          <li><span class="check">&#10003;</span> <strong>Server Components</strong> for raskere sidelasting og bedre SEO</li>
+          <li><span class="check">&#10003;</span> <strong>MCP-klar arkitektur</strong> for ekstern datavalidering av skattetall</li>
+          <li><span class="check">&#10003;</span> <strong>Filbasert persistens</strong> med mutex-låsing for sikker samtidig tilgang</li>
+          <li><span class="check">&#10003;</span> <strong>11+ JSON-LD-skjemaer</strong> for maksimal synlighet i søkeresultater</li>
+          <li><span class="check">&#10003;</span> <strong>WCAG 2.1 AA</strong> med skip-to-content, ARIA, tastaturnavigasjon</li>
+          <li><span class="check">&#10003;</span> <strong>Automatisk sitemap</strong> generert ved bygging</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-num">09</div>
+    <div class="slide-footer">averdi.no</div>
+  </div>
+
+  <!-- SLIDE 10: ADMIN -->
+  <div class="slide slide-gradient">
+    <div class="blob-bl"></div>
+    <div class="slide-tag">Administrasjon</div>
+    <h2 class="section-title">Admin-panelet</h2>
+    <div class="two-col">
+      <div>
+        <ul class="feature-list">
+          <li><span class="check">&#10003;</span> <strong>Dashboard</strong> med oversikt over ansatte, artikler og utkast</li>
+          <li><span class="check">&#10003;</span> <strong>Artikkelstyring</strong> med opprett, rediger, slett, publiser/avpubliser</li>
+          <li><span class="check">&#10003;</span> <strong>Rich text-editor</strong> basert på TipTap med bilde- og lenkestøtte</li>
+          <li><span class="check">&#10003;</span> <strong>Ansatthåndtering</strong> med profiler, tidslinje og hub-tilknytning</li>
+          <li><span class="check">&#10003;</span> <strong>Brukerstyring</strong> med admin og redaktor-roller</li>
+          <li><span class="check">&#10003;</span> <strong>Kunnskapsbank-kontroll</strong> for publisering av seksjoner</li>
+          <li><span class="check">&#10003;</span> <strong>Sikker innlogging</strong> med JWT og bcrypt-passord</li>
+        </ul>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom: 16px;">
+          <div class="card-title">Autentisering</div>
+          <div class="card-desc">
+            JWT-baserte sesjoner med 24-timers varighet. HTTP-only cookies for sikkerhet. bcrypt for passord-hashing. Rollebasert tilgang (admin/redaktor).
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Datapersistens</div>
+          <div class="card-desc">
+            JSON-fillagring med mutex-låsing for å hindre datakorrupsjon ved samtidige endringer. Auto-slug fra titler. Zod-validering på alle inn- og utdata.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-num">10</div>
+    <div class="slide-footer">averdi.no</div>
+  </div>
+
+  <!-- SLIDE 11: SECURE TRANSFER -->
+  <div class="slide slide-dark">
+    <div class="blob-tr"></div>
+    <div class="slide-tag">Sikkerhet</div>
+    <h2 class="section-title">Sikker filoverlevering</h2>
+    <div class="two-col">
+      <div>
+        <div class="slide-body" style="margin-bottom: 24px;">
+          Bygget for trygg deling av sensitive dokumenter mellom kunde og regnskapsforer. Eget .averdi-filformat med kryptering på militærnivå. Ingen eksterne avhengigheter. Alt skjer i nettleseren.
+        </div>
+        <ul class="feature-list">
+          <li><span class="check">&#10003;</span> AES-256-GCM-kryptering</li>
+          <li><span class="check">&#10003;</span> PBKDF2 nøkkelavledning (600 000 iterasjoner)</li>
+          <li><span class="check">&#10003;</span> Per-fil salt mot forhands-beregningsangrep</li>
+          <li><span class="check">&#10003;</span> 6-sifret PIN for enkel deling</li>
+          <li><span class="check">&#10003;</span> Drag-and-drop filopplasting</li>
+          <li><span class="check">&#10003;</span> Opptil 25 MB per fil</li>
+          <li><span class="check">&#10003;</span> Null eksterne avhengigheter (Web Crypto API)</li>
+        </ul>
+      </div>
+      <div>
+        <div class="card" style="font-family: monospace; font-size: 12px; color: var(--text-muted); line-height: 1.8;">
+          <div style="color: var(--brand-orange); font-weight: 700; margin-bottom: 8px;">.averdi filformat</div>
+          [6 bytes]&nbsp;&nbsp; Magic: "AVRD01"<br>
+          [4 bytes]&nbsp;&nbsp; Metadata-lengde (uint32 BE)<br>
+          [N bytes]&nbsp;&nbsp; Metadata JSON (ukryptert)<br>
+          [12 bytes] IV (96-bit for GCM)<br>
+          [Rest]&nbsp;&nbsp;&nbsp;&nbsp; Kryptert data + auth tag<br>
+          <br>
+          <div style="color: var(--brand-orange); font-weight: 700; margin-top: 12px; margin-bottom: 8px;">Metadata inkluderer:</div>
+          - Avsendernavn<br>
+          - Organisasjonsnummer<br>
+          - Tidsstempel<br>
+          - Datatype (vipps-config, api-credentials, ...)<br>
+          - Antall filer<br>
+          - Beskrivelse
+        </div>
+      </div>
+    </div>
+    <div class="slide-num">11</div>
+    <div class="slide-footer">averdi.no</div>
+  </div>
+
+  <!-- SLIDE 12: SEO & COMPLIANCE -->
+  <div class="slide slide-white">
+    <div class="slide-tag">SEO og compliance</div>
+    <h2 class="section-title" style="color: var(--dark);">Synlighet og lovkrav</h2>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-title" style="color: var(--dark);">&#127919; SEO-infrastruktur</div>
+        <ul class="feature-list" style="font-size: 13px;">
+          <li><span class="check">&#10003;</span> 11+ JSON-LD-skjemaer</li>
+          <li><span class="check">&#10003;</span> Dynamisk metadata per side</li>
+          <li><span class="check">&#10003;</span> Open Graph og Twitter Cards</li>
+          <li><span class="check">&#10003;</span> Automatisk sitemap</li>
+          <li><span class="check">&#10003;</span> BreadcrumbList, FAQPage, Service</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title" style="color: var(--dark);">&#9878; Juridisk compliance</div>
+        <ul class="feature-list" style="font-size: 13px;">
+          <li><span class="check">&#10003;</span> GDPR cookie-samtykke</li>
+          <li><span class="check">&#10003;</span> Personvernerklaering</li>
+          <li><span class="check">&#10003;</span> Tilgjengelighetserklering</li>
+          <li><span class="check">&#10003;</span> Åpenhetsloven-redegjoring</li>
+          <li><span class="check">&#10003;</span> Admin-sider med noindex</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title" style="color: var(--dark);">&#128064; Analyse</div>
+        <ul class="feature-list" style="font-size: 13px;">
+          <li><span class="check">&#10003;</span> Vercel Web Analytics</li>
+          <li><span class="check">&#10003;</span> Hotjar (samtykkestyrt)</li>
+          <li><span class="check">&#10003;</span> MCP-dataelementer for overvaking</li>
+          <li><span class="check">&#10003;</span> Strukturerte data for Google</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-num" style="color: #94a3b8;">12</div>
+    <div class="slide-footer">averdi.no</div>
+  </div>
+
+  <!-- SLIDE 13: TIMELINE -->
+  <div class="slide slide-dark">
+    <div class="blob-bl"></div>
+    <div class="slide-tag">Tidslinje</div>
+    <h2 class="section-title">Utviklingsforløpet</h2>
+    <div class="two-col">
+      <div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-date">November 2025</div>
+            <div class="timeline-text">Oppstart etter samtale med Ingvald. React-prototype bygget med Vite, landingsside, tjenester, ansatteprofiler (77 commits)</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-date">Desember 2025</div>
+            <div class="timeline-text">Migrering til Next.js. Kunnskapsbank, Sametinget (8 sider), kalkulatorer, Vipps-veiviser, PowerOffice-guide</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-date">Januar 2026</div>
+            <div class="timeline-text">Innholdsvekst: tjenestesider, Om oss, infrastruktur, prosjektdokumentasjon</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-date">Februar 2026</div>
+            <div class="timeline-text">Lansering: admin-system, 54 sider, GDPR, Next.js 16, WCAG, Åpenhetsloven, innholdsforedling</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-date">Mars 2026</div>
+            <div class="timeline-text">Finpuss: sikkerhetsherding, Vercel-produksjon, analyse, metadata-optimalisering</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <h3 style="margin-bottom: 16px;">Nøkkeltall</h3>
+          <table>
+            <tbody>
+              <tr><td>Prosjektperiode</td><td>124 dager (nov-mar)</td></tr>
+              <tr><td>Aktive arbeidsdager</td><td>25 dager</td></tr>
+              <tr><td>Commits (react-averdi)</td><td>77</td></tr>
+              <tr><td>Commits (averdiNextJS)</td><td>61</td></tr>
+              <tr><td>Totalt commits</td><td>138</td></tr>
+              <tr><td>Største enkelt-commit</td><td>105 filer, 11 572 linjer</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="slide-num">13</div>
+    <div class="slide-footer">averdi.no</div>
+  </div>
+
+  <!-- SLIDE 14: HOURS -->
+  <div class="slide slide-gradient">
+    <div class="blob-tr"></div>
+    <div class="slide-tag">Timeforbruk</div>
+    <h2 class="section-title">Estimert arbeidsinnsats</h2>
+    <div class="two-col">
+      <div>
+        <table>
+          <thead>
+            <tr><th>Kategori</th><th>Lavt</th><th>Høyt</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>React-prototype (77 commits)</td><td>48 t</td><td>66 t</td></tr>
+            <tr><td>Next.js-plattformen (61 commits)</td><td>134 t</td><td>176 t</td></tr>
+            <tr><td>Faglig research</td><td>75 t</td><td>108 t</td></tr>
+            <tr><td>Prosjektstyring og øvrig</td><td>27 t</td><td>41 t</td></tr>
+            <tr style="border-top: 2px solid var(--brand-orange);"><td><strong>Totalt</strong></td><td><strong>284 t</strong></td><td><strong>391 t</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 8px;">Beste estimat</div>
+        <div style="font-size: 72px; font-weight: 900; background: linear-gradient(90deg, var(--brand-orange), var(--brand-yellow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1;">~340</div>
+        <div style="font-size: 18px; color: var(--text-secondary);">timer</div>
+        <div style="font-size: 13px; color: var(--text-muted); margin-top: 12px;">Inkluderer React-prototype, Next.js-plattform,<br>faglig research og innholdsproduksjon</div>
+      </div>
+    </div>
+    <div class="slide-num">14</div>
+    <div class="slide-footer">averdi.no</div>
+  </div>
+
+  <!-- SLIDE 15: CLOSING -->
+  <div class="slide slide-brand" style="justify-content: center; align-items: center; text-align: center;">
+    <div class="cta-box">
+      <div style="font-size: 60px; margin-bottom: 20px;">A</div>
+      <div class="slide-title" style="color: white;">
+        Klar for neste steg?
+      </div>
+      <div style="font-size: 18px; color: rgba(255,255,255,0.85); max-width: 500px; margin: 0 auto; line-height: 1.6;">
+        Averdi.no er bygget, testet og klar for bruk. Plattformen vokser med dere.
+      </div>
+      <div class="cta-info">
+        <strong>Averdi AS</strong><br>
+        Juhána Rásttoš geaidnu 2, 9730 Karasjok<br>
+        +47 78 46 61 16 &bull; post@averdi.no<br>
+        Org.nr 980 383 571
+      </div>
+    </div>
+    <div class="slide-num" style="color: rgba(255,255,255,0.5);">15</div>
+  </div>
+
+</body>
+</html>

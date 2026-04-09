@@ -259,7 +259,7 @@ export default function SametingetPrimaryPage() {
           title="Klar for å satse?"
           description="Vi kjenner reglene for både sjark og fjøs. La oss ta papirarbeidet, så kan du fokusere på driften."
           primaryButtonText="Start søknadsprosessen"
-          primaryButtonLink="/kontakt"
+          primaryButtonLink="/#contact"
           secondaryButtonText="Se alle støtteordninger"
           secondaryButtonLink="/kunnskapsbank/sametinget"
         />

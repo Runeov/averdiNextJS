@@ -18,7 +18,7 @@ export default function TilgjengelighetPage() {
             Averdi AS er forpliktet til å gjøre nettsiden tilgjengelig for alle, i tråd med
             European Accessibility Act (EU 2019/882) og norsk universell utforming.
           </p>
-          <p className="mt-6 text-sm text-blue-300">Sist oppdatert: Juni 2025</p>
+          <p className="mt-6 text-sm text-blue-300">Sist oppdatert: April 2026</p>
         </div>
       </section>
 

@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Åpenhetsloven – Redegjørelse | Averdi AS',
-  description: 'Averdi AS sin redegjørelse for aktsomhetsvurderinger etter Åpenhetsloven §5. Oppdatert 2025.',
+  description: 'Averdi AS sin redegjørelse for aktsomhetsvurderinger etter Åpenhetsloven §5. Oppdatert 2026.',
 };
 
 export default function ApenhetslovanPage() {
@@ -17,7 +17,7 @@ export default function ApenhetslovanPage() {
           <p className="text-xl text-slate-300 leading-relaxed">
             Redegjørelse for aktsomhetsvurderinger knyttet til menneskerettigheter og anstendig arbeid.
           </p>
-          <p className="mt-6 text-sm text-slate-400">Sist oppdatert: Juni 2025 &mdash; Averdi AS, org.nr. 980 383 571</p>
+          <p className="mt-6 text-sm text-slate-400">Sist oppdatert: April 2026 &mdash; Averdi AS, org.nr. 980 383 571</p>
         </div>
       </section>
 

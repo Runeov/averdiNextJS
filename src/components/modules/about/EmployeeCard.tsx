@@ -1,7 +1,7 @@
 'use client';
 
 import { Employee } from '@/types/admin';
-import { MapPin, ExternalLink } from 'lucide-react';
+import { MapPin, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 interface EmployeeCardProps {
@@ -76,13 +76,10 @@ export default function EmployeeCard({ employee }: EmployeeCardProps) {
         {/* View Profile Link */}
         <Link
           href={`/om-oss/${employee.id}`}
-          target="_blank"
-          rel="noopener noreferrer"
           className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-[#E86C1F] bg-[#E86C1F]/10 rounded-full transition-all duration-300 hover:bg-[#E86C1F] hover:text-white group/btn"
         >
           Se profil
-          <span className="sr-only"> (åpnes i ny fane)</span>
-          <ExternalLink className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-0.5" aria-hidden="true" />
+          <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-0.5" aria-hidden="true" />
         </Link>
       </div>
     </div>

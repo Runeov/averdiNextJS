@@ -409,7 +409,7 @@ export default function TransportPage() {
           title="Usikker på om du rammes?"
           description="Vi i Averdi har lang erfaring med De Minimis-reglene og kan hjelpe deg å beregne om din bedrift treffer taket. Ta kontakt for en uforpliktende gjennomgang."
           primaryButtonText="Kontakt oss"
-          primaryButtonLink="/kontakt?subject=Bagatellstøtte"
+          primaryButtonLink="/#contact"
         />
 
         {/* Kilder */}

@@ -1,5 +1,6 @@
 // src/data/propertyTaxData.ts
 
+// TODO: Disse satsene er fra 2025. Oppdater til 2026-satser når de er bekreftet.
 // Satser for NÆRINGSEIENDOM 2025 (Promille)
 // Kilder: SSB (KOSTRA) og kommunale budsjettvedtak for 2025.
 // Merk: Mange kommuner i nord maksimerer denne til 7 promille.

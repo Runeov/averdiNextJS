@@ -103,9 +103,10 @@ export default function ReindriftPage() {
                   <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-1">Anbefalt Frist</span>
                   <div className="flex items-center gap-2">
                     <McpDataSpan 
-                      id="reindrift-frist-anbefalt-2026" 
-                      value="01.03.2026" 
+                      id="reindrift-frist-anbefalt-2026"
+                      value="01.03.2026"
                       source="Averdi Anbefaling"
+                      deadline="2026-03-01"
                       className="font-bold text-xl text-slate-900" 
                     />
                   </div>
@@ -249,7 +250,7 @@ export default function ReindriftPage() {
             title="Skal du levere Melding om Reindrift?"
             description="Vi kvalitetssikrer tallene før du sender dem inn. En korrekt melding er grunnlaget for både erstatning og tilskudd neste år."
             primaryButtonText="Bestill gjennomgang"
-            primaryButtonLink="/kontakt"
+            primaryButtonLink="/#contact"
             secondaryButtonText="Se næringsstøtte"
             secondaryButtonLink="/kunnskapsbank/sametinget/naering"
           />

@@ -283,10 +283,10 @@ export default function InnovasjonNorgePage() {
             </li>
           </ul>
           <Link 
-            href="/kunnskapsbank/bedrifter/tiltakssonen" 
+            href="/kunnskapsbank/bedrifter"
             className="inline-flex items-center gap-2 px-6 py-3 bg-[#E86C1F] text-white font-bold rounded-full hover:bg-[#d65f18] transition-all"
           >
-            Se Innsatssonekalkulatoren
+            Se fordeler i Tiltakssonen
           </Link>
         </section>
 
@@ -311,7 +311,7 @@ export default function InnovasjonNorgePage() {
           title="Trenger du hjelp med søknaden?"
           description="Vi i Averdi har lang erfaring med å hjelpe bedrifter i nord med å navigere virkemiddelapparatet. La oss hjelpe deg med å finne riktig finansiering."
           primaryButtonText="Kontakt oss"
-          primaryButtonLink="/kontakt?subject=Innovasjon%20Norge"
+          primaryButtonLink="/#contact"
         />
 
         {/* Kilder */}

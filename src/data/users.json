@@ -8,5 +8,15 @@
     "isActive": true,
     "createdAt": "2024-01-01T00:00:00Z",
     "updatedAt": "2024-01-01T00:00:00Z"
+  },
+  "test-perrune": {
+    "id": "test-perrune",
+    "email": "operrune@gmail.com",
+    "name": "Per Rune",
+    "passwordHash": "$2b$10$nv4AIPwmVqA0AwZMP.YlseWjZBR9.ABOY5gqRcAYo.NI5/N0mCQz.",
+    "role": "admin",
+    "isActive": true,
+    "createdAt": "2024-01-01T00:00:00Z",
+    "updatedAt": "2024-01-01T00:00:00Z"
   }
 }

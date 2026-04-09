@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getEmployee } from '@/lib/admin/employees';
 import EmployeeProfileCard from '@/components/modules/about/EmployeeProfileCard';
+import ContactPanel from '@/components/modules/home/ContactPanel';
 import { ArrowLeft, Users } from 'lucide-react';
 import Link from 'next/link';
 
@@ -143,10 +144,10 @@ export default async function EmployeeProfilePage({ params }: PageProps) {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
-                href={`mailto:${employee.email}`}
+                href="#contact"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-[#E86C1F] bg-white rounded-full transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
               >
-                Send e-post
+                Send melding
               </a>
               <a
                 href={`tel:+47${employee.phone.replace(/\s/g, '')}`}
@@ -158,6 +159,8 @@ export default async function EmployeeProfilePage({ params }: PageProps) {
           </div>
         </div>
       </div>
+
+      <ContactPanel />
     </main>
   );
 }

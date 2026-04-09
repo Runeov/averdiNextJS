@@ -51,6 +51,8 @@ export interface IntegrationPartner {
   features: string[];
   pricing: string;
   url: string;
+  /** Contact email for secure config delivery */
+  contactEmail?: string;
 }
 
 export interface StepProps {

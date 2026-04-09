@@ -27,7 +27,25 @@
       "Bash(ping:*)",
       "Bash(git commit:*)",
       "Bash(git push:*)",
-      "Bash(git:*)"
+      "Bash(git:*)",
+      "Bash(npm run:*)",
+      "Bash(npm install:*)",
+      "Bash(taskkill //F //IM node.exe)",
+      "Bash(xargs grep:*)",
+      "Bash(tasklist)",
+      "Bash(npx next:*)",
+      "Bash(openssl genpkey:*)",
+      "Bash(openssl pkey:*)",
+      "Bash(python3 /tmp/check_links.py)",
+      "Bash(echo \"  Found $\\(grep -r \"/kontakt\" /c/Users/Administrator/Documents/GitHub/averdiNextJS/src --include=\"*.tsx\")",
+      "Bash(echo \"exit: $?\")",
+      "Bash(set NODE_OPTIONS=--max-old-space-size=4096)",
+      "Bash(npm -v)",
+      "Bash(gh repo:*)",
+      "Bash(gh api:*)",
+      "Bash(gh auth:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(python -c ':*)"
     ]
   }
 }

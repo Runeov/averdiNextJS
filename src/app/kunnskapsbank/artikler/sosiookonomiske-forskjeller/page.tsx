@@ -279,7 +279,7 @@ export default function ArtikkelFornesInteractive() {
               <p className="text-slate-200">Vi hjelper kommuner og organisasjoner med å regne sannheten. Compliance as a Service — med et smil.</p>
             </div>
             <div>
-              <Link href="/kontakt" className="inline-flex items-center justify-center px-6 py-3 bg-[#E86C1F] hover:bg-[#d65a10] rounded-full font-bold">
+              <Link href="/#contact" className="inline-flex items-center justify-center px-6 py-3 bg-[#E86C1F] hover:bg-[#d65a10] rounded-full font-bold">
                 Kontakt oss
               </Link>
             </div>

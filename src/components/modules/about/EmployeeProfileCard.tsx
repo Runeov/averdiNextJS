@@ -430,7 +430,7 @@ export default function EmployeeProfileCard({ employee }: EmployeeProfileCardPro
           {/* Actions */}
           <div className="flex gap-3 w-full sm:w-auto">
             <a
-              href={`mailto:${employee.email}`}
+              href="#contact"
               className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-[#E86C1F] to-[#F4B223] rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-[#E86C1F]/30 hover:-translate-y-0.5 focus:outline-none"
             >
               <Mail className="w-4 h-4" aria-hidden="true" />

@@ -380,6 +380,8 @@
             width: 100%;
             max-height: 80vh;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
             box-shadow: var(--shadow-lg);
             animation: slideUp 0.3s ease-out;
         }
@@ -405,7 +407,8 @@
         .modal-body {
             padding: 2rem;
             overflow-y: auto;
-            max-height: calc(80vh - 200px);
+            flex: 1;
+            min-height: 0;
         }
 
         .summary-section {
@@ -777,9 +780,12 @@
                 checkLabel.textContent = value ? 'Aktivert' : 'Deaktivert';
                 checkLabel.htmlFor = path;
 
+                input.addEventListener('change', () => {
+                    checkLabel.textContent = input.checked ? 'Aktivert' : 'Deaktivert';
+                });
+
                 checkboxGroup.appendChild(input);
                 checkboxGroup.appendChild(checkLabel);
-                formGroup.innerHTML = '';
                 formGroup.appendChild(checkboxGroup);
             } else {
                 const input = document.createElement('input');

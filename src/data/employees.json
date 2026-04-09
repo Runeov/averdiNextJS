@@ -213,12 +213,12 @@
   "linda-marja-anti-kildedam": {
     "id": "linda-marja-anti-kildedam",
     "name": "Linda Marja Anti Kildedam",
-    "role": "Økonomirådgiver",
+    "role": "Regnskapsfører",
     "email": "linda.kildedam@averdi.no",
     "phone": "480 51 672",
     "office": "karasjok",
     "description": "Hjelper gründere og duodji-utøvere med etablering og søknader.",
-    "longDescription": "Linda Marja brenner for nyskaping. Hun er den du snakker med når du skal **starte egen bedrift**. Hun hjelper deg med forretningsplan, budsjettering og valg av selskapsform (AS eller ENK).\n\nHun har spesiell kompetanse på **Duodji-næringen** og de spesifikke støtteordningene som finnes der. Trenger du hjelp til å søke etablererstøtte eller investeringsstøtte fra Sametinget? Linda guider deg gjennom søknadsprosessen.",
+    "longDescription": "Linda Marja brenner for nyskaping. Hun er den du snakker med når du skal **starte eigen bedrift**. Ho hjelper deg med forretningsplan, budsjettering og val av selskapsform (AS eller ENK).\n\nHo har spesiell kompetanse på **Duodji-næringa** og dei spesifikke støtteordningane som finst der. Treng du hjelp til å søke etableringstøtte eller investeringsstøtte frå Sametinget? Linda guider deg gjennom søknadsprosessen.",
     "experience": "10+ år",
     "specialties": [
       "Gründerhjelp",
@@ -227,7 +227,7 @@
       "Søknadsskriving"
     ],
     "education": [
-      "Økonomirådgiver"
+      "Regnskapsfører"
     ],
     "languages": ["Norsk", "Nordsamisk"],
     "workingHours": "Man-Fre: 08:00-16:00",
@@ -249,7 +249,7 @@
   "john-david-utsi-gaup": {
     "id": "john-david-utsi-gaup",
     "name": "John David Utsi Gaup",
-    "role": "Økonomirådgiver",
+    "role": "Regnskapsfører",
     "email": "John.davit@averdi.no",
     "phone": "480 23 265",
     "office": "karasjok",
@@ -263,7 +263,7 @@
       "Vekststrategi"
     ],
     "education": [
-      "Økonomirådgiver"
+      "Regnskapsfører"
     ],
     "languages": ["Norsk", "Nordsamisk"],
     "workingHours": "Man-Fre: 08:00-16:00",

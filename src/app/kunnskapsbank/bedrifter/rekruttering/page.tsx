@@ -235,7 +235,7 @@ export default function RekrutteringPage() {
           title="Trenger du hjelp med lønnskjøring?"
           description="Vi kan sette opp lønnssystemet ditt slik at det automatisk håndterer de ulike sonene og rapporterer riktig til myndighetene."
           primaryButtonText="Snakk med Alida"
-          primaryButtonLink="/kontakt"
+          primaryButtonLink="/#contact"
           secondaryButtonText="Tilbake til Bedriftsoversikt"
           secondaryButtonLink="/kunnskapsbank/bedrifter"
         />
