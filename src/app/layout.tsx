@@ -4,6 +4,7 @@ import '../index.css';
 import { cn } from '@/lib/utils';
 import { RootLayoutContent } from '@/components/layout/RootLayoutContent';
 import { getSiteUrl } from '@/lib/site-url';
+import { Analytics } from '@vercel/analytics/next';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const siteUrl = getSiteUrl();
@@ -47,6 +48,7 @@ export default function RootLayout({
         </a>
         {/* Content with conditional Navbar/Footer */}
         <RootLayoutContent>{children}</RootLayoutContent>
+        <Analytics />
       </body>
     </html>
   );
